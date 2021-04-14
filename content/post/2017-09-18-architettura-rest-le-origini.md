@@ -35,7 +35,7 @@ Ne venne fuori nel 2000 la [definizione di un modello architetturale][8], defini
 Il modello REST, grazie alla sua maturità nonché alla sua formulazione astratta, ovvero non legata a specifiche implementazioni, guida tuttora l&#8217;evoluzione del Web e ha ispirato, più di recente, la nascita di un nuovo approccio alla realizzazione dei servizi Web, i cosiddetti servizi RESTful, di cui parlerò nel prossimo post.
 
  [1]: https://www.w3.org/People/Berners-Lee/
- [2]: http://timeline.web.cern.ch/timelines/The-birth-of-the-World-Wide-Web/overlay#1990-12-20 00:00:00
+ [2]: https://home.cern/science/computing/birth-web/short-history-web
  [3]: http://info.cern.ch/hypertext/WWW/TheProject.html
  [4]: https://lists.w3.org/Archives/Public/www-talk/
  [5]: https://it.wikipedia.org/wiki/World_Wide_Web_Consortium
