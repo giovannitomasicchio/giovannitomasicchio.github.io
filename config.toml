@@ -1,4 +1,4 @@
-baseurl = "https://giovanni.tomasicchio.gitlab.io/website/"
+baseurl = "https://giovannitomasicchio.github.io"
 title = "Giovanni Tomasicchio"
 languageCode = "it-IT"
 paginate = "10" # Number of posts per page
