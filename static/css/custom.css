@@ -1,0 +1,76 @@
+.logo__title {
+	text-transform: none;
+	color: #1e72bd;
+	font-family: "Kaushan Script", handwriting;
+    font-weight: normal;
+    font-size: 48px;
+	line-height: 1.2em;
+	}
+
+.post__title {
+	font-weight: 300;
+	
+}
+.post__header .post__title {
+	font-size: 40px;
+}
+.list__header .post__title {
+	font-size: 30px;
+}
+
+body {
+    color: #3a3a3a;
+    font-weight: 400;
+    font-size: 17px;
+	line-height: 1.5;
+}
+
+p {
+    margin-bottom: 1.5em;
+}
+
+.list__footer-readmore {
+	float: left;
+}
+
+.tags__link .btn {
+	background-color: #ffffff;
+}
+
+.btn {
+	background-color: #666666;
+	font-weight: 400;
+}
+.wrapper {
+	padding: 40px;
+}
+
+@media (max-width: 768px) {
+	.wrapper {
+		padding: 30px;
+	}
+	.logo__title {
+		font-size: 24px;
+	}
+	.post__header .post__title {
+		font-size: 30px;
+		font-weight: 300;
+	}
+	h2 {
+		font-size: 25px;
+	}
+	h3 {
+		font-size: 20px;
+	}
+}
+.post__meta {
+	border: none;
+}
+h2 {
+    font-weight: 300;
+    font-size: 30px;
+}
+h3 {
+    font-size: 20px;
+    font-weight: 300;
+}
