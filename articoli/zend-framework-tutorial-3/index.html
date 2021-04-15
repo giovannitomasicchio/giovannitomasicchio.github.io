@@ -1,0 +1,90 @@
+<!doctype html><html class=no-js lang=it><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>Zend Framework Tutorial - 3 - Giovanni Tomasicchio</title><script>(function(a,b){a[b]=a[b].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content="Accesso ai dati con lo Zend Framework"><meta property="og:title" content="Zend Framework Tutorial - 3"><meta property="og:description" content="Accesso ai dati con lo Zend Framework"><meta property="og:type" content="article"><meta property="og:url" content="https://giovannitomasicchio.github.io/articoli/zend-framework-tutorial-3/"><meta property="article:section" content="articoli"><meta property="article:published_time" content="2007-07-14T09:23:58+00:00"><meta property="article:modified_time" content="2007-07-14T09:23:58+00:00"><meta itemprop=name content="Zend Framework Tutorial - 3"><meta itemprop=description content="Accesso ai dati con lo Zend Framework"><meta itemprop=datePublished content="2007-07-14T09:23:58+00:00"><meta itemprop=dateModified content="2007-07-14T09:23:58+00:00"><meta itemprop=wordCount content="1229"><meta itemprop=keywords content="database,Zend Framework,MySQL,exception,SQL,UTF-8,"><meta name=twitter:card content="summary"><meta name=twitter:title content="Zend Framework Tutorial - 3"><meta name=twitter:description content="Accesso ai dati con lo Zend Framework"><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic|Kaushan+Script:regular"><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-525H86QENV"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-525H86QENV',{anonymize_ip:!1})}</script></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class=logo><a class=logo__link href=/ title="Giovanni Tomasicchio" rel=home><div class="logo__item logo__text"><div class=logo__title>Giovanni Tomasicchio</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
+<span class=menu__btn-title tabindex=-1>Menu</span></button><ul class=menu__list><li class=menu__item><a class=menu__link href=/><span class=menu__text>Home</span></a></li><li class=menu__item><a class=menu__link href=/articoli/><span class=menu__text>Articoli PHP</span></a></li><li class=menu__item><a class=menu__link href=/corsi/><span class=menu__text>Corsi</span></a></li></ul></nav></div></header><div class="wrapper flex"><div class=primary><main class=main role=main><article class=post><header class=post__header><h1 class=post__title>Zend Framework Tutorial - 3</h1><div class="post__meta meta"><div class="meta__item-datetime meta__item"><svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2007-07-14T09:23:58Z>14 July 2007</time></div></div></header><div class="content post__content clearfix"><h3 id=model>Model</h3><p>Poiché tutte le funzionalità del sito che stiamo realizzando fanno accesso ai dati presenti nel database, prima di realizzare i Controller del nostro progetto analizziamo il funzionamento del Model, ovvero della classe responsabile di tutte le operazioni eseguite direttamente sulla base di dati. Per realizzare il Model adotteremo il classico approccio di una applicazione PHP/MySQL basato sull&rsquo;esecuzione esplicita di query attraverso lo Zend_Db_Adapter.</p><p>Il Model per la gestione delle news sarà quindi una classe con un metodo per ciascuna funzionalità fondamentale sui dati della news: getAllNews per lettura di tutte le news (per la home-page), getNewsById per lettura di una singola news (impiegata nelle pagine di visualizzazione e modifica di una singola news), insertUpdateNews per l&rsquo;inserimento e la modifica e deleteNews per la cancellazione.</p><p>Ricordo che la connessione al database, operazione necessaria quasi a tutte le Action dell&rsquo;applicazione, è stata già realizzata nel file di bootstrap e l&rsquo;oggetto Zend_Db_Adapter è stato conservato nello Zend_Registry. Prima di vedere il funzionamento del nostro Model però analizziamo la struttura del database.</p><hr><h3 id=struttura-del-database>Struttura del database</h3><p>La nostra applicazione per la gestione delle news necessita di un database veramente semplice, costituito da una sola tabella. I campi in essa contenuti sono: news_id (la chiave primaria, un intero autoincrement), autore, data (in formato timestamp), titolo, testo_intro e testo_completo.</p><p>Per creare il database e la tabella nelle news possiamo eseguire queste 3 semplici query:</p><pre><code>&lt;pre class=&quot;brush: sql&quot;&gt;
+create database if not exists `zf-tutorial`;
+USE `zf-tutorial`;
+CREATE TABLE `news` (
+ `news_id` int(11) NOT NULL auto_increment,
+ `autore` varchar(255) default NULL,
+ `data` int(11) default NULL,
+ `titolo` varchar(255) default NULL,
+ `testo_intro` text,
+ `testo_completo` text,
+ PRIMARY KEY  (`news_id`)
+) DEFAULT CHARSET=latin1;
+</code></pre><p>Si noti il charset di default impostato a latin1 (ovvero ISO 8859-1), poiché tutta la nostra applicazione è realizzata secondo quel set di caratteri. Nonostante PHP 5 non supporta nativamente l&rsquo;UTF8, lo Zend Framework è in grado di realizzare siti web in unicode. Anzi alcuni suoi componenti, quelli per l&rsquo;internazionalizzazione delle applicazioni, sono progettati per lavorare esclusivamente con l&rsquo;UTF8.</p><hr><h3 id=getallnews>getAllNews</h3><p>Di seguito viene riportato il codice del metodo getAllNews() che ha lo scopo di restituire tutte le news registrate nel database in modo da mostrarle nella home page del sito. Il funzionamento è piuttosto semplice. Per prima cosa viene recuperato l&rsquo;oggetto Zend_Db_Adapter con Zend_Registry::get(). L&rsquo;esecuzione della query ed il recupero di tutti i risultati ottenuti viene eseguito con un solo comando: $db->fetchAll(). Questo metodo restituisce un array di array associativi, composti da coppie nome_campo=>valore. Per una visualizzazione più &ldquo;umana&rdquo; dei timestamp delle date viene poi eseguita una conversione con la funzione date(). Si noti che per rendere le conversioni permanenti il ciclo foreach viene eseguito per riferimento (&$row).</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+public function getAllNews()
+{
+   $db = Zend_Registry::get('db');
+   $sql = 'SELECT * FROM news ORDER BY data DESC';
+   $rows = $db-&gt;fetchAll($sql);
+
+   foreach ($rows as &amp;$row) {
+       $row['data'] = date('j/m/y - G:i',$row['data']);
+   }
+
+   return $rows;
+}
+</code></pre><p>Lo Zend Framework mette a disposizione un sofisticato componente per la gestione delle date, lo Zend_Date, ma come precedentemente accennato, questo è uno dei componenti che richiede l&rsquo;utilizzo del set di caratteri UTF-8, pertanto il suo impiego avrebbe aggiunto ulteriore complessità al tutorial.</p><hr><h3 id=getnewsbyid>getNewsById</h3><p>Questo metodo è molto simile al precedente. Si occupa di estrarre tutti i dati di una singola news. L&rsquo;estrazione della particolare news avviene grazie al suo ID passato al metodo attraverso la variabile $newsId. Anche questa volta, recuperato l&rsquo;oggetto Zend_Db_Adapter dallo Zend_Registry, si procede all&rsquo;esecuzione della query ed alla lettura del record attraverso un&rsquo;unica istruzione: $db->fetchRow($sql). Questa restituisce un array associativo composto da coppie nome_campo=>valore. Doverosa infine la conversione del timestamp della data con l&rsquo;istruzione date();</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+public function getNewsById($newsId)
+{
+   $db = Zend_Registry::get('db');
+   $sql = 'SELECT * FROM news WHERE news_id = ' . (int)$newsId;
+   $row = $db-&gt;fetchRow($sql);
+
+   if($row) {
+       $row['data'] = date('j/m/y - G:i',$row['data']);
+   }
+
+   return $row;
+}
+</code></pre><p>Si noti come l&rsquo;inserimento dell&rsquo;id $newsId all&rsquo;interno dell&rsquo;SQL della query è stato eseguito semplicemente accodando due stringhe. L&rsquo;unico accorgimento preso per evitare l&rsquo;SQL injection è costituito dal casting ad intero (int) della stringa $newsId. Se invece avessimo dovuto comporre dinamicamente l&rsquo;SQL, accodando una stringa al posto di un numero intero allora avremmo dovuto utilizzare i metodi quote o quoteInto:</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+$titolo_news = $db-&gt;quote(&quot;Notizia dell'anno&quot;);
+echo $titolo_news; // 'Notizia dell\'anno'
+
+$sql = &quot;SELECT * FROM news WHERE titolo = $titolo_news&quot;;
+echo $sql; // SELECT * FROM news WHERE titolo = 'Notizia dell\'anno'
+</code></pre><p>oppure più semplicemente:</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+$sql = $db-&gt;quoteInto(&quot;SELECT * FROM news WHERE titolo = ?&quot;, &quot;Notizia dell'anno&quot;);
+echo $sql; // SELECT * FROM news WHERE titolo = 'Notizia dell\'anno'
+</code></pre><p>Si noti il punto interrogativo utilizzato come segna posto per la sostituzione della stringa.</p><hr><h3 id=insertupdatenews>insertUpdateNews</h3><p>Questo metodo si occupa sia dell&rsquo;inserimento di una nuova news nel database, sia dell&rsquo;aggiornamento di una news precedentemente creata. Nonostante le poche righe di codice che lo compongono, diverse sono le osservazioni che si possono fare. Per prima cosa si può notare che se si verifica l&rsquo;assenza di uno dei dati obbligatori che costituisce la news ($autore, $titolo, $testoIntro) il metodo solleva un&rsquo;eccezione di tipo Zend_Exception, passando un messaggio esplicativo. L&rsquo;utilità di questo approccio risulterà più evidente quando vedremo il funzionamento del Controller che si occupa di inserire e modificare le news. Per adesso ci basta sapere che se viene sollevata una eccezione l&rsquo;esecuzione del metodo viene interrotta e il flusso del programma ritorna al chiamante (il Controller) il quale provvede a mostrare il messaggio di errore all&rsquo;utente.</p><p>Se invece tutti i controlli vanno a buon fine viene costruito un array associativo $dati contenente le coppie nome_campo=>valore che stanno per essere inserite nel database. Per capire se si tratta di un inserimento o un aggiornamento viene verificato il valore del parametro $newsId.</p><p>Se presente si tratta di un aggiornamento, quindi viene richiamato il metodo $db->update() che accetta 3 parametri: il nome della tabella nella quale effettuare l&rsquo;update, i dati da aggiornare e una stringa contenente la clausola WHERE dell&rsquo;SQL per individuare le righe che saranno coinvolte dall&rsquo;aggiornamento. Nel nostro caso vogliamo aggiornare solo il record con news_id pari a $newsId.</p><p>Se invece si tratta di un inserimento allora viene richiamato il metodo $db->insert() a cui viene passato il nome della tabella nella quale effettuare l&rsquo;inserimento ed i dati da inserire.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+public function insertUpdateNews($newsId, $autore, $titolo, $testoIntro, $testoCompleto)
+{
+   $db = Zend_Registry::get('db');
+
+   $autore     = trim($autore);
+   $titolo     = trim($titolo);
+   $testoIntro = trim($testoIntro);
+
+   if(!$autore) {
+       throw new Zend_Exception(&quot;Non hai inserito il nome dell'autore&quot;);
+   }
+   if(!$titolo) {
+       throw new Zend_Exception(&quot;Non hai inserito il titolo&quot;);
+   }
+   if(!$testoIntro) {
+       throw new Zend_Exception(&quot;Il testo introduttivo è obbligatorio&quot;);
+   }
+
+   $dati = array(
+   'autore'         =&gt; $autore,
+   'data'           =&gt; time(),
+   'titolo'         =&gt; $titolo,
+   'testo_intro'    =&gt; $testoIntro,
+   'testo_completo' =&gt; $testoCompleto);
+
+   if($newsId) {
+       $where = &quot;news_id = &quot; . (int)$newsId;
+       return $db-&gt;update('news', $dati, $where);
+   } else {
+       return $db-&gt;insert('news', $dati);
+   }
+}
+</code></pre><hr><h3 id=deletenews>deleteNews</h3><p>L&rsquo;ultimo metodo della classe News è quello che permette la cancellazione di una news dal database. Il suo funzionamento è davvero semplice, si basa sul comando $db->delete() al quale viene passato il nome della tabella nella quale effettuare la cancellazione delle righe e una stringa contenente la clausola WHERE dell&rsquo;SQL per individuare le righe da cancellare.</p><p>Anche in questo caso la protezione dall&rsquo;SQL Injection avviene con un semplice cast ad intero di $newsId ma vale il discorso precedentemente fatto sull&rsquo;utilizzo dei metodi quote() e quoteInto().</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+public function deleteNews($newsId)
+{
+   $db = Zend_Registry::get('db');
+   $where = &quot;news_id = &quot; . (int)$newsId;
+   return $db-&gt;delete('news', $where);
+}
+</code></pre></div><footer class=post__footer><div class="post__tags tags clearfix"><svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5.0 11V3C0 1.5.8.8.8.8S1.5.0 3 0h8c1.5.0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 100-6 3 3 0 000 6z"/></svg><ul class=tags__list><li class=tags__item><a class="tags__link btn" href=/tags/database/ rel=tag>database</a></li><li class=tags__item><a class="tags__link btn" href=/tags/zend-framework/ rel=tag>Zend Framework</a></li><li class=tags__item><a class="tags__link btn" href=/tags/mysql/ rel=tag>MySQL</a></li><li class=tags__item><a class="tags__link btn" href=/tags/exception/ rel=tag>exception</a></li><li class=tags__item><a class="tags__link btn" href=/tags/sql/ rel=tag>SQL</a></li><li class=tags__item><a class="tags__link btn" href=/tags/utf-8/ rel=tag>UTF-8</a></li></ul></div></footer></article></main><nav class="pager flex"><div class="pager__item pager__item--prev"><a class=pager__link href=/articoli/zend-framework-tutorial-2/ rel=prev><span class=pager__subtitle>«&#8201;Precedente</span><p class=pager__title>Zend Framework Tutorial - 2</p></a></div><div class="pager__item pager__item--next"><a class=pager__link href=/articoli/zend-framework-tutorial-4/ rel=next><span class=pager__subtitle>Prossimo&#8201;»</span><p class=pager__title>Zend Framework Tutorial - 4</p></a></div></nav></div></div><footer class=footer><div class="container footer__container flex"><div class=footer__copyright>&copy; 2021 Giovanni Tomasicchio.
+<span class=footer__copyright-credits>Generato con <a href=https://gohugo.io/ rel="nofollow noopener" target=_blank>Hugo</a> e il tema <a href=https://github.com/Vimux/Mainroad/ rel="nofollow noopener" target=_blank>Mainroad</a>.</span></div></div></footer></div><script async defer src=/js/menu.js></script></body></html>

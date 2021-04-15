@@ -1,0 +1,270 @@
+<!doctype html><html class=no-js lang=it><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>Invio di email usando Zend_Mail - Giovanni Tomasicchio</title><script>(function(a,b){a[b]=a[b].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content="Inviare email con Zend_Mail proteggendo il form dallo spam con Zend_Service_ReCaptcha"><meta property="og:title" content="Invio di email usando Zend_Mail"><meta property="og:description" content="Inviare email con Zend_Mail proteggendo il form dallo spam con Zend_Service_ReCaptcha"><meta property="og:type" content="article"><meta property="og:url" content="https://giovannitomasicchio.github.io/articoli/invio-di-email-usando-zend_mail/"><meta property="article:section" content="articoli"><meta property="article:published_time" content="2010-09-06T07:30:00+00:00"><meta property="article:modified_time" content="2010-09-06T07:30:00+00:00"><meta itemprop=name content="Invio di email usando Zend_Mail"><meta itemprop=description content="Inviare email con Zend_Mail proteggendo il form dallo spam con Zend_Service_ReCaptcha"><meta itemprop=datePublished content="2010-09-06T07:30:00+00:00"><meta itemprop=dateModified content="2010-09-06T07:30:00+00:00"><meta itemprop=wordCount content="1507"><meta itemprop=keywords content="Zend Framework,CAPTCHA,email,SMTP,"><meta name=twitter:card content="summary"><meta name=twitter:title content="Invio di email usando Zend_Mail"><meta name=twitter:description content="Inviare email con Zend_Mail proteggendo il form dallo spam con Zend_Service_ReCaptcha"><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic|Kaushan+Script:regular"><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-525H86QENV"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-525H86QENV',{anonymize_ip:!1})}</script></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class=logo><a class=logo__link href=/ title="Giovanni Tomasicchio" rel=home><div class="logo__item logo__text"><div class=logo__title>Giovanni Tomasicchio</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
+<span class=menu__btn-title tabindex=-1>Menu</span></button><ul class=menu__list><li class=menu__item><a class=menu__link href=/><span class=menu__text>Home</span></a></li><li class=menu__item><a class=menu__link href=/articoli/><span class=menu__text>Articoli PHP</span></a></li><li class=menu__item><a class=menu__link href=/corsi/><span class=menu__text>Corsi</span></a></li></ul></nav></div></header><div class="wrapper flex"><div class=primary><main class=main role=main><article class=post><header class=post__header><h1 class=post__title>Invio di email usando Zend_Mail</h1><div class="post__meta meta"><div class="meta__item-datetime meta__item"><svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2010-09-06T07:30:00Z>6 September 2010</time></div></div></header><div class="content post__content clearfix"><p>Questo articolo illustra come utilizzare lo <a href=http://framework.zend.com/>Zend Framework</a> per realizzare un form di invio email, utile ad esempio agli utenti per contattare l&rsquo;amministratore del sito oppure per segnalare una pagina del sito ad amici. Zend Framework fornisce tutti gli oggetti necessari allo scopo, oggetti che possono essere usati singolarmente, al di fuori di una applicazione MVC.
+L&rsquo;uso di un framework non deve spaventare coloro che non si sentono degli esperti nella programmazione in PHP. Al contrario l&rsquo;utilizzo degli oggetti forniti dal framework semplifica e velocizza la realizzazione dello script.</p><p>Iniziamo con la creazione del form in HTML che permetterà di inviare i dati inseriti dall&rsquo;utente tramite $_POST allo script send.php:</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+&lt;form method=&quot;post&quot; action=&quot;send.php&quot; name=&quot;form&quot;&gt;
+&lt;table border=&quot;0px&quot;&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align: right&quot;&gt;
+  Tuo Nome:
+&lt;/td&gt;
+&lt;td&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name&quot; size=&quot;40&quot; maxlength=&quot;80&quot; /&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align: right&quot;&gt;
+  Tua Email:
+&lt;/td&gt;
+&lt;td&gt;
+  &lt;input type=&quot;text&quot; name=&quot;email&quot; size=&quot;40&quot; /&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align: right&quot;&gt;
+  Oggetto:
+&lt;/td&gt;
+&lt;td&gt;
+  &lt;input type=&quot;text&quot; name=&quot;subject&quot; size=&quot;40&quot; maxlength=&quot;80&quot; /&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&quot;text-align: right&quot;&gt;
+  Testo:
+&lt;/td&gt;
+&lt;td&gt;
+  &lt;textarea name=&quot;testo&quot; cols=&quot;60&quot; rows=&quot;10&quot;&gt;&lt;/textarea&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;
+&lt;/td&gt;
+&lt;td style=&quot;text-align: right&quot;&gt;
+  &lt;input type=&quot;submit&quot; value=&quot;Invia&quot; /&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/form&gt;
+
+</code></pre><p>Proseguiamo con la creazione dello script send.php. Per prima cosa è bene fare un controllo sull&rsquo;array $_POST. Se questo è vuoto è inutile proseguire poiché significa che l&rsquo;utente non ha inviato il form, mostriamo quindi un messaggio di errore.</p><p>Il passaggio successivo sarà richiamare l&rsquo;oggetto <a href=http://framework.zend.com/manual/en/zend.loader.html>Zend_Loader_Autoloader</a>. Questa classe permette di caricare in automatico i vari oggetti del framework senza la necessità di dover includere i singoli script del framework contenenti le classi che ci interessano.</p><p>Fatto ciò possiamo istanziare un oggetto <a href=http://framework.zend.com/manual/en/zend.mail.html>Zend_Mail</a> (referenziato dalla variabile $mail nello script) e comporre così l&rsquo;email.</p><p>La composizione di una email a partire dai campi del form creato precedentemente è davvero semplice ed intuitiva e uno sguardo allo script send.php lo dimostra chiaramente.</p><p>Fatto ciò si deve spedire la posta. Prima però è necessario indicare a Zend_Mail con quale &ldquo;trasporter&rdquo; inviare la propria email, ovvero quale sistema di invio impiegare. Di default l&rsquo;invio di una email avviene tramite Zend_Mail_Transport_Sendmail. Questo transporter utilizza il server sendmail impostato nella configurazione del php. Dunque per inviare l&rsquo;email basterebbe utilizzare il metodo send di Zend_Mail e l&rsquo;email viene inviata.
+Supponiamo però di voler utilizzare un server SMTP. Per farlo ci viene in aiuto un oggetto molto interessante: Zend_Mail_Transport_Smtp. Nello script send.php si può vedere come si impostano i parametri di connessione al server SMTP.
+Infine, tramite il metodo send di Zend_Mail si invia l&rsquo;email indicando il &ldquo;transporter&rdquo; creato:</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+&lt;?php
+   // includo la cartella del framework
+   // Attenzione, il path impostato è per server windows, se si è su un server linux il path dovrebbe essere del tipo: /directory/zendframework/library
+   set_include_path(get_include_path().PATH_SEPARATOR.&quot;C:\Programmi\ZendFramework\library&quot;);
+   
+   /**
+    * Se il form è stato riempito procedo con l'invio della email  
+    */
+   if($_POST){
+
+   /**
+    * Richiamo il file contenente la mia classe Zend_Loader_Autoloader
+    *
+    * in questo modo posso caricare facilmente tutte le classi di
+    * Zend Framework agevolmente senza dover ogni volta fare un require
+    * come sto facendo ora
+    */
+   require_once(&quot;Zend/Loader/Autoloader.php&quot;);
+   
+   $autoloader = Zend_Loader_Autoloader::getInstance();
+   
+   /**
+    * Istanzio il mio oggetto Zend_Mail
+    */
+   $mail = new Zend_Mail();
+
+   /**
+    *  Compongo la mia email 
+    *  impostando le varie parti dell'email
+    */
+   $mail-&gt;addTo('mario@example.com', 'Mario Santagiuliana');
+   
+   $mail-&gt;setFrom($_POST['email'], $_POST['name']);
+   $mail-&gt;setSubject($_POST['subject']);
+   $mail-&gt;setBodyText($_POST['testo']);
+
+   /**
+    *  Voglio usare il mio server smtp, imposto i
+    *  parametri di configurazione per la connessione smtp 
+    */
+   $config = array('auth' =&gt; 'login',
+       'username' =&gt; 'mario@example.com',
+       'password' =&gt; 'la_mia_password',
+       'port' =&gt; 25);
+   /**
+    *  Istanzio l'oggetto Zend_Mail_Transport_Smtp indicandogli i
+    *  parametri di connessione e di accesso
+    */
+   $transport = new Zend_Mail_Transport_Smtp('smtp.example.com', $config);
+   
+   /**
+    * Invio l'email tramite il mio server smtp appena configurato
+    * e stampo un messaggio di corretta esecuzione dello script
+    */
+   $mail-&gt;send($transport);
+   $messaggio = &quot;Email inviata correttamente&quot;;
+   } else {
+   /**
+    * Imposto un messaggio generico di errore
+    */
+   $messaggio = &quot;Non hai riempito il form per il messaggio&quot;;
+   }
+
+   // Stampo il messaggio
+   echo $messaggio;
+?&gt;
+</code></pre><p>Come si può vedere la creazione dello script, utilizzando le classi di Zend è oltremodo semplice e veloce.</p><hr><p>Allo script appena visto però manca ancora qualche cosa. Cosa succede se l&rsquo;utente inserisce un indirizzo email sbagliato? Come evitare un utilizzo improprio dello script, ad esempio per inviare spam?</p><p>Nessun problema, Zend Framework fornisce un oggetto per controllare la validità di un indirizzo email: <a href=http://framework.zend.com/manual/en/zend.validate.set.html>Zend_Validate_EmailAddress</a>. Includiamo quindi questo controllo nello script precedente (referenziato da $validator) bloccando l&rsquo;esecuzione dello script nel caso l&rsquo;email fornita non sia valida.
+Invece per limitare l&rsquo;uso improprio del form ed evitare lo spam, Zend Framework mette a disposizione due componenti: Zend_Captcha e <a href=http://framework.zend.com/manual/en/zend.service.recaptcha.html>Zend_Service_ReCaptcha</a>. Nell&rsquo;esempio che segue vedremo l&rsquo;utilizzo di quest&rsquo;ultimo. E' necessario essere registrati al servizio <a href=http://www.google.com/recaptcha>ReCaptha</a> e possedere le relative chiavi per poterlo utilizzare.</p><p>L&rsquo;uso è molto semplice, basta istanziare l&rsquo;oggetto e inserire il controllo a monte, subito dopo aver verificato che l&rsquo;array POST abbia degli elementi al suo interno. Bisogna inoltre modificare anche il codice HTML del form per poter inserire al suo interno anche il codice di ReCaptcha.</p><p>Invece di modificare il file HTML, stavolta lo includiamo direttamente all&rsquo;interno dello script send.php. In questo modo avremo un unico script. Il form HTML subirà un piccolo mutamento in modo tale che i dati vengano inviati a se stesso (il campo action del tag form sarà pertanto vuoto).
+Cambieremo inoltre la logica dello script. Zend_Service_ReCaptcha tramite il metodo getHTML fornisce l&rsquo;output del codice per ReCaptcha, sposteremo quindi l&rsquo;inizializzazione di Zend_Loader_Autoloader al di fuori del controllo dell&rsquo;array POST. Un&rsquo;altra piccola modifica la facciamo sul messaggio di errore: se non viene compilato correttamente perché non far visualizzare nuovamente il form?</p><p>Ecco dunque come si presenta lo script finale.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+&lt;?php
+   // includo la cartella del framework
+   // Attenzione, il path impostato è per server windows, se si è su un server linux il path dovrebbe essere del tipo: /directory/zendframework/library
+   set_include_path(get_include_path().PATH_SEPARATOR.&quot;C:\Programmi\ZendFramework\library&quot;);
+
+   /**
+    * Richiamo il file contenente la mia classe Zend_Loader_Autoloader
+    *
+    * in questo modo posso caricare facilmente tutte le classi di
+    * Zend Framework agevolmente senza dover ogni volta fare un require
+    * come sto facendo ora
+    */
+   require_once(&quot;Zend/Loader/Autoloader.php&quot;);
+   
+   $autoloader = Zend_Loader_Autoloader::getInstance();
+   
+   /**
+    * Voglio essere sicuro che sia una persona a scrivermi e non una macchina
+    * uso il servizo di ReCaptcha con Zend_Service_ReCaptcha
+    */
+   $recaptcha = new Zend_Service_ReCaptcha('inserire_la_chiave_pubblica', 'inserire_la_chiave_privata');
+   // Abbellisco un po' l'output di recaptcha, la lingua italiana non è ancora disponibile
+   $recaptcha-&gt;setOptions(array(
+       'theme'=&gt;'clean',
+       'lang'=&gt;'it',
+       'tabindex'=&gt;5
+       )); 
+   
+   /**
+    * Se il form è stato riempito procedo con l'invio della email  
+    */
+   if($_POST){
+   // Controllo se il recaptcha inserito è corretto
+   $result = $recaptcha-&gt;verify(
+       $_POST['recaptcha_challenge_field'],
+       $_POST['recaptcha_response_field']
+   );
+   // Se i codici inseriti dall'utente sono validi allora posso proseguire
+   if($result-&gt;isValid()){
+       /**
+        * Controllo la validità dell'email, se è valida proseguo con l'Invio
+        * altrimenti stampo un messaggio di errore 
+        */
+       $validator = new Zend_Validate_EmailAddress(); // Istanzio l'oggetto
+
+       if ($validator-&gt;isValid($_POST['email'])) {
+       /**
+        * Istanzio il mio oggetto Zend_Mail 
+        */
+       $mail = new Zend_Mail();
+
+       /**
+        *  Compongo la mia email 
+        *  impostando le varie parti dell'email
+        */
+       $mail-&gt;addTo('mario@example.com', 'Mario Santagiuliana');
+       
+       $mail-&gt;setFrom($_POST['email'], $_POST['name']);
+       $mail-&gt;setSubject($_POST['subject']);
+       $mail-&gt;setBodyText($_POST['testo']);
+
+       /**
+        *  Voglio usare il mio server smtp, imposto i
+        *  parametri di configurazione per la connessione smtp 
+        */
+       $config = array('auth' =&gt; 'login',
+           'username' =&gt; 'mario@example.com',
+           'password' =&gt; 'la_mia_password',
+           'port' =&gt; 25);
+       /**
+        *  Istanzio l'oggetto Zend_Mail_Transport_Smtp indicandogli i
+        *  parametri di connessione e di accesso
+        */
+       $transport = new Zend_Mail_Transport_Smtp('smtp.example.com', $config);
+       
+       /**
+        * Invio l'email tramite il mio server smtp appena configurato
+        * e stampo un messaggio di corretta esecuzione dello script
+        */
+       $mail-&gt;send($transport);
+       $messaggio = &quot;Email inviata correttamente&quot;;
+       } else {
+       $messaggio = &quot;L'indirizzo email fornito non è valido&quot;;
+       }
+   } else {
+       $messaggio = &quot;Il codice captcha che hai inserito non è valido&quot;;
+   }
+   } else {
+   /**
+    * Se non ho niente nell'array POST visualizzo il form HTML
+    * Un eventuale messaggio di errore lo stampo successivamente
+    */
+   ?&gt;
+   &lt;form method=&quot;post&quot; action=&quot;&quot; name=&quot;form&quot;&gt;
+   &lt;table border=&quot;0px&quot;&gt;
+   &lt;tr&gt;
+    &lt;td style=&quot;text-align: right&quot;&gt;
+      Tuo Nome:
+    &lt;/td&gt;
+    &lt;td&gt;
+      &lt;input type=&quot;text&quot; name=&quot;name&quot; size=&quot;40&quot; maxlength=&quot;80&quot; /&gt;
+    &lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td style=&quot;text-align: right&quot;&gt;
+      Tua Email:
+    &lt;/td&gt;
+    &lt;td&gt;
+      &lt;input type=&quot;text&quot; name=&quot;email&quot; size=&quot;40&quot; /&gt;
+    &lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td style=&quot;text-align: right&quot;&gt;
+      Oggetto:
+    &lt;/td&gt;
+    &lt;td&gt;
+      &lt;input type=&quot;text&quot; name=&quot;subject&quot; size=&quot;40&quot; maxlength=&quot;80&quot; /&gt;
+    &lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td style=&quot;text-align: right&quot;&gt;
+      Testo:
+    &lt;/td&gt;
+    &lt;td&gt;
+      &lt;textarea name=&quot;testo&quot; cols=&quot;60&quot; rows=&quot;10&quot;&gt;&lt;/textarea&gt;
+    &lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;
+   &lt;/table&gt;
+   &lt;?php
+   // Visualizzo il codice HTML di ReCaptcha
+   echo $recaptcha-&gt;getHTML();
+   ?&gt;
+    &lt;/td&gt;
+    &lt;td style=&quot;text-align: right&quot;&gt;
+      &lt;input type=&quot;submit&quot; value=&quot;Invia&quot; /&gt;
+    &lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;/form&gt;
+   &lt;?php
+   }
+
+   // Stampo il messaggio ma solo se esiste
+   if($messaggio)
+   echo $messaggio;
+?&gt;
+</code></pre><p>Come si può vedere, Zend Framework è un ottimo strumento anche per la creazione di piccoli script. Il framework fornisce molti elementi utili per creare in poco tempo script che non necessariamente devono risiedere all&rsquo;interno di un&rsquo;applicazione web basata sul paradigma MVC. Gli oggetti del framework, infatti, possono essere richiamati e inizializzati a piacere.
+Lo script che ho proposto può essere ulteriormente migliorato. Per il form HTML si potrebbe utilizzare <a href=http://framework.zend.com/manual/en/zend.form.html>Zend_Form</a> e tramite Zend_Validate fare anche un&rsquo;ulteriore serie di controlli sulla compilazione del form da parte dell&rsquo;utente.
+Rimando dunque alla <a href=http://framework.zend.com/manual/en/manual.html>documentazione ufficiale di Zend Framework</a> per scoprire altre opzioni ed utilizzi dei componenti citati.</p></div><footer class=post__footer><div class="post__tags tags clearfix"><svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5.0 11V3C0 1.5.8.8.8.8S1.5.0 3 0h8c1.5.0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 100-6 3 3 0 000 6z"/></svg><ul class=tags__list><li class=tags__item><a class="tags__link btn" href=/tags/zend-framework/ rel=tag>Zend Framework</a></li><li class=tags__item><a class="tags__link btn" href=/tags/captcha/ rel=tag>CAPTCHA</a></li><li class=tags__item><a class="tags__link btn" href=/tags/email/ rel=tag>email</a></li><li class=tags__item><a class="tags__link btn" href=/tags/smtp/ rel=tag>SMTP</a></li></ul></div></footer></article></main><nav class="pager flex"><div class="pager__item pager__item--prev"><a class=pager__link href=/articoli/login-con-php/ rel=prev><span class=pager__subtitle>«&#8201;Precedente</span><p class=pager__title>Login con PHP</p></a></div><div class="pager__item pager__item--next"><a class=pager__link href=/articoli/introduzione-a-symfony/ rel=next><span class=pager__subtitle>Prossimo&#8201;»</span><p class=pager__title>Introduzione a symfony</p></a></div></nav></div></div><footer class=footer><div class="container footer__container flex"><div class=footer__copyright>&copy; 2021 Giovanni Tomasicchio.
+<span class=footer__copyright-credits>Generato con <a href=https://gohugo.io/ rel="nofollow noopener" target=_blank>Hugo</a> e il tema <a href=https://github.com/Vimux/Mainroad/ rel="nofollow noopener" target=_blank>Mainroad</a>.</span></div></div></footer></div><script async defer src=/js/menu.js></script></body></html>

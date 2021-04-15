@@ -1,0 +1,200 @@
+<!doctype html><html class=no-js lang=it><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>L'estensione mysqli - III - Giovanni Tomasicchio</title><script>(function(a,b){a[b]=a[b].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content="Gestire MySQL attraverso l'estensione mysqli di PHP 5"><meta property="og:title" content=" L'estensione mysqli - III"><meta property="og:description" content="Gestire MySQL attraverso l'estensione mysqli di PHP 5"><meta property="og:type" content="article"><meta property="og:url" content="https://giovannitomasicchio.github.io/articoli/lestensione-mysqli-iii/"><meta property="article:section" content="articoli"><meta property="article:published_time" content="2005-11-30T10:42:03+00:00"><meta property="article:modified_time" content="2005-11-30T10:42:03+00:00"><meta itemprop=name content=" L'estensione mysqli - III"><meta itemprop=description content="Gestire MySQL attraverso l'estensione mysqli di PHP 5"><meta itemprop=datePublished content="2005-11-30T10:42:03+00:00"><meta itemprop=dateModified content="2005-11-30T10:42:03+00:00"><meta itemprop=wordCount content="2367"><meta itemprop=keywords content="database,MySQL,sicurezza,BLOB,InnoDB,MyISAM,mysqli,SQL,upload,"><meta name=twitter:card content="summary"><meta name=twitter:title content=" L'estensione mysqli - III"><meta name=twitter:description content="Gestire MySQL attraverso l'estensione mysqli di PHP 5"><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic|Kaushan+Script:regular"><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-525H86QENV"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-525H86QENV',{anonymize_ip:!1})}</script></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class=logo><a class=logo__link href=/ title="Giovanni Tomasicchio" rel=home><div class="logo__item logo__text"><div class=logo__title>Giovanni Tomasicchio</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
+<span class=menu__btn-title tabindex=-1>Menu</span></button><ul class=menu__list><li class=menu__item><a class=menu__link href=/><span class=menu__text>Home</span></a></li><li class=menu__item><a class=menu__link href=/articoli/><span class=menu__text>Articoli PHP</span></a></li><li class=menu__item><a class=menu__link href=/corsi/><span class=menu__text>Corsi</span></a></li></ul></nav></div></header><div class="wrapper flex"><div class=primary><main class=main role=main><article class=post><header class=post__header><h1 class=post__title>L'estensione mysqli - III</h1><div class="post__meta meta"><div class="meta__item-datetime meta__item"><svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2005-11-30T10:42:03Z>30 November 2005</time></div></div></header><div class="content post__content clearfix"><p>Concludiamo lo studio della nuova estensione <em>ext/mysqli</em> soffermandoci su altre interessanti novità. Inizieremo dai <em>prepared statement</em> con cui effettuare il binding dei parametri e dei risultati, vedremo poi come eseguire una transazione ed infine analizzeremo le novità introdotte nella gestione dei BLOB.</p><p>I <em>prepared statement</em> ovvero le &ldquo;dichiarazioni preparate&rdquo; sono dei <em>modelli</em> di query da inviare e conservare nel server MySQL. Attraverso un sistema di collegamento tra le variabili PHP e i parametri delle query preparate è possibile sia modificare i dati contenuti nella query, sia recuperare direttamente i set di risultati.</p><p>Si parla quindi di binding (collegamento) dei parametri quando ad una query precedentemente preparata vengono associati dei parametri legati ad altrettante variabili PHP.</p><p>Si definisce invece binding dei risultati la tecnica che prevede il trasferimento diretto dei risultati di una query in determinate variabili PHP.</p><p>Come risulterà chiaro dagli esempi, queste tecniche non solo hanno indubbi benefici legati alle prestazioni ed alla sicurezza ma rendono il codice molto più snello e leggibile.</p><hr><h4 id=binding-dei-parametri>Binding dei parametri</h4><p>Nel primo esempio vedremo come implementare la tecnica del binding dei parametri. I passi da compiere sono i seguenti:</p><p><strong>1) preparazione della query</strong></p><p>La preparazione della query avviene attraverso il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">prepare&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code> della classe <em>mysqli</em>. Ogni parametro della query che vogliamo collegare ad una variabile PHP dovrà essere indicato con un punto interrogativo utilizzato come segnaposto. Il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">prepare&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code> invia la query a MySQL che ne controlla la validità e ne verifica la correttezza. Se tale controllo dà esito positivo, <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">prepare&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code> restituisce un oggetto di tipo <em>mysqli_stmt</em>.</p><p><strong>2) collegamento delle variabili PHP ai parametri della query</strong></p><p>Il collegamento avviene attraverso il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">bind_param&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code> della classe <em>mysqli_stmt</em> con cui specifichiamo il tipo di parametri e passiamo le variabili da collegare.</p><p><strong>3) assegnazione dei valori alle variabili PHP collegate</strong></p><p>Si tratta di normalissime assegnazioni di valori</p><p><strong>4) esecuzione della query</strong></p><p>Per eseguire lo <em>statement</em> ovvero la query così preparata viene impiegato il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">execute&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> della classe <em>mysqli_stmt</em>.</p><p>Il seguente esempio chiarirà ulteriormente questa tecnica.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+&lt;?php
+// provo a connettermi al server MySQL
+$mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
+
+// preparo lo statement
+$stmt = $mysqli-&gt;prepare('INSERT INTO mia_tabella VALUES (NULL, ? , ?)');
+
+// collego i parametri
+$stmt-&gt;bind_param('ss', $nome, $cognome);
+
+// valorizzo i parametri
+$nome = 'Luca';
+$cognome = 'Armenise';
+
+// eseguo lo statement
+$stmt-&gt;execute();
+
+// valorizzo i parametri
+$nome = 'Nicola';
+$cognome = 'Ruggiero';
+
+// eseguo lo statement
+$stmt-&gt;execute();
+?&gt;
+</code></pre><p>E' importante soffermarsi sulla sintassi del metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">bind_param&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code>. Il primo valore che gli viene passato è una stringa e nel nostro esempio vale &ldquo;ss&rdquo;. Questa stringa contiene una lettera per ciascun parametro e sta ad indicare il tipo di dato che questo parametro contiene. Ecco le lettere che possono essere impiegate:</p><table><thead><tr><th><strong>Lettera</strong></th><th><strong>Tipo di dati</strong></th></tr></thead><tbody><tr><td>i</td><td>numeri interi</td></tr><tr><td>d</td><td>numeri di tipo DOUBLE o FLOAT</td></tr><tr><td>b</td><td>appartenenti alla famiglia dei BLOB</td></tr><tr><td>s</td><td>stringhe (tutti i dati per cui si usano gli apici nelle query)</td></tr></tbody></table><p>Nel nostro caso i parametri da passare sono costituiti da due stringhe ($nome e $cognome) pertanto sono state passate le lettere &ldquo;ss&rdquo;.</p><p>Il binding dei parametri risulta una tecnica particolarmente indicata quando una stessa query deve essere effettuata più volte con parametri diversi. In questi casi si ottiene una notevole riduzione dei tempi di esecuzione poiché la query viene preparata una sola volta ed il server MySQL non deve ricontrollarla ad ogni esecuzione.</p><p>Si noti anche che non è stato necessario effettuare l&rsquo;escape dei &ldquo;caratteri pericolosi&rdquo; quali gli apici con funzioni come addslashes() o mysql_escape_string() in quanto i parametri non vengono inseriti nella query.</p><p>Anche sul fronte della sicurezza il binding dei parametri risulta vantaggioso. Infatti la query viene inviata al server MySQL priva di quei valori, spesso provenienti dall&rsquo;utente, che se manipolati ad arte potrebbero modificarne pesantemente la valenza (SQL injection). Questi parametri vengono invece inviati in un secondo momento ed inoltre per ciascuno di essi, grazie al metodo <em>bind_param</em>, viene specificata la natura.</p><p>Purtroppo la presenza dei parametri all&rsquo;interno della query è segnalata da semplici punti interrogativi, pertanto è necessario che le variabili legate ad esse con <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">bind_param&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code> debbano rispettare rigorosamente l&rsquo;ordine dei punti interrogativi. Sarebbe stato più comodo poter inserire degli alias al posto dei ? e riferirsi a questi per associare le variabili PHP.</p><hr><h4 id=binding-dei-risultati>Binding dei risultati</h4><p>Grazie ai <em>prepared statement</em> è possibile anche legare alcune variabili PHP direttamente ai risultati restituiti da una query. La tecnica è molto semplice e segue questa procedura:</p><p><strong>1) preparazione della query</strong></p><p>La preparazione della query avviene attraverso il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">prepare&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code> della classe <em>mysqli</em>. In questa fase è possibile anche inserire dei parametri nella query come mostrato precedentemente nella tecnica del binding dei parametri.</p><p><strong>2) esecuzione della query</strong></p><p>Questa operazione avviene impiegando il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">execute&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> della classe <em>mysqli_stmt</em>.</p><p><strong>3) collegamento delle variabili PHP con i risultati della query</strong></p><p>Questo collegamento avviene grazie al metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">bind_result&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code> a cui passiamo in ordine le variabili PHP da valorizzare con i corrispondenti dati provenienti dalla query.</p><p><strong>4) Fetch dei risultati</strong></p><p>Il recupero dei risultati avviene con il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">fetch&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> della classe <em>mysqli_stmt</em>.</p><p>Vediamo ora un esempio di binding dei risultati:</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+&lt;?php
+// provo a connettermi al server MySQL
+$mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
+
+// preparo lo statement
+$stmt = $mysqli-&gt;prepare('SELECT * FROM mia_tabella');
+
+// eseguo lo statement
+$stmt-&gt;execute();
+
+// collego i risultati
+$stmt-&gt;bind_result($id, $nome, $cognome);
+
+// eseguo la fetch dei risultati
+while ($stmt-&gt;fetch())
+{
+   echo &quot;ID utente:$id, nome:$nome, cognome:$cognome&lt;br&gt;\n&quot;;
+}
+?&gt;
+</code></pre><p>Una volta collegate le variabili PHP ai risultati della query grazie al metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">bind_result&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code> è possibile adoperarle all&rsquo;interno dello script. Ad ogni chiamata del metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">fetch&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> queste variabili riceveranno i nuovi dati provenienti dal set dei risultati.</p><p>Questa tecnica comunque non è particolarmente vantaggiosa, infatti anche se permette di valorizzare direttamente le variabili PHP, queste devono essere passate al metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">bind_result&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code> nell&rsquo;esatto ordine con cui vengono restituite dalla query: cosa accade se la query viene modificata?</p><hr><h4 id=transazioni>Transazioni</h4><p>Una transazione è una successione di query che si conclude con un successo o un insuccesso. Nel primo caso gli effetti prodotti dalle query diventano permanenti, altrimenti il database torna nello stato precedente l&rsquo;inizio della transazione.</p><p>Le tabelle di tipo MyISAM non supportano le transazioni, possibili in MySQL solo con tabelle di tipo InnoDB e BDB. Per i nostri esempi useremo sempre la tabella mia_tabella costruita nel <a href=http://www.phpnews.it/articoli/php/estensione-mysqli-i/>primo articolo</a>, convertendola però in InnoDB attraverso la seguente query:</p><p>ALTER TABLE mia_tabella type = InnoDB</p><p>La vecchia estensione <em>ext/mysql</em> non offre un supporto nativo alle transazioni che devono essere eseguite utilizzando direttamente delle query. Questo approccio è ovviamente ancora praticabile, pertanto risulta immediato convertire un vecchio script per l&rsquo;utilizzo di <em>ext/mysqli</em>. Vediamo quindi come effettuare una transazione facendo uso esclusivamente di query.</p><p>Di default MySQL funziona in modalità AUTOCOMMIT, ovvero tutte le query che modificano il contenuto del database (INSERT, DELETE, UPDATE) hanno un effetto duraturo ed non possono essere annullate.</p><p>Per effettuare una transazione è possibile disabilitare l&rsquo;AUTOCOMMIT ed utilizzare i comandi COMMIT e ROLLBACK per confermare o annullare gli effetti delle query eseguite. Oppure, lasciando l&rsquo;impostazione AUTOCOMMIT abilitata, è possibile lanciare il comando START TRANSACTION (o il suo alias BEGIN) per indicare l&rsquo;inizio della transazione ed impiegare i i comandi COMMIT e ROLLBACK per confermare o annullare gli effetti delle query eseguite.</p><p>Vediamo un esempio che avvia una transazione con il comando START TRANSACTION:</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+&lt;?php
+// provo a connettermi al server MySQL
+$mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
+
+// Avvio la transazione
+$mysqli-&gt;query('START TRANSACTION');
+
+// eseguo alcune query
+$mysqli-&gt;query(&quot;INSERT INTO mia_tabella VALUES (NULL, 'Alberto', 'Rossi')&quot;);
+$mysqli-&gt;query(&quot;UPDATE mia_tabella SET cognome='Bianchi' WHERE nome='Alberto'&quot;);
+
+// chiudo la transazione con esito positivo
+$mysqli-&gt;query('COMMIT');
+
+// Avvio una nuova transazione
+$mysqli-&gt;query('START TRANSACTION');
+
+// eseguo una query
+$mysqli-&gt;query(&quot;DELETE FROM mia_tabella&quot;);
+
+// affected_rows funziona anche con le transazioni
+// anche se non è detto che l'effetto della query sarà duraturo
+echo 'Righe cancellate:', $mysqli-&gt;affected_rows;
+
+// chiudo la transazione con esito negativo
+$mysqli-&gt;query('ROLLBACK');
+?&gt;
+</code></pre><p>Adesso vediamo invece uno script che implementa le transazioni disabilitando l&rsquo;AUTOCOMMIT:</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+&lt;?php
+// provo a connettermi al server MySQL
+$mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
+
+// Disabilito l'AUTOCOMMIT delle query
+$mysqli-&gt;query('SET AUTOCOMMIT=0');
+
+// eseguo alcune query
+$mysqli-&gt;query(&quot;INSERT INTO mia_tabella VALUES (NULL, 'Alberto', 'Rossi')&quot;);
+$mysqli-&gt;query(&quot;UPDATE mia_tabella SET cognome='Bianchi' WHERE nome='Alberto'&quot;);
+
+// chiudo la transazione con esito positivo
+$mysqli-&gt;query('COMMIT');
+
+// Adesso inizia implicitamente una nuova transazione
+// poiché l'AUTOCOMMIT è disabilitato
+
+// eseguo una query
+$mysqli-&gt;query(&quot;DELETE FROM mia_tabella&quot;);
+
+// chiudo la transazione con esito negativo
+$mysqli-&gt;query('ROLLBACK');
+?&gt;
+</code></pre><p>Con l&rsquo;estensione <em>ext/mysqli</em> abbiamo a disposizione i metodi <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">commit&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code>e <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">rollback&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code>della classe <em>mysqli</em> che, insieme al metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">autocommit&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code> permettono di eseguire delle transazioni inviando al server esclusivamente le query costituenti la transazione stessa. La logica da seguire coincide con quella dell&rsquo;ultimo esempio visto poiché questi metodi hanno la stessa valenza dei relativi comandi SQL:</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+&lt;?php
+// provo a connettermi al server MySQL
+$mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
+
+// Disabilito l'AUTOCOMMIT delle query
+$mysqli-&gt;autocommit(false);
+
+// eseguo alcune query
+$mysqli-&gt;query(&quot;INSERT INTO mia_tabella VALUES (NULL, 'Alberto', 'Rossi')&quot;);
+$mysqli-&gt;query(&quot;UPDATE mia_tabella SET cognome='Bianchi' WHERE nome='Alberto'&quot;);
+
+// chuda la transazione con esito positivo
+$mysqli-&gt;commit();
+
+// Adesso inizia implicitamente una nuova transazione
+// poiché l'AUTOCOMMIT è disabilitato
+
+// eseguo una query
+$mysqli-&gt;query(&quot;DELETE FROM mia_tabella&quot;);
+
+// chiudo la transazione con esito negativo
+$mysqli-&gt;rollback();
+?&gt;
+</code></pre><p>Anche se non ci sono importanti benefici provenienti dall&rsquo;uso di <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">autocommit&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code>, <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">commit&lt;/span>&lt;span style="color: rgb(0, 119, 0);">() &lt;/span>&lt;/span></code>e <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">rollback&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code>, il codice risulta comunque più chiaro ed evidenzia esclusivamente le query appartenenti alla transazione.</p><hr><h4 id=gestione-dei-blob>Gestione dei BLOB</h4><p>Come accadeva per la vecchia <em>ext/mysql</em>, la gestione dei dati di tipo BLOB (<strong>B</strong>inary <strong>L</strong>arge <strong>OB</strong>ject) è analoga a quella dei dati normali. <em>ext/mysqli</em> in più introduce una nuova modalità di inserimento dei dati BLOB di gran lunga più efficiente. Attraverso l&rsquo;uso del metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">send_long_data&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> della classe <em>mysqli_stmt</em> i voluminosi dati binari non devono essere contenuti nella query ed inviati tutti insieme ma, sfruttando il binding dei parametri, possono essere inviati al server MySQL un po' per volta.</p><p>L&rsquo;esempio che proponiamo è una rivisitazione dello script proposto per l'<a href=http://www.phpnews.it/articoli/php/files-ed-immagini-in-mysql/2/>upload e l&rsquo;inserimento dei files all&rsquo;interno di un database MySQL</a>. Questa volta useremo le classi messe a disposizione da <em>ext/mysqli</em> ed in particolare vedremo come impiegare il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">send_long_data&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code>.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+&lt;?php
+// se è stato inviato il file...
+if(isset($_POST['invia']))
+{
+   // se ci sono stati problemi nell'upload del file
+   if(!isset($_FILES['file_inviato']) OR $_FILES['file_inviato']['error'] != UPLOAD_ERR_OK)
+   mostra_form(&quot;errore nell'invio del file. Riprova&quot;);
+
+   // connessione e selezione del database
+   $mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
+
+   // recupero alcune informazioni sul file inviato
+   $nome_file_temporaneo = $_FILES['file_inviato']['tmp_name'];
+   $nome_file_vero = $_FILES['file_inviato']['name'];
+   $tipo_file = $_FILES['file_inviato']['type'];
+
+
+   // preparo la query per inserire i dati nel DB
+   $stmt = $mysqli-&gt;prepare(&quot;INSERT INTO tabella_files VALUES (NULL, ?, ?, ?)&quot;);
+
+   // collego i parametri della query alle variabili PHP
+   $stmt-&gt;bind_param('ssb', $nome_file_vero, $tipo_file, $dati_file);
+
+   // apro il file in lettura
+   $fp = fopen($nome_file_temporaneo,&quot;rb&quot;);
+   while ($dati_file = fread($fp,1024))
+   {
+       $stmt-&gt;send_long_data(2, $dati_file);
+   }
+
+   if ($stmt-&gt;execute())
+   {
+       $messaggio = &quot;Memorizzazione del file &lt;b&gt;$nome_file_vero&lt;/b&gt; nel database eseguita correttamente.&quot;;
+   }
+   else
+   {
+       $messaggio = &quot;Errore nella memorizzazione del file &lt;b&gt;$nome_file_vero&lt;/b&gt;&quot;;
+   }
+
+   // mostro nuovamente il form ed un messaggio di successo
+   mostra_form(&quot;Memorizzazione del file &lt;b&gt;$nome_file_vero&lt;/b&gt; nel database eseguita correttamente.&quot;);
+}
+else
+{
+   mostra_form();
+}
+
+/**
+* Mostra il form per l'upload del file
+*
+*/
+function mostra_form($messaggio = '')
+{
+   echo &lt;&lt;&lt;END
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=iso-8859-1&quot;&gt;
+&lt;title&gt;Carica file nel database&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;p&gt;$messaggio&lt;br&gt;Seleziona un file da memorizzare nel database: &lt;/p&gt;
+   &lt;form name=&quot;form1&quot; enctype=&quot;multipart/form-data&quot; method=&quot;post&quot; action=&quot;&quot;&gt;
+       &lt;p&gt;
+           &lt;input type=&quot;file&quot; name=&quot;file_inviato&quot;&gt;
+       &lt;/p&gt;
+       &lt;p&gt;
+           &lt;input type=&quot;submit&quot; name=&quot;invia&quot; value=&quot;Invia file&quot;&gt;
+       &lt;/p&gt;
+   &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+END;
+exit();
+}
+?&gt;
+</code></pre><p>Il punto di forza di questa tecnica consiste nell&rsquo;accoppiata della funzione <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">fread&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code> con il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">send_long_data&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code>. <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">fread&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code> infatti legge di volta in vola solo parte del file, <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">send_long_data&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> a sua volta prende questi frammenti e li invia a MySQL.</p><p>Lo script PHP quindi non dovrà tenere in memoria tutto il file, inoltre l&rsquo;invio graduale dei dati non rischierà di far superare le dimensioni imposte dalla direttiva <em>max_allowed_packet</em> del server MySQL, ovvero la massima dimensione che può raggiungere una query. Si noti infine come sia comunque necessario richiamare il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">execute&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> della classe <em>mysqli_stmt</em> per eseguire realmente la query.</p></div><footer class=post__footer><div class="post__tags tags clearfix"><svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5.0 11V3C0 1.5.8.8.8.8S1.5.0 3 0h8c1.5.0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 100-6 3 3 0 000 6z"/></svg><ul class=tags__list><li class=tags__item><a class="tags__link btn" href=/tags/database/ rel=tag>database</a></li><li class=tags__item><a class="tags__link btn" href=/tags/mysql/ rel=tag>MySQL</a></li><li class=tags__item><a class="tags__link btn" href=/tags/sicurezza/ rel=tag>sicurezza</a></li><li class=tags__item><a class="tags__link btn" href=/tags/blob/ rel=tag>BLOB</a></li><li class=tags__item><a class="tags__link btn" href=/tags/innodb/ rel=tag>InnoDB</a></li><li class=tags__item><a class="tags__link btn" href=/tags/myisam/ rel=tag>MyISAM</a></li><li class=tags__item><a class="tags__link btn" href=/tags/mysqli/ rel=tag>mysqli</a></li><li class=tags__item><a class="tags__link btn" href=/tags/sql/ rel=tag>SQL</a></li><li class=tags__item><a class="tags__link btn" href=/tags/upload/ rel=tag>upload</a></li></ul></div></footer></article></main><nav class="pager flex"><div class="pager__item pager__item--prev"><a class=pager__link href=/articoli/lestensione-mysqli-ii/ rel=prev><span class=pager__subtitle>«&#8201;Precedente</span><p class=pager__title>L'estensione mysqli - II</p></a></div><div class="pager__item pager__item--next"><a class=pager__link href=/articoli/disabilitare-il-register-globals/ rel=next><span class=pager__subtitle>Prossimo&#8201;»</span><p class=pager__title>Disabilitare il register_globals</p></a></div></nav></div></div><footer class=footer><div class="container footer__container flex"><div class=footer__copyright>&copy; 2021 Giovanni Tomasicchio.
+<span class=footer__copyright-credits>Generato con <a href=https://gohugo.io/ rel="nofollow noopener" target=_blank>Hugo</a> e il tema <a href=https://github.com/Vimux/Mainroad/ rel="nofollow noopener" target=_blank>Mainroad</a>.</span></div></div></footer></div><script async defer src=/js/menu.js></script></body></html>

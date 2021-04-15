@@ -1,0 +1,212 @@
+<!doctype html><html class=no-js lang=it><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>Combattere lo spam con tecniche CAPTCHA - Giovanni Tomasicchio</title><script>(function(a,b){a[b]=a[b].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content="Creare immagini CAPTCHA con PHP"><meta property="og:title" content="Combattere lo spam con tecniche CAPTCHA"><meta property="og:description" content="Creare immagini CAPTCHA con PHP"><meta property="og:type" content="article"><meta property="og:url" content="https://giovannitomasicchio.github.io/articoli/combattere-lo-spam-con-tecniche-captcha/"><meta property="article:section" content="articoli"><meta property="article:published_time" content="2006-04-21T22:07:51+00:00"><meta property="article:modified_time" content="2006-04-21T22:07:51+00:00"><meta itemprop=name content="Combattere lo spam con tecniche CAPTCHA"><meta itemprop=description content="Creare immagini CAPTCHA con PHP"><meta itemprop=datePublished content="2006-04-21T22:07:51+00:00"><meta itemprop=dateModified content="2006-04-21T22:07:51+00:00"><meta itemprop=wordCount content="2095"><meta itemprop=keywords content="database,MySQL,sicurezza,CAPTCHA,cookie,"><meta name=twitter:card content="summary"><meta name=twitter:title content="Combattere lo spam con tecniche CAPTCHA"><meta name=twitter:description content="Creare immagini CAPTCHA con PHP"><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic|Kaushan+Script:regular"><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-525H86QENV"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-525H86QENV',{anonymize_ip:!1})}</script></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class=logo><a class=logo__link href=/ title="Giovanni Tomasicchio" rel=home><div class="logo__item logo__text"><div class=logo__title>Giovanni Tomasicchio</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
+<span class=menu__btn-title tabindex=-1>Menu</span></button><ul class=menu__list><li class=menu__item><a class=menu__link href=/><span class=menu__text>Home</span></a></li><li class=menu__item><a class=menu__link href=/articoli/><span class=menu__text>Articoli PHP</span></a></li><li class=menu__item><a class=menu__link href=/corsi/><span class=menu__text>Corsi</span></a></li></ul></nav></div></header><div class="wrapper flex"><div class=primary><main class=main role=main><article class=post><header class=post__header><h1 class=post__title>Combattere lo spam con tecniche CAPTCHA</h1><div class="post__meta meta"><div class="meta__item-datetime meta__item"><svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2006-04-21T22:07:51Z>21 April 2006</time></div></div></header><div class="content post__content clearfix"><p>Dopo mille peripezie e notti insonni siamo riusciti a realizzare un guestbook o un sistema di commenti per il nostro sito web. Finalmente gli utenti hanno la possibilità di interagire con il sito, lasciare la loro &ldquo;impronta&rdquo;, sentirsi più coinvolti. Neanche il tempo di godersi la nuova creazione che subito un altro problema sembra vanificare tutti i nostri sforzi: lo spam!!!</p><p>E' vero, ogni tanto qualche buontempone si diverte ad &ldquo;abusare&rdquo; delle funzionalità offerte dai nostri script ma avevamo pensato anche a questo e dal nostro pannello di amministrazione facciamo pulizia degli interventi indesiderati. Alcuni però si ripetono costantemente e si distinguono dagli altri perché contengono pubblicità a prodotti o servizi di siti web stranieri.</p><p>Spesso questi messaggi non vengono inseriti da utenti in carne ed ossa ma da sistemi automatizzati che si collegano con il nostro server per riempirlo di spam. Cancellare questi messaggi serve a poco, sono destinati a ripresentarsi. Ma ci si può difendere da questo tipo di attacchi?</p><p>Alan Turing, uno dei padri fondatori della computer scienze, nel lontano 1950 affrontò il problema della creazione di test che potessero essere superati facilmente da un uomo ma non da una macchina. Proprio da questi studi prende il nome la tecnica CAPTCHA (<em>Completely Automated Public Turing Test to Tell Computers and Humans Apart</em>) comunemente usata nei siti web per verificare se l&rsquo;interlocutore del sito web sia un individuo o un software.</p><p>Una classica implementazione delle tecniche CAPTCHA si basa sulla realizzazione di immagini contenenti caratteri che l&rsquo;utente deve leggere e riportare correttamente in una casella di testo. L&rsquo;operazione non può essere effettuata da un software di OCR poiché i caratteri mostrati sono deformati o contengono qualche altra forma di disturbo.</p><p>In questo articolo vedremo dapprima come sia semplice creare un sistema automatico per l&rsquo;inserimento di dati in un form HTML, verrà poi illustrata la realizzazione di un semplice ma efficace procedura di protezione CAPTCHA che potete vedere in azione nelle pagine di PHPnews.it.</p><hr><h4 id=come-viene-generato-lo-spam>Come viene generato lo spam?</h4><p>Per convincersi della facilità con cui è possibile &ldquo;inquinare&rdquo; un form HTML con dati inseriti attraverso un sistema automatico proponiamo uno script che fa uso delle funzioni CURL per connettersi ad un server ed inviare dei dati via POST. Ovviamente si tratta solo di un esempio senza troppe pretese ma sufficiente a comprendere il meccanismo di generazione automatica dello spam.</p><p>Supponiamo quindi che il form bersaglio sia generato dal seguente script.</p><p><strong>post.php</strong></p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+&lt;form id=&quot;form1&quot; name=&quot;form1&quot; method=&quot;post&quot; action=&quot;&quot;&gt;
+&lt;p&gt;titolo
+&lt;input type=&quot;text&quot; name=&quot;titolo&quot; /&gt;
+&lt;/p&gt;
+&lt;p&gt;testo
+&lt;input type=&quot;text&quot; name=&quot;testo&quot; /&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;input type=&quot;submit&quot; name=&quot;Submit&quot; value=&quot;invia&quot; /&gt;
+&lt;/p&gt;
+&lt;/form&gt;
+&lt;?php
+if(!$_POST) exit();
+
+$handle = fopen('testo.txt', 'a');
+fwrite($handle, 'Titolo: '.$_POST['titolo'].' testo: '.$_POST['testo']);
+fclose($handle);
+?&gt;
+</code></pre><p>Lo script genera il form e salva in un file di testo (testo.txt) i dati che l&rsquo;utente o il sistema automatico inviano via POST.</p><p>Il seguente listato invece serve ad &ldquo;attaccare&rdquo; il form bersaglio:</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+&lt;?php
+$post_data = array();
+
+$post_data['titolo'] = &quot;titolo test&quot;;
+$post_data['testo'] = &quot;contenuto&quot;;
+
+$ch = curl_init();
+curl_setopt($ch, CURLOPT_URL, &quot;http://localhost/post.php&quot; );
+curl_setopt($ch, CURLOPT_POST, 1 );
+curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+$postResult = curl_exec($ch);
+
+if (curl_errno($ch)) {
+   print curl_error($ch);
+}
+curl_close($ch);
+print $postResult;
+?&gt;
+</code></pre><p>Per eseguire il precedente script è necessario abilitare il caricamento dell&rsquo;estensione curl e modificare l&rsquo;URL impostato con la direttiva CURLOPT_URL in modo che punti al form bersaglio. Per verificare il funzionamento dello <em>spammer</em> basta leggere il contenuto del file testo.txt generato da post.php.</p><p>Ora non dovrebbero esserci più dubbi sulla semplicità con cui è possibile subissare un sito web di spam. E' quindi il caso di correre ai ripari&mldr;</p><hr><h4 id=funzionamento-della-protezione-captcha>funzionamento della protezione CAPTCHA</h4><p>L&rsquo;approccio impiegato per realizzare la protezione CAPTCHA non fa uso ne di cookie ne delle sessioni, in modo da interferire il meno possibile nel funzionamento degli script preesistenti. Serve solo avere a disposizione una tabella nel DB MySQL da impiegare per conservare i pochi dati necessari. Per crearla è sufficiente eseguire questa query:</p><pre><code>&lt;pre class=&quot;brush: sql&quot;&gt;
+CREATE TABLE CAPTCHA ( 
+   CAPTCHA_id char(32) NOT NULL default '', 
+   code char(3) NOT NULL default '', 
+   `timestamp` int(11) NOT NULL default '0', 
+   PRIMARY KEY (CAPTCHA_id) 
+) 
+</code></pre><p>Il principio di funzionamento si basa sulla creazione di un codice casuale di 3 caratteri (code), che viene mostrato all&rsquo;utente sotto forma di immagine distorta, e di un identificativo alfanumerico di 32 caratteri (CAPTCHA_id) associato ad esso. Codice ed identificativo vengono memorizzati nella tabella del database, insieme all&rsquo;indicazione dell&rsquo;istante di creazione (timestamp). L&rsquo;utente interpreta i caratteri disegnati nell&rsquo;immagine che gli viene mostrata e li riporta in un campo input di un form. Un campo nascosto conserva l&rsquo;identificativo del codice da riconoscere. Una volta inviato il form è sufficiente verificare che la coppia identificativo/codice sia presente nel database.</p><p>Tale procedura si basa su tre script:</p><ul><li>form.php, che si limita a creare il form ed a generare un identificativo casuale.</li><li>CAPTCHA.php, che prende l&rsquo;identificativo generato, ne associa un codice ti tre lettere casuali, memorizza la coppia identificativo/codice nel database e genera l&rsquo;immagine da interpretare.</li><li>post.php, che preleva identificativo e codice inviati dall&rsquo;utente e li confronta con i dati presenti nel database.</li></ul><p>L&rsquo;aver memorizzato il timestamp permette di implementare un sistema di &ldquo;scadenza&rdquo; delle immagini ed inoltre facilita le operazioni di pulizia della tabella.</p><hr><h4 id=creazione-del-form>Creazione del form</h4><p>Di seguito viene riportato il codice dello script form.php. In situazioni di utilizzo concreto di tale tecnica il form sarà ovviamente più complesso, dovendo contenere tutti gli elementi che si vogliono proteggere (input, select, textbox, ecc.).</p><p>Si noti come l&rsquo;unica vera operazione eseguita è la creazione del $CAPTCHA_id casuale, necessaria poiché questo identificativo deve essere presente nel campo nascosto del form ed inoltre deve essere passato allo script CAPTCHA.php responsabile della creazione dell&rsquo;immagine. Osservando il tag &lt;img> si nota come l&rsquo;immagine non è costituita da un file vero e proprio presente sul server ma viene generata &ldquo;al volo&rdquo; dallo script CAPTCHA.php.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+&lt;?php
+// creo un identificativo da associare al codice di sicurezza
+$CAPTCHA_id = md5(microtime().mt_rand().'super1segreto2segretissimo3');
+
+// creo un codice di controllo per la verifica dell'identificativo
+$sale = &quot;frase super segreta da cambiare a discrezione.&quot;;
+$chk = md5($sale.$CAPTCHA_id);
+?&gt;
+
+&lt;form id=&quot;form1&quot; name=&quot;form1&quot; method=&quot;post&quot; action=&quot;post.php&quot;&gt;
+Inserisci i caratteri
+&lt;img src=&quot;CAPTCHA.php?id=&lt;?php echo &quot;$CAPTCHA_id&amp;chk=$chk&quot;?&gt;&quot; width=&quot;110&quot; height=&quot;70&quot; /&gt;
+qui:
+&lt;input type=&quot;text&quot; name=&quot;CAPTCHA_code&quot; /&gt;
+&lt;input name=&quot;CAPTCHA_id&quot; type=&quot;hidden&quot; id=&quot;CAPTCHA_id&quot; value=&quot;&lt;?php echo $CAPTCHA_id?&gt;&quot; /&gt;
+&lt;input type=&quot;submit&quot; name=&quot;Submit&quot; value=&quot;Invia&quot; /&gt;
+&lt;/form&gt;
+</code></pre><p>La stringa $chk è un codice di controllo, costruito per proteggere lo script CAPTCHA.php da chiamate illecite. Viene costruito anteponendo una stringa arbitraria contenuta in $sale alla variabile $CAPTCHA_id e calcolando l&rsquo;md5 del risultato.</p><hr><h4 id=creazione-dellimmagine>Creazione dell&rsquo;immagine</h4><p>Vediamo ora il funzionamento dello script CAPTCHA.php, che assolve diversi importanti compiti del nostro sistema di protezione antispam.</p><p>Per prima cosa lo script verifica che l&rsquo;identificativo passato via GET sia presente e valido. Viene ricalcolato il codice di controllo e confrontato con quello ricevuto via GET. Si procede quindi con la creazione dell&rsquo;immagine. Viene allocato un colore per lo sfondo e tre colori per le lettere che vengono estratte casualmente dalla stringa $caratteri. Si noti come in tale stringa manca lo zero, per evitare confusioni con la lettera o. La funzione imagecolorallocatealpha permette di impostare la trasparenza delle lettere.</p><p>Il ciclo for genera le tre lettere e le disegna nell&rsquo;immagine. La distorsione è realizzata facendo sovrapporre le lettere e conferendo loro una piccola rotazione casuale di +/- 5°. Si noti che si è specificato l&rsquo;utilizzo di un determinato font (VeraMono.ttf) da inserire nella stessa cartella dello script.</p><p>Creata l&rsquo;immagine si procede alla memorizzazione dei dati nel database. La query per l&rsquo;inserimento dei dati non usa una INSERT ma una REPLACE per evitare problemi nel caso lo script CAPTCHA.php venga richiamato più volte con lo stesso identificativo. Segue una procedura che con probabilità impostata da $probabilità provvede a cancellare i record più vecchi di $durata_CAPTCHA secondi.</p><p>Infine l&rsquo;immagine viene inviata al browser insieme ad una intestazione (header) che ne specifica il tipo MIME.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+&lt;?php
+// controllo se è stato fornito l'identificativo del codice CAPTCHA
+if(!isset($_GET['id'])) exit();
+
+// controllo la validità dell'identificativo
+$CAPTCHA_id = $_GET['id'];
+if(!preg_match(&quot;/^[a-f0-9]{32}$/&quot;,$CAPTCHA_id)) exit();
+
+// ricreo il codice di controllo e lo confronto con quello passato via GET
+$sale = &quot;frase super segreta da cambiare a discrezione.&quot;;
+$chk = md5($sale . $CAPTCHA_id);
+if($chk != $_GET['chk']) exit();
+
+// creo l'immagine
+// ---------------------------------------------------------------
+
+// le dimensioni dell'immagine
+$size_x = 110;
+$size_y = 70;
+
+$img = imagecreatetruecolor($size_x,$size_y);
+
+// alloco un colore per lo sfondo
+$backgroung = imagecolorallocate($img,255, 255, 255);
+
+// alloco 3 colori per le 3 lettere da decifrare
+// utilizzo il canale alpha per impostare la trasparenza
+$color[] = imagecolorallocatealpha($img,110,110,110,60);
+$color[] = imagecolorallocatealpha($img,3,187,63,60);
+$color[] = imagecolorallocatealpha($img,255,0,0,70);
+
+// mischio l'ordine dei colori
+shuffle($color);
+
+// coloro lo sfondo creando un rettangolo
+imagefilledrectangle($img,0,0,$size_x-1,$size_y-1,$backgroung);
+
+// i caratteri da utilizzare per il codice di sicurezza
+$caratteri = &quot;ABCDEFGHIJKLMNOPQRSTUVWXYZ123456789&quot;;
+
+// inizializzo la variabile che conterrà il codice
+$codice = '';
+
+// per ciascuno dei 3 caratteri
+for ($i=0 ; $i &lt; 3 ; $i++)
+{
+   // estraggo un carattere a caso
+   $codice .= $caratteri{rand(0,34)};
+
+   // disegno il carattere
+   imagettftext(
+           $img,
+           50,
+           -5+rand(0,10), // rotazione casuale
+           ($i+0.3)*24,
+           60,
+           $color[$i],
+           './VeraMono.ttf',
+           $codice{$i});
+}
+
+// inserisco identificativo e codice nel DB
+// ---------------------------------------------------------------
+mysql_connect('localhost','root','secret');
+mysql_select_db('CAPTCHA');
+
+mysql_query(&quot;REPLACE INTO CAPTCHA (CAPTCHA_id,code,`timestamp`)
+values ('$CAPTCHA_id','$codice',UNIX_TIMESTAMP())&quot;);
+
+// con prob. impostata da $probabilità cancello i record più vecchi
+$probabilità = 5; // 5%
+if(mt_rand(1,100) &lt;= $probabilità)
+{
+   $durata_CAPTCHA = 60*60;
+   mysql_query(&quot;DELETE FROM CAPTCHA WHERE `timestamp`&lt;(UNIX_TIMESTAMP()-$durata_CAPTCHA)&quot;);
+}
+
+// invio l'immagine al browser
+// ---------------------------------------------------------------
+header(&quot;Content-type: image/png&quot;);
+imagepng($img);
+?&gt;
+</code></pre><hr><h4 id=gestione-del-post>Gestione del POST</h4><p>Lo script post.php completa il nostro sistema di protezione CAPTCHA. Dapprima viene verificata la presenza e la validità dell&rsquo;identificativo e del codice inviati via POST. Il codice viene poi convertito in maiuscolo ed eventuali zeri vengono trasformati in caratteri &ldquo;O&rdquo;. Una query di selezione verifica se i dati ricevuti sono presenti nella tabella del database, ignorando però quelli &ldquo;scaduti&rdquo;.</p><p>Se la query restituisce un risultato allora la verifica ha avuto successo. Indipendentemente dall&rsquo;esito si procede poi alla cancellazione sia dei vecchi record presenti nel database, sia del record contenente l&rsquo;identificativo inviato dall&rsquo;utente.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+&lt;?php
+// dopo quanto tempo i dati nella tabella del DB &quot;scadono&quot;?
+$durata_CAPTCHA = 60*60; // secondi
+
+// ci sono tutti i dati?
+if(!isset($_POST['CAPTCHA_code']) OR !isset($_POST['CAPTCHA_id'])) exit;
+
+$CAPTCHA_code = $_POST['CAPTCHA_code'];
+$CAPTCHA_id = $_POST['CAPTCHA_id'];
+
+// controlla la validità del $CAPTCHA_id
+if(!preg_match(&quot;/^[a-f0-9]{32}$/&quot;,$CAPTCHA_id))
+{
+   // se il $CAPTCHA_id non è valido termino la procedura
+   echo '$CAPTCHA_id non valido';
+}
+else
+{
+   // controlla la validità del $CAPTCHA_code
+   if (!preg_match(&quot;/^[a-zA-Z0-9]{3}$/&quot;, $CAPTCHA_code))
+   {
+       // se il $CAPTCHA_code non è valido non faccio la ricerca nel DB
+       echo '$CAPTCHA_code non valido';
+   }
+   else
+   {
+       // $CAPTCHA_id e $CAPTCHA_code sono ben formattai, posso fare la verifica
+
+       // rendo tutte le lettere del $CAPTCHA_code maiuscole e
+       // sostituisco gli zeri con le O
+       $CAPTCHA_code = strtoupper($CAPTCHA_code);
+       $CAPTCHA_code = str_replace('0','O',$CAPTCHA_code);
+
+       mysql_connect('localhost','root','secret') or die(mysql_error());
+       mysql_select_db('CAPTCHA') or die(mysql_error());
+
+       // nella verifica non considero dati più vecchi di $durata_CAPTCHA secondi
+       $res = mysql_query(&quot;SELECT code FROM CAPTCHA
+                           WHERE
+                           CAPTCHA_id = '$CAPTCHA_id' AND
+                           code = '$CAPTCHA_code' AND
+                           `timestamp` &gt; (UNIX_TIMESTAMP() - $durata_CAPTCHA)&quot;)
+                           or die (mysql_error());
+       if(mysql_num_rows($res) != 1)
+       {
+           // verifica fallita
+           echo '$CAPTCHA_code errato';
+       }
+       else
+       {
+           // OK!!!
+           echo '$CAPTCHA_code corretto!';
+       }
+   }
+
+   // cancello i vecchi codici e quello corrente
+   mysql_query(&quot;DELETE FROM CAPTCHA
+               WHERE CAPTCHA_id = '$CAPTCHA_id' OR
+               `timestamp` &lt; (UNIX_TIMESTAMP() - $durata_CAPTCHA)&quot;);
+}
+?&gt;
+</code></pre><hr><h4 id=considerazioni-e-conclusioni>Considerazioni e conclusioni</h4><p>Nella realizzazione dei tre script sono state adottate alcune tecniche ed accorgimenti per aumentare il livello di sicurezza del sistema CAPTCHA:</p><ul><li>Per l&rsquo;identificativo associato al codice CAPTCHA si è fatto uso di una stringa casuale impossibile da intuire o prevedere. Se un utente legge tale stringa non può risalire agli altri identificativi presenti nel database.</li><li>L&rsquo;identificativo è protetto da un codice di controllo che solo lo script form.php può generare correttamente. Questo codice permette allo script CAPTCHA.php di verificare se è stato richiamato realmente da form.php. Un utente non può quindi lanciare più volte CAPTCHA.php sperando che la tabella del database si riempia di record.</li><li>CAPTCHA.php provvede anche a ripulire la tabella dai vecchi record attraverso un sistema che interviene con una determinata probabilità.</li><li>L&rsquo;immagine non viene salvata in un file ma inviata &ldquo;al volo&rdquo; al browser, quindi la ripetuta esecuzione dello script CAPTCHA.php non rischia di intasare il server di immagini. Inoltre non è necessario prevedere un sistema per la cancellazione delle vecchie immagini.</li><li>Indipendentemente dall&rsquo;esito del controllo del codice inserito, il record presente nel DB viene cancellato sventando così qualsiasi tentativo di attacco &ldquo;brute force&rdquo;.</li></ul><p>Il sistema CAPTCHA presentato in questo articolo può essere certamente migliorato, utilizzando ad esempio tecniche più raffinate per la creazione dell&rsquo;immagine distorta. Si è dimostrato comunque efficace nel bloccare lo spam dei commenti che quotidianamente si verificava nelle pagine di PHPnews.it, il tutto a costo zero considerato che non richiede manutenzione e non necessità di particolari risorse.</p></div><footer class=post__footer><div class="post__tags tags clearfix"><svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5.0 11V3C0 1.5.8.8.8.8S1.5.0 3 0h8c1.5.0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 100-6 3 3 0 000 6z"/></svg><ul class=tags__list><li class=tags__item><a class="tags__link btn" href=/tags/database/ rel=tag>database</a></li><li class=tags__item><a class="tags__link btn" href=/tags/mysql/ rel=tag>MySQL</a></li><li class=tags__item><a class="tags__link btn" href=/tags/sicurezza/ rel=tag>sicurezza</a></li><li class=tags__item><a class="tags__link btn" href=/tags/captcha/ rel=tag>CAPTCHA</a></li><li class=tags__item><a class="tags__link btn" href=/tags/cookie/ rel=tag>cookie</a></li></ul></div></footer></article></main><nav class="pager flex"><div class="pager__item pager__item--prev"><a class=pager__link href=/articoli/istruzioni-casuali/ rel=prev><span class=pager__subtitle>«&#8201;Precedente</span><p class=pager__title>Istruzioni "casuali"</p></a></div><div class="pager__item pager__item--next"><a class=pager__link href=/articoli/upload-di-un-file-con-curl/ rel=next><span class=pager__subtitle>Prossimo&#8201;»</span><p class=pager__title>Upload di un file con CURL</p></a></div></nav></div></div><footer class=footer><div class="container footer__container flex"><div class=footer__copyright>&copy; 2021 Giovanni Tomasicchio.
+<span class=footer__copyright-credits>Generato con <a href=https://gohugo.io/ rel="nofollow noopener" target=_blank>Hugo</a> e il tema <a href=https://github.com/Vimux/Mainroad/ rel="nofollow noopener" target=_blank>Mainroad</a>.</span></div></div></footer></div><script async defer src=/js/menu.js></script></body></html>

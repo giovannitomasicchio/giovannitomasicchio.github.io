@@ -1,0 +1,232 @@
+<!doctype html><html class=no-js lang=it><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>Paginazione dei dati - Giovanni Tomasicchio</title><script>(function(a,b){a[b]=a[b].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content="Realizzare un sistema di paginazione dei dati con PHP e MySQL"><meta property="og:title" content="Paginazione dei dati"><meta property="og:description" content="Realizzare un sistema di paginazione dei dati con PHP e MySQL"><meta property="og:type" content="article"><meta property="og:url" content="https://giovannitomasicchio.github.io/articoli/paginazione-dei-dati/"><meta property="article:section" content="articoli"><meta property="article:published_time" content="2008-01-06T21:45:01+00:00"><meta property="article:modified_time" content="2008-01-06T21:45:01+00:00"><meta itemprop=name content="Paginazione dei dati"><meta itemprop=description content="Realizzare un sistema di paginazione dei dati con PHP e MySQL"><meta itemprop=datePublished content="2008-01-06T21:45:01+00:00"><meta itemprop=dateModified content="2008-01-06T21:45:01+00:00"><meta itemprop=wordCount content="3523"><meta itemprop=keywords content="database,MySQL,Oracle,SQL Server,PostgreSQL,SQL,SQLite,"><meta name=twitter:card content="summary"><meta name=twitter:title content="Paginazione dei dati"><meta name=twitter:description content="Realizzare un sistema di paginazione dei dati con PHP e MySQL"><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic|Kaushan+Script:regular"><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-525H86QENV"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-525H86QENV',{anonymize_ip:!1})}</script></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class=logo><a class=logo__link href=/ title="Giovanni Tomasicchio" rel=home><div class="logo__item logo__text"><div class=logo__title>Giovanni Tomasicchio</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
+<span class=menu__btn-title tabindex=-1>Menu</span></button><ul class=menu__list><li class=menu__item><a class=menu__link href=/><span class=menu__text>Home</span></a></li><li class=menu__item><a class=menu__link href=/articoli/><span class=menu__text>Articoli PHP</span></a></li><li class=menu__item><a class=menu__link href=/corsi/><span class=menu__text>Corsi</span></a></li></ul></nav></div></header><div class="wrapper flex"><div class=primary><main class=main role=main><article class=post><header class=post__header><h1 class=post__title>Paginazione dei dati</h1><div class="post__meta meta"><div class="meta__item-datetime meta__item"><svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2008-01-06T21:45:01Z>6 January 2008</time></div></div></header><div class="content post__content clearfix"><h3 id=introduzione>Introduzione</h3><p>In una applicazione web capita spesso di dover mostrare all&rsquo;utente un elenco di dati provenienti dal database. A volte questi dati sono numerosi pertanto, per ragioni estetiche e di usabilità, è necessario suddividerli in diverse pagine web. L&rsquo;accesso alle singole pagine avviene tramite dei link posti comunemente al disopra e al disotto dell&rsquo;elenco parziale di dati. Questa tecnica di rappresentazione dei dati viene comunemente detta <strong>paginazione</strong> e gli esempi sul web sono numerosi, si pensi ad esempio ai risultati di un motore di ricerca o all&rsquo;elenco dei messaggi di un forum o di un blog.</p><p>In alcuni casi la navigazione tra le pagine è garantita solo da due link che puntano alla pagina precedente e successiva, altre volte invece i link sono più numerosi e permettono di raggiungere direttamente una pagina in particolare, identificata dal suo numero.</p><p>Anche se la sorgente dei dati da paginare non influisce sull&rsquo;estetica del sistema di navigazione (la <em>presentation</em>), l&rsquo;impatto sul codice necessario alla realizzazione dello script è invece considerevole. Pertanto in questo articolo focalizzeremo la nostra attenzione sui dati provenienti da database, situazione di gran lunga più comune.</p><p>Come avremo modo di verificare nel corso di questo articolo, la realizzazione di un sistema di paginazione dei dati provenienti da database non è sempre un compito banale. Diversi fattori sono da tenere in considerazione (es.: usabilità, prestazioni) che richiedono soluzioni spesso in contrasto tra loro e tra le quali è necessario mediare.</p><hr><h3 id=paginazione-con-mysql>Paginazione con MySQL</h3><p>Se in una pagina web dobbiamo mostrare solo una parte dei dati complessivi è conveniente che solo questa porzione venga prelevata dal database. Per fare ciò dobbiamo modificare la query che utilizziamo per recuperare i dati in modo che essa estragga solo i record necessari a costruire la pagina web richiesta dall&rsquo;utente. Nello standard SQL però non è prevista una sintassi per limitare i dati provenienti da una SELECT.</p><p>I diversi database comunque hanno introdotto nel loro dialetto SQL particolari comandi proprietari per ottenere questo risultato. In particolare MySQL permette l&rsquo;impiego delle clausole <strong>LIMIT</strong> e <strong>OFFSET</strong>, secondo una sintassi del tipo:</p><p><strong>SELECT &mldr; LIMIT <em>n</em></strong></p><p>per prelevare solo le prime <em>n</em> righe, e</p><p><strong>SELECT &mldr; LIMIT <em>m</em>, <em>n</em></strong></p><p>ovvero</p><p><strong>SELECT &mldr; LIMIT <em>n</em> OFFSET <em>m</em></strong></p><p>per prelevare solo <em>n</em> righe, partendo dalla <em>m</em>-esima riga. Facciamo qualche esempio, con:</p><p><strong>SELECT * FROM <em>nome_tabella</em> WHERE &mldr; LIMIT 10</strong></p><p>otteniamo i primi 10 record estratti dalla SELECT, oppure con</p><p><strong>SELECT * FROM <em>nome_tabella</em> WHERE &mldr; LIMIT 20, 10</strong></p><p>ovvero</p><p><strong>SELECT * FROM <em>nome_tabella</em> WHERE &mldr; LIMIT 10 OFFSET 20</strong></p><p>otteniamo 10 record a partire dal 21° (l&rsquo;offset inizia a contare da zero), cioè i record dal 21° al 30°. E' proprio questa sintassi a permetterci di estrarre i record da mostrare in una particolare pagina web. Ad esempio, se ogni pagina deve contenere 10 record, le precedenti query permettono di estrarre i record necessari a costruire la terza pagina web dei risultati.</p><p>Ma non basta la clausola LIMIT a rendere efficace la SELECT. Infatti negli esempi precedenti abbiamo considerato una numerazione per i record (i primi 10 record, i record dal 21° al 30°) senza però specificare secondo quale ordinamento va considerata questa numerazione. Infatti nelle query appena viste l&rsquo;estrazione di un numero parziale di record avviene in maniera casuale poiché nell&rsquo;SQL non è indicato il criterio di ordinamento con cui vogliamo che ci vengano restituiti i risultati. Pertanto solo con un ordinamento esplicitamente definito ha senso utilizzare la clausola LIMIT.</p><p>Inoltre il criterio di ordinamento deve essere univoco, cioè non deve accadere che due o più record possano essere scambiati di posizione poiché equivalenti nei confronti dell&rsquo;ordinamento indicato. Vediamo il motivo con un esempio, supponiamo di voler paginare l&rsquo;elenco telefonico di Napoli. Se usassimo un ordinamento per cognome le pagine contenenti i dati dei signori &ldquo;Esposito&rdquo;, più di 7.200 record, conterrebbero un elenco casuale di nomi. Ad ogni visualizzazione di una di queste pagine, l&rsquo;elenco si mostrerebbe sempre diverso, poiché secondo un ordinamento per cognome, i signori Esposito sono tutti uguali e non è possibile decidere in maniera assoluta chi viene prima e chi dopo. Una soluzione potrebbe essere ordinarli per cognome e numero di telefono. In pratica quindi specificare un criterio di ordinamento non univoco equivale in certi casi a non specificare alcun ordinamento.</p><p>Per la creazione dei link di navigazione infine serve sapere il numero totale di pagine web in cui stiamo suddividendo l&rsquo;elenco di record. Questo numero è facilmente ricavabile dal numero complessivo di record da mostrare, ottenibile con una query del tipo:</p><p><strong>SELECT COUNT(*) FROM <em>nome_tabella</em> WHERE &mldr;</strong></p><p>in cui le condizioni utilizzate nella clausola WHERE devono essere le stesse utilizzate nelle SELECT di estrazione paginata dei dati, ovvero quelle con la clausola LIMIT.</p><hr><h3 id=applicazione-di-esempio>Applicazione di esempio</h3><p>L&rsquo;applicazione di esempio realizzata, scaricabile a <a href=http://www.phpnews.it/download/paginazione.zip>questo link</a>, si occupa di mostrare l&rsquo;elenco dei comuni italiani, ordinati per nome e codice ISTAT (codice numerico univoco). I dati vengono prelevati da un&rsquo;unica tabella, che è possibile creare e popolare utilizzando lo script SQL contenuto nell&rsquo;archivio ZIP dell&rsquo;applicazione. Nel nostro esempio mostreremo tutti i dati presenti nella tabella dei comuni, pertanto non ci saranno clausole WHERE nelle SELECT.</p><p>Il programma è costituito da 3 file: il template HTML, lo script principale che estrae i dati dal database e uno script contenente tre funzioni utili alla creazione dei link di navigazione. Questi saranno nella forma:</p><p>« 1&mldr;n-2 n-1 [n] n+1 n+2 &mldr; N »</p><p>ovvero conterranno sempre un link alla prima e all&rsquo;ultima pagina (1 e N). Inoltre conterranno l&rsquo;indicazione della pagina corrente racchiusa tra parentesi quadre [n] e dei link alle pagine che precedono e seguono la pagina corrente. Il numero di questi link a pagine limitrofe sarà configurabile. Infine ci saranno anche dei link alla pagina precedente e successiva, indicati dai simboli « e ».</p><p>Iniziamo ad analizzare il codice dell&rsquo;applicazione, partendo dal template HTML, riportato di seguito:</p><pre><code>&lt;pre class=&quot;brush:php&quot;&gt;
+
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=ISO-8859-1&quot;&gt;
+&lt;title&gt;Elenco Comuni Italiani&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;h1&gt;Elenco Comuni Italiani&lt;/h1&gt;
+&lt;p&gt;&lt;?php echo $link_paginazione?&gt;&lt;/p&gt;
+&lt;table border=&quot;1&quot;&gt;
+   &lt;tr&gt;
+       &lt;th&gt;COMUNE&lt;/th&gt;
+       &lt;th&gt;PROVINCIA&lt;/th&gt;
+       &lt;th&gt;REGIONE&lt;/th&gt;
+       &lt;th&gt;CAP&lt;/th&gt;
+       &lt;th&gt;PREFISSO TEL.&lt;/th&gt;
+       &lt;th&gt;CODICE COMUNE&lt;/th&gt;
+       &lt;th&gt;CODICE ISTAT&lt;/th&gt;
+   &lt;/tr&gt;
+   &lt;?php foreach($elenco_comuni as $riga):?&gt;
+   &lt;tr&gt;
+       &lt;td&gt;&lt;?php echo htmlentities($riga['comune'])?&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;?php echo $riga['provincia']?&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;?php echo $riga['regione']?&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;?php echo $riga['cap']?&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;?php echo $riga['prefisso']?&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;?php echo $riga['cod_comune']?&gt;&lt;/td&gt;
+       &lt;td&gt;&lt;?php echo $riga['cod_istat']?&gt;&lt;/td&gt;
+   &lt;/tr&gt;
+   &lt;?php endforeach ?&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;?php echo $link_paginazione?&gt;&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><p>Come si può notare, il template HTML impiegato è davvero molto semplice. Il riempimento della tabella dei dati è affidato ad un ciclo foreach mentre l&rsquo;HTML che costituisce i link di paginazione, riportati al di sopra ed al disotto della tabella, viene incluso nel template leggendo la variabile $link_paginazione, creata nello script PHP principale, riportato nella pagina seguente.</p><hr><h3 id=lettura-paginata-dei-dati>Lettura paginata dei dati</h3><p>Di seguito viene riportato il listato di index.php, il principale script PHP dell&rsquo;applicazione di esempio, responsabile tra l&rsquo;altro dell&rsquo;estrazione dei record dal database. Le prime righe servono a specificare tutti i settaggi del programma necessari alla connessione con il database, alla creazione delle pagine web e dei link di navigazione (modificateli per adattarli alla vostra configurazione). Si noti in particolare la variabile $url_base con la quale viene impostato l&rsquo;URL necessario a richiamare lo script corrente. Nel nostro esempio viene settato a &ldquo;index.php&rdquo; ma potremmo trovarci in situazioni più generiche, con un URL contenente parametri, ad esempio &ldquo;index.php?nazione=italia&rdquo;. $url_base quindi è l&rsquo;URL che utilizzeremo per costruire i link di navigazione, al quale pertanto dovremo poi aggiungere un ulteriore parametro &ldquo;pag&rdquo; necessario a specificare la pagina richiesta (es.: . index.php?nazione=italia&pag=2). La creazione di questi URL con l&rsquo;indicazione della pagina richiesta sarà effettuata dalla funzione crea_url() descritta in seguito.</p><p>Specificati i parametri dell&rsquo;applicazione si prosegue poi con la connessione a MySQL e la selezione del DB.</p><p>Il calcolo del numero totale di pagine viene fatto attraverso la SELECT COUNT(*) che nel nostro esempio non richiede una clausola WHERE poiché mostreremo tutti i dati contenuti nella tabella. Si noti che per calcolare tale numero viene arrotondato per eccesso con la funzione ceil() il risultato della divisione tra $tot_righe e $righe_per_pagina.</p><p>Dall&rsquo;URL recuperiamo il numero della pagina richiesta dall&rsquo;utente ($_GET[&lsquo;pag&rsquo;]) e se questo assume un valore illecito, minore di uno o maggiore del numero dell&rsquo;ultima pagina, eseguiamo un redirect rispettivamente alla prima o all&rsquo;ultima pagina. Per effettuare il redirect viene utilizzata la funzione crea_url() che, come anticipato, serve a confezionare l&rsquo;URL di destinazione contenente l&rsquo;indicazione sulla pagina da mostrare.</p><p>Si procede infine con l&rsquo;esecuzione della query di estrazione dei record e con la fetch dei risultati. La creazione dei link di navigazione viene affidata alla funzione paginazione(), che verrà illustrata nella prossima pagina.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+&lt;?php
+include 'paginazione.php';
+
+$DB_host     = 'localhost';
+$DB_user     = 'root';
+$DB_password = 'secret';
+$DB_name     = 'test';
+
+$righe_per_pagina = 1;
+$url_base = &quot;index.php&quot;;
+$pagine_vicine = 1;
+
+// ----------------------------------------------------------------
+//         C O N N E S S I O N E   A L   D A T A B A S E
+
+$link = mysql_connect($DB_host, $DB_user, $DB_password);
+if (!$link) {
+   die ('Non riesco a connettermi: ' . mysql_error());
+}
+
+$db_selected = mysql_select_db($DB_name, $link);
+if (!$db_selected) {
+   die (&quot;Errore nella selezione del database: &quot; . mysql_error());
+}
+
+// ----------------------------------------------------------------
+//    C A L C O L O   D E L   N U M E R O   D I   P A G I N E
+
+// ricavo il numero totale di record
+$query = &quot;SELECT COUNT(*) FROM comuni&quot;;
+$result = mysql_query($query);
+// record complessivi
+$tot_righe = mysql_result($result,0);
+// totale pagine
+$tot_pagine = ceil($tot_righe / $righe_per_pagina);
+
+// ----------------------------------------------------------------
+//                 P A G I N A   C O R R E N T E
+
+$pagina_corrente = isset($_GET['pag']) ? (int)$_GET['pag'] : 1;
+
+// se la pagina corrente è minore di 1
+if($pagina_corrente &lt; 1)  {
+   header('location: ' . $url_base);
+   exit();
+}
+
+// se la pagina corrente è maggiore dell'ultima pagina
+if($pagina_corrente &gt; $tot_pagine) {
+   header('location: ' . crea_url($url_base, $tot_pagine));
+   exit();
+}
+
+// ----------------------------------------------------------------
+//            E S T R A Z I O N E   D E I   R E C O R D
+
+// calcolo la prima riga da estrarre con la query
+$prima_riga = ($pagina_corrente - 1) * $righe_per_pagina;
+
+$query = &quot;SELECT *
+         FROM comuni
+         ORDER BY comune, cod_istat
+         LIMIT $prima_riga, $righe_per_pagina&quot;;
+
+$result = mysql_query($query);
+if (!$result) {
+   die(&quot;Errore nella query $query: &quot; . mysql_error());
+}
+
+$elenco_comuni = array();
+while ($row = mysql_fetch_assoc($result)) {
+   $elenco_comuni[] = $row;
+}
+
+// creazione dei link di paginazione
+$link_paginazione = paginazione($tot_pagine, $url_base, $pagina_corrente, $pagine_vicine);
+
+// carico il template HTML
+include 'index.html';
+?&gt;
+</code></pre><hr><h3 id=link-di-navigazione>Link di navigazione</h3><p>Lo script PHP che segue, paginazione.php, è costituito da tre funzioni che concorrono alla realizzazione dei link di navigazione. Si è scelto di separare il codice per la creazione dei link da quello di estrazione dei dati per semplificarne l&rsquo;utilizzo anche in altri contesti.</p><p>La funzione crea_url(), già introdotta in precedenza, ha il compito di accodare il parametro che specifica il numero di pagina all'$url_base. Per effettuare tale operazione è necessario controllare se nell'$url_base siano già presenti dei parametri. In caso positivo il parametro &ldquo;pag&rdquo; va accodato con una &ldquo;&&rdquo; altrimenti con un &ldquo;?&rdquo;. Ovviamente la &ldquo;&&rdquo; va riportata nell&rsquo;URL utilizzando la sua entità HTML &ldquo;&amp;amp;amp;&rdquo;.</p><p>La funzione crea_link() invece serve a creare l&rsquo;HTML che costituisce un link ad una pagina dei risultati. Se il link da mostrare è alla pagina corrente allora viene generato solo il numero di pagina racchiuso tra parentesi quadre (es.: [4]), altrimenti viene restituito un vero e proprio link (es.: &lt;a href=&ldquo;index.php?pag=4&rdquo;>4&lt;/a>)</p><p>La funzione paginazione() è il cuore del sistema di creazione dei link di navigazione. Tale funzione realizza un set di link piuttosto elaborato, secondo la seguente logica:</p><ul><li>se la pagina corrente è diversa da 1 allora mostriamo un link alla pagina precedente contenente il simbolo &ldquo;<strong>«</strong>&rdquo;</li><li>mostriamo sempre il link alla prima pagina (« <strong>1</strong> )</li><li>se il successivo link che mostreremo non è alla pagina 2 allora:<ul><li>se è alla pagina 3 allora inseriamo anche il link alla pagina 2, così da non avere discontinuità (« 1 <strong>2</strong> 3 )</li><li>altrimenti inseriamo dei punti di sospensione (&mldr;) per segnalare la discontinuità (« 1 <strong>&mldr;</strong> 4 )</li></ul></li><li>mostriamo i link alla pagina corrente e alle sue limitrofe (« 1 &mldr; <strong>4 5 [6] 7 8</strong> )</li><li>Se l&rsquo;ultimo link mostrato non è alla penultima pagina:<ul><li>se è alla terzultima allora inseriamo anche un link alla penultima in modo da evitare la discontinuità (24 25 [26] 27 28 <strong>29</strong> 30)</li><li>altrimenti inseriamo dei punti di sospensione (&mldr;) per segnalare la discontinuità (24 25 [26] 27 28 <strong>&mldr;</strong> 31)</li></ul></li><li>mostriamo un link all&rsquo;ultima pagina, se questa non coincide con la prima</li><li>se la pagina corrente non è l&rsquo;ultima allora mostriamo un link alla pagina successiva contenente il simbolo &ldquo;<strong>»</strong>&rdquo;</li></ul><p>Tutti i link realizzati vengono di volta in volta accodati alla stringa $link_paginazione che al termine dell&rsquo;esecuzione della funzione paginazione() viene restituita al chiamante.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+&lt;?php
+function crea_url($url_base, $pagina) {
+   if(strpos($url_base,'?') === false) {
+       return $url_base . '?pag=' . $pagina;
+   } else {
+       return $url_base . '&amp;amp;pag=' . $pagina;
+   }
+}
+
+function crea_link($url_base, $pagina_corrente, $numero_pagina) {
+   if($pagina_corrente == $numero_pagina) {
+       return &quot;[$numero_pagina]&quot;;
+   } else {
+       return '&lt;a href=&quot;' . crea_url($url_base, $numero_pagina) . '&quot;&gt;' . $numero_pagina . '&lt;/a&gt;';
+   }
+}
+
+// funzione che crea i link alle pagine dei risultati
+function paginazione($tot_pagine, $url_base, $pagina_corrente, $pagine_vicine) {
+   $link_paginazione = &quot;Pagine: &quot;;
+
+   // link alla pagina precedente
+   if($pagina_corrente != 1) {
+       $link_paginazione .= '&lt;a href=&quot;' . crea_url($url_base, $pagina_corrente - 1) . '&quot;&gt;&amp;laquo;&lt;/a&gt; ';
+   }
+
+   // mostriamo sempre il link alla prima pagina
+   $link_paginazione .= crea_link($url_base, $pagina_corrente, 1);
+
+   // se il prossimo link non è alla seconda pagina aggiungo dei puntini ...
+   // oppure la sola pagina mancante
+   if($pagina_corrente - $pagine_vicine &gt; 2) {
+       if($pagina_corrente - $pagine_vicine == 3) {
+           $link_paginazione .= &quot; &quot; . crea_link($url_base, $pagina_corrente, 2);
+       } else {
+           $link_paginazione .= &quot; ... &quot;;
+       }
+   }
+
+   // creo i link alla pagina corrente ed a quelle ad essa vicine
+   for($i = $pagina_corrente - $pagine_vicine; $i &lt;= $pagina_corrente + $pagine_vicine; $i++) {
+        // se tra quelle vicine c'è la prima pagina (già riportata)
+       if($i &lt; 2) continue;
+
+        // se tra quelle vicine c'è l'ultima pagina (che mostrerò con le prossime istruzioni)
+       if($i &gt; $tot_pagine - 1) continue;
+
+       $link_paginazione .= &quot; &quot; . crea_link($url_base, $pagina_corrente, $i);
+   }
+
+   // se il precedente link non era alla penultima pagina aggiungo dei puntini ...
+   // oppure la sola pagina mancante
+   if($pagina_corrente + $pagine_vicine &lt; $tot_pagine - 1) {
+       if($pagina_corrente + $pagine_vicine == $tot_pagine - 2) {
+           $link_paginazione .= &quot; &quot; . crea_link($url_base, $pagina_corrente, $tot_pagine - 1) . &quot; &quot;;
+       } else {
+           $link_paginazione .= &quot; ... &quot;;
+       }
+   }
+
+   // mostriamo il link all'ultima pagina se questa non coincide con la prima
+   if($tot_pagine != 1) {
+       $link_paginazione .= &quot; &quot; . crea_link($url_base, $pagina_corrente, $tot_pagine);
+   }
+
+   // link alla pagina successiva
+   if($pagina_corrente != $tot_pagine) {
+       $link_paginazione .= ' &lt;a href=&quot;' . crea_url($url_base, $pagina_corrente + 1) . '&quot;&gt;&amp;raquo;&lt;/a&gt;';
+   }
+
+   return $link_paginazione;
+}
+?&gt;
+</code></pre><hr><h3 id=paginazione-con-altri-rdbms>Paginazione con altri RDBMS</h3><p>Abbiamo detto in precedenza che lo standard SQL non prevede una sintassi per ottenere solo una parte dei record estratti da una SELECT. Inoltre abbiamo visto come MySQL adotti una soluzione proprietaria attraverso le clausole LIMIT e OFFSET.</p><p>Del resto MySQL non è l&rsquo;unico RDBMS con cui PHP può interagire quindi vediamo ora come risolvere il problema dell&rsquo;estrazione di una pagina di dati con i più diffusi database relazionali.</p><p><strong>PostgreSQL</strong> e <strong>SQLite</strong> adottano una sintassi molto simile a quella di MySQL, basata su <strong>LIMIT</strong> e <strong>OFFSET</strong>:</p><p><strong>SELECT &mldr; LIMIT <em>n</em> OFFSET <em>m</em></strong></p><p>Maggiori informazioni si trovano sulle rispettive documentazioni ufficiali:</p><p><a href=http://www.postgresql.org/docs/8.2/interactive/queries-limit.html>http://www.postgresql.org/docs/8.2/interactive/queries-limit.html</a></p><p><a href=http://www.sqlite.org/lang_select.html>http://www.sqlite.org/lang_select.html</a></p><p><strong>Oracle</strong>, <strong>Microsoft SQL Server</strong> e <strong>IBM DB2</strong> invece non adottano una sintassi particolare per l&rsquo;estrazione paginata dei dati pertanto è necessario adottare qualche stratagemma.</p><p>Con <strong>Microsoft SQL Server 2005</strong> è stata introdotta la funzione <strong>ROW_NUMBER()</strong> in grado di assegnare un numero crescente ad ogni record estratto dalla SELECT secondo il particolare ordinamento dichiarato. Grazie a questo numero è poi possibile utilizzare la clausola WHERE per selezionare i record da estrarre:</p><pre><code>&lt;pre class=&quot;brush: sql&quot;&gt;
+SELECT *
+ FROM (
+      SELECT TOP 30 ROW_NUMBER() OVER (ORDER BY ...) AS row, ... FROM ...
+      ) AS tab1
+ WHERE row &gt;= 21 AND row &lt;= 30
+</code></pre><p>Il TOP 30 serve a migliorare le prestazioni della SELECT più interna, poiché indica al DB che siamo interessati solo alle prime 30 righe.</p><p>Con le versioni precedenti di Microsoft SQL Server è necessario seguire altre strategie, ad esempio la seguente che fa uso del SELECT TOP e dell&rsquo;inversione dell&rsquo;ordinamento</p><pre><code>&lt;pre class=&quot;brush: sql&quot;&gt;
+SELECT *
+  FROM (
+     SELECT TOP 10 *
+         FROM (
+                 SELECT TOP 30 ... FROM ...ORDER BY ... ASC
+         ) AS inner_tbl
+         ORDER BY DESC
+   ) AS outer_tbl
+   ORDER BY ... ASC
+</code></pre><p>Con <strong>Oracle</strong> possiamo seguire 2 principali tecniche, una basata sul <strong>ROWNUM</strong> e l&rsquo;altra sulla funzione <strong>ROW_NUMBER()</strong>. Di seguito viene riportato un esempio per ciascuna tecnica, seguito da un link utile per ottenere maggiori informazioni.</p><pre><code>&lt;pre class=&quot;brush: sql&quot;&gt;
+SELECT tab2.*
+           FROM (
+               SELECT ROWNUM AS rn, tab1.*
+               FROM (
+                   SELECT ... FROM ... WHERE ... ORDER BY ...
+               ) tab1
+           ) tab2
+           WHERE tab2.rn BETWEEN 21 AND 30
+</code></pre><p><a href=http://www.oracle.com/technology/oramag/oracle/06-sep/o56asktom.html>http://www.oracle.com/technology/oramag/oracle/06-sep/o56asktom.html</a></p><p>oppure</p><pre><code>&lt;pre class=&quot;brush: sql&quot;&gt;
+SELECT *
+  FROM (
+     SELECT ..., ROW_NUMBER() OVER(ORDER BY ...) rn FROM ...
+  )
+  WHERE rn BETWEEN 21 and 30
+ORDER BY rn
+</code></pre><p><a href=http://www.oracle.com/technology/oramag/oracle/07-jan/o17asktom.html>http://www.oracle.com/technology/oramag/oracle/07-jan/o17asktom.html</a></p><p>Anche <strong>IBM DB2</strong> possiede la funzione <strong>ROW_NUMBER()</strong>, pertanto possiamo utilizzare un approccio simile a quelli visti in precedenza.</p><pre><code>&lt;pre class=&quot;brush: sql&quot;&gt;
+SELECT *
+  FROM
+  (
+     SELECT ..., ROW_NUMBER() OVER (ORDER BY ...) AS rn FROM ...
+   ) AS tab1
+  WHERE rn BETWEEN 21 AND 30;
+</code></pre><hr><h3 id=paginazione-e-prestazioni>Paginazione e prestazioni</h3><p>In precedenza abbiamo detto che, dovendo mostrare in una pagina web solo una porzione dei dati complessivi, conviene estrarre dal database di volta in volta solo questi record. Ne consegue quindi che ad ogni <strong>pagina web</strong> richiesta lo script PHP deve estrarre una <strong>pagina di dati</strong> dal database, ovvero un particolare sottoinsieme dei record totali provenienti dalla SELECT. Con queste ipotesi possiamo dire che ad una pagina web corrisponde una relativa pagina di dati e per ciascuna pagina web è necessario eseguire una nuova query, o meglio eseguire sempre la stessa query con le sole condizioni LIMIT e OFFSET modificate.</p><p>Ma questa associazione (pagina web - pagina dati) non è obbligatoria, anzi in certe situazioni potrebbe risultare poco efficiente dal punto di vista delle prestazioni. Supponiamo infatti che i dati provengano da una query piuttosto onerosa per il database, ad esempio una SELECT con diverse LIKE e JOIN. Ripetere questa query ad ogni pagina web richiesta potrebbe essere piuttosto costoso. Infatti, poiché la query di paginazione prevede necessariamente un ordinamento dei dati, il database è costretto ad individuare tutti i record che la soddisfano, ad ordinarli secondo il criteri specificato ed infine a restituirne solo la porzione richiesta. Quindi anche se noi richiediamo ad esempio 10 risultati per volta, il database ne deve gestire migliaia (anche milioni!) ad ogni richiesta. C&rsquo;è un&rsquo;altra peculiarità dei database da tener presente: i primi 10 record verranno restituiti molto più velocemente degli ultimi 10, in altre parole <strong>il tempo necessario a costruire una pagina aumenta all&rsquo;aumentare del numero di pagina</strong>. Infatti per ottimizzare il processo di ordinamento, il database lo interrompe appena possibile. Ad esempio se vogliamo i primi 10 record allora sarà necessario completare l&rsquo;ordinamento solo per questi 10. Se invece vogliamo i record all'11° al 20° il database dovrà ordinare i primi 20 e se infine vogliamo gli ultimi 10 allora tutti i record dovranno essere ordinati. Magari qualcuno potrebbe pensare che nessun utente realmente andrà a visitare le utlime pagine e che quindi si tratta di un falso problema. Forse un utente no ma gli spider ed i grabber dei vari motori di ricerca lo faranno ad intervalli regolari e piuttosto di frequente.</p><p>Queste considerazioni ci devono quindi portare, in prima battuta, ad effettuare sempre una valutazione di massima del &ldquo;peso&rdquo; della query ed una ottimizzazione della stessa, magari con l&rsquo;inserimento di <strong>indici nelle tabelle per i campi coinvolti dalla WHERE e dall&rsquo;ORER BY</strong>. Inoltre, come precedentemente accennato, è possibile separare la realizzazione della pagina web dall&rsquo;estrazione della pagina dei dati. In altre parole possiamo mostrare ad esempio 10 record per pagina web ma estrarne 100 per volta dal database, in modo da avere già a disposizione i dati per costruire le 9 pagine successive, riducendo così di 1/10 (in media) gli accessi al database. Questi record andranno salvati magari in sessione o in tabelle temporanee. Stiamo parlando quindi di un <strong>sistema di cache dei risultati della query</strong> che inevitabilmente possiede i suoi pro e contro ed aumenta la complessità del sistema realizzato.</p><p>Infine non va dimenticato il costo del calcolo del numero totale di pagine web, ovvero del numero totale di record restituiti dalla query principale. Questo valore serve per la costruzione dei link di navigazione ed in generale produce sempre lo stesso risultato durante la navigazione di un utente. Per questa ragione potrebbe risultare conveniente eseguire una sola volta la query per il conteggio e conservare in sessione il risultato restituito.</p><p>A volte però nessuna delle suddette strategie riesce a risolvere il problema delle prestazioni e pertanto si deve procedere diversamente. Ad esempio se il conteggio delle pagine è troppo oneroso ci si può limitare a mostrare solo un link alla pagina precedente e successiva, senza verificare se queste realmente esistano, e delegare gli opportuni controlli allo script che si occupa di creare la pagina richiesta, che in caso di errori mostrerà un messaggio.</p></div><footer class=post__footer><div class="post__tags tags clearfix"><svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5.0 11V3C0 1.5.8.8.8.8S1.5.0 3 0h8c1.5.0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 100-6 3 3 0 000 6z"/></svg><ul class=tags__list><li class=tags__item><a class="tags__link btn" href=/tags/database/ rel=tag>database</a></li><li class=tags__item><a class="tags__link btn" href=/tags/mysql/ rel=tag>MySQL</a></li><li class=tags__item><a class="tags__link btn" href=/tags/oracle/ rel=tag>Oracle</a></li><li class=tags__item><a class="tags__link btn" href=/tags/sql-server/ rel=tag>SQL Server</a></li><li class=tags__item><a class="tags__link btn" href=/tags/postgresql/ rel=tag>PostgreSQL</a></li><li class=tags__item><a class="tags__link btn" href=/tags/sql/ rel=tag>SQL</a></li><li class=tags__item><a class="tags__link btn" href=/tags/sqlite/ rel=tag>SQLite</a></li></ul></div></footer></article></main><nav class="pager flex"><div class="pager__item pager__item--prev"><a class=pager__link href=/articoli/autenticare-gli-utenti-con-zend-auth-2/ rel=prev><span class=pager__subtitle>«&#8201;Precedente</span><p class=pager__title>Autenticare gli utenti con Zend_Auth - 2</p></a></div><div class="pager__item pager__item--next"><a class=pager__link href=/articoli/ottenere-il-pagerank-di-google-con-php/ rel=next><span class=pager__subtitle>Prossimo&#8201;»</span><p class=pager__title>Ottenere il pagerank di Google con PHP</p></a></div></nav></div></div><footer class=footer><div class="container footer__container flex"><div class=footer__copyright>&copy; 2021 Giovanni Tomasicchio.
+<span class=footer__copyright-credits>Generato con <a href=https://gohugo.io/ rel="nofollow noopener" target=_blank>Hugo</a> e il tema <a href=https://github.com/Vimux/Mainroad/ rel="nofollow noopener" target=_blank>Mainroad</a>.</span></div></div></footer></div><script async defer src=/js/menu.js></script></body></html>

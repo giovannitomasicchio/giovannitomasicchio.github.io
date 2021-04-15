@@ -1,0 +1,155 @@
+<!doctype html><html class=no-js lang=it><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>Login con AJAX e PHP - Giovanni Tomasicchio</title><script>(function(a,b){a[b]=a[b].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content="Realizzare un sistema di login con AJAX e PHP"><meta property="og:title" content="Login con AJAX e PHP"><meta property="og:description" content="Realizzare un sistema di login con AJAX e PHP"><meta property="og:type" content="article"><meta property="og:url" content="https://giovannitomasicchio.github.io/articoli/login-con-ajax-e-php/"><meta property="article:section" content="articoli"><meta property="article:published_time" content="2007-01-03T16:28:23+00:00"><meta property="article:modified_time" content="2007-01-03T16:28:23+00:00"><meta itemprop=name content="Login con AJAX e PHP"><meta itemprop=description content="Realizzare un sistema di login con AJAX e PHP"><meta itemprop=datePublished content="2007-01-03T16:28:23+00:00"><meta itemprop=dateModified content="2007-01-03T16:28:23+00:00"><meta itemprop=wordCount content="1108"><meta itemprop=keywords content="AJAX,Javascript,UTF-8,"><meta name=twitter:card content="summary"><meta name=twitter:title content="Login con AJAX e PHP"><meta name=twitter:description content="Realizzare un sistema di login con AJAX e PHP"><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic|Kaushan+Script:regular"><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-525H86QENV"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-525H86QENV',{anonymize_ip:!1})}</script></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class=logo><a class=logo__link href=/ title="Giovanni Tomasicchio" rel=home><div class="logo__item logo__text"><div class=logo__title>Giovanni Tomasicchio</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
+<span class=menu__btn-title tabindex=-1>Menu</span></button><ul class=menu__list><li class=menu__item><a class=menu__link href=/><span class=menu__text>Home</span></a></li><li class=menu__item><a class=menu__link href=/articoli/><span class=menu__text>Articoli PHP</span></a></li><li class=menu__item><a class=menu__link href=/corsi/><span class=menu__text>Corsi</span></a></li></ul></nav></div></header><div class="wrapper flex"><div class=primary><main class=main role=main><article class=post><header class=post__header><h1 class=post__title>Login con AJAX e PHP</h1><div class="post__meta meta"><div class="meta__item-datetime meta__item"><svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2007-01-03T16:28:23Z>3 January 2007</time></div></div></header><div class="content post__content clearfix"><h3 id=introduzione>Introduzione</h3><p>In un <a href=http://www.phpnews.it/articoli/php/ajax-in-pratica/>precedente articolo</a> abbiamo visto una semplicissima implementazione della tecnologia AJAX con PHP, che faceva uso del metodo GET dell&rsquo;HTTP per inviare delle informazioni dal browser al server in maniera asincrona.</p><p>Con questo articolo invece ci occupiamo di inviare con AJAX ad uno script PHP i dati inseriti dall&rsquo;utente all&rsquo;interno di un comune form HTML. Per farlo ci serviremo di un semplice esempio, realizzeremo infatti un banale sistema di login.</p><p>La nostra attenzione sarà interamente rivolta alle problematiche inerenti l&rsquo;invio dei dati via POST con AJAX e la loro corretta ricezione con PHP, pertanto la logica di funzionamento del sistema di login sarà molto semplice.</p><p>Divideremo la realizzazione di tale sistema in 3 fasi: realizzazione del form HTML, realizzazione dello script Javascript e dello script PHP.</p><hr><h3 id=il-form-per-il-log-in>Il form per il log-in</h3><p>C&rsquo;è veramente poco da dire sull&rsquo;HTML necessario a realizzare il form per l&rsquo;immissione di username e password. In realtà non è necessario neanche utilizzare il tag form, dato che i dati non saranno inviati attraverso il submit del form ma il POST sarà ?confezionato? ed inviato dall&rsquo;oggetto request di Javascript.</p><p>Tutto il Javascript necessario all&rsquo;interazione con il server è contenuto nel file login.js incluso nella pagina alla riga 5.</p><p>Si noti l&rsquo;evento onClick associato al bottone e responsabile dell&rsquo;avvio della procedura di invio dati con AJAX.</p><p><strong>login.htm</strong></p><pre><code>&lt;pre class=&quot;brush: xml&quot;&gt;
+&lt;html&gt;
+&lt;head&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=iso-8859-1&quot; /&gt;
+&lt;title&gt;Login&lt;/title&gt;
+&lt;script type=&quot;text/javascript&quot; language=&quot;javascript&quot; src=&quot;login.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;fieldset style=&quot;width:250px&quot;&gt;
+&lt;legend&gt;log-in&lt;/legend&gt;
+&lt;p&gt;
+ &lt;label&gt;username
+ &lt;input name=&quot;username&quot; type=&quot;text&quot; id=&quot;username&quot; /&gt;
+ &lt;/label&gt;
+&lt;/p&gt;
+&lt;p&gt;
+ &lt;label&gt;password
+ &lt;input name=&quot;password&quot; type=&quot;password&quot; id=&quot;password&quot; /&gt;
+ &lt;/label&gt;
+&lt;/p&gt;
+&lt;p&gt;
+ &lt;input name=&quot;Button&quot; type=&quot;button&quot; onClick=&quot;javascript:invia_dati();&quot; value=&quot;Button&quot; /&gt;
+&lt;/p&gt;
+&lt;/fieldset&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre><hr><h3 id=il-javascript-per-ajax>Il Javascript per AJAX</h3><p>Tutto il codice Javascript necessario all&rsquo;interazione asincrona con il server, conservato nel file login.js, è racchiuso in 3 funzioni:</p><ul><li>crea_http_req() si occupa di creare http_req, l&rsquo;oggetto request responsabile della comunicazione con il server. Questa funzione tenta diverse strategie per istanziare tale oggetto, in modo da risultare efficace con la maggior parte dei browser che supportano AJAX.</li><li>invia_dati() configura e utilizza http_req per inviare username e password via POST al server. Questi dati vengono impacchettati nella stringa dati_post, come una sequenza di coppie chiave=valore separati dal carattere &. Si noti come i valori vengono preventivamente codificati con la funzione <strong>encodeURIComponent</strong>, in modo che non presentino caratteri illeciti per un POST.</li><li>gestisci_risposta() infine intercetta la risposta proveniente dal server e, a seconda del risultato restituito, mostra un messaggio all&rsquo;utente attraverso alert().</li></ul><p><strong>login.js</strong></p><pre><code>&lt;pre class=&quot;brush: javascript&quot;&gt;
+// crea l'oggetto per la comunicazione AJAX con il server
+// compatibile con tutti i browser che supportano AJAX
+function crea_http_req() {
+   var req = false;
+   if (typeof XMLHttpRequest != &quot;undefined&quot;)
+       req = new XMLHttpRequest();
+   if (!req &amp;&amp; typeof ActiveXObject != &quot;undefined&quot;) {
+       try {
+           req=new ActiveXObject(&quot;Msxml2.XMLHTTP&quot;);
+       } catch (e1) {
+           try {
+               req=new ActiveXObject(&quot;Microsoft.XMLHTTP&quot;);
+           } catch (e2) {
+               try {
+                   req=new ActiveXObject(&quot;Msxml2.XMLHTTP.4.0&quot;);
+               } catch (e3) {
+                   req=null;
+               }
+           }
+       }
+   }
+
+   if(!req &amp;&amp; window.createRequest)
+       req = window.createRequest();
+
+   if (!req) alert(&quot;Il browser non supporta AJAX&quot;);
+
+   return req;
+}
+
+// l'oggetto per comunicare con il server
+var http_req = crea_http_req();
+
+// invia i dati del form al server
+function invia_dati() {
+   var dati_post = &quot;username=&quot; +
+                   encodeURIComponent( document.getElementById(&quot;username&quot;).value ) +
+                   &quot;&amp;password=&quot; +
+                   encodeURIComponent( document.getElementById(&quot;password&quot;).value );
+
+   http_req.onreadystatechange = gestisci_risposta;
+   http_req.open('POST', 'login.php', true);
+   http_req.setRequestHeader(&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;);
+   http_req.setRequestHeader(&quot;Content-length&quot;, dati_post.length);
+   http_req.setRequestHeader(&quot;Connection&quot;, &quot;close&quot;);
+   http_req.send(dati_post);
+}
+
+// recupero e gestisco la risposta inviata dal server
+function gestisci_risposta() {
+   if(http_req.readyState == 4) {
+       var esito = http_req.responseText;
+       switch (esito) {
+         case '1':
+           alert('username non presente nel sistema');
+         break;
+
+         case '2':
+           alert('password errata');
+         break;
+
+         case '3':
+           alert('username o password non inserite');
+         break;
+
+         case '4':
+           alert('login effettuato correttamente');
+         break;
+
+         default:
+           alert('Risposta del server non riconosciuta: ' + esito);
+       }
+   }
+}
+</code></pre><p>Le righe 41-46 sono responsabili della configurazione dell&rsquo;oggetto http_req in modo che venga effettuato un POST con AJAX. Da notare l&rsquo;indicazione del Content-Type e del Content-length nelle intestazioni inviate con la richiesta al server.</p><hr><h3 id=il-php-per-ajax>Il PHP per AJAX</h3><p>Lo script PHP che si occupa di ricevere il form inviato via AJAX e un comune script per la gestione del POST. La logica di funzionamento è molto semplice ma è necessario adottare alcuni accorgimenti per gestire correttamente le codifiche dei caratteri. Ecco i passaggi essenziali:</p><ul><li>username e password vengono estratti dall&rsquo;array $_POST, privati di eventuali spazi alle estremità e salvati nelle variabili $username e $password.</li><li>Se nel php.ini è abilitato il magic_quotes, vengono eliminati gli eventuali backslash inseriti automaticamente da PHP.</li><li>Poiché username e password sono stati inviati dal client via AJAX, questi sono codificati in UTF8. E' necessario pertanto convertirli in ISO-8859-1 con la funzione <strong>utf8_decode()</strong>.</li><li>username e password possono finalmente essere passati alla funzione login() che, dopo una banale verifica per confronto con username &ldquo;ivan&rdquo; e password &ldquo;segreto&rdquo;, restituisce un codice numerico che identifica l&rsquo;esito dell&rsquo;operazione.</li><li>Il risultato del controllo deve essere inviato al client, ma non prima che questo venga convertito in UTF8, codifica utilizzata da AJAX sul browser, attraverso la funzione <strong>utf8_encode()</strong>.</li><li>Infine il codice con l&rsquo;esito dell&rsquo;operazione viene inviato al browser, con una semplicissima echo.</li></ul><p><strong>login.php</strong></p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
+&lt;?php
+// prelevo username e password dal POST,
+// eliminando eventuali spazi alle estremità delle stringhe
+$username = trim($_POST['username']);
+$password = trim($_POST['password']);
+
+// elimino eventuali backslash inseriti automaticamente da PHP
+if(get_magic_quotes_gpc())
+{
+   $username = stripslashes($username);
+   $password = stripslashes($password);
+}
+
+// Converto in ISO-8859-1 i caratteri provenienti
+// dal client, codificati di default in UTF8
+$username = utf8_decode($username);
+$password = utf8_decode($password);
+
+// provo ad effettuare il login con i dati recuperati dal form
+$esito = login($_POST['username'],$_POST['password']);
+
+// converto in UTF8 la risposta restituita dalla funzione login()
+$esito = utf8_encode($esito);
+
+// invio la risposta al client
+echo $esito;
+
+// funzione per la verifica dei dati di login
+function login($username, $password)
+{
+   $username_corretto = &quot;ivan&quot;;
+   $password_corretta = &quot;segreto&quot;;
+
+   if(!$username || !$password) {
+       return 3;
+   }
+
+   if($username != $username_corretto) {
+       return 1;
+   }
+
+   if($username == $username_corretto &amp;&amp; $password != $password_corretta) {
+       return 2;
+   }
+
+   if($username == $username_corretto &amp;&amp; $password == $password_corretta) {
+       return 4;
+   }
+}
+?&gt;
+</code></pre><hr><h3 id=conclusioni>Conclusioni</h3><p>Come premesso, in questo articolo ci siamo concentrati sugli aspetti strettamente inerenti l&rsquo;nvio di un form attraverso POST con AJAX e PHP. Abbiamo trascurato pertanto tutte le altre problematiche che ruotano attorno all&rsquo;esempio del sistema di login e più in generale dell&rsquo;utilizzo di AJAX all&rsquo;interno di applicazioni web.</p><p>In particolare ci siamo soffermati sull&rsquo;utilizzo del metodo POST con AJAX e sull&rsquo;importanza di una corretta gestione del set di caratteri e della codifica impiegati nella comunicazione asincrona tra browser e server. Sul fronte Javascript abbiamo visto come i dati del form vanno impacchettati in una stringa e codificati con la funzione encodeURIComponent. Lo script PHP invece, non supportando nativamente l&rsquo;UTF8, necessita delle funzioni utf8_decode() e utf8_encode() per lavorare internamente con il classico set di caratteri ISO-8859-1.</p></div><footer class=post__footer><div class="post__tags tags clearfix"><svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5.0 11V3C0 1.5.8.8.8.8S1.5.0 3 0h8c1.5.0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 100-6 3 3 0 000 6z"/></svg><ul class=tags__list><li class=tags__item><a class="tags__link btn" href=/tags/ajax/ rel=tag>AJAX</a></li><li class=tags__item><a class="tags__link btn" href=/tags/javascript/ rel=tag>Javascript</a></li><li class=tags__item><a class="tags__link btn" href=/tags/utf-8/ rel=tag>UTF-8</a></li></ul></div></footer></article></main><nav class="pager flex"><div class="pager__item pager__item--prev"><a class=pager__link href=/articoli/parsing-di-feed-rss-con-simplexml/ rel=prev><span class=pager__subtitle>«&#8201;Precedente</span><p class=pager__title>Parsing di feed RSS con simpleXML</p></a></div><div class="pager__item pager__item--next"><a class=pager__link href=/articoli/cloaking-con-php/ rel=next><span class=pager__subtitle>Prossimo&#8201;»</span><p class=pager__title>Cloaking con PHP</p></a></div></nav></div></div><footer class=footer><div class="container footer__container flex"><div class=footer__copyright>&copy; 2021 Giovanni Tomasicchio.
+<span class=footer__copyright-credits>Generato con <a href=https://gohugo.io/ rel="nofollow noopener" target=_blank>Hugo</a> e il tema <a href=https://github.com/Vimux/Mainroad/ rel="nofollow noopener" target=_blank>Mainroad</a>.</span></div></div></footer></div><script async defer src=/js/menu.js></script></body></html>
