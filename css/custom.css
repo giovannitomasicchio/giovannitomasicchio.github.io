@@ -74,3 +74,12 @@ h3 {
     font-size: 20px;
     font-weight: 300;
 }
+.footer__copyright-credits {
+    display: none;
+}
+
+.footer {
+    color: #999;
+    background: inherit;
+    border-top: none;
+}
