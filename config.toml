@@ -49,7 +49,7 @@ googleAnalytics = "G-525H86QENV" # Enable Google Analytics by entering your trac
 
 [Params.sidebar]
   home = "right" # Configure layout for home page
-  list = "left"  # Configure layout for list pages
+  list = "right"  # Configure layout for list pages
   single = false # Configure layout for single pages
   # Enable widgets in given order
   widgets = ["taglist", "social"]
@@ -66,3 +66,20 @@ googleAnalytics = "G-525H86QENV" # Enable Google Analytics by entering your trac
   facebook = "gianni.tomasicchio"
   twitter = "GiaTomasicchio"
   linkedin = "giovannitomasicchio"
+
+[[menu.main]]
+  name = "Home"
+  #pre = "<i class='fa fa-heart'></i>"
+  weight = -110
+  #identifier = "about"
+  url = "/"
+[[menu.main]]
+  name = "Articoli PHP"
+  #pre = "<i class='fa fa-road'></i>"
+  weight = -100
+  url = "/articoli/"
+[[menu.main]]
+  name = "Corsi"
+  #pre = "<i class='fa fa-road'></i>"
+  weight = -90
+  url = "/corsi/"
