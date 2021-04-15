@@ -1,64 +1,63 @@
-<!doctype html><html class=no-js lang=it><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>Simulare l'overloading - Giovanni Tomasicchio</title><script>(function(a,b){a[b]=a[b].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content="Simulare l'overloading negli script PHP"><meta property="og:title" content="Simulare l'overloading"><meta property="og:description" content="Simulare l'overloading negli script PHP"><meta property="og:type" content="article"><meta property="og:url" content="https://giovannitomasicchio.github.io/articoli/simulare-loverloading/"><meta property="article:section" content="articoli"><meta property="article:published_time" content="2005-03-25T17:23:45+00:00"><meta property="article:modified_time" content="2005-03-25T17:23:45+00:00"><meta itemprop=name content="Simulare l'overloading"><meta itemprop=description content="Simulare l'overloading negli script PHP"><meta itemprop=datePublished content="2005-03-25T17:23:45+00:00"><meta itemprop=dateModified content="2005-03-25T17:23:45+00:00"><meta itemprop=wordCount content="407"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Simulare l'overloading"><meta name=twitter:description content="Simulare l'overloading negli script PHP"><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic|Kaushan+Script:regular"><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-525H86QENV"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-525H86QENV',{anonymize_ip:!1})}</script></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class=logo><a class=logo__link href=/ title="Giovanni Tomasicchio" rel=home><div class="logo__item logo__text"><div class=logo__title>Giovanni Tomasicchio</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
-<span class=menu__btn-title tabindex=-1>Menu</span></button><ul class=menu__list><li class=menu__item><a class=menu__link href=/><span class=menu__text>Home</span></a></li><li class=menu__item><a class=menu__link href=/articoli/><span class=menu__text>Articoli PHP</span></a></li><li class=menu__item><a class=menu__link href=/corsi/><span class=menu__text>Corsi</span></a></li></ul></nav></div></header><div class="wrapper flex"><div class=primary><main class=main role=main><article class=post><header class=post__header><h1 class=post__title>Simulare l'overloading</h1><div class="post__meta meta"><div class="meta__item-datetime meta__item"><svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2005-03-25T17:23:45Z>25 March 2005</time></div></div></header><div class="content post__content clearfix"><p>Il PHP, essendo un linguaggio di scripting, concede allo sviluppatore una notevole libertà nella gestione e nell&rsquo;utilizzo delle variabili. Contrariamente a quanto avviene in altri linguaggi, in PHP non è necessario definire una variabile e dichiarare il tipo prima di usarla. Questa agevolazione però ha anche degli svantaggi, ad esempio non è possibile realizzare in maniera nativa il sovraccarico (overloading) delle funzioni.</p><p>Con PHP 5 però è possibile simulare l&rsquo;overloading dei metodi di un oggetto attraverso l&rsquo;uso del metodo speciale __call().</p><p>Se in una classe è definito questo metodo, esso sarà richiamato ogni volta che verrà invocata l&rsquo;esecuzione di un metodo non definito. __call() quindi è un metodo che intercetta tutte le chiamate ai metodi di una classe che non vanno a buon fine.Il PHP passa a __call() il nome del metodo chiamato ed un array contenente i parametri passati.</p><p>L&rsquo;overloading di un metodo può essere quindi realizzato attraverso una sorta di smistatore di chiamate da realizzare all&rsquo;interno di __call(). Questo smistatore deve essere in grado di riconoscere il tipo e il numero dei parametri passati e deve lanciare la routine più appropriata alla loro gestione.</p><p>L&rsquo;esempio che segue realizza l&rsquo;overloading del metodo somma() al quale si potranno passare sia interi,sui quali verrà effettuata una somma algebrica, sia stringhe, che verranno invece concatenate. Potranno essere passati un numero qualsiasi di parametri, anche nessuno.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;?php
-class sommatore
+<!doctype html><html class=no-js lang=it><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>Simulare l'overloading - Giovanni Tomasicchio</title><script>(function(a,b){a[b]=a[b].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content="Simulare l'overloading negli script PHP"><meta property="og:title" content="Simulare l'overloading"><meta property="og:description" content="Simulare l'overloading negli script PHP"><meta property="og:type" content="article"><meta property="og:url" content="https://giovannitomasicchio.github.io/articoli/simulare-loverloading/"><meta property="article:section" content="articoli"><meta property="article:published_time" content="2005-03-25T17:23:45+00:00"><meta property="article:modified_time" content="2005-03-25T17:23:45+00:00"><meta itemprop=name content="Simulare l'overloading"><meta itemprop=description content="Simulare l'overloading negli script PHP"><meta itemprop=datePublished content="2005-03-25T17:23:45+00:00"><meta itemprop=dateModified content="2005-03-25T17:23:45+00:00"><meta itemprop=wordCount content="403"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Simulare l'overloading"><meta name=twitter:description content="Simulare l'overloading negli script PHP"><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic|Kaushan+Script:regular"><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-525H86QENV"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-525H86QENV',{anonymize_ip:!1})}</script></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class=logo><a class=logo__link href=/ title="Giovanni Tomasicchio" rel=home><div class="logo__item logo__text"><div class=logo__title>Giovanni Tomasicchio</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
+<span class=menu__btn-title tabindex=-1>Menu</span></button><ul class=menu__list><li class=menu__item><a class=menu__link href=/><span class=menu__text>Home</span></a></li><li class=menu__item><a class=menu__link href=/articoli/><span class=menu__text>Articoli PHP</span></a></li><li class=menu__item><a class=menu__link href=/corsi/><span class=menu__text>Corsi</span></a></li></ul></nav></div></header><div class="wrapper flex"><div class=primary><main class=main role=main><article class=post><header class=post__header><h1 class=post__title>Simulare l'overloading</h1><div class="post__meta meta"><div class="meta__item-datetime meta__item"><svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2005-03-25T17:23:45Z>25 March 2005</time></div></div></header><div class="content post__content clearfix"><p>Il PHP, essendo un linguaggio di scripting, concede allo sviluppatore una notevole libertà nella gestione e nell&rsquo;utilizzo delle variabili. Contrariamente a quanto avviene in altri linguaggi, in PHP non è necessario definire una variabile e dichiarare il tipo prima di usarla. Questa agevolazione però ha anche degli svantaggi, ad esempio non è possibile realizzare in maniera nativa il sovraccarico (overloading) delle funzioni.</p><p>Con PHP 5 però è possibile simulare l&rsquo;overloading dei metodi di un oggetto attraverso l&rsquo;uso del metodo speciale __call().</p><p>Se in una classe è definito questo metodo, esso sarà richiamato ogni volta che verrà invocata l&rsquo;esecuzione di un metodo non definito. __call() quindi è un metodo che intercetta tutte le chiamate ai metodi di una classe che non vanno a buon fine.Il PHP passa a __call() il nome del metodo chiamato ed un array contenente i parametri passati.</p><p>L&rsquo;overloading di un metodo può essere quindi realizzato attraverso una sorta di smistatore di chiamate da realizzare all&rsquo;interno di __call(). Questo smistatore deve essere in grado di riconoscere il tipo e il numero dei parametri passati e deve lanciare la routine più appropriata alla loro gestione.</p><p>L&rsquo;esempio che segue realizza l&rsquo;overloading del metodo somma() al quale si potranno passare sia interi,sui quali verrà effettuata una somma algebrica, sia stringhe, che verranno invece concatenate. Potranno essere passati un numero qualsiasi di parametri, anche nessuno.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>sommatore</span>
 {
-   function __call($m, $a)
+   <span style=color:#66d9ef>function</span> __call($m, $a)
    {
-       if($m == 'somma')
+       <span style=color:#66d9ef>if</span>($m <span style=color:#f92672>==</span> <span style=color:#e6db74>&#39;somma&#39;</span>)
        {
-           $num_par = count($a);
-           if(!$num_par)
+           $num_par <span style=color:#f92672>=</span> <span style=color:#a6e22e>count</span>($a);
+           <span style=color:#66d9ef>if</span>(<span style=color:#f92672>!</span>$num_par)
            {
-               echo 'Nessun parametro passato',&quot;\n\n&quot;;
+               <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Nessun parametro passato&#39;</span>,<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n\n</span><span style=color:#e6db74>&#34;</span>;
            }
-           else
+           <span style=color:#66d9ef>else</span>
            {
-               if($this-&gt;sono_interi($a))
+               <span style=color:#66d9ef>if</span>($this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>sono_interi</span>($a))
                {
-                   echo 'Tipo parametri passati: interi (',implode(', ',$a),&quot;)\n&quot;;
-                   echo 'risultato: ',array_reduce($a,array($this,'somma_numeri')),&quot;\n\n&quot;;
+                   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Tipo parametri passati: interi (&#39;</span>,<span style=color:#a6e22e>implode</span>(<span style=color:#e6db74>&#39;, &#39;</span>,$a),<span style=color:#e6db74>&#34;)</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
+                   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;risultato: &#39;</span>,<span style=color:#a6e22e>array_reduce</span>($a,<span style=color:#66d9ef>array</span>($this,<span style=color:#e6db74>&#39;somma_numeri&#39;</span>)),<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n\n</span><span style=color:#e6db74>&#34;</span>;
                }
-               else
+               <span style=color:#66d9ef>else</span>
                {
-                   echo 'Tipo parametri passati: stringhe e/o interi (',implode(', ',$a),&quot;)\n&quot;;
-                   echo 'risultato: ',array_reduce($a,array($this,'somma_stringhe')),&quot;\n\n&quot;;
+                   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Tipo parametri passati: stringhe e/o interi (&#39;</span>,<span style=color:#a6e22e>implode</span>(<span style=color:#e6db74>&#39;, &#39;</span>,$a),<span style=color:#e6db74>&#34;)</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
+                   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;risultato: &#39;</span>,<span style=color:#a6e22e>array_reduce</span>($a,<span style=color:#66d9ef>array</span>($this,<span style=color:#e6db74>&#39;somma_stringhe&#39;</span>)),<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n\n</span><span style=color:#e6db74>&#34;</span>;
                }
            }
        }
-       else
-       echo &quot;Il metodo '$m' non è definito \n\n&quot;;
+       <span style=color:#66d9ef>else</span>
+       <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#34;Il metodo &#39;</span><span style=color:#e6db74>$m</span><span style=color:#e6db74>&#39; non è definito </span><span style=color:#ae81ff>\n\n</span><span style=color:#e6db74>&#34;</span>;
    }
 
-   function somma_numeri($v, $w)
+   <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>somma_numeri</span>($v, $w)
    {
-       $v += $w;
-       return $v;
+       $v <span style=color:#f92672>+=</span> $w;
+       <span style=color:#66d9ef>return</span> $v;
    }
 
-   function somma_stringhe($v, $w)
+   <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>somma_stringhe</span>($v, $w)
    {
-       $v .= $w;
-       return $v;
+       $v <span style=color:#f92672>.=</span> $w;
+       <span style=color:#66d9ef>return</span> $v;
    }
 
-   function sono_interi($a)
+   <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>sono_interi</span>($a)
    {
-       foreach ($a as $value) {
-           if (!is_int($value)) return false;
+       <span style=color:#66d9ef>foreach</span> ($a <span style=color:#66d9ef>as</span> $value) {
+           <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span><span style=color:#a6e22e>is_int</span>($value)) <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>;
        }
-       return true;
+       <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>true</span>;
    }
 }
 
-$mioSommatore = new sommatore();
-$mioSommatore-&gt;somma();
-$mioSommatore-&gt;somma(1);
-$mioSommatore-&gt;somma(3,5);
-$mioSommatore-&gt;somma('Concatena',' stringa');
-$mioSommatore-&gt;ciccio();
-?&gt;
-</code></pre><p>Se lanciamo lo script otterremo il seguente risultato che evidenzia come, attraverso questa tecnica, siamo in grado di realizzare dei metodi il cui comportamento è funzione del numero e del tipo di parametri passati.</p><pre><code>
+$mioSommatore <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>sommatore</span>();
+$mioSommatore<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>somma</span>();
+$mioSommatore<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>somma</span>(<span style=color:#ae81ff>1</span>);
+$mioSommatore<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>somma</span>(<span style=color:#ae81ff>3</span>,<span style=color:#ae81ff>5</span>);
+$mioSommatore<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>somma</span>(<span style=color:#e6db74>&#39;Concatena&#39;</span>,<span style=color:#e6db74>&#39; stringa&#39;</span>);
+$mioSommatore<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>ciccio</span>();
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>Se lanciamo lo script otterremo il seguente risultato che evidenzia come, attraverso questa tecnica, siamo in grado di realizzare dei metodi il cui comportamento è funzione del numero e del tipo di parametri passati.</p><pre><code>
 Nessun parametro passato
 
 Tipo parametri passati: interi (1)

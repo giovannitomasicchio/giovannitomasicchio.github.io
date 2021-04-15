@@ -1,397 +1,372 @@
-<!doctype html><html class=no-js lang=it><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>Le novità di PHP 5 - Giovanni Tomasicchio</title><script>(function(a,b){a[b]=a[b].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content="Le novità di PHP 5"><meta property="og:title" content="Le novità di PHP 5"><meta property="og:description" content="Le novità di PHP 5"><meta property="og:type" content="article"><meta property="og:url" content="https://giovannitomasicchio.github.io/articoli/le-novita-di-php-5/"><meta property="article:section" content="articoli"><meta property="article:published_time" content="2005-01-13T22:43:13+00:00"><meta property="article:modified_time" content="2005-01-13T22:43:13+00:00"><meta itemprop=name content="Le novità di PHP 5"><meta itemprop=description content="Le novità di PHP 5"><meta itemprop=datePublished content="2005-01-13T22:43:13+00:00"><meta itemprop=dateModified content="2005-01-13T22:43:13+00:00"><meta itemprop=wordCount content="3148"><meta itemprop=keywords content="database,MySQL,Java,DOM,exception,mysqli,SimpleXML,SPL,SQL,SQLite,web service,XML,XSL,XSLT,"><meta name=twitter:card content="summary"><meta name=twitter:title content="Le novità di PHP 5"><meta name=twitter:description content="Le novità di PHP 5"><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic|Kaushan+Script:regular"><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-525H86QENV"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-525H86QENV',{anonymize_ip:!1})}</script></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class=logo><a class=logo__link href=/ title="Giovanni Tomasicchio" rel=home><div class="logo__item logo__text"><div class=logo__title>Giovanni Tomasicchio</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
+<!doctype html><html class=no-js lang=it><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>Le novità di PHP 5 - Giovanni Tomasicchio</title><script>(function(a,b){a[b]=a[b].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content="Le novità di PHP 5"><meta property="og:title" content="Le novità di PHP 5"><meta property="og:description" content="Le novità di PHP 5"><meta property="og:type" content="article"><meta property="og:url" content="https://giovannitomasicchio.github.io/articoli/le-novita-di-php-5/"><meta property="article:section" content="articoli"><meta property="article:published_time" content="2005-01-13T22:43:13+00:00"><meta property="article:modified_time" content="2005-01-13T22:43:13+00:00"><meta itemprop=name content="Le novità di PHP 5"><meta itemprop=description content="Le novità di PHP 5"><meta itemprop=datePublished content="2005-01-13T22:43:13+00:00"><meta itemprop=dateModified content="2005-01-13T22:43:13+00:00"><meta itemprop=wordCount content="3062"><meta itemprop=keywords content="database,MySQL,Java,DOM,exception,mysqli,SimpleXML,SPL,SQL,SQLite,web service,XML,XSL,XSLT,"><meta name=twitter:card content="summary"><meta name=twitter:title content="Le novità di PHP 5"><meta name=twitter:description content="Le novità di PHP 5"><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic|Kaushan+Script:regular"><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-525H86QENV"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-525H86QENV',{anonymize_ip:!1})}</script></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class=logo><a class=logo__link href=/ title="Giovanni Tomasicchio" rel=home><div class="logo__item logo__text"><div class=logo__title>Giovanni Tomasicchio</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
 <span class=menu__btn-title tabindex=-1>Menu</span></button><ul class=menu__list><li class=menu__item><a class=menu__link href=/><span class=menu__text>Home</span></a></li><li class=menu__item><a class=menu__link href=/articoli/><span class=menu__text>Articoli PHP</span></a></li><li class=menu__item><a class=menu__link href=/corsi/><span class=menu__text>Corsi</span></a></li></ul></nav></div></header><div class="wrapper flex"><div class=primary><main class=main role=main><article class=post><header class=post__header><h1 class=post__title>Le novità di PHP 5</h1><div class="post__meta meta"><div class="meta__item-datetime meta__item"><svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2005-01-13T22:43:13Z>13 January 2005</time></div></div></header><div class="content post__content clearfix"><p>Niente panico! Nonostante il numero e la valenza delle novità introdotte con PHP 5 sia impressionante, questa nuova versione non stravolge il modo di lavorare con PHP. Tutto ciò che avete imparato a fare con PHP 4 rimane valido, salvo qualche piccola eccezione, anche per PHP 5.</p><p>Perché allora si sente parlare di compatibilità degli script con PHP 5? Uno dei principali motivi per cui alcune applicazioni hanno problemi a girare con la nuova versione di PHP sta nella rinnovata gestione degli oggetti e nel modo in cui vengono passati come parametri alle funzioni. Fortunatamente le correzioni che è necessario apportare non comportano, nella maggior parte dei casi, la completa riprogettazione degli script.</p><p>Ma andiamo con ordine. Le novità introdotte da PHP 5 possono essere raggruppate principalmte in due gruppi:</p><ul><li><strong>evoluzione del linguaggio</strong>
 PHP 5 vede la maturazione del suo modello ad oggetti, l&rsquo;introduzione della gestione degli errori attraverso il paradigma try/throw/catch ed altre interessanti caratteristiche.</li><li><strong>miglioramento delle estensioni</strong>
-La nuova release aggiorna le estensioni SAX, DOM e XSLT ed introduce le nuove SimpleXML e SOAP. Rinnova l&rsquo;estensione per l&rsquo;accesso a MySQL e supporta SQLite</li></ul><p>Le nuove caratteristiche di PHP 5 rafforzano i punti deboli e colmano alcune lacune di PHP 4, decretandone una sensibile maturazione. PHP 5 si presenta così più appetibile al mercato enterprise ed è ormai in grado di affrontare sfide sempre più impegnative.</p><p>In questo articolo accenneremo solamente ad alcune delle svariate innovazioni e migliorie che PHP 5 porta con se, con il semplice scopo di accrescere la curiosità su questa release ma senza la pretesa di risultare esaustivi.</p><hr><h3 id=nuovo-modello-a-oggetti>Nuovo modello a oggetti</h3><p>PHP nasce come linguaggio procedurale, basato cioè su una struttura che prevede un programma principale e diverse funzioni da esso richiamate. Le versioni 3 e 4 di PHP introducono le classi ma queste si limitano ad aggregare metodi e proprietà e supportano solo alcune caratteristiche della programmazione ad oggetti (come l&rsquo;ereditarietà). Inoltre lo Zend Engine (il cuore di PHP 3 e 4, ovvero il sistema che fa girare i nostri script) considera gli oggetti come tipi primitivi (stringhe, interi, ecc.). Questo approccio comporta una anomalia durante le assegnazioni di oggetti. Infatti gli oggetti, quando usati come argomento di funzioni e metodi, vengono passati per valore e non per riferimento, ovvero vengono copiati contrariamente a ciò che avviene nei più popolari linguaggi orientati agli oggetti.</p><p>PHP 5 vede l&rsquo;avvento dello Zend Engine II che, tra l&rsquo;altro, riscrive l&rsquo;intera infrastruttura alla base del modello ad oggetti introducendo gli <em>object handles</em> (una specie di puntatori, trasparenti al programmatore) che risolvono l&rsquo;anomalia prima citata. Inoltre, ispirandosi principalmente al Java, PHP 5 introduce una grande quantità di nuovi strumenti per potenziare il suo modello ad oggetti. Vediamo quali sono le principali novità.</p><p>- Introduzione dei modificatori di accesso <strong>public</strong>, <strong>private</strong> e <strong>protected</strong> sia per metodi che per proprietà con cui regolamentare l&rsquo;accesso ad un oggetto. Le variabili membro e i metodi dichiarati public sono sempre accessibili, quelli dichiarati protected possono essere usati solo dagli oggetti istanziati dalla classe di appartenenza o da una che la eredita, quelli dichiarati private solo dagli oggetti istanzaiti dalla classe di appartenenza.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-class classe_test
+La nuova release aggiorna le estensioni SAX, DOM e XSLT ed introduce le nuove SimpleXML e SOAP. Rinnova l&rsquo;estensione per l&rsquo;accesso a MySQL e supporta SQLite</li></ul><p>Le nuove caratteristiche di PHP 5 rafforzano i punti deboli e colmano alcune lacune di PHP 4, decretandone una sensibile maturazione. PHP 5 si presenta così più appetibile al mercato enterprise ed è ormai in grado di affrontare sfide sempre più impegnative.</p><p>In questo articolo accenneremo solamente ad alcune delle svariate innovazioni e migliorie che PHP 5 porta con se, con il semplice scopo di accrescere la curiosità su questa release ma senza la pretesa di risultare esaustivi.</p><hr><h3 id=nuovo-modello-a-oggetti>Nuovo modello a oggetti</h3><p>PHP nasce come linguaggio procedurale, basato cioè su una struttura che prevede un programma principale e diverse funzioni da esso richiamate. Le versioni 3 e 4 di PHP introducono le classi ma queste si limitano ad aggregare metodi e proprietà e supportano solo alcune caratteristiche della programmazione ad oggetti (come l&rsquo;ereditarietà). Inoltre lo Zend Engine (il cuore di PHP 3 e 4, ovvero il sistema che fa girare i nostri script) considera gli oggetti come tipi primitivi (stringhe, interi, ecc.). Questo approccio comporta una anomalia durante le assegnazioni di oggetti. Infatti gli oggetti, quando usati come argomento di funzioni e metodi, vengono passati per valore e non per riferimento, ovvero vengono copiati contrariamente a ciò che avviene nei più popolari linguaggi orientati agli oggetti.</p><p>PHP 5 vede l&rsquo;avvento dello Zend Engine II che, tra l&rsquo;altro, riscrive l&rsquo;intera infrastruttura alla base del modello ad oggetti introducendo gli <em>object handles</em> (una specie di puntatori, trasparenti al programmatore) che risolvono l&rsquo;anomalia prima citata. Inoltre, ispirandosi principalmente al Java, PHP 5 introduce una grande quantità di nuovi strumenti per potenziare il suo modello ad oggetti. Vediamo quali sono le principali novità.</p><p>- Introduzione dei modificatori di accesso <strong>public</strong>, <strong>private</strong> e <strong>protected</strong> sia per metodi che per proprietà con cui regolamentare l&rsquo;accesso ad un oggetto. Le variabili membro e i metodi dichiarati public sono sempre accessibili, quelli dichiarati protected possono essere usati solo dagli oggetti istanziati dalla classe di appartenenza o da una che la eredita, quelli dichiarati private solo dagli oggetti istanzaiti dalla classe di appartenenza.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>classe_test</span>
 {
-   public $var1; /* proprietà pubblico */
+   <span style=color:#66d9ef>public</span> $var1; <span style=color:#75715e>/* proprietà pubblico */</span>
 
-   private $var2; /* proprietà privata :-) */
+   <span style=color:#66d9ef>private</span> $var2; <span style=color:#75715e>/* proprietà privata :-) */</span>
 
-   protected $var3; /* proprietà protetta */
+   <span style=color:#66d9ef>protected</span> $var3; <span style=color:#75715e>/* proprietà protetta */</span>
 
-   public function function1() {
-       /* metodo pubblico */
+   <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>function1</span>() {
+       <span style=color:#75715e>/* metodo pubblico */</span>
    }
 
-   private function function2() {
+   <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>function2</span>() {
    }
 
-   protected function function3() {
-       /* metodo protetto */
+   <span style=color:#66d9ef>protected</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>function3</span>() {
+       <span style=color:#75715e>/* metodo protetto */</span>
    }
 }
-</code></pre><p>- Nuovo nome univoco per il metodo costruttore <strong>__construct()</strong> di una classe. E' comunque ancora possibile usare il nome della classe di appartenenza.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-class classe_test
+</code></pre></div><p>- Nuovo nome univoco per il metodo costruttore <strong>__construct()</strong> di una classe. E' comunque ancora possibile usare il nome della classe di appartenenza.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>classe_test</span>
 {
-   function __construct() {
-       /* costruttore della classe */
+   <span style=color:#66d9ef>function</span> __construct() {
+       <span style=color:#75715e>/* costruttore della classe */</span>
    }
 
-   /* altri metodi */
+   <span style=color:#75715e>/* altri metodi */</span>
 }
-</code></pre><p>- Introdotto un metodo distruttore dal nome unico <strong>__destructor()</strong></p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-class classe_test
+</code></pre></div><p>- Introdotto un metodo distruttore dal nome unico <strong>__destructor()</strong></p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>classe_test</span>
 {
-   function __destruct() {
-       /* distruttore della classe */
+   <span style=color:#66d9ef>function</span> __destruct() {
+       <span style=color:#75715e>/* distruttore della classe */</span>
    }
 
-   /* altri metodi */
+   <span style=color:#75715e>/* altri metodi */</span>
 }
-</code></pre><p>- Introduzione delle <strong>interfacce</strong>. Grazie alle interfacce viene superato il vincolo della ereditarietà da una singola classe infatti una classe può implementare più interfacce.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-interface interfaccia_1
+</code></pre></div><p>- Introduzione delle <strong>interfacce</strong>. Grazie alle interfacce viene superato il vincolo della ereditarietà da una singola classe infatti una classe può implementare più interfacce.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>interfaccia_1</span>
 {
-   /* metodi astratti */
-   function funzione1();
-}
-
-interface interfaccia_2
-{
-   /* metodi astratti */
-   function funzione2();
+   <span style=color:#75715e>/* metodi astratti */</span>
+   <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>funzione1</span>();
 }
 
-/* classe che implementa 2 interfacce */
-class classe_test implements interfaccia_1, interfaccia_2
+<span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>interfaccia_2</span>
 {
-   function funzione1() {
-       /* implementazione */
+   <span style=color:#75715e>/* metodi astratti */</span>
+   <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>funzione2</span>();
+}
+
+<span style=color:#75715e>/* classe che implementa 2 interfacce */</span>
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>classe_test</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>interfaccia_1</span>, <span style=color:#a6e22e>interfaccia_2</span>
+{
+   <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>funzione1</span>() {
+       <span style=color:#75715e>/* implementazione */</span>
    }
 
-   function funzione2() {
-       /* implementazione */
+   <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>funzione2</span>() {
+       <span style=color:#75715e>/* implementazione */</span>
    }
 }
-</code></pre><p>- Introduzione dell&rsquo;operatore <strong>instance of</strong> per verificare la classe di un oggetto</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-if ($oggetto instance of utente) {
-   echo'$ottetto è una istanza della classe utente';
+</code></pre></div><p>- Introduzione dell&rsquo;operatore <strong>instance of</strong> per verificare la classe di un oggetto</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#66d9ef>if</span> ($oggetto <span style=color:#a6e22e>instance</span> <span style=color:#a6e22e>of</span> <span style=color:#a6e22e>utente</span>) {
+   <span style=color:#66d9ef>echo</span><span style=color:#e6db74>&#39;$ottetto è una istanza della classe utente&#39;</span>;
 }
-</code></pre><p>- Possibilità di dichiarare un <strong>metodo</strong> come <strong>final</strong> affinché non venga effettuato l&rsquo;overload per esso dalle classe che lo ereditano</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-class mia_classe
+</code></pre></div><p>- Possibilità di dichiarare un <strong>metodo</strong> come <strong>final</strong> affinché non venga effettuato l&rsquo;overload per esso dalle classe che lo ereditano</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>mia_classe</span>
 {
-   final function mia_funzione() {
-       /* questo metodo non potrà essere sovrascritto
-           dalle classi che lo ereditano*/
+   <span style=color:#66d9ef>final</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>mia_funzione</span>() {
+       <span style=color:#75715e>/* questo metodo non potrà essere sovrascritto
+</span><span style=color:#75715e>           dalle classi che lo ereditano*/</span>
    }
 }
-</code></pre><p>- Possibilità di dichiarare <strong>classi</strong> come <strong>final</strong> affinché non possano essere ereditate</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-final class FinalClass
+</code></pre></div><p>- Possibilità di dichiarare <strong>classi</strong> come <strong>final</strong> affinché non possano essere ereditate</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#66d9ef>final</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>FinalClass</span>
 {
-   /* ... */
+   <span style=color:#75715e>/* ... */</span>
 }
-</code></pre><p>- Introduzione del metodo <strong>__clone()</strong> che, se implementato, verrà richiamato durante il processo di copia di un oggetto. Può essere utilizzato per personalizzare la procedura di copia di un oggetto. Nel seguente esempio un oggetto che gestisce la connessione ad un database, quando viene clonato, conserva tutte le variabili membro originarie ma incrementa il suo id</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;?php
-class database
+</code></pre></div><p>- Introduzione del metodo <strong>__clone()</strong> che, se implementato, verrà richiamato durante il processo di copia di un oggetto. Può essere utilizzato per personalizzare la procedura di copia di un oggetto. Nel seguente esempio un oggetto che gestisce la connessione ad un database, quando viene clonato, conserva tutte le variabili membro originarie ma incrementa il suo id</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>database</span>
 {
-   public $user = 'nome_utente';
-   public $password = 'mia_password';
-   public $id = 0;
+   <span style=color:#66d9ef>public</span> $user <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;nome_utente&#39;</span>;
+   <span style=color:#66d9ef>public</span> $password <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;mia_password&#39;</span>;
+   <span style=color:#66d9ef>public</span> $id <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
 
-   function __clone() {
-       $this-&gt;id = $this-&gt;id + 1;
+   <span style=color:#66d9ef>function</span> __clone() {
+       $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>id</span> <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>id</span> <span style=color:#f92672>+</span> <span style=color:#ae81ff>1</span>;
    }
 }
 
-$datalink_1 = new database();
+$datalink_1 <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>database</span>();
 
-$datalink_2 = clone $datalink_1;
+$datalink_2 <span style=color:#f92672>=</span> <span style=color:#66d9ef>clone</span> $datalink_1;
 
-echo 'user: '. $datalink_1-&gt;user .&quot;n&quot;;
-echo 'password: '. $datalink_1-&gt;password.&quot;n&quot;;
-echo 'id: '. $datalink_1-&gt;id.&quot;n&quot;;
+<span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;user: &#39;</span><span style=color:#f92672>.</span> $datalink_1<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>user</span> <span style=color:#f92672>.</span><span style=color:#e6db74>&#34;n&#34;</span>;
+<span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;password: &#39;</span><span style=color:#f92672>.</span> $datalink_1<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>password</span><span style=color:#f92672>.</span><span style=color:#e6db74>&#34;n&#34;</span>;
+<span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;id: &#39;</span><span style=color:#f92672>.</span> $datalink_1<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>id</span><span style=color:#f92672>.</span><span style=color:#e6db74>&#34;n&#34;</span>;
 
-echo 'user: '. $datalink_2-&gt;user .&quot;n&quot;;
-echo 'password: '. $datalink_2-&gt;password.&quot;n&quot;;
-echo 'id: '. $datalink_2-&gt;id.&quot;n&quot;;
-?&gt;
-
-Risultato:
-user: nome_utente
-password: mia_password
-id: 0
-user: nome_utente
-password: mia_password
-id: 1
-</code></pre><p>- Possibilità di dichiarare delle costanti all&rsquo;interno di una classe attraverso l&rsquo;uso di <strong>const</strong></p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-class mia_classe
+<span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;user: &#39;</span><span style=color:#f92672>.</span> $datalink_2<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>user</span> <span style=color:#f92672>.</span><span style=color:#e6db74>&#34;n&#34;</span>;
+<span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;password: &#39;</span><span style=color:#f92672>.</span> $datalink_2<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>password</span><span style=color:#f92672>.</span><span style=color:#e6db74>&#34;n&#34;</span>;
+<span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;id: &#39;</span><span style=color:#f92672>.</span> $datalink_2<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>id</span><span style=color:#f92672>.</span><span style=color:#e6db74>&#34;n&#34;</span>;
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>Risultato:
+</span><span style=color:#960050;background-color:#1e0010>user: nome_utente
+</span><span style=color:#960050;background-color:#1e0010>password: mia_password
+</span><span style=color:#960050;background-color:#1e0010>id: 0
+</span><span style=color:#960050;background-color:#1e0010>user: nome_utente
+</span><span style=color:#960050;background-color:#1e0010>password: mia_password
+</span><span style=color:#960050;background-color:#1e0010>id: 1
+</span></code></pre></div><p>- Possibilità di dichiarare delle costanti all&rsquo;interno di una classe attraverso l&rsquo;uso di <strong>const</strong></p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>mia_classe</span>
 {
-   const PI_GRECO = 3.14;
+   <span style=color:#66d9ef>const</span> <span style=color:#66d9ef>PI_GRECO</span> <span style=color:#f92672>=</span> <span style=color:#ae81ff>3.14</span>;
 }
-</code></pre><p>- <strong>Proprietà statiche</strong> attraverso l&rsquo;uso di static</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-class settings
+</code></pre></div><p>- <strong>Proprietà statiche</strong> attraverso l&rsquo;uso di static</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>settings</span>
 {
-   static $max_users = 5;
+   <span style=color:#66d9ef>static</span> $max_users <span style=color:#f92672>=</span> <span style=color:#ae81ff>5</span>;
 }
 
-echo settings::$max_users;
-</code></pre><p>- <strong>Metodi statici</strong> che è possibile richiamare al di fuori di un oggetto</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-class lib
+<span style=color:#66d9ef>echo</span> <span style=color:#a6e22e>settings</span><span style=color:#f92672>::</span>$max_users;
+</code></pre></div><p>- <strong>Metodi statici</strong> che è possibile richiamare al di fuori di un oggetto</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>lib</span>
 {
-   static function get_time() {
-       return time();
+   <span style=color:#66d9ef>static</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>get_time</span>() {
+       <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>time</span>();
    }
 }
 
-echo lib::get_time();
-</code></pre><p>- <strong>Classi astratte</strong> che non possono essere istanziate direttamente ma solo ereditate</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-abstract class classe_base {
-   /* ... */
+<span style=color:#66d9ef>echo</span> <span style=color:#a6e22e>lib</span><span style=color:#f92672>::</span><span style=color:#a6e22e>get_time</span>();
+</code></pre></div><p>- <strong>Classi astratte</strong> che non possono essere istanziate direttamente ma solo ereditate</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>classe_base</span> {
+   <span style=color:#75715e>/* ... */</span>
 }
-</code></pre><p>- <strong>Metodi astratti</strong> per i quali la definizione è lasciata alla classe che li eredita. Ovviamente una classe che contiene un metodo astratto deve essere dichiarata come abstract.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-abstract class classe_base {
-   abstract function metodo_astratto();
+</code></pre></div><p>- <strong>Metodi astratti</strong> per i quali la definizione è lasciata alla classe che li eredita. Ovviamente una classe che contiene un metodo astratto deve essere dichiarata come abstract.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>class</span> <span style=color:#a6e22e>classe_base</span> {
+   <span style=color:#66d9ef>abstract</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>metodo_astratto</span>();
 }
-</code></pre><p>- <strong>Type hinting</strong>: possibilità di dichiarare la classe degli oggetti passati come parametri alle funzioni.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-class utente {/* ... */}
+</code></pre></div><p>- <strong>Type hinting</strong>: possibilità di dichiarare la classe degli oggetti passati come parametri alle funzioni.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#66d9ef>class</span> <span style=color:#a6e22e>utente</span> {<span style=color:#75715e>/* ... */</span>}
 
-$oggetto = new utente();
+$oggetto <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>utente</span>();
 
-function log_in(utente $oggetto) {
-   /* se $oggetto non è di tipo &quot;utente&quot; verrà generato un errore */
+<span style=color:#66d9ef>function</span> <span style=color:#a6e22e>log_in</span>(<span style=color:#a6e22e>utente</span> $oggetto) {
+   <span style=color:#75715e>/* se $oggetto non è di tipo &#34;utente&#34; verrà generato un errore */</span>
 }
-</code></pre><p>- <strong>Deferenziazione</strong> degli oggetti prodotti dai metodi.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-$oggetto-&gt;oggetto_restituito()-&gt;metodo();
-</code></pre><p>- Introduzione della funzione <strong>__autoload()</strong> che viene automaticamente chiamato qualora si stia cercando di istanziare una classe non ancora definita.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-mia_classe.class.php 
-&lt;?php
-echo 'caricata classe mia_classe';
-class mia_classe {}
-?&gt;
+</code></pre></div><p>- <strong>Deferenziazione</strong> degli oggetti prodotti dai metodi.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php>$oggetto<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>oggetto_restituito</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>metodo</span>();
+</code></pre></div><p>- Introduzione della funzione <strong>__autoload()</strong> che viene automaticamente chiamato qualora si stia cercando di istanziare una classe non ancora definita.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#a6e22e>mia_classe</span><span style=color:#f92672>.</span><span style=color:#a6e22e>class</span><span style=color:#f92672>.</span><span style=color:#a6e22e>php</span> 
+<span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;caricata classe mia_classe&#39;</span>;
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>mia_classe</span> {}
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>test.php
+</span><span style=color:#960050;background-color:#1e0010>&lt;?php
+</span><span style=color:#960050;background-color:#1e0010>function __autoload($nome_classe) {
+</span><span style=color:#960050;background-color:#1e0010>include_once($nome_classe . &#39;.class.php&#39;);
+</span><span style=color:#960050;background-color:#1e0010>}
+</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>$oggetto = new mia_classe();
+</span><span style=color:#960050;background-color:#1e0010>?&gt;
+</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>Risultato:
+</span><span style=color:#960050;background-color:#1e0010>caricata classe mia_classe
+</span></code></pre></div><hr><h3 id=il-paradigma-try-throw-catch>Il paradigma try-throw-catch</h3><p>Con PHP 4 risulta difficile realizzare una netta separazione tra il codice di gestione delle eccezioni e le istruzioni della nostra applicazione. Spesso infatti si è costretti, dopo ogni operazione effettuata, a controllare il risultato restituito per verificarne l&rsquo;esito.</p><p>Anche se è possibile definire delle procedure di gestione globale degli errori (attraverso l&rsquo;istruzione set_error_handler) queste non potranno mai essere sufficientemente specializzate per ogni singola categoria di eccezioni e quindi non potranno intervenire e rispondere in maniera adeguata.</p><p>PHP 5 risolve questo problema introducendo il paradigma try-throw-catch, ovvero una struttura di controllo simile al meccanismo if-else ma progettato appositamente per la gestione delle eccezioni. Per chiarirne il funzionamento vediamo il seguente esempio:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span> 
+<span style=color:#66d9ef>try</span> {
+   $a <span style=color:#f92672>=</span> <span style=color:#f92672>-</span><span style=color:#ae81ff>1</span>; <span style=color:#75715e>// valore inaspettato
+</span><span style=color:#75715e></span>   <span style=color:#66d9ef>if</span> ( $a <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>0</span> )
+   <span style=color:#66d9ef>throw</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>Exception</span>(<span style=color:#e6db74>&#39;$a è negativo&#39;</span>);
 
-test.php
-&lt;?php
-function __autoload($nome_classe) {
-include_once($nome_classe . '.class.php');
+   <span style=color:#75715e>// il codice che segue una eccezione non viene eseguito
+</span><span style=color:#75715e></span>   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Questo testo non verrà mai visualizzato&#39;</span>;
 }
-
-$oggetto = new mia_classe();
-?&gt;
-
-Risultato:
-caricata classe mia_classe
-</code></pre><hr><h3 id=il-paradigma-try-throw-catch>Il paradigma try-throw-catch</h3><p>Con PHP 4 risulta difficile realizzare una netta separazione tra il codice di gestione delle eccezioni e le istruzioni della nostra applicazione. Spesso infatti si è costretti, dopo ogni operazione effettuata, a controllare il risultato restituito per verificarne l&rsquo;esito.</p><p>Anche se è possibile definire delle procedure di gestione globale degli errori (attraverso l&rsquo;istruzione set_error_handler) queste non potranno mai essere sufficientemente specializzate per ogni singola categoria di eccezioni e quindi non potranno intervenire e rispondere in maniera adeguata.</p><p>PHP 5 risolve questo problema introducendo il paradigma try-throw-catch, ovvero una struttura di controllo simile al meccanismo if-else ma progettato appositamente per la gestione delle eccezioni. Per chiarirne il funzionamento vediamo il seguente esempio:</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;?php 
-try {
-   $a = -1; // valore inaspettato
-   if ( $a &lt; 0 )
-   throw new Exception('$a è negativo');
-
-   // il codice che segue una eccezione non viene eseguito
-   echo 'Questo testo non verrà mai visualizzato';
+<span style=color:#66d9ef>catch</span> (<span style=color:#a6e22e>Exception</span> $e) {
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#34;Eccezione intercettata: &#34;</span>, $e, <span style=color:#e6db74>&#34;n&#34;</span>;
 }
-catch (Exception $e) {
-   echo &quot;Eccezione intercettata: &quot;, $e, &quot;n&quot;;
-}
-?&gt;
-
-Risultato:
-Eccezione intercettata: exception 'Exception' with message '$a è negativo' in pathnomefile:riga
-Stack trace:
-#0 {main}
-</code></pre><p>Nel blocco <strong>try</strong> una istruzione lancia (<strong>throw</strong>) una eccezione ovvero istanzia un oggetto della classe Exception, definita all&rsquo;interno dello stesso PHP 5 e perciò sempre disponibile. La gestione di questo oggetto, e quindi dell&rsquo;eccezione, non viene implementata immediatamente ma rimandata al blocco <strong>catch</strong>.</p><p>E' anche possibile definire delle classi personalizzate per la gestione delle eccezioni, estendendo la classe Exception. In questo modo è possibile avere più blocchi catch che possano distinguere tra i vari tipi di eccezione avvenuta reagendo in maniera più specializzata.</p><p>La maggior parte delle funzioni interne di PHP non lancia delle eccezioni, comunque le nuove estensioni ne fanno uso. Per intercettare eccezioni che non sono state catturate da nessun blocco catch prima che termini lo script è possibile usare la funzione set_exception_handler().</p><hr><h3 id=standard-php-library---iteratori>Standard PHP Library - Iteratori</h3><p>Parlando del paradigma try-throw-catch abbiamo visto come una eccezione venga rappresentata da un oggetto istanziato della classe Exception definita all&rsquo;interno di PHP 5. La classe Exception infatti fa parte della Standard PHP Library (SPL) che consiste, come spiega il <a href=http://it.php.net/spl>manuale</a>, in un insieme di interfacce e classi realizzate per risolvere problemi standard. Questa libreria fa parte del core di PHP 5 ed è quindi sempre disponibile e non necessita di installazione.</p><p>La SPL è una vera novità nel panorama PHP che ci aveva abituato a veder reinventare la ruota ad ogni nuovo progetto. Attraverso l&rsquo;uso della SPL è possibile standardizzare l&rsquo;approccio a determinate problematiche e questo comporta anche un più facile riutilizzo del codice tra diversi progetti. La Standard PHP Library è solo agli inizi infatti, oltre al problema delle eccezioni, risolve solo l&rsquo;implementazione di iteratori. Purtroppo il manuale di PHP fornisce ancora poche informazioni circa l&rsquo;uso della SPL, per maggiori informazioni è possibile comunque consultare la <a href=http://www.php.net/~helly/php/ext/spl/>documentazione</a> prodotta dal suo ideatore <a href=http://marcus-boerger.de/>Marcus Boerger</a></p><p>Lo script che segue elenca i file presenti in una cartella. Ad un ciclo foreach viene passato un oggetto ottenuto come istanza della classe ElencaFile. Questa classe estende l&rsquo;iteratore DirectIterator appartenente alla SPL.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;?php 
-class ElencaFile extends DirectoryIterator
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>Risultato:
+</span><span style=color:#960050;background-color:#1e0010>Eccezione intercettata: exception &#39;Exception&#39; with message &#39;$a è negativo&#39; in pathnomefile:riga
+</span><span style=color:#960050;background-color:#1e0010>Stack trace:
+</span><span style=color:#960050;background-color:#1e0010>#0 {main}
+</span></code></pre></div><p>Nel blocco <strong>try</strong> una istruzione lancia (<strong>throw</strong>) una eccezione ovvero istanzia un oggetto della classe Exception, definita all&rsquo;interno dello stesso PHP 5 e perciò sempre disponibile. La gestione di questo oggetto, e quindi dell&rsquo;eccezione, non viene implementata immediatamente ma rimandata al blocco <strong>catch</strong>.</p><p>E' anche possibile definire delle classi personalizzate per la gestione delle eccezioni, estendendo la classe Exception. In questo modo è possibile avere più blocchi catch che possano distinguere tra i vari tipi di eccezione avvenuta reagendo in maniera più specializzata.</p><p>La maggior parte delle funzioni interne di PHP non lancia delle eccezioni, comunque le nuove estensioni ne fanno uso. Per intercettare eccezioni che non sono state catturate da nessun blocco catch prima che termini lo script è possibile usare la funzione set_exception_handler().</p><hr><h3 id=standard-php-library---iteratori>Standard PHP Library - Iteratori</h3><p>Parlando del paradigma try-throw-catch abbiamo visto come una eccezione venga rappresentata da un oggetto istanziato della classe Exception definita all&rsquo;interno di PHP 5. La classe Exception infatti fa parte della Standard PHP Library (SPL) che consiste, come spiega il <a href=http://it.php.net/spl>manuale</a>, in un insieme di interfacce e classi realizzate per risolvere problemi standard. Questa libreria fa parte del core di PHP 5 ed è quindi sempre disponibile e non necessita di installazione.</p><p>La SPL è una vera novità nel panorama PHP che ci aveva abituato a veder reinventare la ruota ad ogni nuovo progetto. Attraverso l&rsquo;uso della SPL è possibile standardizzare l&rsquo;approccio a determinate problematiche e questo comporta anche un più facile riutilizzo del codice tra diversi progetti. La Standard PHP Library è solo agli inizi infatti, oltre al problema delle eccezioni, risolve solo l&rsquo;implementazione di iteratori. Purtroppo il manuale di PHP fornisce ancora poche informazioni circa l&rsquo;uso della SPL, per maggiori informazioni è possibile comunque consultare la <a href=http://www.php.net/~helly/php/ext/spl/>documentazione</a> prodotta dal suo ideatore <a href=http://marcus-boerger.de/>Marcus Boerger</a></p><p>Lo script che segue elenca i file presenti in una cartella. Ad un ciclo foreach viene passato un oggetto ottenuto come istanza della classe ElencaFile. Questa classe estende l&rsquo;iteratore DirectIterator appartenente alla SPL.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span> 
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>ElencaFile</span> <span style=color:#66d9ef>extends</span> <span style=color:#a6e22e>DirectoryIterator</span>
 {
-   function current()
+   <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>current</span>()
    {
-       return parent::getFileName();
+       <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>parent</span><span style=color:#f92672>::</span><span style=color:#a6e22e>getFileName</span>();
    }
 
-   function valid()
+   <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>valid</span>()
    {
-       if ( parent::valid() )
+       <span style=color:#66d9ef>if</span> ( <span style=color:#66d9ef>parent</span><span style=color:#f92672>::</span><span style=color:#a6e22e>valid</span>() )
        {
-           if ( !parent::isFile() )
+           <span style=color:#66d9ef>if</span> ( <span style=color:#f92672>!</span><span style=color:#66d9ef>parent</span><span style=color:#f92672>::</span><span style=color:#a6e22e>isFile</span>() )
            {
-               parent::next();
-               return $this-&gt;valid();
+               <span style=color:#66d9ef>parent</span><span style=color:#f92672>::</span><span style=color:#a6e22e>next</span>();
+               <span style=color:#66d9ef>return</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>valid</span>();
            }
-           return TRUE;
+           <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>TRUE</span>;
        }
-       return FALSE;
+       <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>FALSE</span>;
    }
 
-   function rewind()
+   <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>rewind</span>()
    {
-       parent::rewind();
+       <span style=color:#66d9ef>parent</span><span style=color:#f92672>::</span><span style=color:#a6e22e>rewind</span>();
    }
 }
 
-$cartella_corrente = new ElencaFile('./');
+$cartella_corrente <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>ElencaFile</span>(<span style=color:#e6db74>&#39;./&#39;</span>);
 
-foreach ($cartella_corrente as $file)
+<span style=color:#66d9ef>foreach</span> ($cartella_corrente <span style=color:#66d9ef>as</span> $file)
 {
-   echo $file.'&lt;br&gt;';
+   <span style=color:#66d9ef>echo</span> $file<span style=color:#f92672>.</span><span style=color:#e6db74>&#39;&lt;br&gt;&#39;</span>;
 }
-?&gt;
-</code></pre><p>PHP 5 è in grado di applicare un ciclo foreach() anche ad oggetti che non estendono iteratori. In questo caso l&rsquo;iterazione verrà effettuata sulle proprietà pubbliche dell&rsquo;oggetto.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;?php 
-class database
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>PHP 5 è in grado di applicare un ciclo foreach() anche ad oggetti che non estendono iteratori. In questo caso l&rsquo;iterazione verrà effettuata sulle proprietà pubbliche dell&rsquo;oggetto.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span> 
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>database</span>
 {
-   public $user = 'nome_utente';
-   protected $password = 'mia_password';
-   private $id = 0;
+   <span style=color:#66d9ef>public</span> $user <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;nome_utente&#39;</span>;
+   <span style=color:#66d9ef>protected</span> $password <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;mia_password&#39;</span>;
+   <span style=color:#66d9ef>private</span> $id <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
 }
 
-$data = new database();
+$data <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>database</span>();
 
-foreach ($data as $variabile =&gt; $contenuto)
+<span style=color:#66d9ef>foreach</span> ($data <span style=color:#66d9ef>as</span> $variabile <span style=color:#f92672>=&gt;</span> $contenuto)
 {
-   echo $variabile . ' = ' . $contenuto . &quot;n&quot;;
+   <span style=color:#66d9ef>echo</span> $variabile <span style=color:#f92672>.</span> <span style=color:#e6db74>&#39; = &#39;</span> <span style=color:#f92672>.</span> $contenuto <span style=color:#f92672>.</span> <span style=color:#e6db74>&#34;n&#34;</span>;
 
 }
-?&gt;
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>Risultato:
+</span><span style=color:#960050;background-color:#1e0010>user = nome_utente
+</span></code></pre></div><hr><h3 id=altre-novità-del-linguaggio>Altre novità del linguaggio</h3><p><strong>Foreach con riferimenti</strong></p><p>La struttura di controllo <em>foreach</em> è forse una delle più amate e più utilizzate dagli sviluppatori PHP grazie alla facilità con cui riesce ad attraversare un array. Come abbiamo già visto parlando degli iteratori, PHP 5 accresce le capacità di foreach rendendolo capace di accettare come argomento anche un oggetto.</p><p>Ma le novità per questa struttura di controllo non finiscono qui. Con PHP 4 il ciclo foreach mostrava una limitazione: lavorando su una copia dell' array, qualsiasi modifica ad esso effettuata non ha un effetto persistente. Per modificare un array è quindi necessario utilizzare altri costrutti di PHP, come ad esempio i cicli for.</p><p>PHP 5 supera questa limitazione permettendo l&rsquo;uso di array passati per indirizzo attraverso l&rsquo;uso di <strong>&</strong>. L&rsquo;esempio che segue mostra come, attraverso l&rsquo;uso di tale tecnica, sia possibile impiegare questa struttura di controllo per modificare il contenuto di un array.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span> 
+$vettore <span style=color:#f92672>=</span> <span style=color:#66d9ef>array</span>(<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>2</span>,<span style=color:#ae81ff>3</span>,<span style=color:#ae81ff>4</span>);
 
-Risultato:
-user = nome_utente
-</code></pre><hr><h3 id=altre-novità-del-linguaggio>Altre novità del linguaggio</h3><p><strong>Foreach con riferimenti</strong></p><p>La struttura di controllo <em>foreach</em> è forse una delle più amate e più utilizzate dagli sviluppatori PHP grazie alla facilità con cui riesce ad attraversare un array. Come abbiamo già visto parlando degli iteratori, PHP 5 accresce le capacità di foreach rendendolo capace di accettare come argomento anche un oggetto.</p><p>Ma le novità per questa struttura di controllo non finiscono qui. Con PHP 4 il ciclo foreach mostrava una limitazione: lavorando su una copia dell' array, qualsiasi modifica ad esso effettuata non ha un effetto persistente. Per modificare un array è quindi necessario utilizzare altri costrutti di PHP, come ad esempio i cicli for.</p><p>PHP 5 supera questa limitazione permettendo l&rsquo;uso di array passati per indirizzo attraverso l&rsquo;uso di <strong>&</strong>. L&rsquo;esempio che segue mostra come, attraverso l&rsquo;uso di tale tecnica, sia possibile impiegare questa struttura di controllo per modificare il contenuto di un array.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;?php 
-$vettore = array(1,2,3,4);
+<span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#34;Vettore originale: n&#34;</span>;
+<span style=color:#a6e22e>print_r</span>($vettore);
 
-echo &quot;Vettore originale: n&quot;;
-print_r($vettore);
-
-foreach ($vettore as &amp;$valore)
+<span style=color:#66d9ef>foreach</span> ($vettore <span style=color:#66d9ef>as</span> <span style=color:#f92672>&amp;</span>$valore)
 {
-   $valore = $valore * 2;
+   $valore <span style=color:#f92672>=</span> $valore <span style=color:#f92672>*</span> <span style=color:#ae81ff>2</span>;
 }
 
-echo &quot;Vettore dopo il foreach con &amp;: n&quot;;
-print_r($vettore);
-?&gt;
-
-Risultato:
-Vettore originale:
-Array
-(
-   [0] =&gt; 1
-   [1] =&gt; 2
-   [2] =&gt; 3
-   [3] =&gt; 4
-)
-Vettore dopo il foreach con &amp;:
-Array
-(
-   [0] =&gt; 2
-   [1] =&gt; 4
-   [2] =&gt; 6
-   [3] =&gt; 8
-)
-</code></pre><p><strong>Valori di default per parametri passati a funzioni per riferimento</strong></p><p>PHP 5 permette di specificare dei valori di default anche per i parametri delle funzioni passati per riferimento:</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;?php 
-function grassetto(&amp; $stringa = null)
+<span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#34;Vettore dopo il foreach con &amp;: n&#34;</span>;
+<span style=color:#a6e22e>print_r</span>($vettore);
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>Risultato:
+</span><span style=color:#960050;background-color:#1e0010>Vettore originale:
+</span><span style=color:#960050;background-color:#1e0010>Array
+</span><span style=color:#960050;background-color:#1e0010>(
+</span><span style=color:#960050;background-color:#1e0010>   [0] =&gt; 1
+</span><span style=color:#960050;background-color:#1e0010>   [1] =&gt; 2
+</span><span style=color:#960050;background-color:#1e0010>   [2] =&gt; 3
+</span><span style=color:#960050;background-color:#1e0010>   [3] =&gt; 4
+</span><span style=color:#960050;background-color:#1e0010>)
+</span><span style=color:#960050;background-color:#1e0010>Vettore dopo il foreach con &amp;:
+</span><span style=color:#960050;background-color:#1e0010>Array
+</span><span style=color:#960050;background-color:#1e0010>(
+</span><span style=color:#960050;background-color:#1e0010>   [0] =&gt; 2
+</span><span style=color:#960050;background-color:#1e0010>   [1] =&gt; 4
+</span><span style=color:#960050;background-color:#1e0010>   [2] =&gt; 6
+</span><span style=color:#960050;background-color:#1e0010>   [3] =&gt; 8
+</span><span style=color:#960050;background-color:#1e0010>)
+</span></code></pre></div><p><strong>Valori di default per parametri passati a funzioni per riferimento</strong></p><p>PHP 5 permette di specificare dei valori di default anche per i parametri delle funzioni passati per riferimento:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span> 
+<span style=color:#66d9ef>function</span> <span style=color:#a6e22e>grassetto</span>(<span style=color:#f92672>&amp;</span> $stringa <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>)
 {
-   if ($stringa === null)
-   echo 'Nessuna stringa passata!!!';
-   else
-   $stringa = &quot;&lt;b&gt;$stringa&lt;/b&gt;&quot;;
+   <span style=color:#66d9ef>if</span> ($stringa <span style=color:#f92672>===</span> <span style=color:#66d9ef>null</span>)
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Nessuna stringa passata!!!&#39;</span>;
+   <span style=color:#66d9ef>else</span>
+   $stringa <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&lt;b&gt;</span><span style=color:#e6db74>$stringa</span><span style=color:#e6db74>&lt;/b&gt;&#34;</span>;
 }
 
-$testo = 'Testo di prova';
-echo $testo .&quot;n&quot;;
+$testo <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;Testo di prova&#39;</span>;
+<span style=color:#66d9ef>echo</span> $testo <span style=color:#f92672>.</span><span style=color:#e6db74>&#34;n&#34;</span>;
 
-grassetto($testo);
-echo $testo .&quot;n&quot;;
+<span style=color:#a6e22e>grassetto</span>($testo);
+<span style=color:#66d9ef>echo</span> $testo <span style=color:#f92672>.</span><span style=color:#e6db74>&#34;n&#34;</span>;
 
-grassetto();
-?&gt;
+<span style=color:#a6e22e>grassetto</span>();
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>Risultato:
+</span><span style=color:#960050;background-color:#1e0010>Testo di prova
+</span><span style=color:#960050;background-color:#1e0010>&lt;b&gt;Testo di prova&lt;/b&gt;
+</span><span style=color:#960050;background-color:#1e0010>Nessuna stringa passata!!!
+</span></code></pre></div><hr><h3 id=xml-and-web-services>XML and Web Services</h3><p>PHP 4, per il trattamento di documenti XML, si appoggia su tre librerie sviluppate da terzi: il parser SAX <a href=http://expat.sourceforge.net/>Expat</a>, il parser DOM <a href=http://www.xmlsoft.org/>libxml</a> e la libreria <a href="http://www.gingerall.com/charlie/ga/xml/p_sab.xml?s=org">Sablotron</a> per le funzioni XSLT (XSL Transformation). Di queste tre solo il parser SAX può essere considerato affidabile al 100%, infatti l&rsquo;estensione XSLT ha sofferto di alcuni problemi di incompatibilità tra le diverse piattaforme mentre il parser DOM è tuttora sperimentale ed è afflitto da diversi bachi.</p><p>L&rsquo;uso di tre distinte librerie ha comportato un notevole dispendio di energie agli sviluppatori di PHP che per la versione 5 hanno deciso di abbandonare Expat e Sablotron rimpiazzandoli con la libreria <strong>libxml</strong> che, come abbiamo detto, era già usata per il parser DOM.</p><p>Questa potrebbe sembrare una scelta quanto meno strana, dati i noti problemi che questa libreria ha arrecato in passato. In realtà a ben vedere questi problemi non erano legati direttamente a libxml quanto piuttosto al suo utilizzo in PHP come parser DOM. Libxml risulta infatti il parser DOM più veloce in circolazione ed inoltre è in grado di soddisfare le più svariate necessità.</p><p>Nonostante il nuovo parser DOM di PHP 5 sia ancora soggetto a sviluppo, le sue funzioni principali possono essere considerate stabili. Da sottolineare la sua capacità di maneggiare, anche se ancora con qualche imperfezione, i documenti HTML.</p><p>Probabilmente però la più importante novità riguardante il trattamento di documenti XML introdotta da PHP 5 è la nuova estensione <strong>SimpleXML</strong>. Si tratta di un parser XML in parte simile al parser DOM poiché costruisce, a partire dagli elementi del documento XML, una struttura dati ad albero ma si differenzia da questo perché questo albero è costituito da tipi di dati nativi di PHP facilitandone così l&rsquo;accesso. L&rsquo;esempio che segue ne è una dimostrazione.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span> 
+$xml_string <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;&lt;?xml version=&#39;1.0&#39; standalone=&#39;yes&#39;?&gt;
+</span><span style=color:#e6db74>&lt;utenti&gt;
+</span><span style=color:#e6db74>   &lt;utente&gt;
+</span><span style=color:#e6db74>       &lt;nome&gt;Mario&lt;/nome&gt;
+</span><span style=color:#e6db74>       &lt;cognome&gt;Rossi&lt;/cognome&gt;
+</span><span style=color:#e6db74>       &lt;telefono type=</span><span style=color:#ae81ff>\&#34;</span><span style=color:#e6db74>casa</span><span style=color:#ae81ff>\&#34;</span><span style=color:#e6db74>&gt;123456789&lt;/telefono&gt;
+</span><span style=color:#e6db74>       &lt;telefono type=</span><span style=color:#ae81ff>\&#34;</span><span style=color:#e6db74>mobile</span><span style=color:#ae81ff>\&#34;</span><span style=color:#e6db74>&gt;987654321&lt;/telefono&gt;
+</span><span style=color:#e6db74>   &lt;/utente&gt;
+</span><span style=color:#e6db74>&lt;/utenti&gt;&#34;</span>;
 
-Risultato:
-Testo di prova
-&lt;b&gt;Testo di prova&lt;/b&gt;
-Nessuna stringa passata!!!
-</code></pre><hr><h3 id=xml-and-web-services>XML and Web Services</h3><p>PHP 4, per il trattamento di documenti XML, si appoggia su tre librerie sviluppate da terzi: il parser SAX <a href=http://expat.sourceforge.net/>Expat</a>, il parser DOM <a href=http://www.xmlsoft.org/>libxml</a> e la libreria <a href="http://www.gingerall.com/charlie/ga/xml/p_sab.xml?s=org">Sablotron</a> per le funzioni XSLT (XSL Transformation). Di queste tre solo il parser SAX può essere considerato affidabile al 100%, infatti l&rsquo;estensione XSLT ha sofferto di alcuni problemi di incompatibilità tra le diverse piattaforme mentre il parser DOM è tuttora sperimentale ed è afflitto da diversi bachi.</p><p>L&rsquo;uso di tre distinte librerie ha comportato un notevole dispendio di energie agli sviluppatori di PHP che per la versione 5 hanno deciso di abbandonare Expat e Sablotron rimpiazzandoli con la libreria <strong>libxml</strong> che, come abbiamo detto, era già usata per il parser DOM.</p><p>Questa potrebbe sembrare una scelta quanto meno strana, dati i noti problemi che questa libreria ha arrecato in passato. In realtà a ben vedere questi problemi non erano legati direttamente a libxml quanto piuttosto al suo utilizzo in PHP come parser DOM. Libxml risulta infatti il parser DOM più veloce in circolazione ed inoltre è in grado di soddisfare le più svariate necessità.</p><p>Nonostante il nuovo parser DOM di PHP 5 sia ancora soggetto a sviluppo, le sue funzioni principali possono essere considerate stabili. Da sottolineare la sua capacità di maneggiare, anche se ancora con qualche imperfezione, i documenti HTML.</p><p>Probabilmente però la più importante novità riguardante il trattamento di documenti XML introdotta da PHP 5 è la nuova estensione <strong>SimpleXML</strong>. Si tratta di un parser XML in parte simile al parser DOM poiché costruisce, a partire dagli elementi del documento XML, una struttura dati ad albero ma si differenzia da questo perché questo albero è costituito da tipi di dati nativi di PHP facilitandone così l&rsquo;accesso. L&rsquo;esempio che segue ne è una dimostrazione.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;?php 
-$xml_string = &quot;&lt;?xml version='1.0' standalone='yes'?&gt;
-&lt;utenti&gt;
-   &lt;utente&gt;
-       &lt;nome&gt;Mario&lt;/nome&gt;
-       &lt;cognome&gt;Rossi&lt;/cognome&gt;
-       &lt;telefono type=\&quot;casa\&quot;&gt;123456789&lt;/telefono&gt;
-       &lt;telefono type=\&quot;mobile\&quot;&gt;987654321&lt;/telefono&gt;
-   &lt;/utente&gt;
-&lt;/utenti&gt;&quot;;
+$xml <span style=color:#f92672>=</span> <span style=color:#a6e22e>simplexml_load_string</span>($xml_string);
+<span style=color:#a6e22e>print_r</span>($xml)
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>Risultato:
+</span><span style=color:#960050;background-color:#1e0010>SimpleXMLElement Object
+</span><span style=color:#960050;background-color:#1e0010>(
+</span><span style=color:#960050;background-color:#1e0010>   [utente] =&gt; SimpleXMLElement Object
+</span><span style=color:#960050;background-color:#1e0010>   (
+</span><span style=color:#960050;background-color:#1e0010>       [nome] =&gt; Mario
+</span><span style=color:#960050;background-color:#1e0010>       [cognome] =&gt; Rossi
+</span><span style=color:#960050;background-color:#1e0010>       [telefono] =&gt; Array
+</span><span style=color:#960050;background-color:#1e0010>       (
+</span><span style=color:#960050;background-color:#1e0010>           [0] =&gt; 123456789
+</span><span style=color:#960050;background-color:#1e0010>           [1] =&gt; 987654321
+</span><span style=color:#960050;background-color:#1e0010>       )
+</span><span style=color:#960050;background-color:#1e0010>   )
+</span><span style=color:#960050;background-color:#1e0010>)
+</span></code></pre></div><p>Nel caso SimpleXML non sia in grado di effettuare particolari operazioni (in realtà anche il semplice esempio precedente mostra alcune limitazioni di SimpleXML) è sempre possibile importare il tutto in un albero DOM attraverso dom_import_simplexml() e, una volta effettuate le operazioni, reimportarlo con simplexml_import_dom()</p><p>PHP 5 introduce inoltre una nuova estensione per il supporto di <strong>SOAP</strong> scritta in C che, rispetto alle precedenti soluzioni utilizzate da PHP 4 quasi tutte scritte in PHP, assicura maggiori prestazioni. Questa estensione SOAP implementa la maggior parte del protocollo SOAP 1.2 ed è tuttora in fase di intenso sviluppo ma ha tutti i presupposti per poter gareggiare in un prossimo futuro con le implementazioni JAVA e .NET.</p><hr><h3 id=mysqli>MySQLi</h3><p>MySQLi è la rinnovata estensione per la connessione a MySQL che permette di accedere alle nuove funzionalità introdotte da MySQL 4.1 e successivi. Diverse le nuove features tra cui:</p><ul><li>supporto al più efficiente protocollo binario introdotto con MySQL 4.1</li><li>prepared statements</li><li>bounding parameter</li><li>supporto alla replicazione</li></ul><p>MySQLi inoltre permette, accanto ad un tradizionale paradigma procedurale, un approccio ad oggetti all&rsquo;interazione con MySQL, come mostrato nel seguente esempio.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span> 
+<span style=color:#75715e>/* Connessione al server MySQL */</span>
+$mysqli <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>mysqli</span>(<span style=color:#e6db74>&#39;host&#39;</span>, <span style=color:#e6db74>&#39;nome_utente&#39;</span>, <span style=color:#e6db74>&#39;password&#39;</span>, <span style=color:#e6db74>&#39;nome_db&#39;</span>);
 
-$xml = simplexml_load_string($xml_string);
-print_r($xml)
-?&gt;
-
-Risultato:
-SimpleXMLElement Object
-(
-   [utente] =&gt; SimpleXMLElement Object
-   (
-       [nome] =&gt; Mario
-       [cognome] =&gt; Rossi
-       [telefono] =&gt; Array
-       (
-           [0] =&gt; 123456789
-           [1] =&gt; 987654321
-       )
-   )
-)
-</code></pre><p>Nel caso SimpleXML non sia in grado di effettuare particolari operazioni (in realtà anche il semplice esempio precedente mostra alcune limitazioni di SimpleXML) è sempre possibile importare il tutto in un albero DOM attraverso dom_import_simplexml() e, una volta effettuate le operazioni, reimportarlo con simplexml_import_dom()</p><p>PHP 5 introduce inoltre una nuova estensione per il supporto di <strong>SOAP</strong> scritta in C che, rispetto alle precedenti soluzioni utilizzate da PHP 4 quasi tutte scritte in PHP, assicura maggiori prestazioni. Questa estensione SOAP implementa la maggior parte del protocollo SOAP 1.2 ed è tuttora in fase di intenso sviluppo ma ha tutti i presupposti per poter gareggiare in un prossimo futuro con le implementazioni JAVA e .NET.</p><hr><h3 id=mysqli>MySQLi</h3><p>MySQLi è la rinnovata estensione per la connessione a MySQL che permette di accedere alle nuove funzionalità introdotte da MySQL 4.1 e successivi. Diverse le nuove features tra cui:</p><ul><li>supporto al più efficiente protocollo binario introdotto con MySQL 4.1</li><li>prepared statements</li><li>bounding parameter</li><li>supporto alla replicazione</li></ul><p>MySQLi inoltre permette, accanto ad un tradizionale paradigma procedurale, un approccio ad oggetti all&rsquo;interazione con MySQL, come mostrato nel seguente esempio.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;?php 
-/* Connessione al server MySQL */
-$mysqli = new mysqli('host', 'nome_utente', 'password', 'nome_db');
-
-if (mysqli_connect_errno()) {
-   printf(&quot;Non riesco a connettermi a MySQL. Errore: %sn&quot;, mysqli_connect_error());
-   exit;
+<span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>mysqli_connect_errno</span>()) {
+   <span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;Non riesco a connettermi a MySQL. Errore: %sn&#34;</span>, <span style=color:#a6e22e>mysqli_connect_error</span>());
+   <span style=color:#66d9ef>exit</span>;
 }
 
-/* Invio una query al server */
-if ($result = $mysqli-&gt;query('SELECT campo FROM tabella')) {
+<span style=color:#75715e>/* Invio una query al server */</span>
+<span style=color:#66d9ef>if</span> ($result <span style=color:#f92672>=</span> $mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>query</span>(<span style=color:#e6db74>&#39;SELECT campo FROM tabella&#39;</span>)) {
 
-   /* Effettuo la fetch dei risultati */
-   while( $row = $result-&gt;fetch_assoc() ){
-       echo $row['campo'];
+   <span style=color:#75715e>/* Effettuo la fetch dei risultati */</span>
+   <span style=color:#66d9ef>while</span>( $row <span style=color:#f92672>=</span> $result<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>fetch_assoc</span>() ){
+       <span style=color:#66d9ef>echo</span> $row[<span style=color:#e6db74>&#39;campo&#39;</span>];
    }
 
-   /* Cancello il result set e libero la memoria */
-   $result-&gt;close();
+   <span style=color:#75715e>/* Cancello il result set e libero la memoria */</span>
+   $result<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>close</span>();
 }
 
-/* Chiudo la connessione */
-$mysqli-&gt;close();
-?&gt;
-</code></pre><p>MySQLi non supporta, diversamente dalla precedente versione, la connessione automatica e non usa il link di default al database se viene usato l&rsquo;approccio procedurale.</p><h3 id=sqlite>SQLite</h3><p>Anche se il supporto a <a href=http://www.sqlite.org/>SQLite</a> è stato già introdotto nelle ultime versioni di PHP 4.3.x, PHP 5 ne trae maggior beneficio grazie al supporto degli iteratori. SQLite è un database embedded, ovvero una libreria SQL che non necessita di un database server per il suo funzionamento e, contrariamente a quanto il nome suggerisce, è ricca di funzionalità avanzate come le viste, le transazioni e le sub-query. Nel seguente esempio viene mostrato come sia semplice con SQLite creare un database, inserire e recuperare dati da esso.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;?php 
-if ($db = sqlite_open('sqlite_db', 0666, $sqliteerror))
+<span style=color:#75715e>/* Chiudo la connessione */</span>
+$mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>close</span>();
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>MySQLi non supporta, diversamente dalla precedente versione, la connessione automatica e non usa il link di default al database se viene usato l&rsquo;approccio procedurale.</p><h3 id=sqlite>SQLite</h3><p>Anche se il supporto a <a href=http://www.sqlite.org/>SQLite</a> è stato già introdotto nelle ultime versioni di PHP 4.3.x, PHP 5 ne trae maggior beneficio grazie al supporto degli iteratori. SQLite è un database embedded, ovvero una libreria SQL che non necessita di un database server per il suo funzionamento e, contrariamente a quanto il nome suggerisce, è ricca di funzionalità avanzate come le viste, le transazioni e le sub-query. Nel seguente esempio viene mostrato come sia semplice con SQLite creare un database, inserire e recuperare dati da esso.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span> 
+<span style=color:#66d9ef>if</span> ($db <span style=color:#f92672>=</span> <span style=color:#a6e22e>sqlite_open</span>(<span style=color:#e6db74>&#39;sqlite_db&#39;</span>, <span style=color:#ae81ff>0666</span>, $sqliteerror))
 {
-   sqlite_query($db, 'CREATE TABLE tabella (colonna varchar(15))');
-   sqlite_query($db, &quot;INSERT INTO tabella VALUES ('valore')&quot;);
-   $result = sqlite_query($db, 'SELECT colonna FROM tabella');
-   var_dump(sqlite_fetch_array($result));
+   <span style=color:#a6e22e>sqlite_query</span>($db, <span style=color:#e6db74>&#39;CREATE TABLE tabella (colonna varchar(15))&#39;</span>);
+   <span style=color:#a6e22e>sqlite_query</span>($db, <span style=color:#e6db74>&#34;INSERT INTO tabella VALUES (&#39;valore&#39;)&#34;</span>);
+   $result <span style=color:#f92672>=</span> <span style=color:#a6e22e>sqlite_query</span>($db, <span style=color:#e6db74>&#39;SELECT colonna FROM tabella&#39;</span>);
+   <span style=color:#a6e22e>var_dump</span>(<span style=color:#a6e22e>sqlite_fetch_array</span>($result));
 }
-else
+<span style=color:#66d9ef>else</span>
 {
-   die($sqliteerror);
+   <span style=color:#66d9ef>die</span>($sqliteerror);
 }
-?&gt;
-
-Risultato:
-array(2) {
-   [0]=&gt;
-   string(6) &quot;valore&quot;
-   [&quot;colonna&quot;]=&gt;
-   string(6) &quot;valore&quot;
-}
-</code></pre><h3 id=tidy>Tidy</h3><p>PHP 5 dispone anche dell&rsquo;estensione <a href=http://tidy.sf.net/>Tidy</a> che permette di effettuare diverse operazioni su documenti HTLM come il parsing, la diagnosi, la pulizia (mostrata nel seguente esempio) e la riparazione. Tidy supporta le eccezioni e può essere usata con un approccio sia procedurale che ad oggetti.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;?php 
-$tidy = tidy_parse_string(&quot;&lt;B&gt;Questa&lt;/I&gt; è una &lt;U&gt;prova&lt;/B&gt;&quot;);
-tidy_clean_repair($tidy);
-echo $tidy;
-?&gt;
-
-Risultato:
-
-
-&lt;head&gt;
-&lt;title&gt;&lt;/title&gt;
-&lt;/head&gt;
-
-&lt;b&gt;Questa&lt;/b&gt; è una &lt;u&gt;prova&lt;/u&gt; 
-</code></pre><hr><h3 id=altre-novità-di-php-5>Altre novità di PHP 5</h3><p>L&rsquo;avvento dello Zend Engie II porta con se diversi benefici, molti dei quali trasparenti allo sviluppatore ma non per questo meno importanti. Tra questi una rinnovata e più performante gestione della memoria e un miglior supporto per gli ambienti multi-threaded.</p><p>Notevolmente migliorata è anche l&rsquo;interazione con i diversi componenti di Java, COM/DCOM e .NET che con PHP 5 vengono visti come oggetti nativi. Introdotta anche una estensione che permette di chiamare script Perl e usare oggetti e funzionalità native di questo linguaggio direttamente da PHP.</p><p>Altra novità di PHP 5 è il supporto alla <a href=http://it.php.net/manual/it/language.oop5.reflection.php>riflessione</a> (o introspezione) ovvero la capacità di ottenere informazioni sullo script durante la sua esecuzione in modo da poter effettuare un reverse-engineering di classi, metodi, interfacce ed estensioni.</p><p>Nonostante sia evidente lo sforzo fatto per garantire la retrocompatibilità di PHP 5, questa release apporta alcune modifiche che potrebbero pregiudicare il funzionamento di script realizzati con la precedente versione. Oltre al già citato passaggio degli oggetti per indirizzo e non più per valore, PHP 5 presenta alcune incompatibilità. Maggiori informazioni a tal proposito si possono trovare nella <a href=http://www.php.net/manual/en/migration5.incompatible.php>documentazione ufficiale</a>.</p></div><footer class=post__footer><div class="post__tags tags clearfix"><svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5.0 11V3C0 1.5.8.8.8.8S1.5.0 3 0h8c1.5.0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 100-6 3 3 0 000 6z"/></svg><ul class=tags__list><li class=tags__item><a class="tags__link btn" href=/tags/database/ rel=tag>database</a></li><li class=tags__item><a class="tags__link btn" href=/tags/mysql/ rel=tag>MySQL</a></li><li class=tags__item><a class="tags__link btn" href=/tags/java/ rel=tag>Java</a></li><li class=tags__item><a class="tags__link btn" href=/tags/dom/ rel=tag>DOM</a></li><li class=tags__item><a class="tags__link btn" href=/tags/exception/ rel=tag>exception</a></li><li class=tags__item><a class="tags__link btn" href=/tags/mysqli/ rel=tag>mysqli</a></li><li class=tags__item><a class="tags__link btn" href=/tags/simplexml/ rel=tag>SimpleXML</a></li><li class=tags__item><a class="tags__link btn" href=/tags/spl/ rel=tag>SPL</a></li><li class=tags__item><a class="tags__link btn" href=/tags/sql/ rel=tag>SQL</a></li><li class=tags__item><a class="tags__link btn" href=/tags/sqlite/ rel=tag>SQLite</a></li><li class=tags__item><a class="tags__link btn" href=/tags/web-service/ rel=tag>web service</a></li><li class=tags__item><a class="tags__link btn" href=/tags/xml/ rel=tag>XML</a></li><li class=tags__item><a class="tags__link btn" href=/tags/xsl/ rel=tag>XSL</a></li><li class=tags__item><a class="tags__link btn" href=/tags/xslt/ rel=tag>XSLT</a></li></ul></div></footer></article></main><nav class="pager flex"><div class="pager__item pager__item--prev"><a class=pager__link href=/articoli/le-sessioni/ rel=prev><span class=pager__subtitle>«&#8201;Precedente</span><p class=pager__title>Le sessioni</p></a></div><div class="pager__item pager__item--next"><a class=pager__link href=/articoli/guida-allinstallazione-di-phpmyadmin/ rel=next><span class=pager__subtitle>Prossimo&#8201;»</span><p class=pager__title>Guida all'installazione di phpMyAdmin</p></a></div></nav></div></div><footer class=footer><div class="container footer__container flex"><div class=footer__copyright>&copy; 2021 Giovanni Tomasicchio.
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>Risultato:
+</span><span style=color:#960050;background-color:#1e0010>array(2) {
+</span><span style=color:#960050;background-color:#1e0010>   [0]=&gt;
+</span><span style=color:#960050;background-color:#1e0010>   string(6) &#34;valore&#34;
+</span><span style=color:#960050;background-color:#1e0010>   [&#34;colonna&#34;]=&gt;
+</span><span style=color:#960050;background-color:#1e0010>   string(6) &#34;valore&#34;
+</span><span style=color:#960050;background-color:#1e0010>}
+</span></code></pre></div><h3 id=tidy>Tidy</h3><p>PHP 5 dispone anche dell&rsquo;estensione <a href=http://tidy.sf.net/>Tidy</a> che permette di effettuare diverse operazioni su documenti HTLM come il parsing, la diagnosi, la pulizia (mostrata nel seguente esempio) e la riparazione. Tidy supporta le eccezioni e può essere usata con un approccio sia procedurale che ad oggetti.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span> 
+$tidy <span style=color:#f92672>=</span> <span style=color:#a6e22e>tidy_parse_string</span>(<span style=color:#e6db74>&#34;&lt;B&gt;Questa&lt;/I&gt; è una &lt;U&gt;prova&lt;/B&gt;&#34;</span>);
+<span style=color:#a6e22e>tidy_clean_repair</span>($tidy);
+<span style=color:#66d9ef>echo</span> $tidy;
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>Risultato:
+</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>&lt;head&gt;
+</span><span style=color:#960050;background-color:#1e0010>&lt;title&gt;&lt;/title&gt;
+</span><span style=color:#960050;background-color:#1e0010>&lt;/head&gt;
+</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>&lt;b&gt;Questa&lt;/b&gt; è una &lt;u&gt;prova&lt;/u&gt; 
+</span></code></pre></div><hr><h3 id=altre-novità-di-php-5>Altre novità di PHP 5</h3><p>L&rsquo;avvento dello Zend Engie II porta con se diversi benefici, molti dei quali trasparenti allo sviluppatore ma non per questo meno importanti. Tra questi una rinnovata e più performante gestione della memoria e un miglior supporto per gli ambienti multi-threaded.</p><p>Notevolmente migliorata è anche l&rsquo;interazione con i diversi componenti di Java, COM/DCOM e .NET che con PHP 5 vengono visti come oggetti nativi. Introdotta anche una estensione che permette di chiamare script Perl e usare oggetti e funzionalità native di questo linguaggio direttamente da PHP.</p><p>Altra novità di PHP 5 è il supporto alla <a href=http://it.php.net/manual/it/language.oop5.reflection.php>riflessione</a> (o introspezione) ovvero la capacità di ottenere informazioni sullo script durante la sua esecuzione in modo da poter effettuare un reverse-engineering di classi, metodi, interfacce ed estensioni.</p><p>Nonostante sia evidente lo sforzo fatto per garantire la retrocompatibilità di PHP 5, questa release apporta alcune modifiche che potrebbero pregiudicare il funzionamento di script realizzati con la precedente versione. Oltre al già citato passaggio degli oggetti per indirizzo e non più per valore, PHP 5 presenta alcune incompatibilità. Maggiori informazioni a tal proposito si possono trovare nella <a href=http://www.php.net/manual/en/migration5.incompatible.php>documentazione ufficiale</a>.</p></div><footer class=post__footer><div class="post__tags tags clearfix"><svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5.0 11V3C0 1.5.8.8.8.8S1.5.0 3 0h8c1.5.0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 100-6 3 3 0 000 6z"/></svg><ul class=tags__list><li class=tags__item><a class="tags__link btn" href=/tags/database/ rel=tag>database</a></li><li class=tags__item><a class="tags__link btn" href=/tags/mysql/ rel=tag>MySQL</a></li><li class=tags__item><a class="tags__link btn" href=/tags/java/ rel=tag>Java</a></li><li class=tags__item><a class="tags__link btn" href=/tags/dom/ rel=tag>DOM</a></li><li class=tags__item><a class="tags__link btn" href=/tags/exception/ rel=tag>exception</a></li><li class=tags__item><a class="tags__link btn" href=/tags/mysqli/ rel=tag>mysqli</a></li><li class=tags__item><a class="tags__link btn" href=/tags/simplexml/ rel=tag>SimpleXML</a></li><li class=tags__item><a class="tags__link btn" href=/tags/spl/ rel=tag>SPL</a></li><li class=tags__item><a class="tags__link btn" href=/tags/sql/ rel=tag>SQL</a></li><li class=tags__item><a class="tags__link btn" href=/tags/sqlite/ rel=tag>SQLite</a></li><li class=tags__item><a class="tags__link btn" href=/tags/web-service/ rel=tag>web service</a></li><li class=tags__item><a class="tags__link btn" href=/tags/xml/ rel=tag>XML</a></li><li class=tags__item><a class="tags__link btn" href=/tags/xsl/ rel=tag>XSL</a></li><li class=tags__item><a class="tags__link btn" href=/tags/xslt/ rel=tag>XSLT</a></li></ul></div></footer></article></main><nav class="pager flex"><div class="pager__item pager__item--prev"><a class=pager__link href=/articoli/le-sessioni/ rel=prev><span class=pager__subtitle>«&#8201;Precedente</span><p class=pager__title>Le sessioni</p></a></div><div class="pager__item pager__item--next"><a class=pager__link href=/articoli/guida-allinstallazione-di-phpmyadmin/ rel=next><span class=pager__subtitle>Prossimo&#8201;»</span><p class=pager__title>Guida all'installazione di phpMyAdmin</p></a></div></nav></div></div><footer class=footer><div class="container footer__container flex"><div class=footer__copyright>&copy; 2021 Giovanni Tomasicchio.
 <span class=footer__copyright-credits>Generato con <a href=https://gohugo.io/ rel="nofollow noopener" target=_blank>Hugo</a> e il tema <a href=https://github.com/Vimux/Mainroad/ rel="nofollow noopener" target=_blank>Mainroad</a>.</span></div></div></footer></div><script async defer src=/js/menu.js></script></body></html>

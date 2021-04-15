@@ -1,64 +1,61 @@
-<!doctype html><html class=no-js lang=it><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>Cronometriamo i nostri script - Giovanni Tomasicchio</title><script>(function(a,b){a[b]=a[b].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content="Misurare il tempo di esecuzione di uno script PHP"><meta property="og:title" content="Cronometriamo i nostri script"><meta property="og:description" content="Misurare il tempo di esecuzione di uno script PHP"><meta property="og:type" content="article"><meta property="og:url" content="https://giovannitomasicchio.github.io/articoli/cronometriamo-i-nostri-script/"><meta property="article:section" content="articoli"><meta property="article:published_time" content="2005-08-21T12:32:55+00:00"><meta property="article:modified_time" content="2005-08-21T12:32:55+00:00"><meta itemprop=name content="Cronometriamo i nostri script"><meta itemprop=description content="Misurare il tempo di esecuzione di uno script PHP"><meta itemprop=datePublished content="2005-08-21T12:32:55+00:00"><meta itemprop=dateModified content="2005-08-21T12:32:55+00:00"><meta itemprop=wordCount content="492"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Cronometriamo i nostri script"><meta name=twitter:description content="Misurare il tempo di esecuzione di uno script PHP"><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic|Kaushan+Script:regular"><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-525H86QENV"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-525H86QENV',{anonymize_ip:!1})}</script></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class=logo><a class=logo__link href=/ title="Giovanni Tomasicchio" rel=home><div class="logo__item logo__text"><div class=logo__title>Giovanni Tomasicchio</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
-<span class=menu__btn-title tabindex=-1>Menu</span></button><ul class=menu__list><li class=menu__item><a class=menu__link href=/><span class=menu__text>Home</span></a></li><li class=menu__item><a class=menu__link href=/articoli/><span class=menu__text>Articoli PHP</span></a></li><li class=menu__item><a class=menu__link href=/corsi/><span class=menu__text>Corsi</span></a></li></ul></nav></div></header><div class="wrapper flex"><div class=primary><main class=main role=main><article class=post><header class=post__header><h1 class=post__title>Cronometriamo i nostri script</h1><div class="post__meta meta"><div class="meta__item-datetime meta__item"><svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2005-08-21T12:32:55Z>21 August 2005</time></div></div></header><div class="content post__content clearfix"><p>Sicuramente vi sarà capitato di vedere in un sito, magari in fondo ad una pagina, l&rsquo;indicazione del tempo di esecuzione dello script che l&rsquo;ha generata. Questa informazione, mostrata a volte solo per motivi estetici, può invece essere un buon indicatore dello stato di salute del nostro server o della pesantezza dei nostri script. Cronometrare uno script è molto semplice, vediamo come fare.</p><p>Tutta la procedura si basa sulla funzione <a href=http://it2.php.net/microtime>microtime()</a> che ci fornisce l&rsquo;istante corrente (UNIX timestamp) con una precisione al microsecondo. Purtroppo però microtime restituisce tale istante sotto forma di una stringa del tipo &ldquo;microsecondi secondi&rdquo;, che quindi non può essere usata immediatamente per effettuare calcoli.</p><p>Conviene quindi realizzare una funzione che estragga i secondi ed i microsecondi dall&rsquo;output di microtime e li restituisca sotto forma di numero con la virgola (float). Si potrebbe procedere in questo modo:</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-function microtime_float()
+<!doctype html><html class=no-js lang=it><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>Cronometriamo i nostri script - Giovanni Tomasicchio</title><script>(function(a,b){a[b]=a[b].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content="Misurare il tempo di esecuzione di uno script PHP"><meta property="og:title" content="Cronometriamo i nostri script"><meta property="og:description" content="Misurare il tempo di esecuzione di uno script PHP"><meta property="og:type" content="article"><meta property="og:url" content="https://giovannitomasicchio.github.io/articoli/cronometriamo-i-nostri-script/"><meta property="article:section" content="articoli"><meta property="article:published_time" content="2005-08-21T12:32:55+00:00"><meta property="article:modified_time" content="2005-08-21T12:32:55+00:00"><meta itemprop=name content="Cronometriamo i nostri script"><meta itemprop=description content="Misurare il tempo di esecuzione di uno script PHP"><meta itemprop=datePublished content="2005-08-21T12:32:55+00:00"><meta itemprop=dateModified content="2005-08-21T12:32:55+00:00"><meta itemprop=wordCount content="479"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Cronometriamo i nostri script"><meta name=twitter:description content="Misurare il tempo di esecuzione di uno script PHP"><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic|Kaushan+Script:regular"><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-525H86QENV"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-525H86QENV',{anonymize_ip:!1})}</script></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class=logo><a class=logo__link href=/ title="Giovanni Tomasicchio" rel=home><div class="logo__item logo__text"><div class=logo__title>Giovanni Tomasicchio</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
+<span class=menu__btn-title tabindex=-1>Menu</span></button><ul class=menu__list><li class=menu__item><a class=menu__link href=/><span class=menu__text>Home</span></a></li><li class=menu__item><a class=menu__link href=/articoli/><span class=menu__text>Articoli PHP</span></a></li><li class=menu__item><a class=menu__link href=/corsi/><span class=menu__text>Corsi</span></a></li></ul></nav></div></header><div class="wrapper flex"><div class=primary><main class=main role=main><article class=post><header class=post__header><h1 class=post__title>Cronometriamo i nostri script</h1><div class="post__meta meta"><div class="meta__item-datetime meta__item"><svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2005-08-21T12:32:55Z>21 August 2005</time></div></div></header><div class="content post__content clearfix"><p>Sicuramente vi sarà capitato di vedere in un sito, magari in fondo ad una pagina, l&rsquo;indicazione del tempo di esecuzione dello script che l&rsquo;ha generata. Questa informazione, mostrata a volte solo per motivi estetici, può invece essere un buon indicatore dello stato di salute del nostro server o della pesantezza dei nostri script. Cronometrare uno script è molto semplice, vediamo come fare.</p><p>Tutta la procedura si basa sulla funzione <a href=http://it2.php.net/microtime>microtime()</a> che ci fornisce l&rsquo;istante corrente (UNIX timestamp) con una precisione al microsecondo. Purtroppo però microtime restituisce tale istante sotto forma di una stringa del tipo &ldquo;microsecondi secondi&rdquo;, che quindi non può essere usata immediatamente per effettuare calcoli.</p><p>Conviene quindi realizzare una funzione che estragga i secondi ed i microsecondi dall&rsquo;output di microtime e li restituisca sotto forma di numero con la virgola (float). Si potrebbe procedere in questo modo:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>microtime_float</span>()
 {
-   list($usec, $sec) = explode(&quot; &quot;, microtime());
-   return ((float)$usec + (float)$sec);
+   <span style=color:#66d9ef>list</span>($usec, $sec) <span style=color:#f92672>=</span> <span style=color:#a6e22e>explode</span>(<span style=color:#e6db74>&#34; &#34;</span>, <span style=color:#a6e22e>microtime</span>());
+   <span style=color:#66d9ef>return</span> ((<span style=color:#a6e22e>float</span>)$usec <span style=color:#f92672>+</span> (<span style=color:#a6e22e>float</span>)$sec);
 }
-</code></pre><p>Risolto questo problema, per calcolare il tempo di esecuzione non ci resta che memorizzare l&rsquo;istante di inizio e fine dello script e farne la differenza. Ecco un esempio:</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;?php
-// restituisce l'istante corrente
-function microtime_float()
+</code></pre></div><p>Risolto questo problema, per calcolare il tempo di esecuzione non ci resta che memorizzare l&rsquo;istante di inizio e fine dello script e farne la differenza. Ecco un esempio:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#75715e>// restituisce l&#39;istante corrente
+</span><span style=color:#75715e></span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>microtime_float</span>()
 {
-   list($usec, $sec) = explode(&quot; &quot;, microtime());
-   return ((float)$usec + (float)$sec);
+   <span style=color:#66d9ef>list</span>($usec, $sec) <span style=color:#f92672>=</span> <span style=color:#a6e22e>explode</span>(<span style=color:#e6db74>&#34; &#34;</span>, <span style=color:#a6e22e>microtime</span>());
+   <span style=color:#66d9ef>return</span> ((<span style=color:#a6e22e>float</span>)$usec <span style=color:#f92672>+</span> (<span style=color:#a6e22e>float</span>)$sec);
 }
 
-// memorizzo l'istante di inizio dello script
-$inizio = microtime_float();
+<span style=color:#75715e>// memorizzo l&#39;istante di inizio dello script
+</span><span style=color:#75715e></span>$inizio <span style=color:#f92672>=</span> <span style=color:#a6e22e>microtime_float</span>();
 
-// -----------------------------------
-// inizia lo script vero e proprio ...
-// ... una pausa di un secondo
-sleep(1);
-// fine dello script da cronometrare
-// -----------------------------------
+<span style=color:#75715e>// -----------------------------------
+</span><span style=color:#75715e>// inizia lo script vero e proprio ...
+</span><span style=color:#75715e>// ... una pausa di un secondo
+</span><span style=color:#75715e></span><span style=color:#a6e22e>sleep</span>(<span style=color:#ae81ff>1</span>);
+<span style=color:#75715e>// fine dello script da cronometrare
+</span><span style=color:#75715e>// -----------------------------------
+</span><span style=color:#75715e></span>
+<span style=color:#75715e>// memorizzo l&#39;istante di fine dello script
+</span><span style=color:#75715e></span>$fine <span style=color:#f92672>=</span> <span style=color:#a6e22e>microtime_float</span>();
 
-// memorizzo l'istante di fine dello script
-$fine = microtime_float();
+<span style=color:#75715e>// il tempo impiegato dallo script si calcola come
+</span><span style=color:#75715e>// differenza dell&#39;istante di fine meno quello di inizio
+</span><span style=color:#75715e></span>$tempo_impiegato <span style=color:#f92672>=</span> $fine <span style=color:#f92672>-</span> $inizio;
 
-// il tempo impiegato dallo script si calcola come
-// differenza dell'istante di fine meno quello di inizio
-$tempo_impiegato = $fine - $inizio;
+<span style=color:#75715e>// formatto il $tempo_impiegato
+</span><span style=color:#75715e></span>$tempo <span style=color:#f92672>=</span> <span style=color:#a6e22e>number_format</span>($tempo_impiegato,<span style=color:#ae81ff>5</span>,<span style=color:#e6db74>&#39;,&#39;</span>,<span style=color:#e6db74>&#39;.&#39;</span>);
 
-// formatto il $tempo_impiegato
-$tempo = number_format($tempo_impiegato,5,',','.');
+<span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#34;Tempo impiegato dallo script: </span><span style=color:#e6db74>$tempo</span><span style=color:#e6db74> secondi&#34;</span>;
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>Con la funzione <a href=http://it2.php.net/manual/it/function.number-format.php>number_format</a> abbiamo impostato il numero dei decimali da mostrare ed il carattere (la virgola) per separarli dalle unità.</p><p>Con PHP 5 l&rsquo;output della funzione microtime è stato rivisto ed ora, passando semplicemente come parametro il valore true, restituisce l&rsquo;istante corrente come un numero decimale e non come una stringa. In questo modo la funzione mostrata precedentemente non serve più. Vediamo quindi come cronometrare uno script in PHP 5.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#75715e>// memorizzo l&#39;istante di inizio dello script
+</span><span style=color:#75715e></span>$inizio <span style=color:#f92672>=</span> <span style=color:#a6e22e>microtime</span>(<span style=color:#66d9ef>true</span>);
 
-echo &quot;Tempo impiegato dallo script: $tempo secondi&quot;;
-?&gt;
-</code></pre><p>Con la funzione <a href=http://it2.php.net/manual/it/function.number-format.php>number_format</a> abbiamo impostato il numero dei decimali da mostrare ed il carattere (la virgola) per separarli dalle unità.</p><p>Con PHP 5 l&rsquo;output della funzione microtime è stato rivisto ed ora, passando semplicemente come parametro il valore true, restituisce l&rsquo;istante corrente come un numero decimale e non come una stringa. In questo modo la funzione mostrata precedentemente non serve più. Vediamo quindi come cronometrare uno script in PHP 5.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;?php
-// memorizzo l'istante di inizio dello script
-$inizio = microtime(true);
+<span style=color:#75715e>// -----------------------------------
+</span><span style=color:#75715e>// inizia lo script vero e proprio ...
+</span><span style=color:#75715e>// ... una pausa di un secondo
+</span><span style=color:#75715e></span><span style=color:#a6e22e>sleep</span>(<span style=color:#ae81ff>1</span>);
+<span style=color:#75715e>// fine dello script da cronometrare
+</span><span style=color:#75715e>// -----------------------------------
+</span><span style=color:#75715e></span>
+<span style=color:#75715e>// memorizzo l&#39;istante di fine dello script
+</span><span style=color:#75715e></span>$fine <span style=color:#f92672>=</span> <span style=color:#a6e22e>microtime</span>(<span style=color:#66d9ef>true</span>);
 
-// -----------------------------------
-// inizia lo script vero e proprio ...
-// ... una pausa di un secondo
-sleep(1);
-// fine dello script da cronometrare
-// -----------------------------------
+<span style=color:#75715e>// il tempo impiegato dallo script si calcola come
+</span><span style=color:#75715e>// differenza dell&#39;istante di fine meno quello di inizio
+</span><span style=color:#75715e></span>$tempo_impiegato <span style=color:#f92672>=</span> $fine <span style=color:#f92672>-</span> $inizio;
 
-// memorizzo l'istante di fine dello script
-$fine = microtime(true);
+<span style=color:#75715e>// formatto il $tempo_impiegato
+</span><span style=color:#75715e></span>$tempo <span style=color:#f92672>=</span> <span style=color:#a6e22e>number_format</span>($tempo_impiegato,<span style=color:#ae81ff>5</span>,<span style=color:#e6db74>&#39;,&#39;</span>,<span style=color:#e6db74>&#39;.&#39;</span>);
 
-// il tempo impiegato dallo script si calcola come
-// differenza dell'istante di fine meno quello di inizio
-$tempo_impiegato = $fine - $inizio;
-
-// formatto il $tempo_impiegato
-$tempo = number_format($tempo_impiegato,5,',','.');
-
-echo &quot;Tempo impiegato dallo script: $tempo secondi&quot;;
-?&gt;
-</code></pre><p>Utilizzando questo approccio è possibile calcolare anche degli intertempi, cioè i tempi di esecuzione di singole parti dei nostri script. Ad esempio potremmo calcolare il tempo necessario all&rsquo;esecuzione delle query, per confrontarlo con il tempo totale o per ottimizzare le query più complesse.</p></div></article></main><nav class="pager flex"><div class="pager__item pager__item--prev"><a class=pager__link href=/articoli/ajax-in-pratica/ rel=prev><span class=pager__subtitle>«&#8201;Precedente</span><p class=pager__title>AJAX in pratica</p></a></div><div class="pager__item pager__item--next"><a class=pager__link href=/articoli/php-51-note-sullaggiornamento/ rel=next><span class=pager__subtitle>Prossimo&#8201;»</span><p class=pager__title>PHP 5.1 - Note sull'aggiornamento</p></a></div></nav></div></div><footer class=footer><div class="container footer__container flex"><div class=footer__copyright>&copy; 2021 Giovanni Tomasicchio.
+<span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#34;Tempo impiegato dallo script: </span><span style=color:#e6db74>$tempo</span><span style=color:#e6db74> secondi&#34;</span>;
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>Utilizzando questo approccio è possibile calcolare anche degli intertempi, cioè i tempi di esecuzione di singole parti dei nostri script. Ad esempio potremmo calcolare il tempo necessario all&rsquo;esecuzione delle query, per confrontarlo con il tempo totale o per ottimizzare le query più complesse.</p></div></article></main><nav class="pager flex"><div class="pager__item pager__item--prev"><a class=pager__link href=/articoli/ajax-in-pratica/ rel=prev><span class=pager__subtitle>«&#8201;Precedente</span><p class=pager__title>AJAX in pratica</p></a></div><div class="pager__item pager__item--next"><a class=pager__link href=/articoli/php-51-note-sullaggiornamento/ rel=next><span class=pager__subtitle>Prossimo&#8201;»</span><p class=pager__title>PHP 5.1 - Note sull'aggiornamento</p></a></div></nav></div></div><footer class=footer><div class="container footer__container flex"><div class=footer__copyright>&copy; 2021 Giovanni Tomasicchio.
 <span class=footer__copyright-credits>Generato con <a href=https://gohugo.io/ rel="nofollow noopener" target=_blank>Hugo</a> e il tema <a href=https://github.com/Vimux/Mainroad/ rel="nofollow noopener" target=_blank>Mainroad</a>.</span></div></div></footer></div><script async defer src=/js/menu.js></script></body></html>

@@ -1,274 +1,264 @@
-<!doctype html><html class=no-js lang=it><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>L'estensione mysqli - II - Giovanni Tomasicchio</title><script>(function(a,b){a[b]=a[b].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content="Utilizzare l'estenzione mysqli di PHP."><meta property="og:title" content="L'estensione mysqli - II"><meta property="og:description" content="Utilizzare l'estenzione mysqli di PHP."><meta property="og:type" content="article"><meta property="og:url" content="https://giovannitomasicchio.github.io/articoli/lestensione-mysqli-ii/"><meta property="article:section" content="articoli"><meta property="article:published_time" content="2005-11-28T11:54:08+00:00"><meta property="article:modified_time" content="2005-11-28T11:54:08+00:00"><meta itemprop=name content="L'estensione mysqli - II"><meta itemprop=description content="Utilizzare l'estenzione mysqli di PHP."><meta itemprop=datePublished content="2005-11-28T11:54:08+00:00"><meta itemprop=dateModified content="2005-11-28T11:54:08+00:00"><meta itemprop=wordCount content="3064"><meta itemprop=keywords content="database,MySQL,sicurezza,BLOB,debug,mysqli,"><meta name=twitter:card content="summary"><meta name=twitter:title content="L'estensione mysqli - II"><meta name=twitter:description content="Utilizzare l'estenzione mysqli di PHP."><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic|Kaushan+Script:regular"><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-525H86QENV"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-525H86QENV',{anonymize_ip:!1})}</script></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class=logo><a class=logo__link href=/ title="Giovanni Tomasicchio" rel=home><div class="logo__item logo__text"><div class=logo__title>Giovanni Tomasicchio</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
-<span class=menu__btn-title tabindex=-1>Menu</span></button><ul class=menu__list><li class=menu__item><a class=menu__link href=/><span class=menu__text>Home</span></a></li><li class=menu__item><a class=menu__link href=/articoli/><span class=menu__text>Articoli PHP</span></a></li><li class=menu__item><a class=menu__link href=/corsi/><span class=menu__text>Corsi</span></a></li></ul></nav></div></header><div class="wrapper flex"><div class=primary><main class=main role=main><article class=post><header class=post__header><h1 class=post__title>L'estensione mysqli - II</h1><div class="post__meta meta"><div class="meta__item-datetime meta__item"><svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2005-11-28T11:54:08Z>28 November 2005</time></div></div></header><div class="content post__content clearfix"><p>In questa seconda parte riprenderemo alcune tecniche già esposte per approfondire diversi aspetti, in particolare vedremo come inviare a MySQL alcune opzioni per la connessione, analizzeremo inoltre la differenza tra query buffered ed unbuffered e vedremo come inviare query multiple. Infine elencheremo altre funzioni di uso comune.</p><p>Con il <a href=http://www.phpnews.it/articoli/php/estensione-mysqli-i/>primo articolo</a> della serie dedicata all&rsquo;estensione <em>ext/mysqli</em> abbiamo iniziato ad esplorare il nuovo set di funzioni ed oggetti messi a disposizione per l&rsquo;interazione con MySQL 4.1 e versioni successive. Abbiamo visto come effettuare la connessione al database, come inviare una query e come estrarre eventuali risultati, usando sia il classico stile procedurale sia il nuovo approccio ad oggetti.</p><p>In questa seconda parte riprenderemo alcune tecniche già esposte per approfondire diversi aspetti, in particolare vedremo come inviare a MySQL alcune opzioni per la connessione, analizzeremo inoltre la differenza tra query buffered ed unbuffered e vedremo come inviare query multiple. Infine elencheremo altre funzioni di uso comune.</p><p>Gli esempi che proporremo questa volta utilizzeranno solo l&rsquo;approccio orientato agli oggetti offerto da <em>ext/mysqli</em>, sia perché questo risulta particolarmente diverso dallo stile procedurale della vecchia estensione <em>ext/mysql</em>, sia perché permette agli sviluppatori più esperti di poter estendere le classi per ottenere strutture più complesse.</p><p>Inoltre continueremo a far riferimento alla tabella ed ai dati in essa inseriti nel <a href=http://www.phpnews.it/articoli/php/estensione-mysqli-i/>precedente articolo</a>.</p><hr><h4 id=opzioni-di-connessione>Opzioni di connessione</h4><p>A volte può essere necessario inviare al server MySQL alcune opzioni per la connessione. In tal caso non è possibile istanziare l&rsquo;oggetto <em>mysqli</em> con l&rsquo;operazione <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 119, 0);">new &lt;/span>&lt;span style="color: rgb(0, 0, 187);">mysqli&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(221, 0, 0);">...&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code> poiché questa operazione determina anche l&rsquo;effettiva connessione al server. Per l&rsquo;invio di opzioni che devono essere impostate prima che la connessione sia instaurata deve essere seguito un altro procedimento:</p><ol><li><p>richiamare la funzione <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">mysqli_init&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> che restituisce un oggetto <em>mysqli</em> non ancora connesso al server MySQL</p></li><li><p>usare il metodo <code>&lt;span style="color: rgb(0, 0, 187);">options&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span></code> dell&rsquo;oggetto <em>mysqli</em> per impostare ciascuna opzione di connessione</p></li><li><p>richiamare il metodo <code>&lt;span style="color: rgb(0, 0, 187);">real_connect&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span></code> dell&rsquo;oggetto <em>mysqli</em>, impostando eventualmente ulteriori opzioni, per effettuare la vera connessione a MySQL</p></li></ol><p>Vediamo un esempio tratto dalla documentazione ufficiale:</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;?php 
-/* crea un oggetto connessione non ancora connesso */
-$mysqli = mysqli_init();
+<!doctype html><html class=no-js lang=it><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>L'estensione mysqli - II - Giovanni Tomasicchio</title><script>(function(a,b){a[b]=a[b].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content="Utilizzare l'estenzione mysqli di PHP."><meta property="og:title" content="L'estensione mysqli - II"><meta property="og:description" content="Utilizzare l'estenzione mysqli di PHP."><meta property="og:type" content="article"><meta property="og:url" content="https://giovannitomasicchio.github.io/articoli/lestensione-mysqli-ii/"><meta property="article:section" content="articoli"><meta property="article:published_time" content="2005-11-28T11:54:08+00:00"><meta property="article:modified_time" content="2005-11-28T11:54:08+00:00"><meta itemprop=name content="L'estensione mysqli - II"><meta itemprop=description content="Utilizzare l'estenzione mysqli di PHP."><meta itemprop=datePublished content="2005-11-28T11:54:08+00:00"><meta itemprop=dateModified content="2005-11-28T11:54:08+00:00"><meta itemprop=wordCount content="3023"><meta itemprop=keywords content="database,MySQL,sicurezza,BLOB,debug,mysqli,"><meta name=twitter:card content="summary"><meta name=twitter:title content="L'estensione mysqli - II"><meta name=twitter:description content="Utilizzare l'estenzione mysqli di PHP."><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic|Kaushan+Script:regular"><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-525H86QENV"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-525H86QENV',{anonymize_ip:!1})}</script></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class=logo><a class=logo__link href=/ title="Giovanni Tomasicchio" rel=home><div class="logo__item logo__text"><div class=logo__title>Giovanni Tomasicchio</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
+<span class=menu__btn-title tabindex=-1>Menu</span></button><ul class=menu__list><li class=menu__item><a class=menu__link href=/><span class=menu__text>Home</span></a></li><li class=menu__item><a class=menu__link href=/articoli/><span class=menu__text>Articoli PHP</span></a></li><li class=menu__item><a class=menu__link href=/corsi/><span class=menu__text>Corsi</span></a></li></ul></nav></div></header><div class="wrapper flex"><div class=primary><main class=main role=main><article class=post><header class=post__header><h1 class=post__title>L'estensione mysqli - II</h1><div class="post__meta meta"><div class="meta__item-datetime meta__item"><svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2005-11-28T11:54:08Z>28 November 2005</time></div></div></header><div class="content post__content clearfix"><p>In questa seconda parte riprenderemo alcune tecniche già esposte per approfondire diversi aspetti, in particolare vedremo come inviare a MySQL alcune opzioni per la connessione, analizzeremo inoltre la differenza tra query buffered ed unbuffered e vedremo come inviare query multiple. Infine elencheremo altre funzioni di uso comune.</p><p>Con il <a href=http://www.phpnews.it/articoli/php/estensione-mysqli-i/>primo articolo</a> della serie dedicata all&rsquo;estensione <em>ext/mysqli</em> abbiamo iniziato ad esplorare il nuovo set di funzioni ed oggetti messi a disposizione per l&rsquo;interazione con MySQL 4.1 e versioni successive. Abbiamo visto come effettuare la connessione al database, come inviare una query e come estrarre eventuali risultati, usando sia il classico stile procedurale sia il nuovo approccio ad oggetti.</p><p>In questa seconda parte riprenderemo alcune tecniche già esposte per approfondire diversi aspetti, in particolare vedremo come inviare a MySQL alcune opzioni per la connessione, analizzeremo inoltre la differenza tra query buffered ed unbuffered e vedremo come inviare query multiple. Infine elencheremo altre funzioni di uso comune.</p><p>Gli esempi che proporremo questa volta utilizzeranno solo l&rsquo;approccio orientato agli oggetti offerto da <em>ext/mysqli</em>, sia perché questo risulta particolarmente diverso dallo stile procedurale della vecchia estensione <em>ext/mysql</em>, sia perché permette agli sviluppatori più esperti di poter estendere le classi per ottenere strutture più complesse.</p><p>Inoltre continueremo a far riferimento alla tabella ed ai dati in essa inseriti nel <a href=http://www.phpnews.it/articoli/php/estensione-mysqli-i/>precedente articolo</a>.</p><hr><h4 id=opzioni-di-connessione>Opzioni di connessione</h4><p>A volte può essere necessario inviare al server MySQL alcune opzioni per la connessione. In tal caso non è possibile istanziare l&rsquo;oggetto <em>mysqli</em> con l&rsquo;operazione <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 119, 0);">new &lt;/span>&lt;span style="color: rgb(0, 0, 187);">mysqli&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(221, 0, 0);">...&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code> poiché questa operazione determina anche l&rsquo;effettiva connessione al server. Per l&rsquo;invio di opzioni che devono essere impostate prima che la connessione sia instaurata deve essere seguito un altro procedimento:</p><ol><li><p>richiamare la funzione <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">mysqli_init&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> che restituisce un oggetto <em>mysqli</em> non ancora connesso al server MySQL</p></li><li><p>usare il metodo <code>&lt;span style="color: rgb(0, 0, 187);">options&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span></code> dell&rsquo;oggetto <em>mysqli</em> per impostare ciascuna opzione di connessione</p></li><li><p>richiamare il metodo <code>&lt;span style="color: rgb(0, 0, 187);">real_connect&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span></code> dell&rsquo;oggetto <em>mysqli</em>, impostando eventualmente ulteriori opzioni, per effettuare la vera connessione a MySQL</p></li></ol><p>Vediamo un esempio tratto dalla documentazione ufficiale:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span> 
+<span style=color:#75715e>/* crea un oggetto connessione non ancora connesso */</span>
+$mysqli <span style=color:#f92672>=</span> <span style=color:#a6e22e>mysqli_init</span>();
 
-/* imposto le opzioni di connessione */
-$mysqli-&gt;options(MYSQLI_INIT_COMMAND, &quot;SET AUTOCOMMIT=0&quot;);
-$mysqli-&gt;options(MYSQLI_OPT_CONNECT_TIMEOUT, 5);
+<span style=color:#75715e>/* imposto le opzioni di connessione */</span>
+$mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>options</span>(<span style=color:#a6e22e>MYSQLI_INIT_COMMAND</span>, <span style=color:#e6db74>&#34;SET AUTOCOMMIT=0&#34;</span>);
+$mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>options</span>(<span style=color:#a6e22e>MYSQLI_OPT_CONNECT_TIMEOUT</span>, <span style=color:#ae81ff>5</span>);
 
-/* adesso effettuo la vera connessione al server */
-$mysqli-&gt;real_connect('localhost', 'root', 'password_db', 'test');
+<span style=color:#75715e>/* adesso effettuo la vera connessione al server */</span>
+$mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>real_connect</span>(<span style=color:#e6db74>&#39;localhost&#39;</span>, <span style=color:#e6db74>&#39;root&#39;</span>, <span style=color:#e6db74>&#39;password_db&#39;</span>, <span style=color:#e6db74>&#39;test&#39;</span>);
 
-/* controllo l'esito della connessione */
-if (mysqli_connect_errno()) {
-   printf(&quot;Connessione fallita: %s\n&quot;, mysqli_connect_error());
-   exit();
+<span style=color:#75715e>/* controllo l&#39;esito della connessione */</span>
+<span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>mysqli_connect_errno</span>()) {
+   <span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;Connessione fallita: %s</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, <span style=color:#a6e22e>mysqli_connect_error</span>());
+   <span style=color:#66d9ef>exit</span>();
 }
 
-printf (&quot;Connessione: %s\n.&quot;, $mysqli-&gt;host_info);
+<span style=color:#a6e22e>printf</span> (<span style=color:#e6db74>&#34;Connessione: %s</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>.&#34;</span>, $mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>host_info</span>);
 
-$mysqli-&gt;close();
-?&gt; 
-</code></pre><p>Nella seguente tabella sono elencate le diverse opzioni che possono essere impostate attraverso il metodo <code>&lt;span style="color: rgb(0, 0, 187);">options&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span></code>:</p><table><thead><tr><th>Name</th><th>Descrizione</th></tr></thead><tbody><tr><td>MYSQLI_OPT_CONNECT_TIMEOUT</td><td>Imposta la scadenza della connessione espressa in secondi</td></tr><tr><td>MYSQLI_OPT_LOCAL_INFILE</td><td>Abilita e disabilita l&rsquo;uso del comando LOAD LOCAL INFILE</td></tr><tr><td>MYSQLI_INIT_CMD</td><td>Specifica un comando da eseguire subito dopo la connessione al server MySQL</td></tr><tr><td>MYSQLI_READ_DEFAULT_FILE</td><td>Specifica il nome del file che contiene le impostazioni, da usare al posto di my.cnf</td></tr><tr><td>MYSQLI_READ_DEFAULT_GROUP</td><td>Legge le opzioni del gruppo specificato presente nel file my.cnf oppure nel file specificato con MYSQL_READ_DEFAULT_FILE.</td></tr></tbody></table><p>Come già anticipato, anche il metodo <code>&lt;span style="color: rgb(0, 0, 187);">real_connect&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span></code> accetta diversi opzioni di connessione, da passare come ultimo parametro. Ecco i flag possibili:</p><table><thead><tr><th>Nome</th><th>Descrizione</th></tr></thead><tbody><tr><td>MYSQLI_CLIENT_COMPRESS</td><td>Imposta l&rsquo;utilizzo di un protocollo di compressione per la comunicazione</td></tr><tr><td>MYSQLI_CLIENT_FOUND_ROWS</td><td>Impone a MySQL di fornire il numero di righe che soddisfano le condizioni della clausola WHERE di una query e non il numero delle sole righe realmente interessate (modificate) dalla query. Questo numero viene restituito con il metodo affected_rows</td></tr><tr><td>MYSQLI_CLIENT_IGNORE_SPACE</td><td>Permette la presenza di spazi dopo il nome delle funzioni. Rende i nomi delle funzioni termini riservati.</td></tr><tr><td>MYSQLI_CLIENT_INTERACTIVE</td><td>Specifica i secondi di inattività secondo un interactive_timeout (al posto di un wait_timeout) prima che la connessione venga chiusa</td></tr><tr><td>MYSQLI_CLIENT_SSL</td><td>Abilita l&rsquo;uso di una connessione criptata con il server via SSL</td></tr></tbody></table><hr><h4 id=query-buffered-ed-unbuffered>Query buffered ed unbuffered</h4><p>Quando effettuiamo una query che prevede la restituzione di un risultato, ad esempio quando lanciamo una SELECT, dobbiamo tener presente che tale operazione coinvolge più attori: il client, ovvero il motore PHP che effettua la richiesta, il server, ovvero MySQL che riceve la richiesta ed i dati che viaggiano dal server al client.</p><p>Il passaggio dei dati tra MySQL e PHP può avvenire in 2 modi distinti: <strong>buffered</strong> ed <strong>unbuffered</strong></p><p>Una <strong>query buffered</strong> prevede le seguenti operazioni:</p><ol><li><p>PHP attraverso l&rsquo;estensione <em>ext/mysqli</em> invia la query al server MySQL</p></li><li><p>MySQL esegue la query ed invia il set completo dei risultati a PHP</p></li><li><p>PHP conserva i risultati in memoria e li rende accessibili allo script attraverso le operazioni di fetch</p></li></ol><p>Una <strong>query unbuffered</strong> invece funziona nel seguente modo:</p><ol><li><p>PHP attraverso l&rsquo;estensione <em>ext/mysqli</em> invia la query al server MySQL</p></li><li><p>MySQL esegue la query e conserva il set dei risultati</p></li><li><p>PHP accede ai risultati conservati sul server MySQL con le istruzioni di fetch</p></li></ol><p>Risulta evidente quindi che nel caso delle query buffered i risultati risiedono nella memoria di PHP mentre nel caso delle query unbuffered i dati rimangono sul server. A questo punto verrebbe da chiedersi come mai PHP implementa entrambe le tecniche. La risposta risiede nel fatto che nessuna delle due è a priori migliore dell&rsquo;altra e che anzi ciascuna ha pregi e difetti e pertanto il loro impiego è indicato in precise situazioni.</p><p>Con le query buffered i dati vengono conservati da PHP che ha quindi la possibilità di poterli manipolare più agevolmente. E' infatti possibile utilizzare il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">data_seek&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code> della classe <em>mysqli_stmt</em> per spostarsi liberamente all&rsquo;interno dei risultati. Inoltre è possibile accedere alla varabile <code>&lt;span style="color: rgb(0, 0, 187);">num_rows&lt;/span></code> della classe <em>mysqli</em> per sapere subito quante righe sono state restituite dall&rsquo;ultima query. Liberando immediatamente MySQL, le query buffered permettono al server di sbloccare subito i dati coinvolti dalla query in modo che altri processi possano accedervi.</p><p>L&rsquo;inconveniente di questo tipo di approccio è l&rsquo;occupazione di memoria, a volte considerevole, necessaria alla conservazione dei risultati da parte di PHP. Inoltre lo script non può procedere nella sua esecuzione fino a quando tutti i dati non hanno raggiunto il motore PHP, quindi il primo risultato è disponibile solo quando tutti i risultati non sono stati memorizzati dal PHP.</p><p>Per contro le query unbuffered prevedono la conservazione dei dati sul server MySQL. Questi sono accessibili al PHP esclusivamente in maniera sequenziale ma sono disponibili non appena MySQL inizia a restituirli. Il beneficio di non occupare la memoria di PHP deve essere pagato però con un altro inconveniente: poiché l&rsquo;interazione tra PHP e MySQL non si conclude con l&rsquo;invio della query, prima che ne venga eseguita una nuova è necessario prelevare tutti i risultati (fetch) della precedente oppure chiudere il set di risultati (free_result).</p><p>Chiariti i pro ed i contro di ciascun approccio sarà semplice decidere di volta in volta quale tecnica utilizzare. Riassumendo, le query buffered consentono una maggiore elasticità nell&rsquo;accesso ai risultati e permettono di effettuare nuove query anche se si sta ancora lavorando su risultati precedenti. Al contrario le query unbuffered garantiscono un accesso più immediato al set di risultati e permettono un risparmio in termini di allocazione di memoria da parte di PHP proporzionale alla dimensione dei risultati.</p><p>Per effettuare query buffered ed unbuffered ci sono due alternative: utilizzare il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">real_query&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code> della classe <em>mysqli</em> insieme ai metodi <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">store_result&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> e <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">use_result&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> sempre della classe <em>mysqli</em>, oppure usare il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">query&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> della classe <em>mysqli</em>, già incontrato nel precedente articolo, a cui passare un ulteriore parametro (<code>&lt;span style="color: rgb(0, 0, 187);">MYSQLI_USE_RESULT&lt;/span></code> o <code>&lt;span style="color: rgb(0, 0, 187);">MYSQLI_STORE_RESULT&lt;/span></code>) che specifica il tipo di query.</p><p>Di seguito riportiamo due esempi, ciascuno esegue la stessa query sia in modalità buffered che unbuffered. Il primo usa i metodi <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">store_result&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> e <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">use_result&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> mentre il secondo impiega il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">query&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> insieme ad i parametri <code>&lt;span style="color: rgb(0, 0, 187);">MYSQLI_USE_RESULT&lt;/span></code> o <code>&lt;span style="color: rgb(0, 0, 187);">MYSQLI_STORE_RESULT&lt;/span></code></p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;?php 
-// provo a connettermi
-$mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
+$mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>close</span>();
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010> 
+</span></code></pre></div><p>Nella seguente tabella sono elencate le diverse opzioni che possono essere impostate attraverso il metodo <code>&lt;span style="color: rgb(0, 0, 187);">options&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span></code>:</p><table><thead><tr><th>Name</th><th>Descrizione</th></tr></thead><tbody><tr><td>MYSQLI_OPT_CONNECT_TIMEOUT</td><td>Imposta la scadenza della connessione espressa in secondi</td></tr><tr><td>MYSQLI_OPT_LOCAL_INFILE</td><td>Abilita e disabilita l&rsquo;uso del comando LOAD LOCAL INFILE</td></tr><tr><td>MYSQLI_INIT_CMD</td><td>Specifica un comando da eseguire subito dopo la connessione al server MySQL</td></tr><tr><td>MYSQLI_READ_DEFAULT_FILE</td><td>Specifica il nome del file che contiene le impostazioni, da usare al posto di my.cnf</td></tr><tr><td>MYSQLI_READ_DEFAULT_GROUP</td><td>Legge le opzioni del gruppo specificato presente nel file my.cnf oppure nel file specificato con MYSQL_READ_DEFAULT_FILE.</td></tr></tbody></table><p>Come già anticipato, anche il metodo <code>&lt;span style="color: rgb(0, 0, 187);">real_connect&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span></code> accetta diversi opzioni di connessione, da passare come ultimo parametro. Ecco i flag possibili:</p><table><thead><tr><th>Nome</th><th>Descrizione</th></tr></thead><tbody><tr><td>MYSQLI_CLIENT_COMPRESS</td><td>Imposta l&rsquo;utilizzo di un protocollo di compressione per la comunicazione</td></tr><tr><td>MYSQLI_CLIENT_FOUND_ROWS</td><td>Impone a MySQL di fornire il numero di righe che soddisfano le condizioni della clausola WHERE di una query e non il numero delle sole righe realmente interessate (modificate) dalla query. Questo numero viene restituito con il metodo affected_rows</td></tr><tr><td>MYSQLI_CLIENT_IGNORE_SPACE</td><td>Permette la presenza di spazi dopo il nome delle funzioni. Rende i nomi delle funzioni termini riservati.</td></tr><tr><td>MYSQLI_CLIENT_INTERACTIVE</td><td>Specifica i secondi di inattività secondo un interactive_timeout (al posto di un wait_timeout) prima che la connessione venga chiusa</td></tr><tr><td>MYSQLI_CLIENT_SSL</td><td>Abilita l&rsquo;uso di una connessione criptata con il server via SSL</td></tr></tbody></table><hr><h4 id=query-buffered-ed-unbuffered>Query buffered ed unbuffered</h4><p>Quando effettuiamo una query che prevede la restituzione di un risultato, ad esempio quando lanciamo una SELECT, dobbiamo tener presente che tale operazione coinvolge più attori: il client, ovvero il motore PHP che effettua la richiesta, il server, ovvero MySQL che riceve la richiesta ed i dati che viaggiano dal server al client.</p><p>Il passaggio dei dati tra MySQL e PHP può avvenire in 2 modi distinti: <strong>buffered</strong> ed <strong>unbuffered</strong></p><p>Una <strong>query buffered</strong> prevede le seguenti operazioni:</p><ol><li><p>PHP attraverso l&rsquo;estensione <em>ext/mysqli</em> invia la query al server MySQL</p></li><li><p>MySQL esegue la query ed invia il set completo dei risultati a PHP</p></li><li><p>PHP conserva i risultati in memoria e li rende accessibili allo script attraverso le operazioni di fetch</p></li></ol><p>Una <strong>query unbuffered</strong> invece funziona nel seguente modo:</p><ol><li><p>PHP attraverso l&rsquo;estensione <em>ext/mysqli</em> invia la query al server MySQL</p></li><li><p>MySQL esegue la query e conserva il set dei risultati</p></li><li><p>PHP accede ai risultati conservati sul server MySQL con le istruzioni di fetch</p></li></ol><p>Risulta evidente quindi che nel caso delle query buffered i risultati risiedono nella memoria di PHP mentre nel caso delle query unbuffered i dati rimangono sul server. A questo punto verrebbe da chiedersi come mai PHP implementa entrambe le tecniche. La risposta risiede nel fatto che nessuna delle due è a priori migliore dell&rsquo;altra e che anzi ciascuna ha pregi e difetti e pertanto il loro impiego è indicato in precise situazioni.</p><p>Con le query buffered i dati vengono conservati da PHP che ha quindi la possibilità di poterli manipolare più agevolmente. E' infatti possibile utilizzare il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">data_seek&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code> della classe <em>mysqli_stmt</em> per spostarsi liberamente all&rsquo;interno dei risultati. Inoltre è possibile accedere alla varabile <code>&lt;span style="color: rgb(0, 0, 187);">num_rows&lt;/span></code> della classe <em>mysqli</em> per sapere subito quante righe sono state restituite dall&rsquo;ultima query. Liberando immediatamente MySQL, le query buffered permettono al server di sbloccare subito i dati coinvolti dalla query in modo che altri processi possano accedervi.</p><p>L&rsquo;inconveniente di questo tipo di approccio è l&rsquo;occupazione di memoria, a volte considerevole, necessaria alla conservazione dei risultati da parte di PHP. Inoltre lo script non può procedere nella sua esecuzione fino a quando tutti i dati non hanno raggiunto il motore PHP, quindi il primo risultato è disponibile solo quando tutti i risultati non sono stati memorizzati dal PHP.</p><p>Per contro le query unbuffered prevedono la conservazione dei dati sul server MySQL. Questi sono accessibili al PHP esclusivamente in maniera sequenziale ma sono disponibili non appena MySQL inizia a restituirli. Il beneficio di non occupare la memoria di PHP deve essere pagato però con un altro inconveniente: poiché l&rsquo;interazione tra PHP e MySQL non si conclude con l&rsquo;invio della query, prima che ne venga eseguita una nuova è necessario prelevare tutti i risultati (fetch) della precedente oppure chiudere il set di risultati (free_result).</p><p>Chiariti i pro ed i contro di ciascun approccio sarà semplice decidere di volta in volta quale tecnica utilizzare. Riassumendo, le query buffered consentono una maggiore elasticità nell&rsquo;accesso ai risultati e permettono di effettuare nuove query anche se si sta ancora lavorando su risultati precedenti. Al contrario le query unbuffered garantiscono un accesso più immediato al set di risultati e permettono un risparmio in termini di allocazione di memoria da parte di PHP proporzionale alla dimensione dei risultati.</p><p>Per effettuare query buffered ed unbuffered ci sono due alternative: utilizzare il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">real_query&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code> della classe <em>mysqli</em> insieme ai metodi <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">store_result&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> e <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">use_result&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> sempre della classe <em>mysqli</em>, oppure usare il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">query&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> della classe <em>mysqli</em>, già incontrato nel precedente articolo, a cui passare un ulteriore parametro (<code>&lt;span style="color: rgb(0, 0, 187);">MYSQLI_USE_RESULT&lt;/span></code> o <code>&lt;span style="color: rgb(0, 0, 187);">MYSQLI_STORE_RESULT&lt;/span></code>) che specifica il tipo di query.</p><p>Di seguito riportiamo due esempi, ciascuno esegue la stessa query sia in modalità buffered che unbuffered. Il primo usa i metodi <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">store_result&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> e <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">use_result&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> mentre il secondo impiega il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">query&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> insieme ad i parametri <code>&lt;span style="color: rgb(0, 0, 187);">MYSQLI_USE_RESULT&lt;/span></code> o <code>&lt;span style="color: rgb(0, 0, 187);">MYSQLI_STORE_RESULT&lt;/span></code></p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span> 
+<span style=color:#75715e>// provo a connettermi
+</span><span style=color:#75715e></span>$mysqli <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>mysqli</span>(<span style=color:#e6db74>&#39;localhost&#39;</span>, <span style=color:#e6db74>&#39;root&#39;</span>, <span style=color:#e6db74>&#39;password_db&#39;</span>, <span style=color:#e6db74>&#39;test&#39;</span>);
 
-echo &quot;- Eseguo una query unbuffered -&lt;br /&gt;&lt;br /&gt;\n&quot;;
+<span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#34;- Eseguo una query unbuffered -&lt;br /&gt;&lt;br /&gt;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
 
-// lancio la query
-$mysqli-&gt;real_query('SELECT user_id, nome, cognome FROM mia_tabella');
+<span style=color:#75715e>// lancio la query
+</span><span style=color:#75715e></span>$mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>real_query</span>(<span style=color:#e6db74>&#39;SELECT user_id, nome, cognome FROM mia_tabella&#39;</span>);
 
-// dichiaro di voler utilizzare i risultati in modo unbuffered
-$result = $mysqli-&gt;use_result();
+<span style=color:#75715e>// dichiaro di voler utilizzare i risultati in modo unbuffered
+</span><span style=color:#75715e></span>$result <span style=color:#f92672>=</span> $mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>use_result</span>();
 
-// provo ad leggere il numero di righe restituite
-// otterrò un risultato errato
-echo 'Risultati ottenuti: ' , $result-&gt;num_rows , &quot; (errato!)&lt;br /&gt;\n&quot;;
+<span style=color:#75715e>// provo ad leggere il numero di righe restituite
+</span><span style=color:#75715e>// otterrò un risultato errato
+</span><span style=color:#75715e></span><span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Risultati ottenuti: &#39;</span> , $result<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>num_rows</span> , <span style=color:#e6db74>&#34; (errato!)&lt;br /&gt;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
 
-// eseguo la fetch dei risultati
-while ($row = $result-&gt;fetch_row())
+<span style=color:#75715e>// eseguo la fetch dei risultati
+</span><span style=color:#75715e></span><span style=color:#66d9ef>while</span> ($row <span style=color:#f92672>=</span> $result<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>fetch_row</span>())
 {
-   printf (&quot;ID utente:%d, nome:%s, cognome:%s&lt;br /&gt;\n&quot;,
-   $row[0], $row[1],$row[2]);
+   <span style=color:#a6e22e>printf</span> (<span style=color:#e6db74>&#34;ID utente:%d, nome:%s, cognome:%s&lt;br /&gt;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>,
+   $row[<span style=color:#ae81ff>0</span>], $row[<span style=color:#ae81ff>1</span>],$row[<span style=color:#ae81ff>2</span>]);
 }
-echo 'Risultati ottenuti: ' , $result-&gt;num_rows , &quot; (corretto)&lt;br /&gt;&lt;br /&gt;\n&quot;;
+<span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Risultati ottenuti: &#39;</span> , $result<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>num_rows</span> , <span style=color:#e6db74>&#34; (corretto)&lt;br /&gt;&lt;br /&gt;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
 
-// --------------------------------------------------------
+<span style=color:#75715e>// --------------------------------------------------------
+</span><span style=color:#75715e></span>
+<span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#34;- Eseguo una query buffered -&lt;br /&gt;&lt;br /&gt;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
 
-echo &quot;- Eseguo una query buffered -&lt;br /&gt;&lt;br /&gt;\n&quot;;
+<span style=color:#75715e>// lancio la query
+</span><span style=color:#75715e></span>$mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>real_query</span>(<span style=color:#e6db74>&#39;SELECT user_id, nome, cognome FROM mia_tabella&#39;</span>);
 
-// lancio la query
-$mysqli-&gt;real_query('SELECT user_id, nome, cognome FROM mia_tabella');
+<span style=color:#75715e>// dichiaro di voler utilizzare i risultati in modo buffered
+</span><span style=color:#75715e></span>$result <span style=color:#f92672>=</span> $mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>store_result</span>();
 
-// dichiaro di voler utilizzare i risultati in modo buffered
-$result = $mysqli-&gt;store_result();
+<span style=color:#75715e>// provo ad leggere il numero di righe restituite
+</span><span style=color:#75715e>// otterrò un risultato errato
+</span><span style=color:#75715e></span><span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Risultati ottenuti: &#39;</span> , $result<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>num_rows</span> , <span style=color:#e6db74>&#34; (corretto)&lt;br /&gt;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
 
-// provo ad leggere il numero di righe restituite
-// otterrò un risultato errato
-echo 'Risultati ottenuti: ' , $result-&gt;num_rows , &quot; (corretto)&lt;br /&gt;\n&quot;;
-
-// eseguo la fetch dei risultati
-while ($row = $result-&gt;fetch_row())
+<span style=color:#75715e>// eseguo la fetch dei risultati
+</span><span style=color:#75715e></span><span style=color:#66d9ef>while</span> ($row <span style=color:#f92672>=</span> $result<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>fetch_row</span>())
 {
-   printf (&quot;ID utente:%d, nome:%s, cognome:%s&lt;br /&gt;\n&quot;,
-   $row[0], $row[1],$row[2]);
+   <span style=color:#a6e22e>printf</span> (<span style=color:#e6db74>&#34;ID utente:%d, nome:%s, cognome:%s&lt;br /&gt;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>,
+   $row[<span style=color:#ae81ff>0</span>], $row[<span style=color:#ae81ff>1</span>],$row[<span style=color:#ae81ff>2</span>]);
 }
-?&gt;  
-</code></pre><p>Adesso vediamo l&rsquo;uso dei paramentri <code>&lt;span style="color: rgb(0, 0, 187);">MYSQLI_USE_RESULT&lt;/span></code> e <code>&lt;span style="color: rgb(0, 0, 187);">MYSQLI_STORE_RESULT&lt;/span></code></p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;?php 
-// provo a connettermi
-$mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>  
+</span></code></pre></div><p>Adesso vediamo l&rsquo;uso dei paramentri <code>&lt;span style="color: rgb(0, 0, 187);">MYSQLI_USE_RESULT&lt;/span></code> e <code>&lt;span style="color: rgb(0, 0, 187);">MYSQLI_STORE_RESULT&lt;/span></code></p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span> 
+<span style=color:#75715e>// provo a connettermi
+</span><span style=color:#75715e></span>$mysqli <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>mysqli</span>(<span style=color:#e6db74>&#39;localhost&#39;</span>, <span style=color:#e6db74>&#39;root&#39;</span>, <span style=color:#e6db74>&#39;password_db&#39;</span>, <span style=color:#e6db74>&#39;test&#39;</span>);
 
-echo &quot;- Eseguo una query unbuffered -&lt;br /&gt;&lt;br /&gt;\n&quot;;
+<span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#34;- Eseguo una query unbuffered -&lt;br /&gt;&lt;br /&gt;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
 
-// lancio la query unbuffered
-$result = $mysqli-&gt;query('SELECT user_id, nome, cognome FROM mia_tabella',MYSQLI_USE_RESULT);
+<span style=color:#75715e>// lancio la query unbuffered
+</span><span style=color:#75715e></span>$result <span style=color:#f92672>=</span> $mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>query</span>(<span style=color:#e6db74>&#39;SELECT user_id, nome, cognome FROM mia_tabella&#39;</span>,<span style=color:#a6e22e>MYSQLI_USE_RESULT</span>);
 
-// provo ad leggere il numero di righe restituite
-// otterrò un risultato errato
-echo 'Risultati ottenuti: ' , $result-&gt;num_rows , &quot; (errato!)&lt;br /&gt;\n&quot;;
+<span style=color:#75715e>// provo ad leggere il numero di righe restituite
+</span><span style=color:#75715e>// otterrò un risultato errato
+</span><span style=color:#75715e></span><span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Risultati ottenuti: &#39;</span> , $result<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>num_rows</span> , <span style=color:#e6db74>&#34; (errato!)&lt;br /&gt;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
 
-// eseguo la fetch dei risultati
-while ($row = $result-&gt;fetch_row())
+<span style=color:#75715e>// eseguo la fetch dei risultati
+</span><span style=color:#75715e></span><span style=color:#66d9ef>while</span> ($row <span style=color:#f92672>=</span> $result<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>fetch_row</span>())
 {
-   printf (&quot;ID utente:%d, nome:%s, cognome:%s&lt;br /&gt;\n&quot;,
-   $row[0], $row[1],$row[2]);
+   <span style=color:#a6e22e>printf</span> (<span style=color:#e6db74>&#34;ID utente:%d, nome:%s, cognome:%s&lt;br /&gt;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>,
+   $row[<span style=color:#ae81ff>0</span>], $row[<span style=color:#ae81ff>1</span>],$row[<span style=color:#ae81ff>2</span>]);
 }
-echo 'Risultati ottenuti: ' , $result-&gt;num_rows , &quot; (corretto)&lt;br /&gt;&lt;br /&gt;\n&quot;;
+<span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Risultati ottenuti: &#39;</span> , $result<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>num_rows</span> , <span style=color:#e6db74>&#34; (corretto)&lt;br /&gt;&lt;br /&gt;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
 
-// --------------------------------------------------------
+<span style=color:#75715e>// --------------------------------------------------------
+</span><span style=color:#75715e></span>
+<span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#34;- Eseguo una query buffered -&lt;br /&gt;&lt;br /&gt;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
 
-echo &quot;- Eseguo una query buffered -&lt;br /&gt;&lt;br /&gt;\n&quot;;
+<span style=color:#75715e>// lancio la query unbuffered
+</span><span style=color:#75715e></span>$result <span style=color:#f92672>=</span> $mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>query</span>(<span style=color:#e6db74>&#39;SELECT user_id, nome, cognome FROM mia_tabella&#39;</span>,<span style=color:#a6e22e>MYSQLI_STORE_RESULT</span>);
 
-// lancio la query unbuffered
-$result = $mysqli-&gt;query('SELECT user_id, nome, cognome FROM mia_tabella',MYSQLI_STORE_RESULT);
+<span style=color:#75715e>// provo ad leggere il numero di righe restituite
+</span><span style=color:#75715e>// otterrò un risultato errato
+</span><span style=color:#75715e></span><span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Risultati ottenuti: &#39;</span> , $result<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>num_rows</span> , <span style=color:#e6db74>&#34; (corretto)&lt;br /&gt;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
 
-// provo ad leggere il numero di righe restituite
-// otterrò un risultato errato
-echo 'Risultati ottenuti: ' , $result-&gt;num_rows , &quot; (corretto)&lt;br /&gt;\n&quot;;
-
-// eseguo la fetch dei risultati
-while ($row = $result-&gt;fetch_row())
+<span style=color:#75715e>// eseguo la fetch dei risultati
+</span><span style=color:#75715e></span><span style=color:#66d9ef>while</span> ($row <span style=color:#f92672>=</span> $result<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>fetch_row</span>())
 {
-   printf (&quot;ID utente:%d, nome:%s, cognome:%s&lt;br /&gt;\n&quot;,
-   $row[0], $row[1],$row[2]);
+   <span style=color:#a6e22e>printf</span> (<span style=color:#e6db74>&#34;ID utente:%d, nome:%s, cognome:%s&lt;br /&gt;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>,
+   $row[<span style=color:#ae81ff>0</span>], $row[<span style=color:#ae81ff>1</span>],$row[<span style=color:#ae81ff>2</span>]);
 }
-?&gt;  
-</code></pre><p>Nel caso al metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">query&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> non venga passato alcun parametro, le impostazioni di default prevedono che la query sia buffered. Si noti infine come nel caso di query unbuffered la variabile <code>&lt;span style="color: rgb(0, 0, 187);">num_rows&lt;/span></code> restituisce valori errati se chiamato prima della conclusione della fase di fetch.</p><hr><h4 id=query-multiple>Query multiple</h4><p>Una tra le più interessanti novità introdotte con l&rsquo;estensione <em>ext/mysqli</em> è sicuramente la possibilità di inviare al server MySQL più query con un&rsquo;unica chiamata di funzione. Basterà infatti invocare il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">multi_query&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code> della classe <em>mysqli</em> e passargli una stringa contenente le diverse query separate da un punto e virgola.</p><p>Risulta però più complessa l&rsquo;estrazione dei risultati provenienti dalle singole query inviate. Nell&rsquo;esempio che segue vedremo come risolvere il problema. Verranno eseguite due query e lanciate con un&rsquo;unica chiamata al metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">multi_query&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code>. Per recuperare il primo set di risultati useremo il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">store_result&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> (query buffered) seguito da una normale fetch. Dopo aver chiuso il set di risultati corrente (<code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">close&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code>) si passerà a quello successivo attraverso il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">next_result&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> e l&rsquo;intera procedura verrà ripetuta.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;?php 
-// provo a connettermi al server MySQL
-$mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>  
+</span></code></pre></div><p>Nel caso al metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">query&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> non venga passato alcun parametro, le impostazioni di default prevedono che la query sia buffered. Si noti infine come nel caso di query unbuffered la variabile <code>&lt;span style="color: rgb(0, 0, 187);">num_rows&lt;/span></code> restituisce valori errati se chiamato prima della conclusione della fase di fetch.</p><hr><h4 id=query-multiple>Query multiple</h4><p>Una tra le più interessanti novità introdotte con l&rsquo;estensione <em>ext/mysqli</em> è sicuramente la possibilità di inviare al server MySQL più query con un&rsquo;unica chiamata di funzione. Basterà infatti invocare il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">multi_query&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code> della classe <em>mysqli</em> e passargli una stringa contenente le diverse query separate da un punto e virgola.</p><p>Risulta però più complessa l&rsquo;estrazione dei risultati provenienti dalle singole query inviate. Nell&rsquo;esempio che segue vedremo come risolvere il problema. Verranno eseguite due query e lanciate con un&rsquo;unica chiamata al metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">multi_query&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code>. Per recuperare il primo set di risultati useremo il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">store_result&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> (query buffered) seguito da una normale fetch. Dopo aver chiuso il set di risultati corrente (<code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">close&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code>) si passerà a quello successivo attraverso il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">next_result&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> e l&rsquo;intera procedura verrà ripetuta.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span> 
+<span style=color:#75715e>// provo a connettermi al server MySQL
+</span><span style=color:#75715e></span>$mysqli <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>mysqli</span>(<span style=color:#e6db74>&#39;localhost&#39;</span>, <span style=color:#e6db74>&#39;root&#39;</span>, <span style=color:#e6db74>&#39;password_db&#39;</span>, <span style=color:#e6db74>&#39;test&#39;</span>);
 
-// preparo le query da inviare al server MySQL
-$query = &quot;SELECT COUNT(*) FROM mia_tabella;&quot;;
-$query .= &quot;SELECT * FROM mia_tabella&quot;;
+<span style=color:#75715e>// preparo le query da inviare al server MySQL
+</span><span style=color:#75715e></span>$query <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;SELECT COUNT(*) FROM mia_tabella;&#34;</span>;
+$query <span style=color:#f92672>.=</span> <span style=color:#e6db74>&#34;SELECT * FROM mia_tabella&#34;</span>;
 
-// eseguo le query
-$mysqli-&gt;multi_query($query);
+<span style=color:#75715e>// eseguo le query
+</span><span style=color:#75715e></span>$mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>multi_query</span>($query);
 
-// recupero il primo set di risultati (metodo buffered)
-$result = $mysqli-&gt;store_result();
+<span style=color:#75715e>// recupero il primo set di risultati (metodo buffered)
+</span><span style=color:#75715e></span>$result <span style=color:#f92672>=</span> $mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>store_result</span>();
 
-// estraggo i risultati
-$row = $result-&gt;fetch_row();
-printf(&quot;Numero utenti: %s&lt;br /&gt;&lt;br /&gt;\n&quot;, $row[0]);
+<span style=color:#75715e>// estraggo i risultati
+</span><span style=color:#75715e></span>$row <span style=color:#f92672>=</span> $result<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>fetch_row</span>();
+<span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;Numero utenti: %s&lt;br /&gt;&lt;br /&gt;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, $row[<span style=color:#ae81ff>0</span>]);
 
 
-// chiudo il primo set di risultati
-$result-&gt;close();
+<span style=color:#75715e>// chiudo il primo set di risultati
+</span><span style=color:#75715e></span>$result<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>close</span>();
 
-// passo al secondo set di risultati
-$mysqli-&gt;next_result();
+<span style=color:#75715e>// passo al secondo set di risultati
+</span><span style=color:#75715e></span>$mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>next_result</span>();
 
-// recupero il secondo set di risultati (metodo buffered)
-$result = $mysqli-&gt;store_result();
+<span style=color:#75715e>// recupero il secondo set di risultati (metodo buffered)
+</span><span style=color:#75715e></span>$result <span style=color:#f92672>=</span> $mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>store_result</span>();
 
-// estraggo i risultati
-echo &quot;Elenco utenti:&lt;br /&gt;\n&quot;;
-while ($row = $result-&gt;fetch_assoc())
+<span style=color:#75715e>// estraggo i risultati
+</span><span style=color:#75715e></span><span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#34;Elenco utenti:&lt;br /&gt;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>;
+<span style=color:#66d9ef>while</span> ($row <span style=color:#f92672>=</span> $result<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>fetch_assoc</span>())
 {
-   printf (&quot;ID utente:%d, nome:%s, cognome:%s\n&lt;br /&gt;&quot;,
-   $row['user_id'], $row['nome'],$row['cognome']);
+   <span style=color:#a6e22e>printf</span> (<span style=color:#e6db74>&#34;ID utente:%d, nome:%s, cognome:%s</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&lt;br /&gt;&#34;</span>,
+   $row[<span style=color:#e6db74>&#39;user_id&#39;</span>], $row[<span style=color:#e6db74>&#39;nome&#39;</span>],$row[<span style=color:#e6db74>&#39;cognome&#39;</span>]);
 }
 
-// chiudo il secondo set di risultati
-$result-&gt;close();
+<span style=color:#75715e>// chiudo il secondo set di risultati
+</span><span style=color:#75715e></span>$result<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>close</span>();
 
-// chiudo la connessione al server MySQL
-$mysqli-&gt;close();
-?&gt; 
-</code></pre><p>E' importante osservare che l&rsquo;invio di query multiple al server MySQL espone lo script a potenziali rischi di sicurezza. Infatti se una query contiene dati inviati dall&rsquo;utente, questa potrebbe venir abilmente manipolata. Si pensi ad esempio alle query:</p><p>SELECT user_id FROM utenti WHERE nome_utente = &lsquo;$_POST[nome_utente]'; SELECT COUNT(*) FROM UTENTI</p><p>se $_POST[nome_utente] vale</p><p>test&rsquo;; DELETE * FROM utenti; SELECT '</p><p>la query diventa:</p><p>SELECT user_id FROM utenti WHERE nome_utente = &lsquo;test&rsquo;; DELETE * FROM utenti; SELECT ' &lsquo;; SELECT COUNT(*) FROM UTENTI</p><p>Siamo riusciti a cancellare tutti i dati dalla tabella utenti!</p><hr><h4 id=altre-funzioni-di-extmysqli>Altre funzioni di ext/mysqli</h4><p>Prima di concludere questo articolo elenchiamo alcune funzioni messe a disposizione dall&rsquo;estensione <em>ext/mysqli</em> che risultano estremamente utili e di uso comune. La maggior parte di queste comunque era già disponibile con la vecchia estensione <em>ext/mysql</em> ma risulta comunque interessante analizzare il loro utilizzo in un approccio orientato agli oggetti.</p><p><strong>mysqli::affected_rows</strong>
-(mysqli_affected_rows)</p><p>Restituisce il numero di righe interessate dall&rsquo;ultima query. <code>&lt;span style="color: rgb(0, 0, 187);">affected_rows&lt;/span></code> va usato solo quando la query modifica il contenuto del database, come nel caso di INSERT, UPDATE e DELETE e non deve essere impiegato con le SELECT. Nel caso di una query di tipo UPDATE <code>&lt;span style="color: rgb(0, 0, 187);">affected_rows&lt;/span></code> restituisce il numero di righe realmente modificate e non il numero di righe che rispondono alla clausola WHERE della query stessa. Questo comportamento può essere modificato agendo sui parametri di connessione come mostrato all&rsquo;inizio di questo articolo.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;?php 
-// provo a connettermi al server MySQL
-$mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
+<span style=color:#75715e>// chiudo la connessione al server MySQL
+</span><span style=color:#75715e></span>$mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>close</span>();
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010> 
+</span></code></pre></div><p>E' importante osservare che l&rsquo;invio di query multiple al server MySQL espone lo script a potenziali rischi di sicurezza. Infatti se una query contiene dati inviati dall&rsquo;utente, questa potrebbe venir abilmente manipolata. Si pensi ad esempio alle query:</p><p>SELECT user_id FROM utenti WHERE nome_utente = &lsquo;$_POST[nome_utente]'; SELECT COUNT(*) FROM UTENTI</p><p>se $_POST[nome_utente] vale</p><p>test&rsquo;; DELETE * FROM utenti; SELECT '</p><p>la query diventa:</p><p>SELECT user_id FROM utenti WHERE nome_utente = &lsquo;test&rsquo;; DELETE * FROM utenti; SELECT ' &lsquo;; SELECT COUNT(*) FROM UTENTI</p><p>Siamo riusciti a cancellare tutti i dati dalla tabella utenti!</p><hr><h4 id=altre-funzioni-di-extmysqli>Altre funzioni di ext/mysqli</h4><p>Prima di concludere questo articolo elenchiamo alcune funzioni messe a disposizione dall&rsquo;estensione <em>ext/mysqli</em> che risultano estremamente utili e di uso comune. La maggior parte di queste comunque era già disponibile con la vecchia estensione <em>ext/mysql</em> ma risulta comunque interessante analizzare il loro utilizzo in un approccio orientato agli oggetti.</p><p><strong>mysqli::affected_rows</strong>
+(mysqli_affected_rows)</p><p>Restituisce il numero di righe interessate dall&rsquo;ultima query. <code>&lt;span style="color: rgb(0, 0, 187);">affected_rows&lt;/span></code> va usato solo quando la query modifica il contenuto del database, come nel caso di INSERT, UPDATE e DELETE e non deve essere impiegato con le SELECT. Nel caso di una query di tipo UPDATE <code>&lt;span style="color: rgb(0, 0, 187);">affected_rows&lt;/span></code> restituisce il numero di righe realmente modificate e non il numero di righe che rispondono alla clausola WHERE della query stessa. Questo comportamento può essere modificato agendo sui parametri di connessione come mostrato all&rsquo;inizio di questo articolo.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span> 
+<span style=color:#75715e>// provo a connettermi al server MySQL
+</span><span style=color:#75715e></span>$mysqli <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>mysqli</span>(<span style=color:#e6db74>&#39;localhost&#39;</span>, <span style=color:#e6db74>&#39;root&#39;</span>, <span style=color:#e6db74>&#39;password_db&#39;</span>, <span style=color:#e6db74>&#39;test&#39;</span>);
 
-// preparo le query di inserimento
-$query = &quot;INSERT INTO mia_tabella SET nome = 'Gianni', cognome = 'Rossi'&quot;;
+<span style=color:#75715e>// preparo le query di inserimento
+</span><span style=color:#75715e></span>$query <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;INSERT INTO mia_tabella SET nome = &#39;Gianni&#39;, cognome = &#39;Rossi&#39;&#34;</span>;
 
-// eseguo le query
-$mysqli-&gt;multi_query($query);
+<span style=color:#75715e>// eseguo le query
+</span><span style=color:#75715e></span>$mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>multi_query</span>($query);
 
-// mostro il numero delle righe interessate dall'ultima query
-echo 'Numero di righe inserite: ', $mysqli-&gt;affected_rows , '&lt;br /&gt;';
+<span style=color:#75715e>// mostro il numero delle righe interessate dall&#39;ultima query
+</span><span style=color:#75715e></span><span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Numero di righe inserite: &#39;</span>, $mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>affected_rows</span> , <span style=color:#e6db74>&#39;&lt;br /&gt;&#39;</span>;
 
-// preparo le query di cancellazione
-$query = &quot;DELETE FROM mia_tabella WHERE nome = 'Gianni'&quot;;
+<span style=color:#75715e>// preparo le query di cancellazione
+</span><span style=color:#75715e></span>$query <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;DELETE FROM mia_tabella WHERE nome = &#39;Gianni&#39;&#34;</span>;
 
-// eseguo le query
-$mysqli-&gt;multi_query($query);
+<span style=color:#75715e>// eseguo le query
+</span><span style=color:#75715e></span>$mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>multi_query</span>($query);
 
-// mostro il numero delle righe interessate dall'ultima query
-echo 'Numero di righe cancellate: ', $mysqli-&gt;affected_rows;
+<span style=color:#75715e>// mostro il numero delle righe interessate dall&#39;ultima query
+</span><span style=color:#75715e></span><span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Numero di righe cancellate: &#39;</span>, $mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>affected_rows</span>;
 
-// chiudo la connessione al server MySQL
-$mysqli-&gt;close();
-?&gt; 
-</code></pre><p><strong>mysqli_connect_error e mysqli_connect_errno</strong></p><p>Forniscono rispettivamente un messaggio di errore ed un relativo codice numerico associato nel caso in cui la connessione al server MySQL non abbia avuto esito positivo. In particolare<code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);"> mysqli_connect_errno&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> può essere impiegato per verificare l&rsquo;esito della connessione semplicemente con un IF.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;?php 
-// provo a connettermi al server MySQL
-$mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
+<span style=color:#75715e>// chiudo la connessione al server MySQL
+</span><span style=color:#75715e></span>$mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>close</span>();
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010> 
+</span></code></pre></div><p><strong>mysqli_connect_error e mysqli_connect_errno</strong></p><p>Forniscono rispettivamente un messaggio di errore ed un relativo codice numerico associato nel caso in cui la connessione al server MySQL non abbia avuto esito positivo. In particolare<code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);"> mysqli_connect_errno&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> può essere impiegato per verificare l&rsquo;esito della connessione semplicemente con un IF.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span> 
+<span style=color:#75715e>// provo a connettermi al server MySQL
+</span><span style=color:#75715e></span>$mysqli <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>mysqli</span>(<span style=color:#e6db74>&#39;localhost&#39;</span>, <span style=color:#e6db74>&#39;root&#39;</span>, <span style=color:#e6db74>&#39;password_db&#39;</span>, <span style=color:#e6db74>&#39;test&#39;</span>);
 
-// Verifico l'esito della connessione
-if (mysqli_connect_errno())
+<span style=color:#75715e>// Verifico l&#39;esito della connessione
+</span><span style=color:#75715e></span><span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>mysqli_connect_errno</span>())
 {
-   printf(&quot;Connessione fallita: %s\n&quot;, mysqli_connect_error());
-   exit();
+   <span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#34;Connessione fallita: %s</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>, <span style=color:#a6e22e>mysqli_connect_error</span>());
+   <span style=color:#66d9ef>exit</span>();
 }
-?&gt; 
-</code></pre><p><strong>mysqli_result::data_seek</strong>
-(mysqli_data_seek)</p><p>Nel caso di query buffered permette di posizionarsi su una qualsiasi delle righe restituite dalla query</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;?php 
-// provo a connettermi al server MySQL
-$mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010> 
+</span></code></pre></div><p><strong>mysqli_result::data_seek</strong>
+(mysqli_data_seek)</p><p>Nel caso di query buffered permette di posizionarsi su una qualsiasi delle righe restituite dalla query</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span> 
+<span style=color:#75715e>// provo a connettermi al server MySQL
+</span><span style=color:#75715e></span>$mysqli <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>mysqli</span>(<span style=color:#e6db74>&#39;localhost&#39;</span>, <span style=color:#e6db74>&#39;root&#39;</span>, <span style=color:#e6db74>&#39;password_db&#39;</span>, <span style=color:#e6db74>&#39;test&#39;</span>);
 
-// preparo le query da inviare al server MySQL
-$query = &quot;SELECT * FROM mia_tabella&quot;;
+<span style=color:#75715e>// preparo le query da inviare al server MySQL
+</span><span style=color:#75715e></span>$query <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;SELECT * FROM mia_tabella&#34;</span>;
 
-// eseguo le query
-$result = $mysqli-&gt;query($query);
+<span style=color:#75715e>// eseguo le query
+</span><span style=color:#75715e></span>$result <span style=color:#f92672>=</span> $mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>query</span>($query);
 
-// sposto il puntatore dei risultati alla terza riga
-$result-&gt;data_seek(2);
+<span style=color:#75715e>// sposto il puntatore dei risultati alla terza riga
+</span><span style=color:#75715e></span>$result<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>data_seek</span>(<span style=color:#ae81ff>2</span>);
 
-// estraggo la riga
-$row = $result-&gt;fetch_row();
+<span style=color:#75715e>// estraggo la riga
+</span><span style=color:#75715e></span>$row <span style=color:#f92672>=</span> $result<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>fetch_row</span>();
 
-// mostro i risultati
-printf (&quot;ID utente:%d, nome:%s, cognome:%s&lt;br /&gt;\n&quot;,$row[0],$row[1],$row[2]);
+<span style=color:#75715e>// mostro i risultati
+</span><span style=color:#75715e></span><span style=color:#a6e22e>printf</span> (<span style=color:#e6db74>&#34;ID utente:%d, nome:%s, cognome:%s&lt;br /&gt;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>,$row[<span style=color:#ae81ff>0</span>],$row[<span style=color:#ae81ff>1</span>],$row[<span style=color:#ae81ff>2</span>]);
 
-// chiudo la connessione al server MySQL
-$mysqli-&gt;close();
-?&gt;
-</code></pre><p><strong>mysqli::error e mysqli::errno</strong>
-(mysqli_errno e mysqli_error)</p><p>Forniscono rispettivamente un messaggio di errore ed un relativo codice numerico associati all&rsquo;ultimo errore verificatosi nell&rsquo;interazione con il database MySQL. Utili per effettuare il debug delle query</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;?php 
-// provo a connettermi al server MySQL
-$mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
+<span style=color:#75715e>// chiudo la connessione al server MySQL
+</span><span style=color:#75715e></span>$mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>close</span>();
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p><strong>mysqli::error e mysqli::errno</strong>
+(mysqli_errno e mysqli_error)</p><p>Forniscono rispettivamente un messaggio di errore ed un relativo codice numerico associati all&rsquo;ultimo errore verificatosi nell&rsquo;interazione con il database MySQL. Utili per effettuare il debug delle query</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span> 
+<span style=color:#75715e>// provo a connettermi al server MySQL
+</span><span style=color:#75715e></span>$mysqli <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>mysqli</span>(<span style=color:#e6db74>&#39;localhost&#39;</span>, <span style=color:#e6db74>&#39;root&#39;</span>, <span style=color:#e6db74>&#39;password_db&#39;</span>, <span style=color:#e6db74>&#39;test&#39;</span>);
 
-// eseguo le query
-if(!$mysqli-&gt;query(&quot;SELECT * FROM tabella_inesistente&quot;))
+<span style=color:#75715e>// eseguo le query
+</span><span style=color:#75715e></span><span style=color:#66d9ef>if</span>(<span style=color:#f92672>!</span>$mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>query</span>(<span style=color:#e6db74>&#34;SELECT * FROM tabella_inesistente&#34;</span>))
 {
-   printf('Errore nella query (codice %d): %s', $mysqli-&gt;errno,$mysqli-&gt;error);
+   <span style=color:#a6e22e>printf</span>(<span style=color:#e6db74>&#39;Errore nella query (codice %d): %s&#39;</span>, $mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>errno</span>,$mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>error</span>);
 }
-?&gt; 
-</code></pre><p><strong>mysqli_result::field_count</strong>
-( mysqli_field_count)</p><p>Permette di sapere quanti campi (colonne) contiene un set di risultati. Particolarmente utile quando viene eseguito il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">store_result&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> e non è noto a priori se la query restituirà dei risultati (es. una SELECT) o meno (INSER, UPDATE, &mldr;)</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;form id=&quot;form1&quot; name=&quot;form1&quot; method=&quot;post&quot; action=&quot;&quot;&gt; 
-&lt;label&gt;Inserisci una query: 
-&lt;input name=&quot;query&quot; type=&quot;text&quot; size=&quot;50&quot; /&gt; 
-&lt;/label&gt; 
-&lt;input type=&quot;submit&quot; name=&quot;Submit&quot; value=&quot;&amp;lt;- Esegui&quot; /&gt; 
-&lt;/form&gt; 
-&lt;?php 
-if($_POST)
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010> 
+</span></code></pre></div><p><strong>mysqli_result::field_count</strong>
+( mysqli_field_count)</p><p>Permette di sapere quanti campi (colonne) contiene un set di risultati. Particolarmente utile quando viene eseguito il metodo <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">store_result&lt;/span>&lt;span style="color: rgb(0, 119, 0);">()&lt;/span>&lt;/span></code> e non è noto a priori se la query restituirà dei risultati (es. una SELECT) o meno (INSER, UPDATE, &mldr;)</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;</span><span style=color:#a6e22e>form</span> <span style=color:#a6e22e>id</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;form1&#34;</span> <span style=color:#a6e22e>name</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;form1&#34;</span> <span style=color:#a6e22e>method</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;post&#34;</span> <span style=color:#a6e22e>action</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;&#34;</span><span style=color:#f92672>&gt;</span> 
+<span style=color:#f92672>&lt;</span><span style=color:#a6e22e>label</span><span style=color:#f92672>&gt;</span><span style=color:#a6e22e>Inserisci</span> <span style=color:#a6e22e>una</span> <span style=color:#a6e22e>query</span><span style=color:#f92672>:</span> 
+<span style=color:#f92672>&lt;</span><span style=color:#a6e22e>input</span> <span style=color:#a6e22e>name</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;query&#34;</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;text&#34;</span> <span style=color:#a6e22e>size</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;50&#34;</span> <span style=color:#f92672>/&gt;</span> 
+<span style=color:#f92672>&lt;/</span><span style=color:#a6e22e>label</span><span style=color:#f92672>&gt;</span> 
+<span style=color:#f92672>&lt;</span><span style=color:#a6e22e>input</span> <span style=color:#a6e22e>type</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;submit&#34;</span> <span style=color:#a6e22e>name</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;Submit&#34;</span> <span style=color:#a6e22e>value</span><span style=color:#f92672>=</span><span style=color:#e6db74>&#34;&amp;lt;- Esegui&#34;</span> <span style=color:#f92672>/&gt;</span> 
+<span style=color:#f92672>&lt;/</span><span style=color:#a6e22e>form</span><span style=color:#f92672>&gt;</span> 
+<span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span> 
+<span style=color:#66d9ef>if</span>($_POST)
 {
-   // provo a connettermi al server MySQL
-   $mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
+   <span style=color:#75715e>// provo a connettermi al server MySQL
+</span><span style=color:#75715e></span>   $mysqli <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>mysqli</span>(<span style=color:#e6db74>&#39;localhost&#39;</span>, <span style=color:#e6db74>&#39;root&#39;</span>, <span style=color:#e6db74>&#39;password_db&#39;</span>, <span style=color:#e6db74>&#39;test&#39;</span>);
 
-   // eseguo le query
-   $result = $mysqli-&gt;real_query($_POST['query']);
+   <span style=color:#75715e>// eseguo le query
+</span><span style=color:#75715e></span>   $result <span style=color:#f92672>=</span> $mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>real_query</span>($_POST[<span style=color:#e6db74>&#39;query&#39;</span>]);
 
-   // se la query ha prodotto un risultato
-   if($mysqli-&gt;field_count)
+   <span style=color:#75715e>// se la query ha prodotto un risultato
+</span><span style=color:#75715e></span>   <span style=color:#66d9ef>if</span>($mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>field_count</span>)
    {
-       $result = $mysqli-&gt;store_result();
+       $result <span style=color:#f92672>=</span> $mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>store_result</span>();
 
-       while ($row = $result-&gt;fetch_assoc())
+       <span style=color:#66d9ef>while</span> ($row <span style=color:#f92672>=</span> $result<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>fetch_assoc</span>())
        {
-           foreach ($row as $key =&gt; $value)
+           <span style=color:#66d9ef>foreach</span> ($row <span style=color:#66d9ef>as</span> $key <span style=color:#f92672>=&gt;</span> $value)
            {
-               echo &quot;$key=&gt;$value &quot;;
+               <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#34;</span><span style=color:#e6db74>$key</span><span style=color:#e6db74>=&gt;</span><span style=color:#e6db74>$value</span><span style=color:#e6db74> &#34;</span>;
            }
-           echo '&lt;br /&gt;';
+           <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;&lt;br /&gt;&#39;</span>;
        }
    }
 }
-?&gt; 
-</code></pre><p><strong>mysqli::insert_id</strong>
-(mysqli_insert_id)</p><p>Fornisce l&rsquo;ultimo ID autogenerato da MySQL per un campo auto_increment.</p><pre><code>&lt;pre class=&quot;brush: php&quot;&gt;
-&lt;?php 
-// provo a connettermi al server MySQL
-$mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010> 
+</span></code></pre></div><p><strong>mysqli::insert_id</strong>
+(mysqli_insert_id)</p><p>Fornisce l&rsquo;ultimo ID autogenerato da MySQL per un campo auto_increment.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span> 
+<span style=color:#75715e>// provo a connettermi al server MySQL
+</span><span style=color:#75715e></span>$mysqli <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>mysqli</span>(<span style=color:#e6db74>&#39;localhost&#39;</span>, <span style=color:#e6db74>&#39;root&#39;</span>, <span style=color:#e6db74>&#39;password_db&#39;</span>, <span style=color:#e6db74>&#39;test&#39;</span>);
 
-// eseguo le query
-$result = $mysqli-&gt;query(&quot;INSERT INTO mia_tabella SET nome='Gigi', cognome='Cremeria'&quot;);
+<span style=color:#75715e>// eseguo le query
+</span><span style=color:#75715e></span>$result <span style=color:#f92672>=</span> $mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>query</span>(<span style=color:#e6db74>&#34;INSERT INTO mia_tabella SET nome=&#39;Gigi&#39;, cognome=&#39;Cremeria&#39;&#34;</span>);
 
-echo &quot;L'ID del nuovo utente inserito è &quot;, $mysqli-&gt;insert_id;
-?&gt;
-</code></pre><p><strong>mysqli::more_results</strong>
+<span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#34;L&#39;ID del nuovo utente inserito è &#34;</span>, $mysqli<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>insert_id</span>;
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p><strong>mysqli::more_results</strong>
 ( mysqli_more_results)</p><p>Nel caso di query multiple restituisce true se sono presenti ulteriori set di risultati provenienti da una precedente chiamata alla funzione <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">multi_query&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code>. Utile quando non si conosce a priori il numero delle query eseguite con una <code>&lt;span style="color: rgb(0, 0, 0);">&lt;span style="color: rgb(0, 0, 187);">multi_query&lt;/span>&lt;span style="color: rgb(0, 119, 0);">(&lt;/span>&lt;span style="color: rgb(0, 119, 0);">)&lt;/span>&lt;/span></code> e pertanto non è noto il numero di set di risultati da elaborare.</p><p>Nel prossimo articolo, che concluderà la serie dedicata a ext/mysqli, vedremo come sfruttare i prepared statements per ottenere il binding dei parametri e dei risultati, come effettuare le transazioni e come gestire i BLOB.</p></div><footer class=post__footer><div class="post__tags tags clearfix"><svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5.0 11V3C0 1.5.8.8.8.8S1.5.0 3 0h8c1.5.0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 100-6 3 3 0 000 6z"/></svg><ul class=tags__list><li class=tags__item><a class="tags__link btn" href=/tags/database/ rel=tag>database</a></li><li class=tags__item><a class="tags__link btn" href=/tags/mysql/ rel=tag>MySQL</a></li><li class=tags__item><a class="tags__link btn" href=/tags/sicurezza/ rel=tag>sicurezza</a></li><li class=tags__item><a class="tags__link btn" href=/tags/blob/ rel=tag>BLOB</a></li><li class=tags__item><a class="tags__link btn" href=/tags/debug/ rel=tag>debug</a></li><li class=tags__item><a class="tags__link btn" href=/tags/mysqli/ rel=tag>mysqli</a></li></ul></div></footer></article></main><nav class="pager flex"><div class="pager__item pager__item--prev"><a class=pager__link href=/articoli/php-51-note-sullaggiornamento/ rel=prev><span class=pager__subtitle>«&#8201;Precedente</span><p class=pager__title>PHP 5.1 - Note sull'aggiornamento</p></a></div><div class="pager__item pager__item--next"><a class=pager__link href=/articoli/lestensione-mysqli-iii/ rel=next><span class=pager__subtitle>Prossimo&#8201;»</span><p class=pager__title>L'estensione mysqli - III</p></a></div></nav></div></div><footer class=footer><div class="container footer__container flex"><div class=footer__copyright>&copy; 2021 Giovanni Tomasicchio.
 <span class=footer__copyright-credits>Generato con <a href=https://gohugo.io/ rel="nofollow noopener" target=_blank>Hugo</a> e il tema <a href=https://github.com/Vimux/Mainroad/ rel="nofollow noopener" target=_blank>Mainroad</a>.</span></div></div></footer></div><script async defer src=/js/menu.js></script></body></html>
