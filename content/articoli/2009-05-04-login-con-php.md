@@ -22,8 +22,7 @@ tags:
 
  Per provare lo script di login proposto bisogna creare una tabella degli utenti ed inserire almeno un record. Ecco i comandi SQL necessari, da eseguire ad esempio con phpMyAdmin.
 
- ```
-<pre class="brush:sql">
+ ```sql
 CREATE TABLE `utenti` (
    `id` INT(11) NOT NULL AUTO_INCREMENT,
    `nome` VARCHAR(32) NOT NULL,
@@ -39,8 +38,7 @@ INSERT INTO utenti (nome, pswd) VALUES ('gianni', MD5('prova'));
 
  Ed ecco lo script PHP di login:
 
- ```
-<pre class="brush:php">
+ ```php
 <?php
 $DB_host     = 'localhost';
 $DB_user     = 'root';

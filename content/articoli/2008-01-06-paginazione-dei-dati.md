@@ -84,9 +84,7 @@ ovvero conterranno sempre un link alla prima e all'ultima pagina (1 e N). Inoltr
 
 Iniziamo ad analizzare il codice dell'applicazione, partendo dal template HTML, riportato di seguito:
 
- ```
-<pre class="brush:php">
-
+ ```php
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
