@@ -20,7 +20,7 @@ Il dubbio mi è venuto osservando che ci sono contesti in cui questo approccio n
 
 ## Domain-driven design
 
-{{< figure src="/wp-content/uploads/2017/10/eric_evans-300x300.jpg" title="Eric Evans" >}}
+{{< figure src="/wp-content/uploads/2017/10/eric_evans.jpg" title="Eric Evans" >}}
 
 Così ho iniziato a fare una ricerca, e ovviamente sono partito dal lavoro di [Eric Evans][1], ovvero dal [Domain-driven design (DDD)][2], un approccio allo sviluppo del software che si può riassumere nei seguenti punti:
 
