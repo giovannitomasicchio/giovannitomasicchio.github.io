@@ -53,8 +53,7 @@ tags:
 
  Nel precedente articolo avevamo detto che tutte le richieste effettuate dall'utente, tutti gli URL della nostra applicazione, vengono in realtà intercettati da un unica pagina di nome index.php, il file di bootstrap. Per ottenere questo risultato è necessario configurare opportunamente il server web, nel nostro caso Apache, ed in questo tutorial utilizzeremo un file .htaccess contenete le seguenti direttive:
 
- ```
-<pre class="brush: php">
+ ```php
 RewriteEngine on
 RewriteRule !\.(js|ico|gif|jpg|png|css)$ index.php
 
@@ -74,8 +73,7 @@ php_flag magic_quotes_gpc off
 
  Ecco il codice:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // includo la cartella del framework e quella dei models
 set_include_path(get_include_path().PATH_SEPARATOR.'C:\Programmi\ZendFramework\library'.PATH_SEPARATOR.'.\models');

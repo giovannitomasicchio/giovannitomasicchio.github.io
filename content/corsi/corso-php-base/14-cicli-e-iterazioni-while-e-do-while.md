@@ -13,8 +13,7 @@ categories:
 
 A volte serve semplicemente ripetere un gruppo di istruzioni finché una determinata condizione è soddisfatta. Quando tale condizione non è più verificata le iterazioni devono essere interrotte. Questo è proprio quello che fa il ciclo **while** che si presenta con una sintassi del tipo:
 
- ```
-<pre class="brush: php">
+ ```php
 while(condizione)
 {
    // istruzioni da iterare
@@ -23,8 +22,7 @@ while(condizione)
 
 dove l'espressione *condizione* viene valutata all'inizio di ogni iterazione. Se assume il valore *true* allora sarà eseguito il gruppo di istruzioni da iterare, altrimenti il ciclo verrà interrotto. Vediamo un esempio:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $somma = 0;
 while ($somma < 100)
@@ -47,8 +45,7 @@ Da questo esempio si evince che il ciclo while è particolarmente indicato quand
 
 Il ciclo **do-while** è una variante del ciclo while. Nel ciclo do-while infatti il controllo viene effettuato alla fine di ogni iterazione anziché all'inizio e questo fa si che la prima iterazione venga sempre eseguita. Si presenta con la seguente sintassi:
 
- ```
-<pre class="brush: php">
+ ```php
 do
 {
    // istruzioni da iterare
@@ -58,8 +55,7 @@ while ( condizione)
 
 Vediamo un esempio:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 do
 {

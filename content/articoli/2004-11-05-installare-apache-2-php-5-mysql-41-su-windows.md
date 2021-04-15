@@ -105,8 +105,7 @@ Procuriamoci il pacchetto compresso di PHP 5 scaricandolo da [questa pagina](htt
 
 Adesso dobbiamo integrare il PHP 5 all'interno di Apache. Per prima cosa apriamo la cartella nella quale abbiamo installato Apache, nel nostro caso **C:\\Programmi\\Apache Group\\Apache2** e cerchiamo al suo interno la cartella **conf**. In questa cartella è presente il file httpd.conf ovvero il principale file di configurazione di Apache. Apriamolo con un editor (il blocco note va benissimo) ed andiamo ad individuare al suo interno un lungo elenco di righe che iniziano con la parola *LoadModule*. Portiamoci alla fine di questo elenco ed aggiungiamo le seguenti righe e salviamo i cambiamenti.
 
- ```
-<pre class="brush: php">
+ ```php
 LoadModule php5_module "c:/php/php5apache2.dll"
 AddType application/x-httpd-php .php
 PHPIniDir "C:/php"
@@ -122,8 +121,7 @@ Come ultima operazione dobbiamo tornare nella cartella **C:\\php** e rinominare 
 
 Per riavviare Apache sarà sufficiente cliccare sul pulsante *Restart*. La procedura dura pochi secondi, se non vengono visualizzati errori significa che tutto è andato a buon fine. Per sincerarcene realizziamo un piccolo script PHP. Apriamo il blocco note e scriviamo le seguenti istruzioni:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 phpinfo();
 ?>
@@ -242,8 +240,7 @@ A questo punto riavviamo Apache come mostrato precedentemente (doppio clic sull'
 
 Adesso proviamo a collegarci con uno script PHP al nostro database MySQL. Apriamo il blocco note (o l'editor che preferite) e scriviamo il seguente codice:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 $link = mysqli_connect("localhost", "root", "testpass");
 if (!$link) {
@@ -294,8 +291,7 @@ Adesso riavviamo Apache come mostrato precedentemente (doppio clic sull'icona di
 
 Ora tutto è pronto per testare uno script PHP-MySQL. Apriamo il blocco note (o l'editor che preferite) e scriviamo il seguente codice:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 $connessione = mysql_connect("localhost", "root", "testpass")
 	or die("Connessione non riuscita: " . mysql_error());

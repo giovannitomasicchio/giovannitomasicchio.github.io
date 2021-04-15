@@ -35,15 +35,13 @@ tags:
 
  getResultRowObject() permette anche di recuperare solo alcune informazioni dal record della tabella. Se ad esempio vogliamo recuperare solo i campi "campo1" e "campo2" bisogna procedere in questo modo:
 
- ```
-<pre class="brush: php">
+ ```php
 $my_auth_adapter->getResultRowObject(array('campo1', 'campo2'));
 ```
 
  Se invece vogliamo recuperare tutti i campi tranne "campo3" e "campo4":
 
- ```
-<pre class="brush: php">
+ ```php
 $my_auth_adapter->getResultRowObject(null, array('campo3', 'campo4'));
 ```
 
@@ -55,8 +53,7 @@ $my_auth_adapter->getResultRowObject(null, array('campo3', 'campo4'));
 
  L'Adapter impiegato è lo Zend\_Auth\_Adapter\_DbTable che utilizza una connessione a MySQL, creata nel file di bootstrap, ed una tabella di nome "users" che è possibile creare con le seguenti query:
 
- ```
-<pre class="brush: sql">
+ ```sql
 CREATE TABLE `users` (
    `user_id` int(11) NOT NULL auto_increment,
    `user_name` varchar(32) default NULL,
@@ -79,8 +76,7 @@ insert into `users` (`user_name`, `password`, `nome`) values('mario76','525d5d4f
 
  Il file di bootstrap utilizzato per questa semplice applicazione non contiene importanti variazioni rispetto a quello analizzato in dettaglio nel [tutorial sullo Zend Framework](http://www.phpnews.it/articoli/zend-framework/zend-framework-tutorial-1/) al quale rimando per eventuali approfondimenti.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 set_include_path(get_include_path().PATH_SEPARATOR.'C:\Programmi\ZendFramework\library');
 
@@ -124,8 +120,7 @@ Zend_Controller_Front::run('controllers');
 
  **logoutAction**: viene invocata dall'utente cliccando su un link "logout". L'operazione richiede semplicemente l'esecuzione del metodo clearIdentity() di Zend\_Auth.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 class IndexController extends Zend_Controller_Action
 {
@@ -212,8 +207,7 @@ class IndexController extends Zend_Controller_Action
 
  Anche in questo caso si rimanda al tutorial sullo Zend Framework per i dettagli sulle altre funzioni presenti.
 
- ```
-<pre class="brush: php">
+ ```php
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="it" xml:lang="it">
 <head>

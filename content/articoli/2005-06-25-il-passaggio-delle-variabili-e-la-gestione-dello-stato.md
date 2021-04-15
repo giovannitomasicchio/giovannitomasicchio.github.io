@@ -172,8 +172,7 @@ tags:
  
  La prima evenienza è facilmente gestibile con la funzione [isset](http://it2.php.net/manual/it/function.isset.php). Ad esempio, se ci aspettiamo che via POST ci venga fornito il valore di un "id" potremo comportarci nel seguente modo:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 if(isset($_POST['id']))
 {

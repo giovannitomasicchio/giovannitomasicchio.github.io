@@ -82,8 +82,7 @@ tags:
 
  Quindi la struttura della classe NotizieController sarà la seguente (si noti come questo tipo di classi deve ereditare da **Zend\_Controller\_Action**, padre di tutti i Controller della nostra applicazione):
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 class NewsController extends Zend_Controller_Action
 {

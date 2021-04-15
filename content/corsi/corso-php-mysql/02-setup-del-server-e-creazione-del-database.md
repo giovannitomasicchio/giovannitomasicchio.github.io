@@ -15,8 +15,7 @@ Vivamente consigliata anche l'installazione di un **client MySQL**. Installando 
 
 Prima di iniziare a realizzare i nostri script PHP/MySQL dobbiamo preparare un database nel quale salvare i nostri dati. Gli esempi proposti nelle prossime lezioni fanno riferimento ad un database di nome *prova* contenente un'unica tabella di nome *utenti*. Per creare il database e la tabella in questione basta lanciare le seguenti query:
 
- ```
-<pre class="brush: mysql">
+ ```sql
 create database prova;
 
 use prova;

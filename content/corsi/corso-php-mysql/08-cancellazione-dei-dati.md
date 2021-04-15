@@ -11,15 +11,13 @@ categories:
 ---
 La cancellazione di record presenti in una tabella è un'operazione che richiede l'esecuzione di una semplice query. Ad esempio per cancellare dalla tabella utenti il record con id pari a 5 basta lanciare la seguente query.
 
- ```
-<pre class="brush: mysql">
+ ```sql
 DELETE FROM utenti WHERE id = 5
 ```
 
 Per eseguire questa cancellazione in PHP è sufficiente quindi il seguente script:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // richiamo il file di configurazione
 require 'config.php';
@@ -49,8 +47,7 @@ Di solito però lo script che deve cancellare dei dati non sa a priori quale rec
 
 Vediamo quindi come realizzare uno script che mostra l'elenco dei record presenti nella tabella "utenti", associando a ciascuno di essi un link e una checkbox attraverso cui selezionare quelli da eliminare. Lo script verrà suddiviso in due pari, la prima adibita alla creazione dell'elenco di record disponibili, con relativi link e checkbox, la seconda per l'eliminazione del record identificato dall'id passato via $\_GET o via $\_POST.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // richiamo il file di configurazione
 require 'config.php';

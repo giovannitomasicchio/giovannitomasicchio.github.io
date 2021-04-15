@@ -13,8 +13,7 @@ categories:
 
  Ma forse è meglio vedere subito un esempio semplice ma efficace:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 echo '5' * '3';
 ?>
@@ -32,8 +31,7 @@ echo '5' * '3';
 
  Vediamo ora un esempio di conversione da numero a stringa:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 echo 'un numero a caso: ' . 43;
 ?>
@@ -49,8 +47,7 @@ echo 'un numero a caso: ' . 43;
  
  Come sarà chiarito dal seguente esempio, l'uso di diversi tipi di dati e la loro implicita conversione in booleano permette di scrivere codice molto compatto ed efficace.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $array = array();
 

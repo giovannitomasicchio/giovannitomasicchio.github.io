@@ -17,8 +17,7 @@ tags:
 
  Il seguente esempio è valido per un server Windows:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 setlocale(LC_TIME, 'ita');
 
@@ -28,8 +27,7 @@ echo strftime("%A %d %B %Y");
 
  Invece per un server Linux (sperimentato su Fedora Core I):
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 setlocale(LC_TIME, 'it_IT');
 
@@ -43,8 +41,7 @@ echo strftime("%A %d %B %Y");
 
  Una soluzione un po' artigianale potrebbe essere la seguente, che si basa sulla semplice traduzione dei giorni della settimana e dei mesi dalla loro indicazione numerica al relativo nome in lettere:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $mesi = array(1=>'gennaio', 'febbraio', 'marzo', 'aprile',
                 'maggio', 'giugno', 'luglio', 'agosto',
@@ -63,8 +60,7 @@ echo $giorni[$sett],' ',$giorno,' ',$mesi[$mese],' ',$anno;
 
  Dalla versione 4.3.0 di PHP la funzione setlocale è diventata però più flessibile. Infatti ora è possibile passare diverse stringe per individuare la lingua desiderata. In altre parole è possibile fondere i due esempi iniziali nel modo seguente:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 setlocale(LC_TIME, 'ita', 'it_IT');
 

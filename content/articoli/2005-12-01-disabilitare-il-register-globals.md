@@ -29,8 +29,7 @@ php_flag register_globals Off
 
  Questa operazione ha effetti simili alla modifica diretta del php.ini A volte però non è possibile usare il file .htaccess, ad esempio se stiamo usando IIS come server web. In questi casi è possibile risolvere il problema con un semplice ma efficace script che di seguito vi riporto integralmente.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 /**
 * @version $Id: globals.php-off 47 2005-09-15 02:55:27Z rhuk $

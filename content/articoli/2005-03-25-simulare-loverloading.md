@@ -21,8 +21,7 @@ tags:
 
  L'esempio che segue realizza l'overloading del metodo somma() al quale si potranno passare sia interi,sui quali verrà effettuata una somma algebrica, sia stringhe, che verranno invece concatenate. Potranno essere passati un numero qualsiasi di parametri, anche nessuno.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 class sommatore
 {

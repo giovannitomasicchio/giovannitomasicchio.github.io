@@ -15,8 +15,7 @@ tags:
 
  Non tutti i fornitori di hosting infatti permettono di gestire files al di fuori della root. In questi casi è possibile affidare al PHP il compito di controllare tali accessi diretti, semplicemente aggiungendo il seguente codice in testa a tutti gli script da proteggere:
 
- ```
-<pre class="brush: php">
+ ```php
 if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 {
     exit('Accesso non consentito') ;
@@ -29,8 +28,7 @@ if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])
 
  **- index.php**
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // includiamo il file di configurazione
 include('config.php');
@@ -41,8 +39,7 @@ include('config.php');
 
  **- config.php**
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // evitiamo l'inclusione diretta
 if(__FILE__ == $_SERVER['SCRIPT_FILENAME'])

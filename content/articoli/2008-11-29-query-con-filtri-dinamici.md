@@ -20,8 +20,7 @@ Poiché non vi è alcun obbligo di specificare tutti i criteri di ricerca, è ne
 
 Questa tecnica, sicuramente flessibile, ha però uno svantaggio, ovvero **frammenta lo statement SQL** in tante stringhe, rendendolo di difficile comprensione. In alternativa possiamo lasciare a MySQL il compito di **ignorare le condizioni non specificate** e considerare solo quelle realmente impostate dall'utente. Vediamo uno statement SQL in grado di fare quanto appena detto.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // tutti i comuni
 $nome_comune = '';

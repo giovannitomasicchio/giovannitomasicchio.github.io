@@ -41,8 +41,7 @@ tags:
 
  Vediamo un esempio tratto dalla documentazione ufficiale:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 /* crea un oggetto connessione non ancora connesso */
 $mysqli = mysqli_init();
@@ -124,8 +123,7 @@ $mysqli->close();
 
  Di seguito riportiamo due esempi, ciascuno esegue la stessa query sia in modalità buffered che unbuffered. Il primo usa i metodi `<span style="color: rgb(0, 0, 0);"><span style="color: rgb(0, 0, 187);">store_result</span><span style="color: rgb(0, 119, 0);">()</span></span>` e `<span style="color: rgb(0, 0, 0);"><span style="color: rgb(0, 0, 187);">use_result</span><span style="color: rgb(0, 119, 0);">()</span></span>` mentre il secondo impiega il metodo `<span style="color: rgb(0, 0, 0);"><span style="color: rgb(0, 0, 187);">query</span><span style="color: rgb(0, 119, 0);">()</span></span>` insieme ad i parametri `<span style="color: rgb(0, 0, 187);">MYSQLI_USE_RESULT</span>` o `<span style="color: rgb(0, 0, 187);">MYSQLI_STORE_RESULT</span>`
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 // provo a connettermi
 $mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
@@ -175,8 +173,7 @@ while ($row = $result->fetch_row())
 
  Adesso vediamo l'uso dei paramentri `<span style="color: rgb(0, 0, 187);">MYSQLI_USE_RESULT</span>` e `<span style="color: rgb(0, 0, 187);">MYSQLI_STORE_RESULT</span>`
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 // provo a connettermi
 $mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
@@ -228,8 +225,7 @@ while ($row = $result->fetch_row())
 
  Risulta però più complessa l'estrazione dei risultati provenienti dalle singole query inviate. Nell'esempio che segue vedremo come risolvere il problema. Verranno eseguite due query e lanciate con un'unica chiamata al metodo `<span style="color: rgb(0, 0, 0);"><span style="color: rgb(0, 0, 187);">multi_query</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(0, 119, 0);">)</span></span>`. Per recuperare il primo set di risultati useremo il metodo `<span style="color: rgb(0, 0, 0);"><span style="color: rgb(0, 0, 187);">store_result</span><span style="color: rgb(0, 119, 0);">()</span></span>` (query buffered) seguito da una normale fetch. Dopo aver chiuso il set di risultati corrente (`<span style="color: rgb(0, 0, 0);"><span style="color: rgb(0, 0, 187);">close</span><span style="color: rgb(0, 119, 0);">()</span></span>`) si passerà a quello successivo attraverso il metodo `<span style="color: rgb(0, 0, 0);"><span style="color: rgb(0, 0, 187);">next_result</span><span style="color: rgb(0, 119, 0);">()</span></span>` e l'intera procedura verrà ripetuta.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 // provo a connettermi al server MySQL
 $mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
@@ -299,8 +295,7 @@ $mysqli->close();
 
  Restituisce il numero di righe interessate dall'ultima query. `<span style="color: rgb(0, 0, 187);">affected_rows</span>` va usato solo quando la query modifica il contenuto del database, come nel caso di INSERT, UPDATE e DELETE e non deve essere impiegato con le SELECT. Nel caso di una query di tipo UPDATE `<span style="color: rgb(0, 0, 187);">affected_rows</span>` restituisce il numero di righe realmente modificate e non il numero di righe che rispondono alla clausola WHERE della query stessa. Questo comportamento può essere modificato agendo sui parametri di connessione come mostrato all'inizio di questo articolo.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 // provo a connettermi al server MySQL
 $mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
@@ -332,8 +327,7 @@ $mysqli->close();
 
  Forniscono rispettivamente un messaggio di errore ed un relativo codice numerico associato nel caso in cui la connessione al server MySQL non abbia avuto esito positivo. In particolare`<span style="color: rgb(0, 0, 0);"><span style="color: rgb(0, 0, 187);"> mysqli_connect_errno</span><span style="color: rgb(0, 119, 0);">()</span></span>` può essere impiegato per verificare l'esito della connessione semplicemente con un IF.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 // provo a connettermi al server MySQL
 $mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
@@ -352,8 +346,7 @@ if (mysqli_connect_errno())
 
  Nel caso di query buffered permette di posizionarsi su una qualsiasi delle righe restituite dalla query
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 // provo a connettermi al server MySQL
 $mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
@@ -383,8 +376,7 @@ $mysqli->close();
 
  Forniscono rispettivamente un messaggio di errore ed un relativo codice numerico associati all'ultimo errore verificatosi nell'interazione con il database MySQL. Utili per effettuare il debug delle query
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 // provo a connettermi al server MySQL
 $mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
@@ -402,8 +394,7 @@ if(!$mysqli->query("SELECT * FROM tabella_inesistente"))
 
  Permette di sapere quanti campi (colonne) contiene un set di risultati. Particolarmente utile quando viene eseguito il metodo `<span style="color: rgb(0, 0, 0);"><span style="color: rgb(0, 0, 187);">store_result</span><span style="color: rgb(0, 119, 0);">()</span></span>` e non è noto a priori se la query restituirà dei risultati (es. una SELECT) o meno (INSER, UPDATE, ...)
 
- ```
-<pre class="brush: php">
+ ```php
 <form id="form1" name="form1" method="post" action=""> 
 <label>Inserisci una query: 
 <input name="query" type="text" size="50" /> 
@@ -442,8 +433,7 @@ if($_POST)
 
  Fornisce l'ultimo ID autogenerato da MySQL per un campo auto\_increment.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 // provo a connettermi al server MySQL
 $mysqli = new mysqli('localhost', 'root', 'password_db', 'test');

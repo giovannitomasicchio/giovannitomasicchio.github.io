@@ -69,8 +69,7 @@ tags:
 
  **1) Autenticazione diretta**: richiamiamo il metodo authenticate() dell'Adapter e recuperiamo l'oggetto Zend\_Auth\_Result per verificarne l'esito. Se l'autenticazione ha successo procediamo alla memorizzazione dell'identità dell'utente nello Storage di Zend\_Auth. Per farlo recuperiamo l'oggetto Storage col metodo getStorage() di Zend\_Auth e poi utilizziamo il metodo write().
 
- ```
-<pre class="brush: php">
+ ```php
 // Creo il mio Adapter (viene considerato un generico Adapter personalizzato)
 $authAdapter = new MyAuthAdapter($username, $password);
 
@@ -87,8 +86,7 @@ if ($result->isValid()) {
 
  **2) Autenticazione indiretta**: richiamiamo Zend\_Auth::authenticate() a cui passiamo come parametro proprio l'Adapter precedentemente creato. Zend\_Auth::authenticate() chiamerà a sua volta il metodo authenticate() dell'Adapter e restituirà un oggetto Zend\_Auth\_Result (analogamente a quanto avviene al punto 1). Inoltre, se l'autenticazione ha esito positivo, memorizzerà l'identità dell'utente nello Storage in modo da rendere permanente il risultato dell'autenticazione.
 
- ```
-<pre class="brush: php">
+ ```php
 $auth = Zend_Auth::getInstance();
 
 // Creo il mio Adapter (viene considerato un generico Adapter personalizzato)
@@ -108,8 +106,7 @@ if ($result->isValid()) {
 
  Effettuata l'autenticazione e memorizzato l'esito, per verificare se l'utente corrente è loggato basta controllare se la sua identità sia presente nello Storage di Zend\_Auth ed eventualmente recuperarla:
 
- ```
-<pre class="brush: php">
+ ```php
 $auth = Zend_Auth::getInstance();
 if ($auth->hasIdentity()) {
     // recupero l'identità dell'utente
@@ -121,7 +118,6 @@ if ($auth->hasIdentity()) {
 
  L'operazione di logout avviene invece cancellando dallo Storage l'identità precedentemente memorizzata, ed anche in questo caso possiamo demandare l'operazione a Zend\_Auth:
 
- ```
-<pre class="brush: php">
+ ```php
 Zend_Auth::getInstance()->clearIdentity();
 ```

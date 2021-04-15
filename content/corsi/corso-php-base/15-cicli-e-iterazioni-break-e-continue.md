@@ -13,8 +13,7 @@ categories:
 
 Abbiamo visto che ogni struttura per la realizzazione di cicli (for, foreach, while, do-while) utilizza una condizione per decidere se continuare le iterazioni o interrompersi. PHP comunque mette a disposizione il comando **break** per effettuare una terminazione prematura di queste esecuzioni:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $colori = array('bianco','nero','rosso','verde','blu','giallo');
 $trovato = false;
@@ -42,8 +41,7 @@ L'esempio precedente scorre gli elementi dell'array $colori attraverso un foreac
 
 Ci sono casi in cui più cicli vengono annidati, l'uno dentro l'altro, per risolvere problemi più complessi. Il seguente esempio è molto simile al precedente ma in questo caso la struttura dell'array $colori è più complessa. $colori infatti è composto a sua volta da tre array ognuno dei quali contiene 2 colori. Per scorrere questo array usiamo un ciclo for ed al suo interno un ciclo foreach nel quale viene effettuata la ricerca vera e propria. Non appena viene trovato il valore cercato è inutile procedere con le iterazioni sia del ciclo foreach che del ciclo for più esterno. Useremo allora il comando break 2 proprio per specificare che i cicli da interrompere sono 2. Se avessimo usato solo il comando break avremmo interrotto solo il ciclo foreach, ovvero il più interno.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $colori = array( array('bianco','nero'),
 array('rosso','verde'),
@@ -76,8 +74,7 @@ Come già detto nella Lezione 10 il comando break è usato anche nel costrutto s
 
 Anche il comando **continue** serve ad alterare le normali iterazioni di un ciclo for, foreach, while e do-while. In particolare continue fa si che non vengano eseguite le successive istruzioni del ciclo ma che si passi direttamente alle prime istruzioni della prossima iterazione. Il seguente esempio effettua la somma di tutti i numeri pari presenti in un array. Quando si incontra un numero dispari il comando continue permette di saltarne la somma e di procedere con il prossimo numero.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $somma = 0;
 $numeri = array(3,2,5,6,8,12,43,23,66,11,32);

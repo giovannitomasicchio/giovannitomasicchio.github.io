@@ -23,8 +23,7 @@ tags:
 
  Siamo finalmente arrivati all'ultima parte di questa serie di articoli dedicati alla realizzazione di una applicazione con lo Zend Framework. Dobbiamo analizzare il funzionamento del NewsController, il cuore della nostro sito web, che si occupa della visualizzazione, inserimento, modifica e cancellazione delle news. Di seguito viene riportata la struttura del Controller che sarà analizzata in dettaglio nelle prossime pagine.
 
- ```
-<pre class="brush: php">
+ ```php
 class NewsController extends Zend_Controller_Action
 {
     protected $_flashMessenger = null;
@@ -53,8 +52,7 @@ class NewsController extends Zend_Controller_Action
 
  Nel codice sono evidenti le quattro Action per la gestione delle news (viewAction, deleteAction, newAction, editAction). Inoltre si può notare l'attributo $\_flashMessenger che ci serve per conservare un riferimento all'helper FlashMessenger, descritto nel precedente articolo. Poiché il FlashMessenger viene utilizzato in quasi tutte le Action, è conveniente recuperarlo e conservarlo in un attributo (una variabile) del Controller. Dove vanno poste le istruzioni per recuperare il FlashMessenger indipendentemente dalla Action chiamata? Nel metodo **init()**, di seguito riportato:
 
- ```
-<pre class="brush: php">
+ ```php
 public function init()
 {
     $this->_flashMessenger = $this->_helper->getHelper('FlashMessenger');
@@ -85,8 +83,7 @@ public function init()
 
  Chiarito le modalità di accesso ai dati provenienti dall'esterno vediamo il codice dell'Action che mostra una news all'utente:
 
- ```
-<pre class="brush: php">
+ ```php
 public function viewAction()
 {
     $news = new News();
@@ -107,8 +104,7 @@ public function viewAction()
 
  Terminata l'esecuzione della viewAction, per le convenzioni sui nomi dei template, viene automaticamente caricato il template /views/scripts/news/view.phtml, riportato di seguito.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php echo $this->render('header.phtml'); ?>
 <div class="news">
     <div class="autore">di <?php echo $this->escape($this->news['autore']) ?> | <?php echo $this->escape($this->news['data']) ?></div>
@@ -135,8 +131,7 @@ public function viewAction()
 
  Ovviamente la presenza del redirect inibisce il caricamento automatico di un template al termine della Acion.
 
- ```
-<pre class="brush: php">
+ ```php
 public function deleteAction()
 {
     $news = new News();
@@ -157,8 +152,7 @@ public function deleteAction()
 
  Se è stato effettuato l'invio del form (**$request-&gt;isPost()** in riga 9) allora dobbiamo provare ad inserire la nuova news nel database. Recuperiamo quindi i dati inseriti dall'utente con $request-&gt;getPost('nome\_parametro') ed invochiamo il metodo insertUpdateNews del Model $news (riga 19). Se tutto va bene memorizziamo un messaggio di successo nel flashMessenger ed effettuiamo il redirect alla home page. Se invece il Model $news solleva un'eccezione a causa di un problema con i dati inseriti dall'utente, allora mostro un messaggio di errore (riga 23) insieme ai dati inviati dall'utente (righe 24-27)
 
- ```
-<pre class="brush: php">
+ ```php
 public function newAction()
 {
     $this->view->titoloPagina = 'Inserisci una news';
@@ -195,8 +189,7 @@ public function newAction()
 
  **news-form.phtml**
 
- ```
-<pre class="brush: php">
+ ```php
 <?php echo $this->render('header.phtml'); ?>
 <p class="errore"><?php echo $this->escape($this->errorMsg)?></p>
 <form action="" method="post">
@@ -229,8 +222,7 @@ public function newAction()
 
  La Action per la modifica di una news precedentemente inserita dall'utente ha una struttura molto simile a quella per l'inserimento vista nella precedente pagina. La principale differenza consiste nel fatto che se la pagina viene mostrata per la prima volta non basta caricare il template del form di inserimento/modifica ma bisogna anche recuperare i dati della news dal database e passarli al template. Queste operazioni vengono realizzate alla fine dello script, nel blocco "else" (righe 34-38). Si noti come anche in questo caso viene effettuato un controllo sulla news recuperata dal database. Infatti poiché l'id della news proviene dall'utente, questo potrebbe esser manomesso e quindi non associato ad una news realmente presente nel database. In questo caso viene sollevata una eccezzione che si traduce, come visto nella viewAction, in un messaggio di pagina non trovata.
 
- ```
-<pre class="brush: php">
+ ```php
 public function editAction()
 {
     $this->view->titoloPagina = 'Modifica news';

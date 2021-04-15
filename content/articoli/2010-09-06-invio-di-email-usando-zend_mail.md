@@ -20,8 +20,7 @@ tags:
 
  Iniziamo con la creazione del form in HTML che permetterà di inviare i dati inseriti dall'utente tramite $\_POST allo script send.php:
 
- ```
-<pre class="brush: php">
+ ```php
 <form method="post" action="send.php" name="form">
 <table border="0px">
 <tr>
@@ -80,8 +79,7 @@ tags:
  Supponiamo però di voler utilizzare un server SMTP. Per farlo ci viene in aiuto un oggetto molto interessante: Zend\_Mail\_Transport\_Smtp. Nello script send.php si può vedere come si impostano i parametri di connessione al server SMTP.
  Infine, tramite il metodo send di Zend\_Mail si invia l'email indicando il "transporter" creato:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
     // includo la cartella del framework
     // Attenzione, il path impostato è per server windows, se si è su un server linux il path dovrebbe essere del tipo: /directory/zendframework/library
@@ -166,8 +164,7 @@ tags:
 
  Ecco dunque come si presenta lo script finale.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
     // includo la cartella del framework
     // Attenzione, il path impostato è per server windows, se si è su un server linux il path dovrebbe essere del tipo: /directory/zendframework/library

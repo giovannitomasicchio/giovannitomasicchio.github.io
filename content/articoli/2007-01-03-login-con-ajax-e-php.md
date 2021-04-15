@@ -36,8 +36,7 @@ tags:
 
  **login.htm**
 
- ```
-<pre class="brush: xml">
+ ```html
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
@@ -77,8 +76,7 @@ tags:
  
  **login.js**
 
- ```
-<pre class="brush: javascript">
+ ```javascript
 // crea l'oggetto per la comunicazione AJAX con il server
 // compatibile con tutti i browser che supportano AJAX
 function crea_http_req() {
@@ -172,8 +170,7 @@ function gestisci_risposta() {
  
  **login.php**
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // prelevo username e password dal POST,
 // eliminando eventuali spazi alle estremità delle stringhe

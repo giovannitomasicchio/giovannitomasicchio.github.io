@@ -25,8 +25,7 @@ Gli operatori aritmetici sono quelli che usiamo comunemente per effettuare le op
 
 Niente di nuovo quindi, a parte forse l'operatore modulo (%) che restituisce il resto di una divisione. Vediamo un esempio
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $a = 5; $b = 2;
 
@@ -42,8 +41,7 @@ $modulo = $a % $b; // 1
 
 Abbiamo già utilizzato l'operatore di assegnazione " = " per impostare il valore di una variabile. Citiamo qui anche le forme abbreviate (+=, -= e .=) che più spesso vengono usate. I commenti nel codice ne spiegano la valenza.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $n = 5;
 $testo = 'Ciao';
@@ -75,8 +73,7 @@ La seguente tabella riporta i principali operatori di confronto:
 
 Questi operatori sono molto importanti perché vengono usati sia nel costrutto if sia in altre strutture che vedremo in seguito. Effettuano il confronto tra due valori il cui esito verrà espresso attraverso una variabile booleana: se la relazione specificata (uguale, minore, maggiore, ecc.) viene rispettata allora il risultato del confronto sarà true, in caso contrario sarà false. Vediamone un impiego all'interno del costrutto if:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $n = 5;
 
@@ -96,8 +93,7 @@ In realtà ci sono altri 2 operatori di confronto (=== e !==) che operano, oltre
 
 Si tratta di due operatori (++ e --) che fanno aumentare o diminuire di una unità il valore di una variabile numerica. Sono quindi delle forme abbreviate per espressioni aritmetiche di uso comune.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $n = 5; $m = 3;
 
@@ -122,8 +118,7 @@ Nella seguente tabella sono elencati i 4 operatori logici, due dei quali (and e 
 
 Gli operatori and, or e xor si applicano ad una coppia di variabili booleane mentre l'operatore ! agisce su un unica variabile booleana. Gli operatori logici possano essere usati all'interno di espressioni più complesse, in cui gli operandi sono costituiti a loro volta da espressioni il cui risultato sarà una variabile booleana. Vediamo alcuni esempi:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $denaro_disponibile = 500;
 $prezzo = 1400;
@@ -172,8 +167,7 @@ Un altro operatore che vale la pena menzionare è l'operatore ternario o di conf
 
 Se l'espressione1 è true allora viene valutata l'espressione2, altrimenti sarà valutata l'espressione3. L'esempio seguente mostra un possibile uso di questo operatore:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $voto = 7;
 

@@ -29,8 +29,7 @@ L'espressione1 viene eseguita una sola volta prima della prima iterazione. Viene
 
 Adesso vediamo un esempio concreto, utilizzato per la visualizzazione del quadrato dei numeri da 1 a 10.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 for ($i=1 ; $i <= 10 ; $i++)
 {
@@ -44,8 +43,7 @@ La variabile $i viene utilizzata come indice per questo ciclo. Il suo valore è 
 
 Vediamo ora come scorrere gli elementi di un array e mostrarli all'utente.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // array da scorrere
 $animali = array('cane','gatto','topo','elefante');
@@ -74,8 +72,7 @@ foreach ($array\_da\_attraversare as $valore\_elemento)
 
 Le istruzioni raggruppate nelle parentesi graffe verranno ripetute tante volte quanti sono gli elementi presenti nell'array $array\_da\_attraversare. Ad ogni iterazione verrà letto un valore presente in tale array e copiato nella variabile $valore\_elemento. Vediamo un esempio:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $colori = array('bianco','rosso','verde','blu','giallo','nero');
 
@@ -88,8 +85,7 @@ foreach ($colori as $colore)
 
 Ad ogni iterazione la variabile $colore assumerà il valore di un elemento presente nell'array $colori. E' chiaro quindi che un ciclo foreach serve a iterare delle operazioni che vanno eseguite sugli elementi di un array. Vediamo invece che succede se nell'esempio precedente usiamo il ciclo foreach per effettuare una modifica ai valori contenuti nell'array.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $colori = array('bianco','rosso','verde','blu','giallo','nero');
 
@@ -109,8 +105,7 @@ Abbiamo attraversato 2 volte l'array $colori. Una volta per modificare ogni suo 
 
 Con PHP 5 però le cose sono cambiate. Infatti è sufficiente porre il carattere &amp; prima della variabile $colore nell'espressione del ciclo foreach per far si che ogni modifica effettuata su di essa venga in realtà effettuata sul relativo valore dell'array. L'esempio seguente è identico al precedente, tranne che per il carattere &amp; posto a sinistra della variabile $colore. Questa volta le modifiche ai valori dell'array avranno effetto.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $colori = array('bianco','rosso','verde','blu','giallo','nero');
 
@@ -134,8 +129,7 @@ foreach ($colori as $colore)
 
 Mostriamo adesso un ultima variante, non meno importante, della sintassi del ciclo foreach che permette di scorrere un array e recuperarne gli elementi sotto forma di coppie chiave =&gt; valore. Ecco la struttura tipica:
 
- ```
-<pre class="brush: php">
+ ```php
 foreach ($array_da_attraversare as $chiave_elemento => $valore_elemento)
 {
    // istruzioni da iterare
@@ -144,8 +138,7 @@ foreach ($array_da_attraversare as $chiave_elemento => $valore_elemento)
 
 Il funzionamento è lo stesso della struttura vista in precedenza. L'unica differenza è che adesso anche le chiavi di ciascun elemento vengono lette e copiate nella variabile $chiave\_elemento. Vediamo un semplice esempio:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $film = array('titolo' => 'Via col Vento', 'anno' => 1939,'regista' => 'Victor Fleming');
 
@@ -160,8 +153,7 @@ Anche con questa sintassi è possibile usare il carattere &amp; per far si che l
 
 Concludiamo risolvendo il problema posto all'inizio della Lezione 8: mostrare un elenco di recensioni di films. In quella lezione avevamo detto che la struttura migliore per contenere questi dati sarebbe stata un array multilivello, ovvero un array i cui elementi fossero a loro volta degli array contenenti i dati di ciascun film. Vediamo come usare un ciclo foreach per questo tipo di struttura.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $films = array(array('titolo' => 'Via col Vento',
                      'anno' => 1939,

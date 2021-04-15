@@ -54,8 +54,7 @@ tags:
 
  Il seguente esempio chiarirà ulteriormente questa tecnica.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // provo a connettermi al server MySQL
 $mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
@@ -125,8 +124,7 @@ $stmt->execute();
 
  Vediamo ora un esempio di binding dei risultati:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // provo a connettermi al server MySQL
 $mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
@@ -170,8 +168,7 @@ while ($stmt->fetch())
 
  Vediamo un esempio che avvia una transazione con il comando START TRANSACTION:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // provo a connettermi al server MySQL
 $mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
@@ -203,8 +200,7 @@ $mysqli->query('ROLLBACK');
 
  Adesso vediamo invece uno script che implementa le transazioni disabilitando l'AUTOCOMMIT:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // provo a connettermi al server MySQL
 $mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
@@ -232,8 +228,7 @@ $mysqli->query('ROLLBACK');
 
  Con l'estensione *ext/mysqli* abbiamo a disposizione i metodi `<span style="color: rgb(0, 0, 0);"><span style="color: rgb(0, 0, 187);">commit</span><span style="color: rgb(0, 119, 0);">()</span></span>`e `<span style="color: rgb(0, 0, 0);"><span style="color: rgb(0, 0, 187);">rollback</span><span style="color: rgb(0, 119, 0);">()</span></span>`della classe *mysqli* che, insieme al metodo `<span style="color: rgb(0, 0, 0);"><span style="color: rgb(0, 0, 187);">autocommit</span><span style="color: rgb(0, 119, 0);">(</span><span style="color: rgb(0, 119, 0);">)</span></span>` permettono di eseguire delle transazioni inviando al server esclusivamente le query costituenti la transazione stessa. La logica da seguire coincide con quella dell'ultimo esempio visto poiché questi metodi hanno la stessa valenza dei relativi comandi SQL:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // provo a connettermi al server MySQL
 $mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
@@ -269,8 +264,7 @@ $mysqli->rollback();
 
  L'esempio che proponiamo è una rivisitazione dello script proposto per l'[upload e l'inserimento dei files all'interno di un database MySQL](http://www.phpnews.it/articoli/php/files-ed-immagini-in-mysql/2/). Questa volta useremo le classi messe a disposizione da *ext/mysqli* ed in particolare vedremo come impiegare il metodo `<span style="color: rgb(0, 0, 0);"><span style="color: rgb(0, 0, 187);">send_long_data</span><span style="color: rgb(0, 119, 0);">()</span></span>`.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // se è stato inviato il file...
 if(isset($_POST['invia']))

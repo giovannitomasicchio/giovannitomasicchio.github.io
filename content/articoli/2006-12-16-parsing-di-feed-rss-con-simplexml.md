@@ -30,8 +30,7 @@ tags:
 
  Iniziamo subito a vedere come effettuare il parsing di un documento XML con simpleXML. Ecco l'unica istruzione necessaria:
 
- ```
-<pre class="brush: php">
+ ```php
 $documento = simplexml_load_file("file_esempio.xml");
 ```
 
@@ -41,15 +40,13 @@ $documento = simplexml_load_file("file_esempio.xml");
 
  Entriamo ora nel vivo della questione e vediamo come accedere alla gerarchia di oggetti restituita dalla funzione simplexml\_load\_file(). Va subito osservato come tutta la gerarchia è contenuta nella variabile restituita da tale funzione, che nel nostro caso si chiama appunto $documento. Tale variabile risulta essere un oggetto corrispondente all'elemento radice del file XML. Dentro tale oggetto ci si può muove agilmente, grazie alla seguente sintassi:
 
- ```
-<pre class="brush: php">
+ ```php
 $documento->nome_elementi_figli;
 ```
 
  simplexml\_load\_file() restituisce quindi un oggetto che rappresenta l'elemento radice del documento XML, al cui interno verranno innestati un insieme di ulteriori oggetti, ciascuno dei quali rappresenta un nodo figlio. Il nome dei nodi figli diverrà il nome degli oggetti che li rappresentano. Se più nodi figlio posseggono lo stesso nome allora simpleXML genera un array di oggetti corrispondenti. Per chiarire le cose facciamo un esempio, riferendoci al seguente semplice documento chiamato "esempio.xml":
 
- ```
-<pre class="brush: xml">
+ ```xml
 <radice>
    <item>primo elemento</item>
    <item>secondo elemento</item>
@@ -59,16 +56,14 @@ $documento->nome_elementi_figli;
 
  Attraverso le seguenti istruzioni possiamo recuperare l'array contenente i tre oggetti che rappresentano i 3 elementi figli &lt;item&gt; presenti in esempio.xml e annidati in &lt;radice&gt;.
 
- ```
-<pre class="brush: php">
+ ```php
 $documento = simplexml_load_file("esempio.xml");
 $array_items = $documento->item;
 ```
 
  Infine, con un semplice ciclo foreach, possiamo stampare il contenuto dei tre oggetti &lt;item&gt;. Ecco il codice necessario:
 
- ```
-<pre class="brush: php">
+ ```php
 foreach($array_items as $item)
 {
    echo $item . "<br />";
@@ -77,8 +72,7 @@ foreach($array_items as $item)
 
  Nel caso in cui i tag &lt;item&gt; del nostro file "esempio.xml" contenessero ulteriori tag figli annidati, essi avrebbero potuto essere recuperati con una sintassi del tutto simile a quella appena vista. Complichiamo un po' il nostro file "esempio.xml" e vediamo come trattarlo al fine di recuperare i nuovi tag inseriti:
 
- ```
-<pre class="brush: xml">
+ ```xml
 <radice>
    <item>
       <title>primo elemento</title>
@@ -97,8 +91,7 @@ foreach($array_items as $item)
 
  A questo punto se vogliamo recuperare il contenuto degli elementi figli dei tag &lt;item&gt; presenti nel documento, non dobbiamo far altro che adoperare il seguente ciclo foreach:
 
- ```
-<pre class="brush: php">
+ ```php
 $documento = simplexml_load_file("esempio.xml");
 $array_items = $documento->item;
 foreach($array_items as $item)
@@ -110,8 +103,7 @@ foreach($array_items as $item)
 
  Come potete notare abbiamo adoperato la sintassi per il recupero degli elementi già introdotta in precedenza. Va osservato che quando un tag (nel nostro caso &lt;item&gt;) contiene elementi figli con nome distinto (nel nostro caso &lt;title&gt; o &lt;autore&gt;) non è necessario adoperare un ciclo foreach per accedervi. Basta infatti usare la sintassi:
 
- ```
-<pre class="brush: php">
+ ```php
 echo $item->title;
 echo $item->autore;
 ```
@@ -137,8 +129,7 @@ echo $item->autore;
 
  Ecco lo script e alcuni commenti per una sua più chiara comprensione:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // indirizzo remoto del feed
 $url_feed = "http://www.phpnews.it/index2.php?option=com_rss&feed=RSS2.0&no_html=1";

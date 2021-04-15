@@ -24,8 +24,7 @@ Alla fine del ciclo di esecuzione (ciclo di dispatch), quando l'esecuzione del m
 
 zf-tutorial/application/layouts/scripts/layout.phtml
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $this->headMeta()->appendHttpEquiv('Content-Type', 'text/html;charset=utf-8');
 $this->headTitle()->setSeparator(' - ');

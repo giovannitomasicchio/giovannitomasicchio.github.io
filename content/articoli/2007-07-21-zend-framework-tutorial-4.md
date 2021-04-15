@@ -21,8 +21,7 @@ tags:
 
  Generalmente una Action preleva eventuali dati presenti nella richiesta effettuata dall'utente (come i dati GET e POST), richiama uno o più Model per interagire col database e mostra il risultato del suo operato caricando (implicitamente o esplicitamente) un template a cui passa i dati dinamici da visualizzare. Vediamo come queste operazioni vengono eseguite nell'IndexController, responsabile della home page del sito. Di seguito viene riportato il codice completo.
 
- ```
-<pre class="brush: php">
+ ```php
 class IndexController extends Zend_Controller_Action
 {
     public function indexAction()
@@ -62,8 +61,7 @@ class IndexController extends Zend_Controller_Action
  
  **index.phtml**
 
- ```
-<pre class="brush: php">
+ ```php
 <?php echo $this->render('header.phtml'); ?>
 <p class="errore"><?php echo $this->escape($this->messaggi[0])?></p>
 <a href="<?php echo BASE_URL?>news/new/">Inserisci una news</a>
@@ -92,8 +90,7 @@ class IndexController extends Zend_Controller_Action
 
  **header.phtml**
 
- ```
-<pre class="brush: php">
+ ```php
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="it" xml:lang="it">
 <head>
@@ -108,8 +105,7 @@ class IndexController extends Zend_Controller_Action
 
  **footer.phtml**
 
- ```
-<pre class="brush: php">
+ ```php
 </div>
     </body>
 </html>
@@ -121,8 +117,7 @@ class IndexController extends Zend_Controller_Action
 
  ErrorController è il Controller che intercetta (tra le altre cose) eventuali errori del Front Controller, come ad esempio gli errori di "pagina non trovata". La sua struttura e davvero molto semplice, in pratica si limita a dare un titolo esplicativo alla pagina. Il messaggio vero e proprio è invece conservato direttamente nel template associato (error.phtml), richiamato automaticamente grazie alla convenzione sui nomi dei file.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 class ErrorController extends Zend_Controller_Action
 {
@@ -136,8 +131,7 @@ class ErrorController extends Zend_Controller_Action
 
  **error.phtml**
 
- ```
-<pre class="brush: php">
+ ```php
 <?php echo $this->render('header.phtml'); ?>
 <div class="testo">Attensione! La pagina che stai cercando non esiste oppure è stata spostata.</div>
 <br />

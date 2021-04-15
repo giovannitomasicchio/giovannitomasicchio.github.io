@@ -25,8 +25,7 @@ tags:
 
  Al di la delle considerazioni etiche sull'attività di SEO e al di la di quali siano le caratteristiche dei contenuti che garantiscono un buon ranking nelle SERP dei motori, di seguito viene mostrato un semplice script PHP per praticare il cloaking.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $pagina_ottimizzata_per_gg = <<<EOF
 codice html pagina sovraottimizzata
@@ -55,8 +54,7 @@ else {
 
  Di conseguenza con l'istruzione:
 
- ```
-<pre class="brush: php">
+ ```php
 strstr($us_agent, $gg_agent_string)
 ```
 

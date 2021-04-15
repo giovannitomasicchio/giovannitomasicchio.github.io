@@ -13,8 +13,7 @@ Adesso che sappiamo inserire dei dati in una tabella MySQL vediamo come poterli 
 
 Come visto in precedenza la funzione mysql\_query() ci permette di inviare una query al server MySQL. Se ad esempio inviando una query del tipo:
 
- ```
-<pre class="brush: mysql">
+ ```sql
 SELECT id, nome FROM utenti
 ```
 
@@ -43,8 +42,7 @@ Tenendo presente questo comportamento delle istruzioni di fetch è facile realiz
 
 **- mysql\_fetch\_row**
 
- ```
-<pre class="brush: php">
+ ```php
 $ricevuta = mysql_query("SELECT id, nome FROM utenti ");
 
 while ($row = mysql_fetch_row($ricevuta)) {
@@ -54,8 +52,7 @@ while ($row = mysql_fetch_row($ricevuta)) {
 
 **- mysql\_fetch\_assoc**
 
- ```
-<pre class="brush: php">
+ ```php
 $ricevuta = mysql_query("SELECT id, nome FROM utenti ");
 
 while ($row = mysql_fetch_assoc($ricevuta)) {
@@ -65,8 +62,7 @@ while ($row = mysql_fetch_assoc($ricevuta)) {
 
 **- mysql\_fetch\_object**
 
- ```
-<pre class="brush: php">
+ ```php
 $ricevuta = mysql_query("SELECT id, nome FROM utenti ");
 
 while ($obj = mysql_fetch_object($ricevuta)) {
@@ -76,8 +72,7 @@ while ($obj = mysql_fetch_object($ricevuta)) {
 
 **- mysql\_fetch\_array**
 
- ```
-<pre class="brush: php">
+ ```php
 $ricevuta = mysql_query("SELECT id, nome FROM utenti ");
 
 while ($row = mysql_fetch_array($ricevuta, MYSQL_BOTH)) {
@@ -91,8 +86,7 @@ Effettuata una query questo puntatore è inizializzato da PHP a 0 e viene increm
 
 Normalmente non è necessario agire su questo puntatore, poiché quasi sempre siamo interessati ad estrarre tutti i record provenienti dalla query, nell'ordine con cui sono stati prodotti ed inviati da MySQL. Se però volessimo prelevare solo alcuni record allora possiamo utilizzare la funzione **mysql\_data\_seek()** con cui è possibile spostarsi all'interno del set di risultati. Nel seguente esempio verrà estratto solo il primo e l'ultimo record dal set dei risultati:
 
- ```
-<pre class="brush: php">
+ ```php
 $ricevuta = mysql_query("SELECT nome FROM utenti ORDER BY nome");
 
 $row = mysql_fetch_assoc($ricevuta);
@@ -115,8 +109,7 @@ Analizziamo nel dettaglio il funzionamento del precedente script:
  
 Prima di concludere con le istruzioni di fetch è doveroso citare **mysql\_result()**. A differenza delle altre funzioni di fetch che prelevano un intero record dal set di risultati, mysql\_result() permette di ottenere solo un campo di un particolare record (una sola cella). Ecco un esempio del suo funzionamento:
 
- ```
-<pre class="brush: php">
+ ```php
 $ricevuta = mysql_query("SELECT id, nome FROM utenti ORDER BY id");
 
 // mostra il nome del TERZO record restituito dalla query

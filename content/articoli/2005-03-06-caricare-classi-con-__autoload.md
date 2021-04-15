@@ -21,8 +21,7 @@ tags:
 
  Vediamo un esempio:
 
- ```
-<pre class="brush: php">
+ ```php
 function __autoload($class_name)
 {
    require $class_name . '.php';
@@ -33,8 +32,7 @@ function __autoload($class_name)
 
  Si può pensare di estendere questa funzione permettendole di caricare i files da cartelle diverse a seconda del nome della classe da istanziare. Ad esempio la seguente funzione cercherà la definizione di una ipotetica classe "common\_xml\_parser" nel file parser.php della cartella common/xml/
 
- ```
-<pre class="brush: php">
+ ```php
 function __autoload($class_name)
 {
   $file_name = strreplace('_', '/', $class_name) . '.php';

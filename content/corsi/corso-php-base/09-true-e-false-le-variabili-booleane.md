@@ -15,8 +15,7 @@ categories:
 
  Il PHP ci viene incontro mettendoci a disposizione 2 valori particolari: **true** e **false** che significano appunto "vero" e "falso". Alcuni esempi chiariranno il concetto:
 
- ```
-<pre class="brush: php">
+ ```php
 $mi_piace_il_php = true; // altrimenti non avrei scritto questo corso
 $php_difficile = false; // se credete sia difficile non conoscete il C++
 $sono_ricco = false; // se lo fossi mi comprerei un'auto nuova

@@ -22,8 +22,7 @@ tags:
 
  Ecco il listato dello script mittente.php, abbondantemente commentato. Si noti come nella riga 4 per specificare il nome del file da trasmettere sia stato usato il carattere @. In questo modo CURL sa che il campo 'file\_dati' dell'ipotetico form che stiamo inviando non contiene la stringa "C:\\dati.txt" bensì il file C:\\dati.txt.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // preparo l'array che conterrà i dati da inviare via POST
 // in questo caso c'è solo il file da trasmettere
@@ -65,8 +64,7 @@ echo $postResult;
 
  destinatario.php è invece un semplicissimo script che si occupa esclusivamente di salvare il file ricevuto da mittente.php. In caso di utilizzo reale dello script sarebbe opportuno inserire una serie di controlli per verificare se il processo di upload è stato eseguito correttamente, verifiche non necessarie ai fini di questo esempio.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // provo a salvare in "dati_ricevuti.txt" il file ricevuto
 if (move_uploaded_file($_FILES['file_dati']['tmp_name'], 'dati_ricevuti.txt'))

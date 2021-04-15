@@ -44,8 +44,7 @@ tags:
 
  Trovo che AJAX sia un po' una montatura. Molte persone hanno usato tecniche simili, prima che queste fossero chiamate "AJAX". E non si tratta di cose complicate come molti fanno credere. Ecco un semplice esempio tratto da una mia applicazione. Iniziamo con il Javascript:
 
- ```
-<pre class="brush: javascript">
+ ```javascript
 function createRequestObject() {
 	var ro;
 	var browser = navigator.appName;
@@ -81,8 +80,7 @@ function handleResponse() {
  Questo script definisce una funzione per la creazione di un oggetto *Request*, una funzione per l'invio di tale richiesta ed una funzione per la gestione della risposta. Per essere usato, questo script va inserito all'interno di una pagina web.
  Per effettuare una richiesta al backend possiamo collegare tale script ad un evento "onClick" oppure direttamente all'attributo *href* di un link, nel seguente modo:
 
- ```
-<pre class="brush: xml">
+ ```xml
 <a href="javascript:sndReq('foo')">[foo]</a>
 ```
 
@@ -90,8 +88,7 @@ function handleResponse() {
 
  Nel file rpc.php potremmo inserire qualcosa di simile:
 
- ```
-<pre class="brush: php">
+ ```php
 switch($_REQUEST['action']) { 
 	case 'foo': 
 	/* do something */ 
@@ -133,8 +130,7 @@ foo done
 
  Per estendere questo approccio all'invio nella richiesta di più parametri si potrebbe semplicemente procedere così:
 
- ```
-<pre class="brush: javascript">
+ ```javascript
 function sndReqArg(action,arg) { 
 	http.open('get', 'rpc.php?action='+action+'&arg='+arg); 
 	http.onreadystatechange = handleResponse; 

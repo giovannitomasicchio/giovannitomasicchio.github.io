@@ -17,8 +17,7 @@ tags:
 
  Conviene quindi realizzare una funzione che estragga i secondi ed i microsecondi dall'output di microtime e li restituisca sotto forma di numero con la virgola (float). Si potrebbe procedere in questo modo:
 
- ```
-<pre class="brush: php">
+ ```php
 function microtime_float()
 {
     list($usec, $sec) = explode(" ", microtime());
@@ -28,8 +27,7 @@ function microtime_float()
 
  Risolto questo problema, per calcolare il tempo di esecuzione non ci resta che memorizzare l'istante di inizio e fine dello script e farne la differenza. Ecco un esempio:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // restituisce l'istante corrente
 function microtime_float()
@@ -66,8 +64,7 @@ echo "Tempo impiegato dallo script: $tempo secondi";
 
  Con PHP 5 l'output della funzione microtime è stato rivisto ed ora, passando semplicemente come parametro il valore true, restituisce l'istante corrente come un numero decimale e non come una stringa. In questo modo la funzione mostrata precedentemente non serve più. Vediamo quindi come cronometrare uno script in PHP 5.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // memorizzo l'istante di inizio dello script
 $inizio = microtime(true);

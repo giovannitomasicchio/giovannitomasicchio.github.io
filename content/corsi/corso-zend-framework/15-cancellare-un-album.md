@@ -17,8 +17,7 @@ Iniziamo con il codice della action in IndexController::deleteAction():
 
 zf-tutorial/application/controllers/IndexController.php
 
- ```
-<pre class="brush: php">
+ ```php
  ...
  public function deleteAction()
  {
@@ -45,8 +44,7 @@ Lo script view è un semplice form:
 
 zf-tutorial/application/views/scripts/index/delete.phtml
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $this->title = "Delete album";
 $this->headTitle($this->title);

@@ -13,8 +13,7 @@ Anche se questo è solo un tutorial, avremo bisogno di un file CSS per rendere l
 
 zf-tutorial/application/layouts/scripts/layout.phtml
 
- ```
-<pre class="brush: php">
+ ```php
 ...
 <head>
     <?php echo $this->headMeta(); ?>
@@ -30,8 +29,7 @@ Infine abbiamo bisogno di un po' di stile CSS, creiamo quindi una directory css 
 
 zf-tutorial/public/css/site.css
 
- ```
-<pre class="brush: css">
+ ```css
 body,html {
     margin: 0 5px;
     font-family: Verdana,sans-serif;

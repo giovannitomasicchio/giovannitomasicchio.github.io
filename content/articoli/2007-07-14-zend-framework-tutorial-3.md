@@ -33,8 +33,7 @@ tags:
 
  Per creare il database e la tabella nelle news possiamo eseguire queste 3 semplici query:
 
- ```
-<pre class="brush: sql">
+ ```sql
 create database if not exists `zf-tutorial`;
 USE `zf-tutorial`;
 CREATE TABLE `news` (
@@ -56,8 +55,7 @@ CREATE TABLE `news` (
 
  Di seguito viene riportato il codice del metodo getAllNews() che ha lo scopo di restituire tutte le news registrate nel database in modo da mostrarle nella home page del sito. Il funzionamento è piuttosto semplice. Per prima cosa viene recuperato l'oggetto Zend\_Db\_Adapter con Zend\_Registry::get(). L'esecuzione della query ed il recupero di tutti i risultati ottenuti viene eseguito con un solo comando: $db-&gt;fetchAll(). Questo metodo restituisce un array di array associativi, composti da coppie nome\_campo=&gt;valore. Per una visualizzazione più "umana" dei timestamp delle date viene poi eseguita una conversione con la funzione date(). Si noti che per rendere le conversioni permanenti il ciclo foreach viene eseguito per riferimento (&amp;$row).
 
- ```
-<pre class="brush: php">
+ ```php
 public function getAllNews()
 {
     $db = Zend_Registry::get('db');
@@ -80,8 +78,7 @@ public function getAllNews()
 
  Questo metodo è molto simile al precedente. Si occupa di estrarre tutti i dati di una singola news. L'estrazione della particolare news avviene grazie al suo ID passato al metodo attraverso la variabile $newsId. Anche questa volta, recuperato l'oggetto Zend\_Db\_Adapter dallo Zend\_Registry, si procede all'esecuzione della query ed alla lettura del record attraverso un'unica istruzione: $db-&gt;fetchRow($sql). Questa restituisce un array associativo composto da coppie nome\_campo=&gt;valore. Doverosa infine la conversione del timestamp della data con l'istruzione date();
 
- ```
-<pre class="brush: php">
+ ```php
 public function getNewsById($newsId)
 {
     $db = Zend_Registry::get('db');
@@ -98,8 +95,7 @@ public function getNewsById($newsId)
 
  Si noti come l'inserimento dell'id $newsId all'interno dell'SQL della query è stato eseguito semplicemente accodando due stringhe. L'unico accorgimento preso per evitare l'SQL injection è costituito dal casting ad intero (int) della stringa $newsId. Se invece avessimo dovuto comporre dinamicamente l'SQL, accodando una stringa al posto di un numero intero allora avremmo dovuto utilizzare i metodi quote o quoteInto:
 
- ```
-<pre class="brush: php">
+ ```php
 $titolo_news = $db->quote("Notizia dell'anno");
 echo $titolo_news; // 'Notizia dell\'anno'
 
@@ -109,8 +105,7 @@ echo $sql; // SELECT * FROM news WHERE titolo = 'Notizia dell\'anno'
 
  oppure più semplicemente:
 
- ```
-<pre class="brush: php">
+ ```php
 $sql = $db->quoteInto("SELECT * FROM news WHERE titolo = ?", "Notizia dell'anno");
 echo $sql; // SELECT * FROM news WHERE titolo = 'Notizia dell\'anno'
 ```
@@ -129,8 +124,7 @@ echo $sql; // SELECT * FROM news WHERE titolo = 'Notizia dell\'anno'
 
  Se invece si tratta di un inserimento allora viene richiamato il metodo $db-&gt;insert() a cui viene passato il nome della tabella nella quale effettuare l'inserimento ed i dati da inserire.
 
- ```
-<pre class="brush: php">
+ ```php
 public function insertUpdateNews($newsId, $autore, $titolo, $testoIntro, $testoCompleto)
 {
     $db = Zend_Registry::get('db');
@@ -173,8 +167,7 @@ public function insertUpdateNews($newsId, $autore, $titolo, $testoIntro, $testoC
 
  Anche in questo caso la protezione dall'SQL Injection avviene con un semplice cast ad intero di $newsId ma vale il discorso precedentemente fatto sull'utilizzo dei metodi quote() e quoteInto().
 
- ```
-<pre class="brush: php">
+ ```php
 public function deleteNews($newsId)
 {
     $db = Zend_Registry::get('db');

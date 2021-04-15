@@ -15,8 +15,7 @@ Niente paura, affronteremo il tutto cercando di non impantanarci in trattazioni 
 
 Come sono fatte queste pagine web? Probabilmente anche questo sapete, ma è meglio non dare niente per scontato. Ecco come potrebbe presentarsi una semplicissima pagina web, che dal server a seguito di una richiesta del browser viene inviata la client:
 
- ```
-<pre class="brush: php">
+ ```php
 <html>
 <head>
 <title>Pagina di prova</title>
@@ -37,8 +36,7 @@ Dobbiamo quindi rassegnarci a realizzare pagine web tanto stupide da non capire 
 
 Diamo un'occhiata al seguente codice, senza soffermarci sul suo contenuto (avremo modo in seguito di analizzarlo con calma) ma esclusivamente su ciò che il vostro browser visualizza:
 
- ```
-<pre class="brush: php">
+ ```php
 <html>
 <head>
 <title>Pagina di prova</title>

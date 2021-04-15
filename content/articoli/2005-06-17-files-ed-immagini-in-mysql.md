@@ -60,8 +60,7 @@ Se infatti i files sono conservati nel database, sarà l'applicazione PHP a veri
 
  Per creare la tabella possiamo eseguire la seguente query (ad esempio usando phpMyAdmin o direttamente con il MySQL Command Line Client):
 
- ```
-<pre class="brush: sql">
+ ```sql
 CREATE TABLE tabella_files ( 
 	id_file int(11) NOT NULL auto_increment, 
 	nome_file varchar(255) default NULL, 
@@ -79,8 +78,7 @@ CREATE TABLE tabella_files (
 
  Non ci soffermiamo sui dettagli della procedura di upload del file, che non rientra nello scopo di questo articolo. Si noti solamente come sia possibile ricavare dall'array `<span style="color: rgb(0, 0, 0);"><span style="color: rgb(0, 0, 187);">$_FILES</span></span>` alcune informazioni sul file ricevuto, in particolare il suo tipo MIME. Si tratta di una stringa che lo stesso browser invia insieme al file e che ne specifica il tipo. A esempio per una immagine in formato GIF questa stringa sarà "image/gif". Per un elenco dei diversi tipi MIME è possibile consultare [questa pagina](http://www.utoronto.ca/webdocs/HTMLdocs/Book/Book-3ed/appb/mimetype.html).
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 // se è stato inviato il file...
 if(isset($_POST['invia']))
@@ -164,8 +162,7 @@ function mostra_form($messaggio = '')
 
  Questi links ovviamente non punteranno ai files, poiché questi non sono accessibili direttamente. I collegamenti saranno invece del tipo `<span style="color: rgb(0, 0, 0);"><span style="color: rgb(221, 0, 0);">mostra.php?id=32</span></span>` e punteranno quindi ad un ulteriore script che si occuperà dell'invio dei files all'utente, e che realizzeremo nella prossima pagina.
 
- ```
-<pre class="brush: php">
+ ```php
 <head> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"> 
 <title>Carica file nel database</title> 
@@ -212,8 +209,7 @@ else
 
  **mostra.php**
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 // connessione e selezione del database
 mysql_connect('localhost', 'utente_db', 'password_db')

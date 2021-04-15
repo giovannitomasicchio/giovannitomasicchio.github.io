@@ -19,8 +19,7 @@ categories:
 
  Adesso analizziamo il seguente script, che vi consiglio di provare sul vostro PC, e cerchiamo le analogie con il precedente problema:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $base = 5;
 $altezza = 3;
@@ -40,8 +39,7 @@ echo $area;
 
  Ma le variabili in PHP non si limitano a contenere solo numeri. Il loro valore può essere ad esempio una stringa:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $messaggio = "Questa è una stringa";
 echo $messaggio;
@@ -56,8 +54,7 @@ echo $messaggio;
 
  Oltre alle variabili, il PHP mette a disposizione anche un altro tipo di contenitore di dati: le **costanti**. Queste non usano il simbolo $ all'inizio del loro nome e per assegnare loro un valore è necessario utilizzare un'apposita funzione dal nome **define**. Il seguente esempio definisce una costante di nome TASSO\_LIRA\_EURO a cui viene assegnato il valore 1936.27
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 define("TASSO_LIRA_EURO", 1936.27);
 echo TASSO_LIRA_EURO;

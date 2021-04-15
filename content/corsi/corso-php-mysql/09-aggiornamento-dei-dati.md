@@ -11,8 +11,7 @@ categories:
 ---
 L'aggiornamento dei dati presenti in una tabella MySQL è affidato ad una query di tipo UPDATE. Ad esempio, per modificare i dati associati al record con id = 5 della tabella "utenti" potremmo impiegare la seguente query:
 
- ```
-<pre class="brush: mysql">
+ ```sql
 UPDATE 
    utenti
 SET
@@ -28,8 +27,7 @@ WHERE
 
 La semplice esecuzione della query in PHP richiede la realizzazione di un banale script:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // richiamo il file di configurazione
 require 'config.php';
@@ -70,8 +68,7 @@ Similmente a quanto visto nelle precedenti lezioni, anche l'aggiornamento dei da
  
 Vediamo il codice necessario a realizzare questo script:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // richiamo il file di configurazione
 require 'config.php';

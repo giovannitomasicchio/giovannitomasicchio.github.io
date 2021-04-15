@@ -25,8 +25,7 @@ Questo crea il file Album.php in application/forms che include un metodo init() 
 
 zf-tutorial/application/forms/Album.php
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 class Application_Form_Album extends Zend_Form
 {
@@ -67,8 +66,7 @@ Abbiamo ora bisogno di visualizzare il form e processare l'invio dei dati. Ciò 
 
 zf-tutorial/application/controllers/IndexController.php
 
- ```
-<pre class="brush: php">
+ ```php
  ...
  function addAction()
  {
@@ -94,8 +92,7 @@ zf-tutorial/application/controllers/IndexController.php
 
 Esaminiamo il codice più in dettaglio:
 
- ```
-<pre class="brush: php">
+ ```php
 $form = new Application_Form_Album();
 $form->submit->setLabel('Add');
 $this->view->form = $form;
@@ -103,8 +100,7 @@ $this->view->form = $form;
 
 Istanziamo il nostro Form\_Album, impostiamo la label per il bottone submit ad "Add" e poi assegniamo il tutto all'oggetto view per il rendering.
 
- ```
-<pre class="brush: php">
+ ```php
 if ($this->getRequest()->isPost()) {
     $formData = $this->getRequest()->getPost();
     if ($form->isValid($formData)) {
@@ -112,8 +108,7 @@ if ($this->getRequest()->isPost()) {
 
 Se il metodo isPost() dell'oggetto request restituisce true, allora il form è stato inviato e si possono recuperare i dati del form con getPost() e di conseguenza controllare la validità dello stesso usando la funzione isValid().
 
- ```
-<pre class="brush: php">
+ ```php
 $artist = $form->getValue('artist');
 $title = $form->getValue('title');
 $albums = new Application_Model_DbTable_Albums();
@@ -122,15 +117,13 @@ $albums->addAlbum($artist, $title);
 
 Se il form è valido, si può istanziare il model Application\_Model\_DbTable\_Albums e usare addAlbum(), creato precedentemente, per inserire un nuovo record nel database.
 
- ```
-<pre class="brush: php">
+ ```php
 $this->_helper->redirector('index');
 ```
 
 Dopo aver salvato il nuovo album, si procede con un redirect usando l'action helper Redirector per ritornare all'action index (ovvero per tornare alla home page).
 
- ```
-<pre class="brush: php">
+ ```php
 } else {
     $form->populate($formData);
 }
@@ -142,8 +135,7 @@ Adesso dobbiamo creare il form nello script view add.phtml:
 
 zf-tutorial/application/views/scripts/index/add.phtml
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $this->title = "Add new album";
 $this->headTitle($this->title);

@@ -11,8 +11,7 @@ categories:
 ---
  Torniamo sul primo esempio di pagina PHP visto:
 
- ```
-<pre class="brush: php">
+ ```php
 <html>
 <head>
 <title>Pagina di prova</title>
@@ -35,8 +34,7 @@ categories:
 
  Guardate adesso questo esempio di pagina PHP, salvatela in un file e visualizzatela:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php echo date("G.i"); ?>
 ```
 

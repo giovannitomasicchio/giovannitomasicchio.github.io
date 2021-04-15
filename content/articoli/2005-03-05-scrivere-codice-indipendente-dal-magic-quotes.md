@@ -22,8 +22,7 @@ tags:
 
  Il seguente codice ad esempio si occupa di aggiungere gli slashes nel caso in cui nel php.ini la direttiva magic\_quotes\_gpc sia impostata ad "Off":
 
- ```
-<pre class="brush: php">
+ ```php
 // se nel php.ini non è abilitato il "magic_quotes_gpc"
 if (!get_magic_quotes_gpc())
 {
@@ -45,8 +44,7 @@ if (!get_magic_quotes_gpc())
 
  Se invece preferiamo lavorare senza gli slashes, indipendentemente dalle impostazioni del php.ini possiamo far precedere i nostri script dal seguente codice:
 
- ```
-<pre class="brush: php">
+ ```php
 // se nel php.ini è abilitato il "magic_quotes_gpc"
 if (get_magic_quotes_gpc())
 {

@@ -21,8 +21,7 @@ categories:
  
  Nel seguente script verranno presentati le diverse modalità di inserimento di commenti:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 
 // questo è un commento

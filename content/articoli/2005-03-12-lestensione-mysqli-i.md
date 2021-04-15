@@ -75,8 +75,7 @@ tags:
 
  Vediamo quindi come usare le funzioni o le classi messeci a disposizione da ext/mysqli per interagire con un server MySQL. Iniziamo vedendo come connetterci al server attraverso un approccio procedurale, ovvero usando le funzione `<span style="color: rgb(0, 0, 0);"><span style="color: rgb(0, 0, 187);">mysqli_connect</span></span>`:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // provo a connettermi
 $link = mysqli_connect('localhost', 'root', 'password_db', 'test');
@@ -103,8 +102,7 @@ mysqli_close($link);
 
  Vediamo adesso come utilizzare la classe mysqi per connetterci al server in stile *Object Oriented*:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
 
@@ -135,8 +133,7 @@ $mysqli->close();
 
  Adesso che abbiamo imparato a connetterci ad un server MySQL possiamo inviargli le nostre query. Iniziamo con una query che ci permette di creare una tabella che ci tornerà utile nei prossimi esempi. Vediamo l'approccio procedurale:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // provo a connettermi
 $link = mysqli_connect('localhost', 'root', 'password_db', 'test');
@@ -173,8 +170,7 @@ mysqli_close($link);
 
  Vediamo adesso l'approccio ad oggetti:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // provo a connettermi
 $mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
@@ -211,8 +207,7 @@ $mysqli->close();
 
  Per permetterci di fare ulteriori test con il nostro database procediamo con l'inserimento di alcuni dati nella tabella appena creata. Lo faremo utilizzando solamente l'approccio procedurale dato che la versione ad oggetti non introdurrebbe nessuna novità rispetto all'esempio appena fatto.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // provo a connettermi
 $mysqli = new mysqli('localhost', 'root', 'password_db', 'test');
@@ -252,8 +247,7 @@ $mysqli->close();
 
  Nel seguente esempio effettueremo una query per recuperare i dati precedentemente inseriti nella tabella. Questa volta il risultato restituito dalla funzione `<span style="color: rgb(0, 0, 0);"><span style="color: rgb(0, 0, 187);">mysqli_query</span></span>` non sarà un semplice *true* o *false* a seconda dell'esito della query. Se la query avrà successo ci verrà restituito un oggetto di tipo mysqli\_result che possiamo considerare come una sorta di contenitore delle righe restituite dalla query. L'operazione di estrazione di ogni singola riga da questo contenitore prende il nome di **fetch** e può essere eseguita in vari modi. Possiamo infatti estrarli in una array con indici numerici, oppure in un array associativo, in un array con indici sia numerici che associativi e addirittura nelle proprietà di un oggetto. Vediamo le quattro tecniche.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // provo a connettermi
 $link = mysqli_connect('localhost', 'root', 'password_db', 'test',3307);
@@ -314,8 +308,7 @@ mysqli_close($link);
 
  Ora vediamo come si procede utilizzando un approccio ad oggetti.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // provo a connettermi
 $mysqli = new mysqli('localhost', 'root', 'password_db', 'test');

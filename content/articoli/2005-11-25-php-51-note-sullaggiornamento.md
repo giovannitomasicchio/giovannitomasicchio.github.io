@@ -56,8 +56,7 @@ tags:
  Dal punto di vista del programmatore PHP, il cambiamento che più probabilmente influenzerà il vecchio codice riguarda il modo in cui vengono gestiti i riferimenti in tutte le versioni successive alla 4.4.0.
  Fino alla versione 4.3 inclusa, era possibile inviare, assegnare o restituire variabili tramite riferimento, quando invece dovevano essere restituite per valore, come nel caso di una costante, di un valore temporaneo (ad es. il risultato di un'espressione), o del risultato di una funzione che avrebbe dovuto essere restituito per valore, come nel seguente script:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 $foo = "123";
 
@@ -76,8 +75,7 @@ $bar = &return_value();
 
 ###  <a id="cirh2" name="cirh2">1b. Codice che funzionava sotto PHP 4.3, ma che ora fallisce</a>
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 function func(&$arraykey) {
 	return $arraykey; // function returns by value!
@@ -124,8 +122,7 @@ array(3) {
  Questo accade perché, seguendo i cambiamenti, func() assegna per valore. Il valore di $y è ri-assegnato ed il collegamento per riferimento è preservato da $z. Prima della correzione, il valore era assegnato per riferimento, portando $y ad essere ri-collegato ad ogni assegnazione. Il tentativo di legare ad un valore temporaneo attraverso il riferimento era la causa della corruzione della memoria.
  Quel codice può essere fatto funzionare in modo identico sia nelle versione di PHP precedenti che in quelle successive alla correzione della gestione dei riferimenti. La firma di func() può essere modificata in modo da restituire tramite riferimento, oppure l'assegnazione per riferimento può essere rimossa dal risultato di func().
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 function func() {
 	return 'function return';
@@ -142,8 +139,7 @@ echo $x;
 
 ###  <a id="cirh3" name="cirh3">1c. Codice che era valido sotto PHP 4.3, ma che ora produce errori</a>
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 class Foo {
 
@@ -166,8 +162,7 @@ var_dump($bar);
 
 ###  <a id="cirh4" name="cirh4">1d. Codice che fallisce sotto PHP 4.3, ma ora funziona</a>
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 function &f() {
 	$x = "foo";
@@ -184,8 +179,7 @@ for ($i = 0; $i < 3; $i++) {
 
  In PHP 4.3 la terza chiamata a var\_dump produce NULL, ciò è dovuto alla corruzione della memoria causata dalla restituzione di un valore non inizializzato tramite riferimento. Questo è un codice valido in PHP 5.0.4 e successivi, ma produce errori nelle precedenti versioni di PHP.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 $arr = array('a1' => array('alfa' => 'ok')); 
 $arr =& $arr['a1']; 
@@ -201,8 +195,7 @@ echo '-'.$arr['alfa']."-\n";
 
 ###  <a id="cirh6" name="cirh6">1f. Avvisi che vanno e vengono</a>
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 function & foo() {
 	$var = 'ok';
@@ -222,8 +215,7 @@ echo "$a\n";
 
 ##  <a id="reading" name="reading">2. Lettura \[\]</a>
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 class XmlTest {
 
@@ -269,8 +261,7 @@ $o->run();
 
  Sotto PHP 5.0 era possibile avere una dichiarazione di funzione in una classe derivata che non combaciava con la dichiarazione della stessa funzione nella classe base, ad es.
 
- ```
-<pre class="brush: php">
+ ```php
 class Base {
 	function &return_by_ref() {
 		$r = 1;
@@ -291,8 +282,7 @@ class Derived extends Base {
 
  Sotto PHP 5.0 il seguente codice era valido:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 class test {
 	const foobar = 'foo';
@@ -396,8 +386,7 @@ sapi/activescript   http://pecl4win.php.net/ext.php/php5activescript.dll (PECL p
 
  Per progetti più ampi, lo script qui sotto garantirà lo stesso risultato:
 
- ```
-<pre class="brush: xml">
+ ```bash
 #!/bin/sh
 
 directory=$1

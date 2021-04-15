@@ -13,8 +13,7 @@ categories:
 
  Ci sono però diverse situazioni in cui questo modo di procedere non va bene. Immaginiamo ad esempio di dover realizzare una pagina web in cui gli utenti registrati possono scaricare un certo file mentre gli utenti non registrati devono ricevere un avviso. E' evidente che il nostro script si troverà ad un bivio: se l'utente è registrato deve mostrare un collegamento al file da scaricare, altrimenti deve visualizzare un messaggio. Alcune istruzioni dovranno essere eseguite in un caso ma non nell'altro e viceversa. Come facciamo a gestire questa situazione? Quello che segue è lo schema generale di una struttura messa a disposizione dal PHP per risolvere il problema:
 
- ```
-<pre class="brush: php">
+ ```php
 if(condizione da verificare)
 {
     // istruzioni da eseguire in caso positivo
@@ -33,8 +32,7 @@ else
 
  Spesso questa struttura si usa anche senza il ramo else:
 
- ```
-<pre class="brush: php">
+ ```php
 if(condizione da verificare)
 {
     // istruzioni da eseguire in caso positivo
@@ -45,8 +43,7 @@ if(condizione da verificare)
 
  Adesso vediamo un esempio più concreto, nel quale viene risolto il problema dell'accesso al file per l'utente registrato posto all'inizio della lezione:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 /* ATTENZIONE !!! In un vero programma questa istruzione
 non esisterebbe ma il valore di $utente_registrato verrebbe ricavato
@@ -73,8 +70,7 @@ else
 
  La condizione controllata dall'if non deve essere necessariamente una variabile, ma può essere una qualunque espressione il cui risultato sia però true o false. Il seguente esempio chiarirà il concetto.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $eta_utente = 21;
 
@@ -93,8 +89,7 @@ else
 
  Analizziamo ora il seguente esempio:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $giorno_della_settimana = 2;
 
@@ -117,8 +112,7 @@ if($giorno_della_settimana == 3)
 
  E' chiaro che delle 3 strutture if precedenti solo una potrà andare a buon fine. Inoltre se la prima è verificata le altre sicuramente non lo saranno! Nonostante ciò tutti e tre gli if vengono eseguiti. Per ovviare si può usare la seguente variante:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $giorno_della_settimana = 2;
 
@@ -141,8 +135,7 @@ elseif($giorno_della_settimana == 3)
 
  Un simile risultato potrebbe essere raggiunto usando una struttura switch. Vediamo come:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $giorno_della_settimana = 2;
 
@@ -176,8 +169,7 @@ switch ($giorno_della_settimana) {
  
  Con un if è comunque possibile gestire tutte le evenienze gestite da uno switch, anche il blocco di default. Lo script che segue adotta infatti un ulteriore else posto alla fine proprio per contemplare l'evenienza che nessuna delle precedenti condizioni sia soddisfatta.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $giorno_della_settimana = 2;
 

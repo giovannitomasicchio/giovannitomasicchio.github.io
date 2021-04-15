@@ -18,8 +18,7 @@ categories:
  
  Vediamo quindi come tradurre in codice le precedenti osservazioni, considerando uno script che mostra i dati contenuti nella tabella "utenti" all'interno di una tabella HTML.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // richiamo il file di configurazione
 require 'config.php';

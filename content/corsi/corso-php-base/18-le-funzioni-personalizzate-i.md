@@ -13,8 +13,7 @@ Il PHP mette a disposizione dei nostri script una miriade di funzioni che possia
 
 Ad esempio se vogliamo mostrare un testo in grassetto o in corsivo non possiamo confidare su una funzione PHP ma dovremo inserire manualmente i tag HTML opportuni. In generale questo non è un problema ma lo può diventare se la pagina da realizzare richiede diverse stringhe in grassetto:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $testo1 = 'Sito web';
 $testo2 = 'URL';
@@ -35,8 +34,7 @@ E' evidente che per ottenere il grassetto ed il corsivo abbiamo dovuto inserire 
 
 Il PHP ci permette di superare questo problema dandoci la possibilità di definire delle funzioni personalizzate, ovvero delle funzioni utilizzabili come le normali funzione PHP che però si comporteranno nel modo da noi specificato. Le funzioni personalizzate sono quindi un "pacchetto" di istruzioni a cui diamo un nome e che useremo per effettuare dei compiti particolari, spesso ripetitivi. Vediamo subito un esempio:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // due stringhe da mostrare
 $testo1 = 'Corso di PHP';
@@ -73,8 +71,7 @@ E' evidente quindi che la variabile $stringa presente nella funzione è semplice
 
 Vediamo adesso un esempio che fa uso del comando return. Vogliamo realizzare un convertitore euro -&gt; lire.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // 15 euro
 $valuta = 15;

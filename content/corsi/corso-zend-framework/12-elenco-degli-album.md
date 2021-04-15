@@ -13,8 +13,7 @@ Ora che si è impostata la configurazione, le informazioni per il database e lo 
 
 zf-tutorial/application/controllers/IndexController.php
 
- ```
-<pre class="brush: php">
+ ```php
 ...
 function indexAction()
 {
@@ -30,8 +29,7 @@ Possiamo ora completare lo script view associato: index.phtml:
 
 zf-tutorial/application/views/scripts/index/index.phtml
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
     $this->title = "My Albums";
     $this->headTitle($this->title);

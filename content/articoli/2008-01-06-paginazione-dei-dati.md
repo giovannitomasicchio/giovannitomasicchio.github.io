@@ -138,8 +138,7 @@ Dall'URL recuperiamo il numero della pagina richiesta dall'utente ($\_GET\['pag'
 
 Si procede infine con l'esecuzione della query di estrazione dei record e con la fetch dei risultati. La creazione dei link di navigazione viene affidata alla funzione paginazione(), che verrà illustrata nella prossima pagina.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 include 'paginazione.php';
 
@@ -248,8 +247,7 @@ La funzione paginazione() è il cuore del sistema di creazione dei link di navig
  
 Tutti i link realizzati vengono di volta in volta accodati alla stringa $link\_paginazione che al termine dell'esecuzione della funzione paginazione() viene restituita al chiamante.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 function crea_url($url_base, $pagina) {
     if(strpos($url_base,'?') === false) {
@@ -347,8 +345,7 @@ Maggiori informazioni si trovano sulle rispettive documentazioni ufficiali:
 
 Con **Microsoft SQL Server 2005** è stata introdotta la funzione **ROW\_NUMBER()** in grado di assegnare un numero crescente ad ogni record estratto dalla SELECT secondo il particolare ordinamento dichiarato. Grazie a questo numero è poi possibile utilizzare la clausola WHERE per selezionare i record da estrarre:
 
- ```
-<pre class="brush: sql">
+ ```sql
 SELECT *
   FROM (
        SELECT TOP 30 ROW_NUMBER() OVER (ORDER BY ...) AS row, ... FROM ...
@@ -360,8 +357,7 @@ Il TOP 30 serve a migliorare le prestazioni della SELECT più interna, poiché i
 
 Con le versioni precedenti di Microsoft SQL Server è necessario seguire altre strategie, ad esempio la seguente che fa uso del SELECT TOP e dell'inversione dell'ordinamento
 
- ```
-<pre class="brush: sql">
+ ```sql
 SELECT *
    FROM (
       SELECT TOP 10 *
@@ -375,8 +371,7 @@ SELECT *
 
 Con **Oracle** possiamo seguire 2 principali tecniche, una basata sul **ROWNUM** e l'altra sulla funzione **ROW\_NUMBER()**. Di seguito viene riportato un esempio per ciascuna tecnica, seguito da un link utile per ottenere maggiori informazioni.
 
- ```
-<pre class="brush: sql">
+ ```sql
 SELECT tab2.*
             FROM (
                 SELECT ROWNUM AS rn, tab1.*
@@ -391,8 +386,7 @@ SELECT tab2.*
 
 oppure
 
- ```
-<pre class="brush: sql">
+ ```sql
 SELECT *
    FROM (
       SELECT ..., ROW_NUMBER() OVER(ORDER BY ...) rn FROM ...
@@ -405,8 +399,7 @@ ORDER BY rn
 
 Anche **IBM DB2** possiede la funzione **ROW\_NUMBER()**, pertanto possiamo utilizzare un approccio simile a quelli visti in precedenza.
 
- ```
-<pre class="brush: sql">
+ ```sql
 SELECT *
    FROM
    (

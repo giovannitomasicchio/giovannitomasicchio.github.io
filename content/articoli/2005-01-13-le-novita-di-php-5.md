@@ -50,8 +50,7 @@ tags:
 
 \- Introduzione dei modificatori di accesso **public**, **private** e **protected** sia per metodi che per proprietà con cui regolamentare l'accesso ad un oggetto. Le variabili membro e i metodi dichiarati public sono sempre accessibili, quelli dichiarati protected possono essere usati solo dagli oggetti istanziati dalla classe di appartenenza o da una che la eredita, quelli dichiarati private solo dagli oggetti istanzaiti dalla classe di appartenenza.
 
- ```
-<pre class="brush: php">
+ ```php
 class classe_test
 {
 	public $var1; /* proprietà pubblico */
@@ -75,8 +74,7 @@ class classe_test
 
 \- Nuovo nome univoco per il metodo costruttore **\_\_construct()** di una classe. E' comunque ancora possibile usare il nome della classe di appartenenza.
 
- ```
-<pre class="brush: php">
+ ```php
 class classe_test
 {
 	function __construct() {
@@ -89,8 +87,7 @@ class classe_test
 
 \- Introdotto un metodo distruttore dal nome unico **\_\_destructor()**
 
- ```
-<pre class="brush: php">
+ ```php
 class classe_test
 {
 	function __destruct() {
@@ -103,8 +100,7 @@ class classe_test
 
 \- Introduzione delle **interfacce**. Grazie alle interfacce viene superato il vincolo della ereditarietà da una singola classe infatti una classe può implementare più interfacce.
 
- ```
-<pre class="brush: php">
+ ```php
 interface interfaccia_1
 {
 	/* metodi astratti */
@@ -132,8 +128,7 @@ class classe_test implements interfaccia_1, interfaccia_2
 
 \- Introduzione dell'operatore **instance of** per verificare la classe di un oggetto
 
- ```
-<pre class="brush: php">
+ ```php
 if ($oggetto instance of utente) {
 	echo'$ottetto è una istanza della classe utente';
 }
@@ -141,8 +136,7 @@ if ($oggetto instance of utente) {
 
 \- Possibilità di dichiarare un **metodo** come **final** affinché non venga effettuato l'overload per esso dalle classe che lo ereditano
 
- ```
-<pre class="brush: php">
+ ```php
 class mia_classe
 {
 	final function mia_funzione() {
@@ -154,8 +148,7 @@ class mia_classe
 
 \- Possibilità di dichiarare **classi** come **final** affinché non possano essere ereditate
 
- ```
-<pre class="brush: php">
+ ```php
 final class FinalClass
 {
 	/* ... */
@@ -164,8 +157,7 @@ final class FinalClass
 
 \- Introduzione del metodo **\_\_clone()** che, se implementato, verrà richiamato durante il processo di copia di un oggetto. Può essere utilizzato per personalizzare la procedura di copia di un oggetto. Nel seguente esempio un oggetto che gestisce la connessione ad un database, quando viene clonato, conserva tutte le variabili membro originarie ma incrementa il suo id
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 class database
 {
@@ -202,8 +194,7 @@ id: 1
 
 \- Possibilità di dichiarare delle costanti all'interno di una classe attraverso l'uso di **const**
 
- ```
-<pre class="brush: php">
+ ```php
 class mia_classe
 {
 	const PI_GRECO = 3.14;
@@ -212,8 +203,7 @@ class mia_classe
 
 \- **Proprietà statiche** attraverso l'uso di static
 
- ```
-<pre class="brush: php">
+ ```php
 class settings
 {
 	static $max_users = 5;
@@ -224,8 +214,7 @@ echo settings::$max_users;
 
 \- **Metodi statici** che è possibile richiamare al di fuori di un oggetto
 
- ```
-<pre class="brush: php">
+ ```php
 class lib
 {
 	static function get_time() {
@@ -238,8 +227,7 @@ echo lib::get_time();
 
 \- **Classi astratte** che non possono essere istanziate direttamente ma solo ereditate
 
- ```
-<pre class="brush: php">
+ ```php
 abstract class classe_base {
 	/* ... */
 }
@@ -247,8 +235,7 @@ abstract class classe_base {
 
 \- **Metodi astratti** per i quali la definizione è lasciata alla classe che li eredita. Ovviamente una classe che contiene un metodo astratto deve essere dichiarata come abstract.
 
- ```
-<pre class="brush: php">
+ ```php
 abstract class classe_base {
 	abstract function metodo_astratto();
 }
@@ -256,8 +243,7 @@ abstract class classe_base {
 
 \- **Type hinting**: possibilità di dichiarare la classe degli oggetti passati come parametri alle funzioni.
 
- ```
-<pre class="brush: php">
+ ```php
 class utente {/* ... */}
 
 $oggetto = new utente();
@@ -269,15 +255,13 @@ function log_in(utente $oggetto) {
 
 \- **Deferenziazione** degli oggetti prodotti dai metodi.
 
- ```
-<pre class="brush: php">
+ ```php
 $oggetto->oggetto_restituito()->metodo();
 ```
 
 \- Introduzione della funzione **\_\_autoload()** che viene automaticamente chiamato qualora si stia cercando di istanziare una classe non ancora definita.
 
- ```
-<pre class="brush: php">
+ ```php
 mia_classe.class.php 
 <?php
 echo 'caricata classe mia_classe';
@@ -307,8 +291,7 @@ caricata classe mia_classe
 
  PHP 5 risolve questo problema introducendo il paradigma try-throw-catch, ovvero una struttura di controllo simile al meccanismo if-else ma progettato appositamente per la gestione delle eccezioni. Per chiarirne il funzionamento vediamo il seguente esempio:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 try {
 	$a = -1; // valore inaspettato
@@ -345,8 +328,7 @@ Stack trace:
 
  Lo script che segue elenca i file presenti in una cartella. Ad un ciclo foreach viene passato un oggetto ottenuto come istanza della classe ElencaFile. Questa classe estende l'iteratore DirectIterator appartenente alla SPL.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 class ElencaFile extends DirectoryIterator
 {
@@ -386,8 +368,7 @@ foreach ($cartella_corrente as $file)
 
  PHP 5 è in grado di applicare un ciclo foreach() anche ad oggetti che non estendono iteratori. In questo caso l'iterazione verrà effettuata sulle proprietà pubbliche dell'oggetto.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 class database
 {
@@ -421,8 +402,7 @@ user = nome_utente
 
  PHP 5 supera questa limitazione permettendo l'uso di array passati per indirizzo attraverso l'uso di **&amp;**. L'esempio che segue mostra come, attraverso l'uso di tale tecnica, sia possibile impiegare questa struttura di controllo per modificare il contenuto di un array.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 $vettore = array(1,2,3,4);
 
@@ -461,8 +441,7 @@ Array
 
  PHP 5 permette di specificare dei valori di default anche per i parametri delle funzioni passati per riferimento:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 function grassetto(& $stringa = null)
 {
@@ -501,8 +480,7 @@ Nessuna stringa passata!!!
 
  Probabilmente però la più importante novità riguardante il trattamento di documenti XML introdotta da PHP 5 è la nuova estensione **SimpleXML**. Si tratta di un parser XML in parte simile al parser DOM poiché costruisce, a partire dagli elementi del documento XML, una struttura dati ad albero ma si differenzia da questo perché questo albero è costituito da tipi di dati nativi di PHP facilitandone così l'accesso. L'esempio che segue ne è una dimostrazione.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 $xml_string = "<?xml version='1.0' standalone='yes'?>
 <utenti>
@@ -551,8 +529,7 @@ SimpleXMLElement Object
  
  MySQLi inoltre permette, accanto ad un tradizionale paradigma procedurale, un approccio ad oggetti all'interazione con MySQL, come mostrato nel seguente esempio.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 /* Connessione al server MySQL */
 $mysqli = new mysqli('host', 'nome_utente', 'password', 'nome_db');
@@ -585,8 +562,7 @@ $mysqli->close();
 
  Anche se il supporto a [SQLite](http://www.sqlite.org/) è stato già introdotto nelle ultime versioni di PHP 4.3.x, PHP 5 ne trae maggior beneficio grazie al supporto degli iteratori. SQLite è un database embedded, ovvero una libreria SQL che non necessita di un database server per il suo funzionamento e, contrariamente a quanto il nome suggerisce, è ricca di funzionalità avanzate come le viste, le transazioni e le sub-query. Nel seguente esempio viene mostrato come sia semplice con SQLite creare un database, inserire e recuperare dati da esso.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 if ($db = sqlite_open('sqlite_db', 0666, $sqliteerror))
 {
@@ -614,8 +590,7 @@ array(2) {
 
  PHP 5 dispone anche dell'estensione [Tidy](http://tidy.sf.net/) che permette di effettuare diverse operazioni su documenti HTLM come il parsing, la diagnosi, la pulizia (mostrata nel seguente esempio) e la riparazione. Tidy supporta le eccezioni e può essere usata con un approccio sia procedurale che ad oggetti.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 $tidy = tidy_parse_string("<B>Questa</I> è una <U>prova</B>");
 tidy_clean_repair($tidy);

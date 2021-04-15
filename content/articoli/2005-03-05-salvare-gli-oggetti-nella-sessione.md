@@ -18,29 +18,25 @@ tags:
 
  Quindi per creare (o salvare) un oggetto in sessione:
 
- ```
-<pre class="brush: php">
+ ```php
 $_SESSION['oggetto'] = new oggetto();
 ```
 
  Per recuperare invece il contenuto:
 
- ```
-<pre class="brush: php">
+ ```php
 $oggetto = $_SESSION['oggetto'];
 ```
 
  La precedente assegnazione ha un risultato diverso a seconda che stiamo usando PHP 4 o 5. In **PHP 4** $oggetto diventa una copia dell'oggetto memorizzato in sessione, tutte le modifiche che subirà nello script non verranno quindi salvate in sessione. In **PHP 5** invece $oggetto diventa un modo diverso ma equivalente di riferirsi all'oggetto salvato in sessione. Tutte le modifiche fatte su $oggetto verranno salvate in sessione. In PHP 4 si può risolvere la precedente questione facendo una assegnazione per indirizzo usando il carattere "&amp;":
 
- ```
-<pre class="brush: php">
+ ```php
 $oggetto = &$_SESSION['oggetto'];
 ```
 
  Nel seguente esempio viene mostrato un modo veloce per inizializzare o recuperare un oggetto dalla sessione. Nel caso l'oggetto non sia in sessione verrà creato e memorizzato, se invece l'oggetto è già in sessione allora verrà recuperato. In entrambi i casi l'oggetto sarà disponibile nella variabile $oggetto e tutte le modifiche effettuate su di esso verranno memorizzate automaticamente a fine script.
 
- ```
-<pre class="brush: php">
+ ```php
 // se non c'è l'oggetto in sessione allora lo creo e lo inserisco
 if (!isset($_SESSION['oggetto'])) $_SESSION['oggetto'] = new oggetto();
 

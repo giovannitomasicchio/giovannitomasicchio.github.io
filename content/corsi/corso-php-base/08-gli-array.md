@@ -21,8 +21,7 @@ Queste variabili di tipo array possono gestire il loro contenuto in 2 modi diver
 
 Le informazioni da conservare possono essere inserite nell'array attraverso la funzione **array()** semplicemente elencandole una alla volta:
 
- ```
-<pre class="brush: php">
+ ```php
 $test = array('ciao', 'prova', 123, 'php', 5.34);
 ```
 
@@ -39,8 +38,7 @@ $test[4] vale 5.34
 
 E importante notare subito che la prima posizione non è la numero 1 bensì la numero 0. Vediamo subito un esempio:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $film = array('Via col Vento',1939,'Victor Fleming');
 
@@ -54,8 +52,7 @@ echo 'Regista: ' , $film[2];
 
 A volte però usare dei numeri (gli indici) per scegliere quale informazione prelevare da un array potrebbe essere scomodo. Immaginate la difficoltà che avremmo nel gestire un array contenente decine e decine di informazioni. Ma il PHP ci viene incontro dandoci la possibilità di usare un nome, chiamato **chiave**, da associare ad ogni valore inserito in un array. Si parla in questo caso di **array associativi**.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $film = array('titolo' => 'Via col Vento', 'anno' => 1939,'regista' => 'Victor Fleming');
 
@@ -75,8 +72,7 @@ Prima di proseguire con lo studio degli array dobbiamo introdurre la funzione **
 
 PHP permette l'uso in uno stesso array sia di indici numerici che di coppie chiave =&gt; valore. Vediamo come.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // definiamo un array $film
 $film = array('Via col Vento', 'anno' => 1939,'Victor Fleming');
@@ -100,8 +96,7 @@ Array
 
 Notiamo come PHP abbia usato degli indici numerici (0 e 1) per tutti i valori per cui non è stata esplicitata una chiave. Un ultimo esempio chiarirà definitivamente il comportamento di PHP:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $test = array('scheda',
               'test'=>'prova',
@@ -143,8 +138,7 @@ Possiamo dire quindi che tutti i valori di un array dispongono di una chiave che
 
 Chiarito il meccanismo di assegnazione delle chiavi, possiamo ora vedere come aggiungere nuovi elementi all'interno di un array esistente:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // avremmo potuto anche scrivere $test = array();
 // per iniziare con un array completamente vuoto
@@ -187,8 +181,7 @@ La politica di assegnazione delle chiavi rimane quindi la stessa anche nel caso 
 
 Per concludere questa lezione accenniamo al fatto che gli elementi di un array possono essere di qualsiasi tipo: numeri, stringhe ma anche altri array. Vediamo un esempio proprio su quest'ultima possibilità:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // definiamo un array $film
 $film = array('titolo' => 'Via col Vento',

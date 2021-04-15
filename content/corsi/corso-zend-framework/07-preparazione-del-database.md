@@ -18,7 +18,6 @@ Per usare Zend\_Db\_Table, abbiamo bisogno di indicare quale database useremo ed
 Apriamo il file application/configs/application.ini e aggiungiamo le seguenti rige alla fine della sezione \[production\] (ovvero sopra alla sezione \[staging\]):
 
  ```
-<pre class="brush: ini">
 resources.db.adapter = PDO_MYSQL
 resources.db.params.host = localhost
 resources.db.params.username = rob
@@ -32,8 +31,7 @@ Ovviamente si deve usare il nome utente, la password ed il nome del proprio data
 
 Come detto nella pianificazione del progetto, utilizzeremo un database per immagazzinare i dati degli album. In questo corso utilizzeremo MySQL e così l'SQL per creare la tabella è:
 
- ```
-<pre class="brush: mysql">
+ ```sql
 CREATE TABLE albums (
     id int(11) NOT NULL auto_increment,
     artist varchar(100) NOT NULL,
@@ -48,8 +46,7 @@ Eseguiamo questa query in un client MySQL come ad esempio phpMyAdmin o nel clien
 
 Inseriamo ora qualche riga nella tabella, così potremo vedere qualche risultato in home page. Prenderemo alcuni CD. Lanciamo la seguente query in un client MySQL:
 
- ```
-<pre class="brush: mysql">
+ ```sql
 INSERT INTO albums (artist, title) VALUES
     ('Paolo Nutine', 'Sunny Side Up'),
     ('Florence + The Machine', 'Lungs'),

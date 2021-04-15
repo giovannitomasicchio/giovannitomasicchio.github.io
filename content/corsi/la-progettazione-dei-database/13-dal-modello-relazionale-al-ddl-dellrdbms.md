@@ -15,8 +15,7 @@ Il DDL, essendo un sottoinsieme dell'SQL, è un linguaggio solo in parte standar
 
 Quelle che seguono sono le query necessarie a creare il database della rubrica personale presentato nella prima lezione.
 
- ```
-<pre class="brush: mysql">
+ ```sql
 CREATE TABLE `lavoro` (
    `lavoro` varchar(255),
    `indirizzo` varchar(255),

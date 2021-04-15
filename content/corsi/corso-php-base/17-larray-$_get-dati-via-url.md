@@ -25,8 +25,7 @@ categories:
 
  Con il seguente esempio vedremo come usare la query string per mostrare il testo della notizia selezionata:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 if(!$_GET)
 {

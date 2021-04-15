@@ -21,8 +21,7 @@ Supponiamo di aver memorizzato le impostazioni generali del nostro sito in alcun
 
 Ecco il file impostazioni.php:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // file contenente le impostazioni generali del sito
 $colore_sfondo = 'blu';
@@ -32,8 +31,7 @@ $colore_testo = 'bianco';
 
 Questa sarà la generica pagina del sito:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // carico le impostazioni generali del sito
 include 'impostazioni.php';
@@ -53,8 +51,7 @@ E' interessante notare come un file incluso possa a sua volta caricare un ulteri
 
 primo.php
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 include ('librerie/secondo.php');
 // il resto del file
@@ -63,8 +60,7 @@ include ('librerie/secondo.php');
 
 secondo.php
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 include 'librerie/terzo.php';
 // il resto del file
@@ -88,8 +84,7 @@ Esistono altri tre costrutti PHP che permettono l'inclusione di codice presente 
 
 Abbiamo visto quindi come i costrutti include e require, con le loro varianti, permettano di "allungare" il codice di uno script attraverso l'inclusione di codice proveniente da altri files. Il PHP mette a disposizione il comando exit per ottenere l'effetto opposto, ovvero terminare l'esecuzione di uno script. Le successive istruzioni verranno ignorate e lo script risulterà virtualmente tagliato. Vediamo un semplice esempio:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 echo 'unico testo che leggerai <br>';
 

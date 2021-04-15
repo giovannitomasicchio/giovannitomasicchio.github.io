@@ -20,8 +20,7 @@ tags:
 
  L'esempio che segue realizza la procedura descritta:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $frase = "Questa è un articolo molto lungo.\nUna frase\n".
             "a cavallo. Voglio riuscire a estrapolarne una introduzione.\n".

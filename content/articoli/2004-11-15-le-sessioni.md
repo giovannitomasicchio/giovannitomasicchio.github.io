@@ -62,8 +62,7 @@ Le sessioni si prestano bene alla risoluzione di questo problema, vediamo quali 
 
 La pagina login.php controlla il nome e la password dell'utente e se sono corretti memorizza che l'autenticazione è avvenuta con successo:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 session_start();
 
@@ -85,8 +84,7 @@ La semplice assegnazione $\_SESSION\['login\_effettuato'\] = true; renderà pers
 
 Immaginiamo adesso come proteggere una pagina privata, ovvero accessibile solo agli utenti loggati. Lo script potrebbe cominciare nel seguente modo:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 session_start();
 
@@ -101,8 +99,7 @@ Anche questa volta per prima cosa dobbiamo chiamare la funzione session\_start, 
 
 Anche l'eliminazione di una variabile di sessione si effettua in maniera identica a quanto accade per una comune variabile, cioè attraverso l'utilizzo della funzione [unset()](http://it2.php.net/manual/it/function.unset.php). Ad esempio la pagina per effettuare il log-out potrebbe cominciare così:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 session_start();
 
@@ -115,8 +112,7 @@ In questo esempio abbiamo usato una semplice variabile booleana (true/false) per
 
 Nel caso si vogliano cancellare tutte i dati contenuti in una sessione è possibile procedere nel seguente modo, assegnando a $\_SESSION un array vuoto:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 
 session_start();
@@ -128,8 +124,7 @@ $_SESSION = array();
 
 In questo modo però la sessione sarà ancora attiva, anche se priva di dati. Per distruggere completamente una sessione bisogna eliminare il file sul server contenente i dati di sessione usando la funzione [session\_destroy()](http://www.php.net/manual/it/function.session-destroy.php) e cancellare l'eventuale cookie usato per far propagare l'id di sessione. L'esempio seguente è preso direttamente dalla documentazione ufficiale:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 session_start();
 
@@ -203,8 +198,7 @@ Come abbiamo detto fin qui, il PHP memorizza i dati di ogni singola sessione all
 
 L'esempio seguente mostra come definire tali funzioni e come queste vengano chiamate dal PHP ad ogni evento legato alle sessioni. Per evidenziare l'attivazione del garbage collector abbiamo impostato la sua probabilità di avvio al 50% attraverso la funzione ini\_set.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php 
 // imposto la scadenza delle sessioni a 20 minuti
 ini_set('session.gc_maxlifetime',20*60);

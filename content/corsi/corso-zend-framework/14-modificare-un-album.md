@@ -13,8 +13,7 @@ La modifica di un album è quasi identica all'inserimento, il codice è molto si
 
 zf-tutorial/application/controllers/IndexController.php
 
- ```
-<pre class="brush: php">
+ ```php
  ...
  function editAction()
  {
@@ -48,8 +47,7 @@ zf-tutorial/application/controllers/IndexController.php
 
 Vediamo le differenze rispetto all'inserimento di un album. Prima di tutto, quando si visualizza il form all'utente abbiamo bisogno di recuperare il titolo e l'artista dell'album dal database per poi popolare gli elementi del form con questi dati. Ciò avviene alla fine del metodo:
 
- ```
-<pre class="brush: php">
+ ```php
 $id = $this->_getParam('id', 0);
 if ($id > 0) {
     $albums = new Application_Model_DbTable_Albums();
@@ -61,8 +59,7 @@ Notiamo che ciò viene eseguito se non c'è stata una richiesta via POST, dato c
 
 Dopo aver validato il form, abbiamo bisogno di salvare i dati nel record corretto del database. Lo facciamo usando il nostro metodo updateAlbum() del model:
 
- ```
-<pre class="brush: php">
+ ```php
 $id = $form->getValue('id');
 $artist = $form->getValue('artist');
 $title = $form->getValue('title');
@@ -74,8 +71,7 @@ Il template dello script di view è lo stesso di add.phtml:
 
 zf-tutorial/application/views/scripts/index/edit.phtml
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $this->title = "Edit album";
 $this->headTitle($this->title);

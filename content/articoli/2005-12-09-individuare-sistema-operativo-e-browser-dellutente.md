@@ -55,8 +55,7 @@ AIX			AIX
 
  Ecco quindi come potrebbe essere strutturata la funzione:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 function GetSistemaOperativo()
 {
@@ -104,8 +103,7 @@ function GetSistemaOperativo()
 
  Come vedrete, la funzione per ricavare il browser è molto simile alla precedente.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 function GetBrowser()
 {

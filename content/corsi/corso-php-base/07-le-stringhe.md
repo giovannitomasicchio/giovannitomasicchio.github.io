@@ -13,8 +13,7 @@ categories:
 
  E' per questo motivo che vale la pena ora soffermarci su come PHP gestisce le stringhe. Iniziamo con un esempio:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // stringa definita con i singoli apici
 $stringa1 = 'Ciao a tutti';
@@ -37,8 +36,7 @@ echo $stringa2;
 
  Da questo esempio sembrerebbe che, sia che usiamo i **singoli apici** sia che usiamo i **doppi apici** per delimitare una stringa, il risultato sia identico. Ciò è vero però solo per questo semplice script. Il successivo ci mostrerà invece le prime differenze tra le due tecniche:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // stringa che cercherò di includere
 $domanda = 'vi piace il PHP?';
@@ -72,8 +70,7 @@ echo $stringa2;
 
  Quindi il PHP quando incontra una stringa delimitata da doppi apici interpreta il suo contenuto. Oltre a sostituire le variabili con il loro contenuto è anche in grado di riconoscere delle sequenze di caratteri speciali, detti **caratteri di escape**, e sostituirle con speciali formattazioni. Il seguente esempio chiarirà la questione:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // una stringa con "strane" sequenze di caratteri
 $stringa = " cane \t gatto \t topo \n cavallo \t mucca \t pecora \n rana \t serpente \t pesce";
@@ -87,8 +84,7 @@ echo $stringa;
 
  Affrontiamo ora un altro problema: come facciamo ad inserire un apice all'interno di una stringa delimitata da singoli apici o un doppio apice in una stringa delimitata da doppi apici. Per evitare che questi caratteri vengano interpretati come "fine stringa" si fanno precedere dal simbolo \\. Vediamo un esempio.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // stringa definita con i singoli apici
 $stringa1 = 'Il romanzo \'I promessi Sposi\' fu scritto dal "Manzoni"';
@@ -111,8 +107,7 @@ echo $stringa2;
 
  E se volessimo unire due o più stringhe, accodandole una all'altra? Basta usare un punto!
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // tre stringhe
 $stringa1 = 'Ciao';

@@ -47,8 +47,7 @@ Adesso dobbiamo aggiungere qualche funzionalità, modifichiamo quindi applicatio
 
 zf-tutorial/application/models/DbTable/Albums.php
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 class Application_Model_DbTable_Albums extends Zend_Db_Table_Abstract
 {

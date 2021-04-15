@@ -38,8 +38,7 @@ tags:
 
  **post.php**
 
- ```
-<pre class="brush: php">
+ ```php
 <form id="form1" name="form1" method="post" action="">
 <p>titolo
 <input type="text" name="titolo" />
@@ -64,8 +63,7 @@ fclose($handle);
 
  Il seguente listato invece serve ad "attaccare" il form bersaglio:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $post_data = array();
 
@@ -97,8 +95,7 @@ print $postResult;
 
  L'approccio impiegato per realizzare la protezione CAPTCHA non fa uso ne di cookie ne delle sessioni, in modo da interferire il meno possibile nel funzionamento degli script preesistenti. Serve solo avere a disposizione una tabella nel DB MySQL da impiegare per conservare i pochi dati necessari. Per crearla è sufficiente eseguire questa query:
 
- ```
-<pre class="brush: sql">
+ ```sql
 CREATE TABLE CAPTCHA ( 
 	CAPTCHA_id char(32) NOT NULL default '', 
 	code char(3) NOT NULL default '', 
@@ -125,8 +122,7 @@ CREATE TABLE CAPTCHA (
 
  Si noti come l'unica vera operazione eseguita è la creazione del $CAPTCHA\_id casuale, necessaria poiché questo identificativo deve essere presente nel campo nascosto del form ed inoltre deve essere passato allo script CAPTCHA.php responsabile della creazione dell'immagine. Osservando il tag &lt;img&gt; si nota come l'immagine non è costituita da un file vero e proprio presente sul server ma viene generata "al volo" dallo script CAPTCHA.php.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // creo un identificativo da associare al codice di sicurezza
 $CAPTCHA_id = md5(microtime().mt_rand().'super1segreto2segretissimo3');
@@ -162,8 +158,7 @@ qui:
 
  Infine l'immagine viene inviata al browser insieme ad una intestazione (header) che ne specifica il tipo MIME.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // controllo se è stato fornito l'identificativo del codice CAPTCHA
 if(!isset($_GET['id'])) exit();
@@ -256,8 +251,7 @@ imagepng($img);
 
  Se la query restituisce un risultato allora la verifica ha avuto successo. Indipendentemente dall'esito si procede poi alla cancellazione sia dei vecchi record presenti nel database, sia del record contenente l'identificativo inviato dall'utente.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // dopo quanto tempo i dati nella tabella del DB "scadono"?
 $durata_CAPTCHA = 60*60; // secondi

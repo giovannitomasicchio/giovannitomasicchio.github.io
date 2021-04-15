@@ -24,8 +24,7 @@ categories:
 
  Vediamo quindi un semplice esempio di connessione, selezione del DB e chiusura del link:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $link = mysql_connect('localhost', 'nome_utente', 'password');
 if (!$link) {

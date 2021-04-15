@@ -20,8 +20,7 @@ tags:
 
  Senza addentrarci nella problematica vediamo come poter eseguire dei minimi controlli su una stringa per verificare se essa realmente contiene un indirizzo email valido.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 function chkEmail($email)
 {

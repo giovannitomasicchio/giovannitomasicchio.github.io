@@ -100,8 +100,7 @@ tags:
 
  Adesso dobbiamo integrare il PHP 5 all'interno di Apache. Per prima cosa apriamo la cartella nella quale abbiamo installato Apache, nel nostro caso **C:\\Programmi\\Apache Software Foundation\\Apache2.2** e cerchiamo al suo interno la cartella **conf**. In questa cartella è presente il file **httpd.conf** ovvero il principale file di configurazione di Apache. Apriamolo con un editor (il blocco note va benissimo) ed andiamo ad individuare al suo interno un lungo elenco di righe che iniziano con la parola *LoadModule*. Portiamoci alla fine di questo elenco ed aggiungiamo le seguenti righe e salviamo i cambiamenti.
 
- ```
-<pre class="brush: php">
+ ```php
 LoadModule php5_module "c:/php/php5apache2_2.dll"
 AddType application/x-httpd-php .php
 PHPIniDir "C:/php"
@@ -115,8 +114,7 @@ PHPIniDir "C:/php"
 
  Per riavviare Apache sarà sufficiente cliccare sul pulsante *Restart* (oppure prima su *Stop* e poi su *Start*). La procedura dura pochi secondi, se non vengono visualizzati errori significa che tutto è andato a buon fine. Per sincerarcene realizziamo un piccolo script PHP. Apriamo il blocco note e scriviamo le seguenti istruzioni:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 phpinfo();
 ?>
@@ -214,8 +212,7 @@ phpinfo();
 
  Adesso proviamo a collegarci con uno script PHP al nostro database MySQL. Apriamo il blocco note (o l'editor che preferite) e scriviamo il seguente codice:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $link = mysqli_connect("localhost", "root", "testpass");
 if (!$link)
@@ -231,8 +228,7 @@ mysqli_close($link);
 
  Se volete connettervi a MySQL con il nuovo approccio OO ( Object Oriented ) fornito da mysqli
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $mysqli = new mysqli("localhost","root","testpass");
 if(mysqli_connect_errno())
@@ -273,8 +269,7 @@ if(mysqli_connect_errno())
 
  Ora tutto è pronto per testare uno script PHP-MySQL. Apriamo il blocco note (o l'editor che preferite) e scriviamo il seguente codice:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $connessione = mysql_connect("localhost", "root", "testpass")
    or die("Connessione non riuscita: " . mysql_error());

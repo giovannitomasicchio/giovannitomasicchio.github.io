@@ -21,8 +21,7 @@ Il primo esempio che vediamo è costituito da 2 files. Il primo è una normale p
 
 Ecco l'HTML presente nel primo file. Si noti il valore dell'attributo action del tab form.
 
- ```
-<pre class="brush: php">
+ ```php
 <form name="form1" method="post" action="prova.php">
    <p>Inserisci il tuo nome: </p>
    <p>
@@ -34,8 +33,7 @@ Ecco l'HTML presente nel primo file. Si noti il valore dell'attributo action del
 
 Segue il codice della pagina prova.php, che riceverà i dati inviati dall'utente e che verranno inseriti dal PHP all'interno dell'array $\_POST.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 echo('Il tuo nome è ' . $_POST['nome_utente']);
 ?>
@@ -47,8 +45,7 @@ In realtà non è necessario che la pagina che realizza il form e quella che rac
 
 Il seguente esempio funziona proprio in questo modo: crea un form particolarmente complesso e gestisce anche i dati che verranno inviati:
 
- ```
-<pre class="brush: php">
+ ```php
 <form name="form1" method="post" action="">
   <p> campo di testo: <br>
     <input type="text" name="textfield">

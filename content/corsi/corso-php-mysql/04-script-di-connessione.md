@@ -13,8 +13,7 @@ categories:
 
  **connect.php**
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $link = mysql_connect('localhost', 'nome_utente', 'password');
 if (!$link) {
@@ -30,8 +29,7 @@ if (!$db_selected) {
 
  Ecco come potrebbe presentarsi il generico script che fa uso del precedente codice di connessione:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // richiamo lo script responsabile della connessione a MySQL
 require 'connect.php';
@@ -45,8 +43,7 @@ require 'connect.php';
 
  **config.php**
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $DB_host     = 'localhost';
 $DB_user     = 'nome_utente';
@@ -57,8 +54,7 @@ $DB_name     = 'prova';
 
  **connect.php**
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $link = mysql_connect($DB_host, $DB_user, $DB_password);
 if (!$link) {
@@ -74,8 +70,7 @@ if (!$db_selected) {
 
  Il generico script pertanto diventa:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // richiamo il file di configurazione
 require 'config.php';

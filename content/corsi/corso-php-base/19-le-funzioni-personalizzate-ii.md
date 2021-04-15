@@ -15,8 +15,7 @@ categories:
 
  Supponiamo ad esempio di dover realizzare una funzione che crei una descrizione di un film. Passeremo come parametri il titolo del film, il regista, l'anno e una indicazione 'bianco e nero' o 'a colori'. Poiché supponiamo che la maggior parte dei film da descrivere sarà a colori allora faremo in modo che questa sia l'opzione di default. Vediamo come realizzare tale funzione.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // il terzo parametro ha un valore di default
 function descrivi_film($titolo, $regista, $bn_colori = 'colori')
@@ -42,8 +41,7 @@ descrivi_film('I soliti ignoti','Mario Monicelli','bianco e nero');
 
  Partiamo subito con un esempio: una funzione che calcola il quadrato di un numero.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 function quadrato($a)
 {
@@ -68,8 +66,7 @@ echo $numero;
  
  E' quindi chiaro che non possiamo alterare all'interno di una funzione i parametri passati sperando che queste modifiche abbiano effetto anche sulle relative variabili del programma principale. Questo perché i parametri durante il passaggio vengono semplicemente copiati. E' possibile però modificare questo comportamento attraverso l'uso del carattere **&amp;** (passaggio di variabile per riferimento, già incontrato nei cicli foreach) . Modifichiamo l'esempio precedente:
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 // il parametro viene passato "per riferimento"
 
@@ -91,8 +88,7 @@ echo $numero;
 
  Un fenomeno analogo avviene per le variabili dichiarate all'esterno delle funzioni, nel programma principale, che sono dette anche **variabili globali**. Queste saranno "invisibili" all'interno delle varie funzioni. Il seguente esempio dimostra quanto detto.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 function test()
 {
@@ -121,8 +117,7 @@ else
 
  A volte però, magari per evitare di usare lunghe liste di parametri o per non complicare troppo i valori restituiti da return, si preferisce alterare le normali regole di visibilità delle variabili attraverso l'uso del comando **global**.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 function test()
 {

@@ -13,8 +13,7 @@ Il componente view di Zend Framework si chiama, senza troppa fantasia, Zend\_Vie
 
 L'uso base di Zend\_View è:
 
- ```
-<pre class="brush: php">
+ ```php
 $view = new Zend_View();
 $view->setScriptPath('/path/to/scripts');
 echo $view->render('script.php');

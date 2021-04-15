@@ -26,8 +26,7 @@ tags:
 
  **- form.htm**
 
- ```
-<pre class="brush: php">
+ ```php
 
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="it-it" lang="it-it" dir="ltr">
     <head>
@@ -67,8 +66,7 @@ tags:
 
  **- form.php**
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 include 'Akismet.class.php';
 
@@ -110,8 +108,7 @@ if ($akismet->isCommentSpam()) {
 
  **- form.php**
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 set_include_path(get_include_path() . PATH_SEPARATOR . 'C:\Program Files (x86)\Zend\ZendServer\share\ZendFramework\library');
 

@@ -91,10 +91,9 @@ A titolo di esempio, il sistema conserverà in documenti appartenenti alla stess
 
 Come anticipato, il formato usato da MongoDB per descrivere questi documenti è JSON. I dati dell'esempio corrisponderanno agli array JSON:
 
- ```
-<pre class="brush: json">
+ ```json
 {
-  "nome"    : "Ugo",
+  "nome"    : "Ugo",
   "cognome" : "rossi",
   "Java"    : "10",
   "PHP"     : "7",
@@ -104,8 +103,7 @@ Come anticipato, il formato usato da MongoDB per descrivere questi documenti è 
 
 e
 
- ```
-<pre class="brush: json">
+ ```json
 {
   "nome"    : "Silvio",
   "cognome" : "Verdi",
@@ -150,8 +148,7 @@ Procediamo adesso con un esempio piuttosto basilare, finalizzato a trasformare i
 
 Per connetterci al database è necessario istanziare un oggetto della classe Mongo, passandogli una stringa contenente i parametri di connessione. Nel nostro caso, non avendo provvisto MongoDB di autenticazione, sarà sufficiente richiedere una connessione al servizio standard ossia localhost sulla porta 27017.
 
- ```
-<pre class="brush: php">
+ ```php
 <?php
 $conn = new Mongo("mongodb://localhost:27017");
 $database = $conn->prova;
@@ -164,8 +161,7 @@ Come anticipato, MongoDB non adotta un linguaggio per le query simile all’SQL.
 
 Ecco un esempio di inserimento di un documento:
 
- ```
-<pre class="brush: php">
+ ```php
 $documento = array (
      'nome' => "Ugo",
      'cognome' => "Rossi",
@@ -185,8 +181,7 @@ Per inserire un documento è possibile invocare, al posto del metodo insert, il 
 
 Vediamo adesso uno degli aspetti più importanti dell'interazione con un database ossia il recupero dei dati. Iniziamo con una ricerca priva di filtri, finalizzata alla lettura di tutti i documenti presenti nella collection.
 
- ```
-<pre class="brush: php">
+ ```php
 $cursore = $collection->find();
 
 foreach($cursore as $documento) {
@@ -200,8 +195,7 @@ Vediamo adesso come effettuare una lettura dei documenti di una collection impie
 
 Se ad esempio volessimo cercare i candidati di nome ‘Ugo’:
 
- ```
-<pre class="brush: php">
+ ```php
 $query = array(
      'nome' => 'Ugo'
 );
@@ -211,8 +205,7 @@ $cursore = $collection->find($query);
 
 Oppure, per recuperare i documenti in cui il voto di PHP risulta minore di 8 si può impostare $query in questa maniera:
 
- ```
-<pre class="brush: php">
+ ```php
 $query = array(
      'PHP' => array('$lt' => 8)
 );
@@ -228,8 +221,7 @@ Il meccanismo di definizione delle condizioni appena visto può essere usato anc
 
 Vediamo ad esempio come cancellare tutti i documenti dei candidati che conoscono il Python
 
- ```
-<pre class="brush: php">
+ ```php
 $query = array(
      'Python' => array('$exists' => true)
 );
