@@ -27,15 +27,15 @@ Nel modello REST si parla di risorse e dei relativi identificativi, che corrispo
   3. /film/terminator/attori  
     per accedere all&#8217;elenco degli attori di Terminator
   4. /film/terminator/attori/schwarzenegger  
-    per interagire con l&#8217;interpretazione di Arnold Schwarzenegger in Terminator
+    per interagire con l&#8217;interpretazione di Arnold Schwarzenegger in Terminator
 
-Gli URL degli esempi 1 e 3 si dicono di tipo _collection_ poiché fanno riferimento ad un insieme omogeneo di elementi (film e attori di un film), mentre gli URL 2 e 4 referenziano specifici elementi.
+Gli URL degli esempi 1 e 3 si dicono di tipo _collection_ poiché fanno riferimento ad un insieme omogeneo di elementi (film e attori di un film), mentre gli URL 2 e 4 referenziano specifici elementi.
 
 Salta subito all&#8217;occhio una differenza sostanziale con i servizi SOAP che tramite un unico URL possono esporre funzionalità relative a differenti soggetti (film, attori, ecc.). Questo avviene perché in SOAP l&#8217;oggetto dell&#8217;interazione tra client e server è codificato nel messaggio XML e non nell&#8217;URL.
 
 ## Rappresentazione delle risorse
 
-Abbiamo detto che nel modello REST l&#8217;interazione tra client e server ha come oggetto una risorsa. Questa risorsa però si manifesta non direttamente ma tramite delle sue rappresentazioni. Una rappresentazione di una risorsa è costituita da:
+Abbiamo detto che nel modello REST l&#8217;interazione tra client e server ha come oggetto una risorsa. Questa risorsa però si manifesta non direttamente ma tramite delle sue rappresentazioni. Una rappresentazione di una risorsa è costituita da:
 
   * i dati associati alla risorsa, descritti mediante una specifica codifica;
   * i metadati necessari a descrivere i suddetti dati, sotto forma di coppie nome &#8211; valore.
@@ -65,7 +65,7 @@ Nel Web questo si realizza mediante il protocollo di trasporto HTTP, che utilizz
 
 I verbi più utilizzati da un browser sono GET, per richiedere una &#8220;pagina&#8221; dato il suo URL, e POST per inviare al server i dati inseriti da un utente in un form HTML. Lo status code più noto del Web è certamente il 404 &#8220;pagina non trovata&#8221;.
 
-I verbi HTTP ricoprono un ruolo del tutto simile nei servizi RESTful. Mediante questi verbi il client indica al server quale tipo di operazione intende effettuare su una particolare risorsa. Per questa ragione nel contesto dei servizi RESTful vengono impiegati, oltre a GET e POST, ulteriori verbi HTTP. Di seguito il significato di quelli maggiormente utilizzati, raggruppati in base al risultato atteso in caso di esecuzione multipla (idempotenza).
+I verbi HTTP ricoprono un ruolo del tutto simile nei servizi RESTful. Mediante questi verbi il client indica al server quale tipo di operazione intende effettuare su una particolare risorsa. Per questa ragione nel contesto dei servizi RESTful vengono impiegati, oltre a GET e POST, ulteriori verbi HTTP. Di seguito il significato di quelli maggiormente utilizzati, raggruppati in base al risultato atteso in caso di esecuzione multipla (idempotenza).
 
 **Operazioni idempotenti** &#8211; anche se eseguite più volte su uno specifico URL, il risultato non deve cambiare rispetto a quello ottenibile con una singola esecuzione.
 
@@ -75,7 +75,7 @@ I verbi HTTP ricoprono un ruolo del tutto simile nei servizi RESTful. Mediante q
   * **PUT**, crea o aggiorna una risorsa identificata dall&#8217;URL specificato. Se la risorsa esiste già allora il server la aggiorna, altrimenti la crea, associandola all&#8217;URL specificato.  
     Generalmente l&#8217;URL specificato in una richiesta di tipo PUT non è di tipo _collection_ (vedi i precedenti esempi 1 e 3) ma identifica una specifica entità, a meno che non si voglia creare o aggiornare una intera _collection_.  
     Poiché l&#8217;identificativo della risorsa è specificato dal client, se questa non esiste il server è tenuto a crearla utilizzando proprio questo identificativo. Non è detto però che il server possa accettare che sia il client a scegliere l&#8217;identificativo delle nuove risorse, ad esempio perché questo è un numero progressivo gestito dal server. In questi casi il server, ad una richiesta PUT per una nuova risorsa, restituisce un errore.
-  * **DELETE**, cancella una risorsa identificata dall&#8217;URL specificato.  
+  * **DELETE**, cancella una risorsa identificata dall&#8217;URL specificato.  
     Come per PUT, generalmente l&#8217;URL specificato in una richiesta di tipo DELETE non è di tipo _collection_.
 
 **Operazioni non idempotenti** &#8211; il risultato può cambiare ad ogni esecuzione dell&#8217;operazione.
@@ -83,20 +83,20 @@ I verbi HTTP ricoprono un ruolo del tutto simile nei servizi RESTful. Mediante q
   * **POST**, per la creazione di una nuova risorsa affidata ad un URL che rappresenta l&#8217;entità &#8220;padre&#8221; della nuova risorsa.  
     Generalmente l&#8217;URL specificato in una richiesta di tipo POST è di tipo _collection_, poiché il client vuole aggiungere una nuova risorsa nella _collection_ indicata.
 
-Nel caso si stia realizzando un servizio RESTful con una semantica non immediatamente riconducibile a quella di una delle suddette operazioni, bisogna comunque scegliere il verbo che si avvicina di più allo scopo del servizio tra quelli definiti dagli standard [RFC 7231][3]  (GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE) e [RFC 5789][4] (PATCH), facendo massima attenzione a rispettare la caratteristica di idempotenza del verbo scelto.
+Nel caso si stia realizzando un servizio RESTful con una semantica non immediatamente riconducibile a quella di una delle suddette operazioni, bisogna comunque scegliere il verbo che si avvicina di più allo scopo del servizio tra quelli definiti dagli standard [RFC 7231][3]  (GET, HEAD, POST, PUT, DELETE, CONNECT, OPTIONS, TRACE) e [RFC 5789][4] (PATCH), facendo massima attenzione a rispettare la caratteristica di idempotenza del verbo scelto.
 
 Come anticipato, l&#8217;esito delle richieste RESTful viene indicato dal server mediante lo [status code][5] dell&#8217;HTTP. Di seguito alcuni possibili esiti delle principali operazioni:
 
   * GET: 200 (Ok) se il server è in grado di restituire la risorsa associata all&#8217;URL richiesto, 404 (Not Found) se l&#8217;URL non esiste;
-  * PUT: 200 (Ok) o 204 (No Content) se la risorsa viene creata o aggiornata come richiesto, 405 (Method Not Allowed) se il server non accetta di eseguire l&#8217;operazione richiesta sull&#8217;URL specificato (ad esempio in caso di richiesta di creazione di nuove risorse);
-  * POST: 201 (Created) se il server è in grado di creare la nuova risorsa;
-  * DELETE: 200 (Ok) o 204 (No Content) se il server è in grado di rimuovere la risorsa associata all&#8217;URL richiesto, 404 (Not Found) se l&#8217;URL non esiste;
+  * PUT: 200 (Ok) o 204 (No Content) se la risorsa viene creata o aggiornata come richiesto, 405 (Method Not Allowed) se il server non accetta di eseguire l&#8217;operazione richiesta sull&#8217;URL specificato (ad esempio in caso di richiesta di creazione di nuove risorse);
+  * POST: 201 (Created) se il server è in grado di creare la nuova risorsa;
+  * DELETE: 200 (Ok) o 204 (No Content) se il server è in grado di rimuovere la risorsa associata all&#8217;URL richiesto, 404 (Not Found) se l&#8217;URL non esiste;
 
-In estrema sintesi potremmo dire che i servizi RESTful affidano tutta la gestione del trasposto delle rappresentazioni al protocollo HTTP: la semantica della richiesta del client è codificata nei verbi HTTP mentre il significato delle risposte è comunicato al client mediante gli status code. Questa costituisce una ulteriore differenza con i servizi SOAP che invece incorporano nel messaggio XML la descrizione della _request_ e della _response_.
+In estrema sintesi potremmo dire che i servizi RESTful affidano tutta la gestione del trasposto delle rappresentazioni al protocollo HTTP: la semantica della richiesta del client è codificata nei verbi HTTP mentre il significato delle risposte è comunicato al client mediante gli status code. Questa costituisce una ulteriore differenza con i servizi SOAP che invece incorporano nel messaggio XML la descrizione della _request_ e della _response_.
 
 ## HATEOAS
 
-Il modello REST è definito dall&#8217;autore come un &#8220;[architectural style for distributed hypermedia systems][6]&#8220;. Non sorprende quindi che in questo modello abbia un ruolo centrale il concetto di ipertesto: &#8220;Hypertext As The Engine Of Application State&#8221; da cui il discutibile acronimo HATEOAS. Le risorse del modello REST sono infatti collegate mediante link che permettono di navigare il &#8220;distributed hypermedia systems&#8221;.
+Il modello REST è definito dall&#8217;autore come un &#8220;[architectural style for distributed hypermedia systems][6]&#8220;. Non sorprende quindi che in questo modello abbia un ruolo centrale il concetto di ipertesto: &#8220;Hypertext As The Engine Of Application State&#8221; da cui il discutibile acronimo HATEOAS. Le risorse del modello REST sono infatti collegate mediante link che permettono di navigare il &#8220;distributed hypermedia systems&#8221;.
 
 Nel Web questi link sono presenti sia nei documenti HTML (i tag <a>), sia nei messaggi del protocollo HTTP, si pensi alla risposta [HTTP 301 &#8220;Moved Permanently&#8221;][7]. Allo stesso modo anche i servizi RESTful sono tenuti ad incorporare nei messaggi e nel protocollo HTTP l&#8217;informazione degli URL associati alla risorsa corrente. Ad esempio quando il client effettua una GET per un URL, il messaggio di risposta deve contenere gli URL delle risorse collegate all&#8217;URL richiesto. Oppure quando il client effettua una POST per creare una nuova risorsa, il server deve rispondere indicando l&#8217;URL della risorsa appena creata, nonché gli URL da utilizzare per manipolarla.
 

@@ -12,13 +12,13 @@ tags:
   - Manifesto Agile
 
 ---
-Fatemelo dire a chiare lettere: nell&#8217;industria IT non c&#8217;è più spazio per gli sviluppatori _nerd_. Mi riferisco a coloro che sono attratti dalle soluzioni complesse, dagli hack, dalle over-ingegnerizzazioni e da tutto ciò che, per essere compreso, richieda un QI elevato e, al contempo, mostrano seri problemi nelle relazioni interpersonali.
+Fatemelo dire a chiare lettere: nell&#8217;industria IT non c&#8217;è più spazio per gli sviluppatori _nerd_. Mi riferisco a coloro che sono attratti dalle soluzioni complesse, dagli hack, dalle over-ingegnerizzazioni e da tutto ciò che, per essere compreso, richieda un QI elevato e, al contempo, mostrano seri problemi nelle relazioni interpersonali.
 
 ## KISS
 
-La letteratura dell&#8217;ingegneria del software parla chiaro, basta citare il [principio KISS][1] (Keep It Simple, Stupid) con cui si esorta a mantenere il codice sorgente semplice, lineare e comprensibile. Interessante notare che questo principio non nasce nel mondo informatico ma viene elaborato da Kelly Johnsond, un ingegnere americano, famoso per la progettazione di aerei militari.
+La letteratura dell&#8217;ingegneria del software parla chiaro, basta citare il [principio KISS][1] (Keep It Simple, Stupid) con cui si esorta a mantenere il codice sorgente semplice, lineare e comprensibile. Interessante notare che questo principio non nasce nel mondo informatico ma viene elaborato da Kelly Johnsond, un ingegnere americano, famoso per la progettazione di aerei militari.
 
-Bisogna inoltre evitare l&#8217;**ottimizzazione precoce**, radice di tutto il male, come asserisce [Donald Knuth][2]. Molte scelte di un programmatore nerd infatti si basano sul concetto di ottimizzazione delle performance e del consumo di memoria. Nella maggior parte dei casi queste posizioni sono del tutto anacronistiche, avevano un senso quando la velocità dei processori si misurava in Megahertz e la memoria in Megabyte. Oggigiorno, tra hardware sempre più performante e compilatori sempre più raffinati, non ha senso continuare a scrivere codice ottimizzato per la macchina ma non per il programmatore.
+Bisogna inoltre evitare l&#8217;**ottimizzazione precoce**, radice di tutto il male, come asserisce [Donald Knuth][2]. Molte scelte di un programmatore nerd infatti si basano sul concetto di ottimizzazione delle performance e del consumo di memoria. Nella maggior parte dei casi queste posizioni sono del tutto anacronistiche, avevano un senso quando la velocità dei processori si misurava in Megahertz e la memoria in Megabyte. Oggigiorno, tra hardware sempre più performante e compilatori sempre più raffinati, non ha senso continuare a scrivere codice ottimizzato per la macchina ma non per il programmatore.
 
 E qui entra in gioco **il baco**, croce e delizia di tutti gli sviluppatori. Questo animaletto digitale ha il suo habitat nei grovigli di codice, nelle matasse di istruzioni criptiche e nelle soluzioni software &#8220;esoteriche&#8221;. Lì non lo trova nessuno e può vivere indisturbato per anni, all&#8217;ombra di codice che nessuno si sognerà mai di toccare. Ho visto programmatori così terrorizzati dalla sola idea di intervenire su certe porzioni complesse di codice che hanno preferito modificare tutto ciò che interagiva con esso.
 
@@ -32,7 +32,7 @@ Qui si rischia davvero tanto. Il nerd architetto smania dalla voglia di inserire
   &#8211; fermatevi un attimo e riposatevi, il nerd architetto toglie il fiato &#8211;
 </p>
 
-Anche in questo caso la &#8220;retta via&#8221; ce la indica un altro esperto di aerei, Antoine de Saint-Exupéry, [secondo cui][16]
+Anche in questo caso la &#8220;retta via&#8221; ce la indica un altro esperto di aerei, Antoine de Saint-Exupéry, [secondo cui][16]
 
 > la perfezione si raggiunge non quando non c&#8217;è nient&#8217;altro da aggiungere ma quando non c&#8217;è null&#8217;altro da togliere
 
@@ -52,9 +52,9 @@ Il nerd fanatico combatte battaglie tra open e closed source, tra Windows e Linu
 
 Anche in questo caso dal Manifesto Agile possiamo estrarre due passi illuminanti:
 
-> Una **conversazione faccia a faccia** è il modo più efficiente e più efficace per comunicare con il team ed all&#8217;interno del team.
+> Una **conversazione faccia a faccia** è il modo più efficiente e più efficace per comunicare con il team ed all&#8217;interno del team.
 
-> A intervalli regolari **il team riflette** su come diventare più efficace, dopodiché **regola e adatta il proprio comportamento** di conseguenza.
+> A intervalli regolari **il team riflette** su come diventare più efficace, dopodiché **regola e adatta il proprio comportamento** di conseguenza.
 
 Quanto spazio può avere il fanatismo, l&#8217;intransigenza, la chiusura, in una conversazione faccia a faccia o in una riflessione del team? Quante possibilità ci sono che un nerd fanatico regoli e adatti il proprio comportamento?
 
@@ -64,7 +64,7 @@ Il nerd asociale si riconosce dal fatto che utilizza il monitor come barriera im
 
 Anche stavolta mi tocca riportare un passo del Manifesto Agile:
 
-> Committenti e sviluppatori devono **lavorare insieme quotidianamente** per tutta la durata del progetto.
+> Committenti e sviluppatori devono **lavorare insieme quotidianamente** per tutta la durata del progetto.
 
 Non so voi, ma io dubito che un nerd asociale possa &#8220;lavorare insieme quotidianamente&#8221; con qualcuno.
 

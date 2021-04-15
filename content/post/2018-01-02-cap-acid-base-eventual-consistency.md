@@ -28,16 +28,16 @@ In questo post proverò ad analizzare i differenti significati che il termine &#
 
 ## Teorema CAP
 
-Il **Teorema CAP**, formulato da Eric Brewer nel 1998, afferma che se i dati di un sistema sono distribuiti tra i nodi di una rete, solo due delle seguenti caratteristiche possono contemporaneamente essere garantite:
+Il **Teorema CAP**, formulato da Eric Brewer nel 1998, afferma che se i dati di un sistema sono distribuiti tra i nodi di una rete, solo due delle seguenti caratteristiche possono contemporaneamente essere garantite:
 
   * **Consistency**: le operazioni di lettura restituiscono il dato aggiornato, ovvero proveniente dall&#8217;ultima scrittura dello stesso, oppure un messaggio di errore.
-  * **Availability**: l&#8217;accesso ai dati è sempre garantito, non si ricevono mai messaggi di errore, ma i dati restituiti non sono necessariamente consistenti, ovvero non coincidono con quelli utilizzati nell&#8217;ultima operazione di scrittura degli stessi.
+  * **Availability**: l&#8217;accesso ai dati è sempre garantito, non si ricevono mai messaggi di errore, ma i dati restituiti non sono necessariamente consistenti, ovvero non coincidono con quelli utilizzati nell&#8217;ultima operazione di scrittura degli stessi.
   * **Partition tolerance**: il sistema continua a funzionare nonostante alcuni messaggi vengano persi o subiscano rallentamenti nelle comunicazioni tra i nodi della rete.
 
 Questo teorema viene spesso utilizzato per analizzare le dinamiche dei sistemi informativi che possiedono due o più archivi di dati posti su nodi distinti della rete. Rientrano in questa categoria:
 
   * i sistemi informativi cooperanti, ovvero gli insiemi di sistemi, ciascun dotato della propria base dati, che comunicano tra loro per l&#8217;accesso a dati e a funzionalità reciprocamente esposte;
-  * i sistemi informativi dotati di due o più basi dati distinte, come i sistemi che possiedono al contempo database SQL, NoSQL, sistemi di cache (es.: [Redis][2]) e di ricerca (es.: [ElasticSearch][3]); in questo caso di parla di [Polyglot Persistence][4];
+  * i sistemi informativi dotati di due o più basi dati distinte, come i sistemi che possiedono al contempo database SQL, NoSQL, sistemi di cache (es.: [Redis][2]) e di ricerca (es.: [ElasticSearch][3]); in questo caso di parla di [Polyglot Persistence][4];
   * i sistemi informativi che fanno uso di basi dati distribuite (es.: Apache HBase, Apache Cassandra, ecc.).
 
 Questi sistemi, avendo distribuito i dati su più nodi della rete, richiedono necessariamente la _partition tolerance_ del teorema CAP. Ne consegue che nell&#8217;acceso ai dati distribuiti, e quindi nella progettazione dei meccanismi di integrazione, non si può confidare contemporaneamente sulle caratteristiche di disponibilità e consistenza, definite nel teorema CAP, dei dati richiesti.
@@ -52,23 +52,23 @@ Questo tipo di integrazioni **permette di accedere a dati consistenti, ovvero pi
 
 A prima vista simili alle tecniche RPC, i servizi RESTful, a ben vedere, sono una tipologia di integrazione a se stante. Se da un lato condividono con lo stile RPC l&#8217;approccio &#8220;on line&#8221; delle operazioni, basato su di un insieme di interazioni dirette e in tempo reale con il sistema remoto, che garantiscono l&#8217;accesso ai dati consistenti del sistema remoto, dall&#8217;altro utilizzano un modello di integrazione incentrato sull&#8217;interazione con lo stato del sistema remoto mediante sue rappresentazioni. I servizi RESTful infatti non espongono generiche procedure ma specifiche operazioni, quelle dell&#8217;HTTP, per interagire con lo stato del sistema. Questo è costituito dall&#8217;insieme delle sue risorse, individuate dagli URI, ed è possibile interagire con esse mediante sue rappresentazioni codificate in differenti modi (es.: JSON, XML, ecc.).
 
-### CAP Consistency vs ACID Consistency
+### CAP Consistency vs ACID Consistency
 
 E&#8217; importante non confondere il significato di consistenza del Teorema CAP con quello previsto dalle caratteristiche ACID delle transazioni di un database. Il Teorema CAP parla di consistenza in termini di accesso al valore più aggiornato di un certo dato, ovvero quello utilizzato nell&#8217;ultima scrittura dello stesso. Nelle transazioni invece la consistenza fa riferimento al rispetto dei vincoli di integrità, prima e dopo l&#8217;esecuzione di una transazione. In altre parole, una transazione porta il database da uno stato consistente ad un nuovo stato consistente e non ci sono mai momenti in cui i dati del database non rispettano i vincoli di integrità.
 
-La consistenza del Teorema CAP è quindi una caratteristica che riguarda le **operazioni di lettura** dei dati distribuiti mentre la consistenza ACID è una proprietà delle **operazioni di scrittura** (inserimento, modifica o cancellazione) dei dati. E&#8217; evidente quindi che, anche se parliamo di consistenza, **sia le integrazioni di tipo RPC che quelle RESTful non garantiscono la complessiva integrità dei dati presenti sui diversi nodi**, propria di un sistema transazionale. Infatti queste tecniche non prevedono un sistema universalmente applicabile di gestione della transazione distribuita.
+La consistenza del Teorema CAP è quindi una caratteristica che riguarda le **operazioni di lettura** dei dati distribuiti mentre la consistenza ACID è una proprietà delle **operazioni di scrittura** (inserimento, modifica o cancellazione) dei dati. E&#8217; evidente quindi che, anche se parliamo di consistenza, **sia le integrazioni di tipo RPC che quelle RESTful non garantiscono la complessiva integrità dei dati presenti sui diversi nodi**, propria di un sistema transazionale. Infatti queste tecniche non prevedono un sistema universalmente applicabile di gestione della transazione distribuita.
 
 ## Integrazioni per la disponibilità dei dati
 
 Rilassando il requisito della consistenza CAP, ovvero rinunciando all&#8217;accesso alla versione più aggiornata di un dato remoto, è possibile realizzare meccanismi di accesso ai dati remoti basati sullo scambio di messaggi. Il sistema su cui si verifica un evento provvede a notificarlo ai sistemi cooperanti, o mediante interazioni dirette con gli stessi, o più di frequente affidando il messaggio ad appositi sistemi che fungono da mediatori (code di messaggi, meccanismi di publish/subscribe, pattern pipes and filters, ecc.). I sistemi che ricevono questi messaggi provvedono a recepire nella propria base dati locale quanto accaduto nel sistema remoto.
 
-Le integrazioni basate su messaggi permettono quindi di recepire localmente un dato remoto. I dati locali, se da un lato sono certamente disponibili, dall&#8217;altro non sono necessariamente i più aggiornati per via dell&#8217;inevitabile ritardo con cui si propagano i messaggi di aggiornamento tra i sistemi cooperanti.
+Le integrazioni basate su messaggi permettono quindi di recepire localmente un dato remoto. I dati locali, se da un lato sono certamente disponibili, dall&#8217;altro non sono necessariamente i più aggiornati per via dell&#8217;inevitabile ritardo con cui si propagano i messaggi di aggiornamento tra i sistemi cooperanti.
 
 A ben vedere però, le integrazioni basate su messaggi non rinunciano completamente alla consistenza CAP dei dati tra i sistemi. Possono infatti contare sua una particolare forma di consistenza, di tipo asintotica, a regime, che prende il nome di **eventual consistency**.
 
 ### Eventual Consistency e transazioni BASE
 
-Il fluire dei messaggi di notifica tra i sistemi cooperanti permette infatti, anche se non in maniera istantanea, di mantenere allineate le diverse basi dati. Questo meccanismo, molto meno rigoroso di quello previsto dalle transazioni ACID, permette di realizzare il modello transazionale noto con l&#8217;acronimo BASE, che sta per **B**asically **A**vailable, **S**oft state, **E**ventually consistent.
+Il fluire dei messaggi di notifica tra i sistemi cooperanti permette infatti, anche se non in maniera istantanea, di mantenere allineate le diverse basi dati. Questo meccanismo, molto meno rigoroso di quello previsto dalle transazioni ACID, permette di realizzare il modello transazionale noto con l&#8217;acronimo BASE, che sta per **B**asically **A**vailable, **S**oft state, **E**ventually consistent.
 
 L&#8217;eventual consistency quindi non è una garanzia di consistenza ma solo una caratteristica del sistema di integrazione, non promette una istantanea e complessiva consistenza dei dati distribuiti ma solo una tendenza delle basi dati ad allinearsi, senza però poter garantire l&#8217;istante in cui ciò accadrà.
 
