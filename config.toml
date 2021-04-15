@@ -1,6 +1,7 @@
 baseurl = "https://giovannitomasicchio.github.io"
 title = "Giovanni Tomasicchio"
 languageCode = "it-IT"
+defaultContentLanguage = "it"
 paginate = "10" # Number of posts per page
 theme = "mainroad"
 disqusShortname = "" # Enable Disqus comments by entering your Disqus shortname
