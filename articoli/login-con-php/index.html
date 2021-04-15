@@ -1,93 +1,91 @@
-<!doctype html><html class=no-js lang=it><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>Login con PHP - Giovanni Tomasicchio</title><script>(function(a,b){a[b]=a[b].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content="Come creare uno script PHP per effettuare il login degli utenti"><meta property="og:title" content="Login con PHP"><meta property="og:description" content="Come creare uno script PHP per effettuare il login degli utenti"><meta property="og:type" content="article"><meta property="og:url" content="https://giovannitomasicchio.github.io/articoli/login-con-php/"><meta property="article:section" content="articoli"><meta property="article:published_time" content="2009-05-04T20:44:51+00:00"><meta property="article:modified_time" content="2009-05-04T20:44:51+00:00"><meta itemprop=name content="Login con PHP"><meta itemprop=description content="Come creare uno script PHP per effettuare il login degli utenti"><meta itemprop=datePublished content="2009-05-04T20:44:51+00:00"><meta itemprop=dateModified content="2009-05-04T20:44:51+00:00"><meta itemprop=wordCount content="658"><meta itemprop=keywords content="database,MySQL,sicurezza,crittografia,SQL,"><meta name=twitter:card content="summary"><meta name=twitter:title content="Login con PHP"><meta name=twitter:description content="Come creare uno script PHP per effettuare il login degli utenti"><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic|Kaushan+Script:regular"><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-525H86QENV"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-525H86QENV',{anonymize_ip:!1})}</script></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class=logo><a class=logo__link href=/ title="Giovanni Tomasicchio" rel=home><div class="logo__item logo__text"><div class=logo__title>Giovanni Tomasicchio</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
-<span class=menu__btn-title tabindex=-1>Menu</span></button><ul class=menu__list><li class=menu__item><a class=menu__link href=/><span class=menu__text>Home</span></a></li><li class=menu__item><a class=menu__link href=/articoli/><span class=menu__text>Articoli PHP</span></a></li><li class=menu__item><a class=menu__link href=/corsi/><span class=menu__text>Corsi</span></a></li></ul></nav></div></header><div class="wrapper flex"><div class=primary><main class=main role=main><article class=post><header class=post__header><h1 class=post__title>Login con PHP</h1><div class="post__meta meta"><div class="meta__item-datetime meta__item"><svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2009-05-04T20:44:51Z>4 May 2009</time></div></div></header><div class="content post__content clearfix"><p>Realizzare uno <strong>script PHP per effettuare il login degli utenti</strong> è un compito piuttosto semplice per un programmatore PHP con un po' di esperienza. Gli sviluppatori alle prime armi possono invece incontrare qualche difficoltà.</p><p>Lo script che viene proposto di seguito vuole essere quindi un punto di partenza per i neofiti che li guidi alla realizzazione del proprio sistema di login con PHP. La complessità è stata ridotta al minimo per rendere lo script maggiormente comprensibile, ma non per questo a rischio sicurezza.</p><p>Per provare lo script di login proposto bisogna creare una tabella degli utenti ed inserire almeno un record. Ecco i comandi SQL necessari, da eseguire ad esempio con phpMyAdmin.</p><pre><code>&lt;pre class=&quot;brush:sql&quot;&gt;
-CREATE TABLE `utenti` (
-  `id` INT(11) NOT NULL AUTO_INCREMENT,
-  `nome` VARCHAR(32) NOT NULL,
-  `pswd` VARCHAR(32) NOT NULL,
-  PRIMARY KEY  (`id`)
+<!doctype html><html class=no-js lang=it><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>Login con PHP - Giovanni Tomasicchio</title><script>(function(a,b){a[b]=a[b].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content="Come creare uno script PHP per effettuare il login degli utenti"><meta property="og:title" content="Login con PHP"><meta property="og:description" content="Come creare uno script PHP per effettuare il login degli utenti"><meta property="og:type" content="article"><meta property="og:url" content="https://giovannitomasicchio.github.io/articoli/login-con-php/"><meta property="article:section" content="articoli"><meta property="article:published_time" content="2009-05-04T20:44:51+00:00"><meta property="article:modified_time" content="2009-05-04T20:44:51+00:00"><meta itemprop=name content="Login con PHP"><meta itemprop=description content="Come creare uno script PHP per effettuare il login degli utenti"><meta itemprop=datePublished content="2009-05-04T20:44:51+00:00"><meta itemprop=dateModified content="2009-05-04T20:44:51+00:00"><meta itemprop=wordCount content="653"><meta itemprop=keywords content="database,MySQL,sicurezza,crittografia,SQL,"><meta name=twitter:card content="summary"><meta name=twitter:title content="Login con PHP"><meta name=twitter:description content="Come creare uno script PHP per effettuare il login degli utenti"><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic|Kaushan+Script:regular"><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-525H86QENV"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-525H86QENV',{anonymize_ip:!1})}</script></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class=logo><a class=logo__link href=/ title="Giovanni Tomasicchio" rel=home><div class="logo__item logo__text"><div class=logo__title>Giovanni Tomasicchio</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
+<span class=menu__btn-title tabindex=-1>Menu</span></button><ul class=menu__list><li class=menu__item><a class=menu__link href=/><span class=menu__text>Home</span></a></li><li class=menu__item><a class=menu__link href=/articoli/><span class=menu__text>Articoli PHP</span></a></li><li class=menu__item><a class=menu__link href=/corsi/><span class=menu__text>Corsi</span></a></li></ul></nav></div></header><div class="wrapper flex"><div class=primary><main class=main role=main><article class=post><header class=post__header><h1 class=post__title>Login con PHP</h1><div class="post__meta meta"><div class="meta__item-datetime meta__item"><svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2009-05-04T20:44:51Z>4 May 2009</time></div></div></header><div class="content post__content clearfix"><p>Realizzare uno <strong>script PHP per effettuare il login degli utenti</strong> è un compito piuttosto semplice per un programmatore PHP con un po' di esperienza. Gli sviluppatori alle prime armi possono invece incontrare qualche difficoltà.</p><p>Lo script che viene proposto di seguito vuole essere quindi un punto di partenza per i neofiti che li guidi alla realizzazione del proprio sistema di login con PHP. La complessità è stata ridotta al minimo per rendere lo script maggiormente comprensibile, ma non per questo a rischio sicurezza.</p><p>Per provare lo script di login proposto bisogna creare una tabella degli utenti ed inserire almeno un record. Ecco i comandi SQL necessari, da eseguire ad esempio con phpMyAdmin.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sql data-lang=sql><span style=color:#66d9ef>CREATE</span> <span style=color:#66d9ef>TABLE</span> <span style=color:#f92672>`</span>utenti<span style=color:#f92672>`</span> (
+  <span style=color:#f92672>`</span>id<span style=color:#f92672>`</span> INT(<span style=color:#ae81ff>11</span>) <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span> AUTO_INCREMENT,
+  <span style=color:#f92672>`</span>nome<span style=color:#f92672>`</span> VARCHAR(<span style=color:#ae81ff>32</span>) <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span>,
+  <span style=color:#f92672>`</span>pswd<span style=color:#f92672>`</span> VARCHAR(<span style=color:#ae81ff>32</span>) <span style=color:#66d9ef>NOT</span> <span style=color:#66d9ef>NULL</span>,
+  <span style=color:#66d9ef>PRIMARY</span> <span style=color:#66d9ef>KEY</span>  (<span style=color:#f92672>`</span>id<span style=color:#f92672>`</span>)
 );
 
-INSERT INTO utenti (nome, pswd) VALUES ('gianni', MD5('prova'));
+<span style=color:#66d9ef>INSERT</span> <span style=color:#66d9ef>INTO</span> utenti (nome, pswd) <span style=color:#66d9ef>VALUES</span> (<span style=color:#e6db74>&#39;gianni&#39;</span>, MD5(<span style=color:#e6db74>&#39;prova&#39;</span>));
 
-</code></pre><p>I più attenti avranno notato che la password non viene memorizzata in chiaro nel database, bensì sotto forma di <strong>hash MD5</strong>.</p><p>Ed ecco lo script PHP di login:</p><pre><code>&lt;pre class=&quot;brush:php&quot;&gt;
-&lt;?php
-$DB_host     = 'localhost';
-$DB_user     = 'root';
-$DB_password = 'secret';
-$DB_name     = 'test';
+</code></pre></div><p>I più attenti avranno notato che la password non viene memorizzata in chiaro nel database, bensì sotto forma di <strong>hash MD5</strong>.</p><p>Ed ecco lo script PHP di login:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+$DB_host     <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;localhost&#39;</span>;
+$DB_user     <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;root&#39;</span>;
+$DB_password <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;secret&#39;</span>;
+$DB_name     <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;test&#39;</span>;
 
-$link = mysql_connect($DB_host, $DB_user, $DB_password);
-if (!$link) {
-   die ('Non riesco a connettermi: ' . mysql_error());
+$link <span style=color:#f92672>=</span> <span style=color:#a6e22e>mysql_connect</span>($DB_host, $DB_user, $DB_password);
+<span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span>$link) {
+   <span style=color:#66d9ef>die</span> (<span style=color:#e6db74>&#39;Non riesco a connettermi: &#39;</span> <span style=color:#f92672>.</span> <span style=color:#a6e22e>mysql_error</span>());
 }
 
-$db_selected = mysql_select_db($DB_name, $link);
-if (!$db_selected) {
-   die (&quot;Errore nella selezione del database: &quot; . mysql_error());
+$db_selected <span style=color:#f92672>=</span> <span style=color:#a6e22e>mysql_select_db</span>($DB_name, $link);
+<span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span>$db_selected) {
+   <span style=color:#66d9ef>die</span> (<span style=color:#e6db74>&#34;Errore nella selezione del database: &#34;</span> <span style=color:#f92672>.</span> <span style=color:#a6e22e>mysql_error</span>());
 }
 
-if($_POST) {
-   effettua_login();
-} else {
-   mostra_form();
+<span style=color:#66d9ef>if</span>($_POST) {
+   <span style=color:#a6e22e>effettua_login</span>();
+} <span style=color:#66d9ef>else</span> {
+   <span style=color:#a6e22e>mostra_form</span>();
 }
 
-function mostra_form()
+<span style=color:#66d9ef>function</span> <span style=color:#a6e22e>mostra_form</span>()
 {
-   // mostro un eventuale messaggio
-   if(isset($_GET['msg'])) {
-       echo '&lt;b&gt;'.htmlentities($_GET['msg']).'&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;';
+   <span style=color:#75715e>// mostro un eventuale messaggio
+</span><span style=color:#75715e></span>   <span style=color:#66d9ef>if</span>(<span style=color:#a6e22e>isset</span>($_GET[<span style=color:#e6db74>&#39;msg&#39;</span>])) {
+       <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;&lt;b&gt;&#39;</span><span style=color:#f92672>.</span><span style=color:#a6e22e>htmlentities</span>($_GET[<span style=color:#e6db74>&#39;msg&#39;</span>])<span style=color:#f92672>.</span><span style=color:#e6db74>&#39;&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;&#39;</span>;
    }
-   ?&gt;
-   &lt;form name=&quot;form_login&quot; method=&quot;post&quot; action=&quot;&quot;&gt;
-       &lt;label&gt;nome: &lt;input name=&quot;nome&quot; type=&quot;text&quot; value=&quot;&quot; /&gt;&lt;/label&gt;&lt;br /&gt;
-       &lt;label&gt;password: &lt;input name=&quot;password&quot; type=&quot;password&quot; value=&quot;&quot; /&gt;&lt;/label&gt;&lt;br /&gt;
-       &lt;input name=&quot;invia&quot; type=&quot;submit&quot; value=&quot;Invia&quot; /&gt;
-   &lt;/form&gt;
-   &lt;?
-}
-
-function effettua_login()
-{
-   // recupero il nome e la password inseriti dall'utente
-   $nome      = trim($_POST['nome']);
-   $password  = trim($_POST['password']);
-   // verifico se devo eliminare gli slash inseriti automaticamente da PHP
-   if(get_magic_quotes_gpc()) {
-       $nome      = stripslashes($nome);
-       $password  = stripslashes($password);
-   }
-
-   // verifico la presenza dei campi obbligatori
-   if(!$nome || !$password) {
-       $messaggio = urlencode(&quot;Non hai inserito il nome o la password&quot;);
-       header(&quot;location: $_SERVER[PHP_SELF]?msg=$messaggio&quot;);
-       exit;
-   }
-   // effettuo l'escape dei caratteri speciali per inserirli all'interno della query
-   $nome     = mysql_real_escape_string($nome);
-   $password = mysql_real_escape_string($password);	
-
-   // preparo ed invio la query
-   $query = &quot;SELECT id FROM utenti WHERE nome = '$nome' AND pswd = MD5('$password')&quot;;
-   $result = mysql_query($query);
-   // controllo l'esito
-   if (!$result) {
-       die(&quot;Errore nella query $query: &quot; . mysql_error());
-   }
-
-   $record = mysql_fetch_array($result);
-
-   if(!$record) {
-       $messaggio = urlencode('Nome utente o password errati');
-       header(&quot;location: $_SERVER[PHP_SELF]?msg=$messaggio&quot;);
-   } else {
-       session_start();
-       $_SESSION['user_id'] = $record['id'];
-       $messaggio = urlencode('Login avvenuto con successo');
-       header(&quot;location: $_SERVER[PHP_SELF]?msg=$messaggio&quot;);
-   }
-}
-?&gt;
-</code></pre><p>Analizziamo i punti principali dello script:</p><ul><li>La prima parte del codice è dedicata alla connessione con il server MySQL ed alla selezione del database.</li><li>La funzione mostra_form() provvede a mostrare il form HTML nel quale l&rsquo;utente inserisce il nome e la password<ul><li>notare come vengono recuperati e visualizzati eventuali messaggi passati via $_GET[&lsquo;msg&rsquo;]</li></ul></li><li>La funzione effettua_login() verifica le credenziali inserite:<ul><li>vengono eliminati gli spazi bianchi con la funzione trim()</li><li>vengono eliminati gli eventuali caratteri di slash inseriti automaticamente da PHP con stripslashes()</li><li>viene verificata la presenza del nome e della password</li><li>viene effettuo l&rsquo;escape dei caratteri speciali eventualmente presenti nel nome o nella password affinché possano essere inseriti con sicurezza all&rsquo;interno della query</li><li>viene eseguita la query di ricerca del record con nome e password coincidenti con quelli specificati dall&rsquo;utente. Nella query la password viene convertita nel suo hash MD5</li><li>L&rsquo;eventuale record individuato dalla query viene letto con mysql_fetch_array()</li><li>Se la query non ha restituito risultati viene effettuato il redirect con la funzione header() e viene mostrato un messaggio di errore</li><li>Se la query ha avuto successo<ul><li>viene avviata la sessione,</li><li>viene memorizzato l&rsquo;id dell&rsquo;utente loggato in sessione, utile nelle pagine successive per sapere se l&rsquo;utente ha effettuato il login</li><li>viene effettuato il redirect con la funzione header() e viene mostrato un messaggio di sucesso</li></ul></li></ul></li></ul><p>Come detto all&rsquo;inizio, questo script vuole essere solo uno spunto, un&rsquo;indicazione di massima su come realizzare un <strong>sistema id login con PHP e MySQL</strong>.</p></div><footer class=post__footer><div class="post__tags tags clearfix"><svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5.0 11V3C0 1.5.8.8.8.8S1.5.0 3 0h8c1.5.0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 100-6 3 3 0 000 6z"/></svg><ul class=tags__list><li class=tags__item><a class="tags__link btn" href=/tags/database/ rel=tag>database</a></li><li class=tags__item><a class="tags__link btn" href=/tags/mysql/ rel=tag>MySQL</a></li><li class=tags__item><a class="tags__link btn" href=/tags/sicurezza/ rel=tag>sicurezza</a></li><li class=tags__item><a class="tags__link btn" href=/tags/crittografia/ rel=tag>crittografia</a></li><li class=tags__item><a class="tags__link btn" href=/tags/sql/ rel=tag>SQL</a></li></ul></div></footer></article></main><nav class="pager flex"><div class="pager__item pager__item--prev"><a class=pager__link href=/articoli/directory_separator-quando-usarlo/ rel=prev><span class=pager__subtitle>«&#8201;Precedente</span><p class=pager__title>DIRECTORY_SEPARATOR, quando usarlo?</p></a></div><div class="pager__item pager__item--next"><a class=pager__link href=/articoli/invio-di-email-usando-zend_mail/ rel=next><span class=pager__subtitle>Prossimo&#8201;»</span><p class=pager__title>Invio di email usando Zend_Mail</p></a></div></nav></div></div><footer class=footer><div class="container footer__container flex"><div class=footer__copyright>&copy; 2021 Giovanni Tomasicchio.
+   <span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>   &lt;form name=&#34;form_login&#34; method=&#34;post&#34; action=&#34;&#34;&gt;
+</span><span style=color:#960050;background-color:#1e0010>       &lt;label&gt;nome: &lt;input name=&#34;nome&#34; type=&#34;text&#34; value=&#34;&#34; /&gt;&lt;/label&gt;&lt;br /&gt;
+</span><span style=color:#960050;background-color:#1e0010>       &lt;label&gt;password: &lt;input name=&#34;password&#34; type=&#34;password&#34; value=&#34;&#34; /&gt;&lt;/label&gt;&lt;br /&gt;
+</span><span style=color:#960050;background-color:#1e0010>       &lt;input name=&#34;invia&#34; type=&#34;submit&#34; value=&#34;Invia&#34; /&gt;
+</span><span style=color:#960050;background-color:#1e0010>   &lt;/form&gt;
+</span><span style=color:#960050;background-color:#1e0010>   &lt;?
+</span><span style=color:#960050;background-color:#1e0010>}
+</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>function effettua_login()
+</span><span style=color:#960050;background-color:#1e0010>{
+</span><span style=color:#960050;background-color:#1e0010>   // recupero il nome e la password inseriti dall&#39;utente
+</span><span style=color:#960050;background-color:#1e0010>   $nome      = trim($_POST[&#39;nome&#39;]);
+</span><span style=color:#960050;background-color:#1e0010>   $password  = trim($_POST[&#39;password&#39;]);
+</span><span style=color:#960050;background-color:#1e0010>   // verifico se devo eliminare gli slash inseriti automaticamente da PHP
+</span><span style=color:#960050;background-color:#1e0010>   if(get_magic_quotes_gpc()) {
+</span><span style=color:#960050;background-color:#1e0010>       $nome      = stripslashes($nome);
+</span><span style=color:#960050;background-color:#1e0010>       $password  = stripslashes($password);
+</span><span style=color:#960050;background-color:#1e0010>   }
+</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>   // verifico la presenza dei campi obbligatori
+</span><span style=color:#960050;background-color:#1e0010>   if(!$nome || !$password) {
+</span><span style=color:#960050;background-color:#1e0010>       $messaggio = urlencode(&#34;Non hai inserito il nome o la password&#34;);
+</span><span style=color:#960050;background-color:#1e0010>       header(&#34;location: $_SERVER[PHP_SELF]?msg=$messaggio&#34;);
+</span><span style=color:#960050;background-color:#1e0010>       exit;
+</span><span style=color:#960050;background-color:#1e0010>   }
+</span><span style=color:#960050;background-color:#1e0010>   // effettuo l&#39;escape dei caratteri speciali per inserirli all&#39;interno della query
+</span><span style=color:#960050;background-color:#1e0010>   $nome     = mysql_real_escape_string($nome);
+</span><span style=color:#960050;background-color:#1e0010>   $password = mysql_real_escape_string($password);	
+</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>   // preparo ed invio la query
+</span><span style=color:#960050;background-color:#1e0010>   $query = &#34;SELECT id FROM utenti WHERE nome = &#39;$nome&#39; AND pswd = MD5(&#39;$password&#39;)&#34;;
+</span><span style=color:#960050;background-color:#1e0010>   $result = mysql_query($query);
+</span><span style=color:#960050;background-color:#1e0010>   // controllo l&#39;esito
+</span><span style=color:#960050;background-color:#1e0010>   if (!$result) {
+</span><span style=color:#960050;background-color:#1e0010>       die(&#34;Errore nella query $query: &#34; . mysql_error());
+</span><span style=color:#960050;background-color:#1e0010>   }
+</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>   $record = mysql_fetch_array($result);
+</span><span style=color:#960050;background-color:#1e0010>
+</span><span style=color:#960050;background-color:#1e0010>   if(!$record) {
+</span><span style=color:#960050;background-color:#1e0010>       $messaggio = urlencode(&#39;Nome utente o password errati&#39;);
+</span><span style=color:#960050;background-color:#1e0010>       header(&#34;location: $_SERVER[PHP_SELF]?msg=$messaggio&#34;);
+</span><span style=color:#960050;background-color:#1e0010>   } else {
+</span><span style=color:#960050;background-color:#1e0010>       session_start();
+</span><span style=color:#960050;background-color:#1e0010>       $_SESSION[&#39;user_id&#39;] = $record[&#39;id&#39;];
+</span><span style=color:#960050;background-color:#1e0010>       $messaggio = urlencode(&#39;Login avvenuto con successo&#39;);
+</span><span style=color:#960050;background-color:#1e0010>       header(&#34;location: $_SERVER[PHP_SELF]?msg=$messaggio&#34;);
+</span><span style=color:#960050;background-color:#1e0010>   }
+</span><span style=color:#960050;background-color:#1e0010>}
+</span><span style=color:#960050;background-color:#1e0010>?&gt;
+</span></code></pre></div><p>Analizziamo i punti principali dello script:</p><ul><li>La prima parte del codice è dedicata alla connessione con il server MySQL ed alla selezione del database.</li><li>La funzione mostra_form() provvede a mostrare il form HTML nel quale l&rsquo;utente inserisce il nome e la password<ul><li>notare come vengono recuperati e visualizzati eventuali messaggi passati via $_GET[&lsquo;msg&rsquo;]</li></ul></li><li>La funzione effettua_login() verifica le credenziali inserite:<ul><li>vengono eliminati gli spazi bianchi con la funzione trim()</li><li>vengono eliminati gli eventuali caratteri di slash inseriti automaticamente da PHP con stripslashes()</li><li>viene verificata la presenza del nome e della password</li><li>viene effettuo l&rsquo;escape dei caratteri speciali eventualmente presenti nel nome o nella password affinché possano essere inseriti con sicurezza all&rsquo;interno della query</li><li>viene eseguita la query di ricerca del record con nome e password coincidenti con quelli specificati dall&rsquo;utente. Nella query la password viene convertita nel suo hash MD5</li><li>L&rsquo;eventuale record individuato dalla query viene letto con mysql_fetch_array()</li><li>Se la query non ha restituito risultati viene effettuato il redirect con la funzione header() e viene mostrato un messaggio di errore</li><li>Se la query ha avuto successo<ul><li>viene avviata la sessione,</li><li>viene memorizzato l&rsquo;id dell&rsquo;utente loggato in sessione, utile nelle pagine successive per sapere se l&rsquo;utente ha effettuato il login</li><li>viene effettuato il redirect con la funzione header() e viene mostrato un messaggio di sucesso</li></ul></li></ul></li></ul><p>Come detto all&rsquo;inizio, questo script vuole essere solo uno spunto, un&rsquo;indicazione di massima su come realizzare un <strong>sistema id login con PHP e MySQL</strong>.</p></div><footer class=post__footer><div class="post__tags tags clearfix"><svg class="tags__badge icon icon-tag" width="16" height="16" viewBox="0 0 32 32"><path d="M32 19c0 1-1 2-1 2L21 31s-1 1-2 1-2-1-2-1L2 16c-1-1-1.4-2-1.4-2S0 12.5.0 11V3C0 1.5.8.8.8.8S1.5.0 3 0h8c1.5.0 3 .6 3 .6S15 1 16 2l15 15s1 1 1 2zM7 10a3 3 0 100-6 3 3 0 000 6z"/></svg><ul class=tags__list><li class=tags__item><a class="tags__link btn" href=/tags/database/ rel=tag>database</a></li><li class=tags__item><a class="tags__link btn" href=/tags/mysql/ rel=tag>MySQL</a></li><li class=tags__item><a class="tags__link btn" href=/tags/sicurezza/ rel=tag>sicurezza</a></li><li class=tags__item><a class="tags__link btn" href=/tags/crittografia/ rel=tag>crittografia</a></li><li class=tags__item><a class="tags__link btn" href=/tags/sql/ rel=tag>SQL</a></li></ul></div></footer></article></main><nav class="pager flex"><div class="pager__item pager__item--prev"><a class=pager__link href=/articoli/directory_separator-quando-usarlo/ rel=prev><span class=pager__subtitle>«&#8201;Precedente</span><p class=pager__title>DIRECTORY_SEPARATOR, quando usarlo?</p></a></div><div class="pager__item pager__item--next"><a class=pager__link href=/articoli/invio-di-email-usando-zend_mail/ rel=next><span class=pager__subtitle>Prossimo&#8201;»</span><p class=pager__title>Invio di email usando Zend_Mail</p></a></div></nav></div></div><footer class=footer><div class="container footer__container flex"><div class=footer__copyright>&copy; 2021 Giovanni Tomasicchio.
 <span class=footer__copyright-credits>Generato con <a href=https://gohugo.io/ rel="nofollow noopener" target=_blank>Hugo</a> e il tema <a href=https://github.com/Vimux/Mainroad/ rel="nofollow noopener" target=_blank>Mainroad</a>.</span></div></div></footer></div><script async defer src=/js/menu.js></script></body></html>
