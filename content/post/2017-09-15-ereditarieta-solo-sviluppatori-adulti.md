@@ -4,7 +4,7 @@ author: giovannitomasicchio
 type: post
 date: 2017-09-15T20:24:56+00:00
 url: /ereditarieta-solo-sviluppatori-adulti/
-thumbnail: /wp-content/uploads/2017/09/manette.jpg
+thumbnail: /image/blog/2017/09/manette.jpg
 categories:
   - Senza categoria
 tags:

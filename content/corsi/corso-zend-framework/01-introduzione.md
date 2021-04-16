@@ -10,7 +10,7 @@ categories:
   - Introduzione allo Zend Framework
   
 ---
-Questo corso è tratto dal tutorial [Getting Started with Zend Framework](http://akrabat.com/wp-content/uploads/Getting-Started-with-Zend-Framework.pdf) di Rob Allen, versione 1.7.5. La traduzione in italiano è a cura di [Mario Santagiuliana](autore/mario-santagiuliana/).
+Questo corso è tratto dal tutorial [Getting Started with Zend Framework](http://akrabat.com/image/blog/Getting-Started-with-Zend-Framework.pdf) di Rob Allen, versione 1.7.5. La traduzione in italiano è a cura di [Mario Santagiuliana](autore/mario-santagiuliana/).
 
 E' possibile scaricare tutti i sorgenti dell'applicazione di esempio a [questo indirizzo](http://akrabat.com/zend-framework-tutorial/).
 

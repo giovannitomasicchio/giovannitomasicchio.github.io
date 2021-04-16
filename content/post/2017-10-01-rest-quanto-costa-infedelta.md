@@ -4,7 +4,7 @@ author: giovannitomasicchio
 type: post
 date: 2017-10-01T21:39:22+00:00
 url: /rest-quanto-costa-infedelta/
-thumbnail: /wp-content/uploads/2017/10/infedelta.jpg
+thumbnail: /image/blog/2017/10/infedelta.jpg
 categories:
   - Senza categoria
 tags:

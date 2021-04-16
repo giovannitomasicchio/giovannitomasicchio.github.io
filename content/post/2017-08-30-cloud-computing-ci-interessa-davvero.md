@@ -4,7 +4,7 @@ author: giovannitomasicchio
 type: post
 date: 2017-08-30T17:51:44+00:00
 url: /cloud-computing-ci-interessa-davvero/
-thumbnail: /wp-content/uploads/2017/08/cloud.jpg
+thumbnail: /image/blog/2017/08/cloud.jpg
 categories:
   - Senza categoria
 tags:

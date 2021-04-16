@@ -34,7 +34,7 @@ PRIMARY KEY (id));
 
 Nell'immagine che segue è mostrato l'esito delle precedenti query eseguite all'interno del MySQL Command Line client.
 
-![mqb.png](/corsi/corso_php_mysql/mqb.png)
+![mqb.png](/image/corsi/corso_php_mysql/mqb.png)
 
 La tabella *utenti* memorizza un ipotetico profilo di un utente che fa richiesta di un servizio offerto da un sito web. Essa contiene il **nome** dell'utente, il suo indirizzo email, il **sesso** (1= maschio, 2=femmina), se accetta di registrarsi alla **newsletter** (0=no, 1=si), l'**attività** svolta (0=non dichiarata,1=studente, 2=impiegato, 3=disoccupato) ed infine un **messaggio** inviato alla redazione del sito. Si noti anche che per la chiave primaria viene impiegato un campo **id** di tipo intero auto\_increment. Questa tabella non ha alcun valore pratico ma la sua struttura ci permetterà di esplorare le tecniche necessarie a gestire le differenti tipologie di informazione.
 

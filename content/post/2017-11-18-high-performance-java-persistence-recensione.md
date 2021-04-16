@@ -4,7 +4,7 @@ author: giovannitomasicchio
 type: post
 date: 2017-11-18T11:19:45+00:00
 url: /high-performance-java-persistence-recensione/
-thumbnail: /wp-content/uploads/2017/11/High-Performance-Java-Persistence.jpg
+thumbnail: /image/blog/2017/11/High-Performance-Java-Persistence.jpg
 categories:
   - Senza categoria
 tags:

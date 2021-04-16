@@ -4,7 +4,7 @@ author: giovannitomasicchio
 type: post
 date: 2018-01-02T15:50:26+00:00
 url: /cap-acid-base-eventual-consistency/
-thumbnail: /wp-content/uploads/2018/01/chimica.jpg
+thumbnail: /image/blog/2018/01/chimica.jpg
 toc: false
 categories:
   - Senza categoria

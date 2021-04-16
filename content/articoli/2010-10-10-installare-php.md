@@ -33,7 +33,7 @@ La versione commerciale dello Zend Server integra ulteriori funzionalità, pensa
 
 La gestione dello Zend Server e la configurazione di tutte le sue componenti avviene attraverso una comoda interfaccia web.
 
- | [![](/image/articoli//installare_php/zend_server/T01.jpg)](</image/articoli//installare_php/zend_server/01 setup di zend server.jpg>) | [![](/image/articoli//installare_php/zend_server/T02.jpg)](</image/articoli//installare_php/zend_server/02 interfaccia web di zend server.jpg>) | [![](/image/articoli//installare_php/zend_server/T03.jpg)](</image/articoli//installare_php/zend_server/03 estensioni di php.jpg>) |
+ | [![](/image/articoli/installare_php/zend_server/T01.jpg)](</image/articoli/installare_php/zend_server/01 setup di zend server.jpg>) | [![](/image/articoli/installare_php/zend_server/T02.jpg)](</image/articoli/installare_php/zend_server/02 interfaccia web di zend server.jpg>) | [![](/image/articoli/installare_php/zend_server/T03.jpg)](</image/articoli/installare_php/zend_server/03 estensioni di php.jpg>) |
 |---|---|---|
 
 ##  XAMPP
@@ -42,7 +42,7 @@ La gestione dello Zend Server e la configurazione di tutte le sue componenti avv
 
 La versione Windows di XAMPP installa anche un pannello di controllo per l’avvio e l’arresto dei server Apache, MySQL, FileZilla (FTP) e Mercury (posta).
 
- | [![](/image/articoli//installare_php/xampp/T01.jpg)](</image/articoli//installare_php/xampp/01 setup di XAMPP.jpg>) | [![](/image/articoli//installare_php/xampp/T02.jpg)](</image/articoli//installare_php/xampp/02 pannello di controllo di XAMPP.jpg>) | [![](/image/articoli//installare_php/xampp/T03.jpg)](</image/articoli//installare_php/xampp/03 interfaccia web.jpg>) |
+ | [![](/image/articoli/installare_php/xampp/T01.jpg)](</image/articoli/installare_php/xampp/01 setup di XAMPP.jpg>) | [![](/image/articoli/installare_php/xampp/T02.jpg)](</image/articoli/installare_php/xampp/02 pannello di controllo di XAMPP.jpg>) | [![](/image/articoli/installare_php/xampp/T03.jpg)](</image/articoli/installare_php/xampp/03 interfaccia web.jpg>) |
 |---|---|---|
 
 ##  EasyPHP
@@ -51,7 +51,7 @@ La versione Windows di XAMPP installa anche un pannello di controllo per l’avv
 
 EasyPHP aggiunge una icona nella system tray di windows da cui è possibile avviare ed arrestare Apache e MySQL, accedere ai log di Apache e MySQL, aprire l’interfaccia web di configurazione, ecc.
 
- | [![](/image/articoli//installare_php/easyphp/T1.jpg)](/image/articoli//installare_php/easyphp/easyphp_1.jpg) | [![](/image/articoli//installare_php/easyphp/T2.jpg)](/image/articoli//installare_php/easyphp/easyphp_2.jpg) | [![](/image/articoli//installare_php/easyphp/T3.jpg)](/image/articoli//installare_php/easyphp/easyphp_3.jpg) |
+ | [![](/image/articoli/installare_php/easyphp/T1.jpg)](/image/articoli/installare_php/easyphp/easyphp_1.jpg) | [![](/image/articoli/installare_php/easyphp/T2.jpg)](/image/articoli/installare_php/easyphp/easyphp_2.jpg) | [![](/image/articoli/installare_php/easyphp/T3.jpg)](/image/articoli/installare_php/easyphp/easyphp_3.jpg) |
 |---|---|---|
 
 - - - - - -

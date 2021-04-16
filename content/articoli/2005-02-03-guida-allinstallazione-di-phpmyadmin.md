@@ -54,7 +54,7 @@ tags:
 
  Per prima cosa dobbiamo procurarci l'archivio compresso di phpMyAdmin. Lo troveremo facilmente raggiungendo la [sezione download](http://www.phpmyadmin.net/home_page/downloads.php) del sito ufficiale. In questa pagina troveremo diverse versioni, a noi interessa la più recente tra le versioni stabili (nel momento in cui scriviamo l'articolo è la 2.6.1)
 
- ![](/image/articoli//phpmyadmin/cap9.png)
+ ![](/image/articoli/phpmyadmin/cap9.png)
 
  Come è possibile vedere dalla precedente figura, per ogni versione di phpMyAdmin sono presenti 3 diversi archivi compressi. Ovviamente sono equivalenti, basta scegliere quello più consono al proprio ambiente operativo: gli utenti Windows preferiranno probabilmente l'archivio zip, chi invece lavora con Linux troverà più comodi gli archivi tar.bz2 o tar.gz.
 
@@ -62,7 +62,7 @@ tags:
 
  Se vogliamo farlo girare **sul nostro computer**, in cui avremo precedentemente installato un server web (ad es. Apache) e PHP, possiamo estrarre i files direttamente in una cartella accessibile al server web. Ad esempio, nella configurazione di default di Apache, questa cartella si chiama **htdocs** (un possibile percorso di questa cartella potrebbe quindi essere C:\\Programmi\\Apache Group\\Apache2\\htdocs). Se ci si trova in una situazione di questo genere o simile si potrebbe creare una cartella dal nome 'phpmyadmin' all'interno della cartella htdocs.
 
- ![](/image/articoli//phpmyadmin/cap1.png)
+ ![](/image/articoli/phpmyadmin/cap1.png)
 
  Nel caso in cui vogliamo invece installare phpMyAdmin **su uno spazio web** messoci a disposizione dal nostro fornitore di hosting allora sarà sufficiente scompattare l'archivio appena scaricato in una cartella temporanea della nostra macchina. Solo dopo aver effettuato la configurazione (che vedremo nelle prossime pagine) andremo a creare una cartella, magari via FTP, sul server remoto ed al suo interno copieremo tutti i files estratti.
 
@@ -72,11 +72,11 @@ tags:
 
  Individuiamo, nella cartella in cui abbiamo messo i files di phpmyadmin, il file dal nome config.inc.php (oppure il file config.default.php per phpMyAdmin 2.7 e successivi).
 
- ![](/image/articoli//phpmyadmin/cap2.png)
+ ![](/image/articoli/phpmyadmin/cap2.png)
 
  Questo file è responsabile della configurazione di phpMyAdmin. Apriamolo usando un editor di testi. Sconsigliamo agli utenti Windows di usare il notepad e di preferire al suo posto il WordPad a causa di una errata gestione del carattere di a capo.
 
- ![](/image/articoli//phpmyadmin/cap0.png)
+ ![](/image/articoli/phpmyadmin/cap0.png)
 
  Questo file è costituito da una serie di istruzioni di assegnazione in PHP del tipo:
 
@@ -109,7 +109,7 @@ tags:
 > 
 >  In realtà è possibile non settare questo parametro poiché phpMyAdmin cerca di ricavarlo automaticamente. Sia in caso di successo che di insuccesso phpMyAdmin comunque avverte dell'assenza di questa direttiva, come mostrato nella seguente figura:
 > 
->  ![](/image/articoli//phpmyadmin/cap3.gif)
+>  ![](/image/articoli/phpmyadmin/cap3.gif)
 > 
 >  Se, utilizzando phpMyAdmin, vi rendete conto che tutto funziona correttamente nonostante non avete configurato questo parametro allora potete disabilitare questo avvertimento semplicemente mettendo a **TRUE** la direttiva **$cfg\['PmaAbsoluteUri\_DisableWarning'\]** che trovate subito dopo $cfg\['PmaAbsoluteUri'\] (opzione non più presente con phpMyAdmin 2.7).
 
@@ -117,7 +117,7 @@ tags:
 
 > Alcune funzionalità avanzate di phpMyAdmin richiedono la creazione di un database, di alcune tabelle in esso e di un utente particolare. Se queste tabelle non vengono create e sopratutto se non vengono impostate nel file di configurazione le direttive, in alcune pagine di phpMyAdmin viene mostrato un avviso a riguardo.
 > 
->  ![](/image/articoli//phpmyadmin/errore2.gif)
+>  ![](/image/articoli/phpmyadmin/errore2.gif)
 > 
 >  Se non si ha intenzione di abilitare queste funzionalità (procedura non descritta da questo articolo e sconsigliata per una prima installazione), è possibile impostare questo parametro a **TRUE** così da disabilitare questo avviso.
 
@@ -175,13 +175,13 @@ tags:
 > 
 >  **http -** Questo sistema di autenticazione (disponibile solo se si sta usando Apache come web server) si poggia sull'autenticazione HTML. Quando si accede a phpMyAdmin il browser mostrerà una finestra chiedendoci di inserire un nome ed una password.
 > 
->  ![](/image/articoli//phpmyadmin/cap5.png)
+>  ![](/image/articoli/phpmyadmin/cap5.png)
 > 
 >  A questo punto dovremo inserire i dati di un utente del server MySQL. Ad esempio potremo autenticarci come l'utente principale di MySQL che, in molte installazioni, ha come nome di default 'root' e password vuota.
 > 
 >  **cookie** - Se scegliamo di usare il sistema di autenticazione basato sui cookies phpMyAdmin ci mostrerà una pagina di accesso chiedendo il nome e la password di un utente del server MySQL (procedura simile a quella vista prima).
 > 
->  ![](/image/articoli//phpmyadmin/cap6.png)
+>  ![](/image/articoli/phpmyadmin/cap6.png)
 > 
 >  I dati immessi vengono memorizzati in un cookie (che ovviamente dovranno essere abilitati sul browser) con la password criptata con l'algoritmo blowfish attraverso la chiave impostata con la direttiva $cfg\['blowfish\_secret'\].
 > 

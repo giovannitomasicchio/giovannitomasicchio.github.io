@@ -4,7 +4,7 @@ author: giovannitomasicchio
 type: post
 date: 2017-10-22T17:12:13+00:00
 url: /cose-larchitettura-un-software/
-thumbnail: /wp-content/uploads/2017/10/architettura.jpeg
+thumbnail: /image/blog/2017/10/architettura.jpeg
 categories:
   - Senza categoria
 tags:
@@ -30,7 +30,7 @@ A ben vedere non tutti gli elementi dell&#8217;architettura sono frutto di una v
 
 Ma quale criterio utilizzare per fare scelte architetturali? Come anticipato, a mio avviso a guidare le nostre scelte deve essere il costo. Ma in che termini? Ci viene in soccorso, come al solito, il buon [Martin Fowler][2] che ha formulato quella che lui chiama la  [Design Stamina Hypothesis][3]. Secondo Fowler, nei contesti in cui la progettazione è assente (curva blu del grafico), si osserva una iniziale velocità nella realizzazione delle prime funzionalità che però, con l&#8217;aumentare del codice scritto, rallenta considerevolmente poiché diventa estremamente oneroso realizzare nuove funzionalità su una base di codice caotica. Al contrario, nei progetti che godono di una buona progettazione (curva rossa del grafico),  si osserva una costante accelerazione della capacità di sviluppare sempre nuove funzionalità.
 
-{{< figure src="/wp-content/uploads/2017/10/designStaminaGraph.png" title="Martin Fowler - Design Stamina Hypothesis" >}}
+{{< figure src="/image/blog/2017/10/designStaminaGraph.png" title="Martin Fowler - Design Stamina Hypothesis" >}}
 
 Questa costatazione empirica, facilmente riscontrabile nei progetti reali, può essere utilizzata come criterio di valutazione delle scelte architetturali. L&#8217;ipotesi di Fowler infatti ci suggerisce che se dobbiamo effettuare una scelta architetturale, tra le diverse alternative possibili, dobbiamo scegliere quella che maggiormente velocizza lo sviluppo delle nuove funzionalità, rendendole quindi più economiche. Certo, scegliere ad esempio tra un DB commerciale come Oracle ed un DB opensource come PostgreSQL comporta di per se delle ricadute economiche sul progetto, ma **la velocità con cui un team di sviluppo realizza nuove funzionalità ha una valenza superiore, poiché al contempo economica e strategica**. Un team di sviluppo messo nelle condizioni di realizzare velocemente nuove funzionalità permette, ad esempio, di anticipare un concorrente, completare un progetto nei tempi imposti dal committente, preparare una demo in tempo utile, più in generale ridurre il [feature lead time][4].
 

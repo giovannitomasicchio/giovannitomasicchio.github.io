@@ -4,7 +4,7 @@ author: giovannitomasicchio
 type: post
 date: 2017-12-16T16:22:54+00:00
 url: /eventi-dominio-spring-framework/
-thumbnail: /wp-content/uploads/2017/12/eventi.jpg
+thumbnail: /image/blog/2017/12/eventi.jpg
 categories:
   - Senza categoria
 tags:

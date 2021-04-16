@@ -4,7 +4,7 @@ author: giovannitomasicchio
 type: post
 date: 2017-09-18T06:45:49+00:00
 url: /architettura-rest-le-origini/
-thumbnail: /wp-content/uploads/2017/09/www.jpg
+thumbnail: /image/blog/2017/09/www.jpg
 categories:
   - Senza categoria
 tags:
@@ -16,7 +16,7 @@ tags:
 ---
 Chiacchierando tra colleghi mi sono accorto che chi viene dal mondo SOAP e si avvicina ai servizi RESTful commette spesso l&#8217;errore di pensare che la principale differenza tra i due approcci sia solo la notazione utilizzata per lo scambio dei dati, XML per i servizi SOAP e JSON per quelli RESTful. Per avere un&#8217;idea più corretta sui concetti alla base di questi servizi è necessario fare un salto nel passato e seguire la nascita del Web per come lo conosciamo adesso.
 
-{{< figure src="/wp-content/uploads/2017/09/Tim-Berners-Lee.jpg" title="Tim Berners-Lee" >}}
+{{< figure src="/image/blog/2017/09/Tim-Berners-Lee.jpg" title="Tim Berners-Lee" >}}
 
 Tutto è iniziato quanto un fisico inglese, [Tim Berners-Lee][1], durante la sua attività al CERN di Ginevra, realizzò un sistema per la condivisione delle informazioni con le comunità scientifiche di tutto il mondo. Tim si occupò di definire i protocolli HTTP e HTML, sviluppo inoltre il primo server e client Web. Era il [20 dicembre 1990][2] quando fu messa online la [sua prima pagina Web][3], la prima nel mondo.
 
@@ -24,7 +24,7 @@ Superato l&#8217;iniziale scetticismo, l&#8217;interesse suscitato da questa ini
 
 Ma il business non tardò a fiutare la valenza del Web e nel 1994 lo stesso Tim Berners-Lee capì che era necessario fare un salto di qualità. Egli fondò quindi il [W3C][5] , una organizzazione non governativa con lo scopo di dare più consistenza al processo di evoluzione del Web e renderlo più appetibile agli investimenti privati. Non più una serie di protocolli in continua evoluzione, da inseguire su una mailing list, ma una rete di precisi **standard** da adottare.
 
-{{< figure src="/wp-content/uploads/2017/09/appies2000-roy.jpg" title="Roy Thomas Fielding" >}}
+{{< figure src="/image/blog/2017/09/appies2000-roy.jpg" title="Roy Thomas Fielding" >}}
 
 A far parte di questo processo di standardizzazione venne invitato un informatico californiano, [Roy Thomas Fielding][6], che si occupò di URL, HTML e successivamente divenne il revisore capo dell&#8217;HTTP. In quegli anni Roy si divideva tra le attività di standardizzazione del Web ed il mondo accademico, per via dei suoi studi come dottorando.
 

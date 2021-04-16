@@ -4,7 +4,7 @@ author: giovannitomasicchio
 type: post
 date: 2017-08-20T22:21:05+00:00
 url: /hello-world/
-thumbnail: /wp-content/uploads/2017/08/pexels-photo-3.jpg
+thumbnail: /image/blog/2017/08/pexels-photo-3.jpg
 categories:
   - Senza categoria
 

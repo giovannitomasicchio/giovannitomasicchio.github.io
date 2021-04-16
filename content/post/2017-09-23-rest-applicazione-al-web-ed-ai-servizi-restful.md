@@ -4,7 +4,7 @@ author: giovannitomasicchio
 type: post
 date: 2017-09-23T14:44:32+00:00
 url: /rest-applicazione-al-web-ed-ai-servizi-restful/
-thumbnail: /wp-content/uploads/2017/09/world-wide-web.jpg
+thumbnail: /image/blog/2017/09/world-wide-web.jpg
 categories:
   - Senza categoria
 tags:

@@ -4,7 +4,7 @@ author: giovannitomasicchio
 type: post
 date: 2017-10-29T22:10:39+00:00
 url: /organizzazione-dei-team-sviluppo/
-thumbnail: /wp-content/uploads/2017/10/B0vO1pHIAAEhpMy.jpg
+thumbnail: /image/blog/2017/10/B0vO1pHIAAEhpMy.jpg
 categories:
   - Senza categoria
 tags:

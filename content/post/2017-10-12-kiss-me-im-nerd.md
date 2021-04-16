@@ -4,7 +4,7 @@ author: giovannitomasicchio
 type: post
 date: 2017-10-12T16:57:29+00:00
 url: /kiss-me-im-nerd/
-thumbnail: /wp-content/uploads/2017/10/kiss_the_nerd.jpeg
+thumbnail: /image/blog/2017/10/kiss_the_nerd.jpeg
 categories:
   - Senza categoria
 tags:

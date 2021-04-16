@@ -4,7 +4,7 @@ author: giovannitomasicchio
 type: post
 date: 2017-08-24T13:35:17+00:00
 url: /sorgente-e-runtime-le-insidie-dellastrazione/
-thumbnail: /wp-content/uploads/2017/08/astrazione-1.jpg
+thumbnail: /image/blog/2017/08/astrazione-1.jpg
 categories:
   - Senza categoria
 tags:

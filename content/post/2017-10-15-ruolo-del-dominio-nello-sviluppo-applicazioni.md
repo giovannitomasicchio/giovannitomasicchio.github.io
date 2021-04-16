@@ -4,7 +4,7 @@ author: giovannitomasicchio
 type: post
 date: 2017-10-15T08:51:39+00:00
 url: /ruolo-del-dominio-nello-sviluppo-applicazioni/
-thumbnail: /wp-content/uploads/2017/10/Knowledge-Sharing.jpg
+thumbnail: /image/blog/2017/10/Knowledge-Sharing.jpg
 categories:
   - Senza categoria
 tags:
@@ -20,7 +20,7 @@ Il dubbio mi è venuto osservando che ci sono contesti in cui questo approccio n
 
 ## Domain-driven design
 
-{{< figure src="/wp-content/uploads/2017/10/eric_evans.jpg" title="Eric Evans" >}}
+{{< figure src="/image/blog/2017/10/eric_evans.jpg" title="Eric Evans" >}}
 
 Così ho iniziato a fare una ricerca, e ovviamente sono partito dal lavoro di [Eric Evans][1], ovvero dal [Domain-driven design (DDD)][2], un approccio allo sviluppo del software che si può riassumere nei seguenti punti:
 
@@ -37,7 +37,7 @@ Il dominio quindi non solo per comprendere e risolvere il problema ma come punto
 
 ## Manifesto Agile
 
-{{< figure src="/wp-content/uploads/2017/10/martin_fowler.jpg" title="Martin Fowler" >}}
+{{< figure src="/image/blog/2017/10/martin_fowler.jpg" title="Martin Fowler" >}}
 
 Fowler è uno dei 17 firmatari del [Manifesto Agile][5], pertanto sono andato a verificare se questi concetti fossero in qualche modo presenti tra i 12 principi del manifesto, ed ho trovato il seguente:
 
@@ -47,7 +47,7 @@ Come possono lavorare insieme quotidianamente gli sviluppatori ed il committente
 
 Sullo stesso tema, Fowler sottolinea l&#8217;importanza della **[Customer Affinity][6]**, ovvero &#8220;l&#8217;interesse e la vicinanza che gli sviluppatori dimostrano nei confronti dei problemi di business che il software risolve e delle persone che lavorano in quel business&#8221;.
 
-{{< figure src="/wp-content/uploads/2017/10/kent.jpg" title="Kent Beck" >}}
+{{< figure src="/image/blog/2017/10/kent.jpg" title="Kent Beck" >}}
 
 Fowler afferma che il suo apprezzamento nei confronti dell&#8217;[Extreme Programming][7] (XP) e delle altre metodologie agili deriva principalmente dall&#8217;importanza che queste attribuiscono alla customer affinity. Egli ricorda che, in occasione degli incontri che portarono alla definizione del Manifesto Agile, [Kent Beck][8], presentando l&#8217;XP, preferì evidenziare non gli aspetti più tecnici della sua metodologia ma il suo desiderio di **modificare la natura dei rapporti tra committenti e sviluppatori**.
 
@@ -55,7 +55,7 @@ Fowler afferma che il suo apprezzamento nei confronti dell&#8217;[Extreme Progra
 
 A questo punto della mia ricerca, il dominio sembra essere il Santo Graal dello sviluppo moderno. Un dubbio ancora mi rimane: scrivendo codice che trasuda dominio da tutte le righe e che pertanto tende ad essere prolisso, **non corriamo il rischio di mortificare le performance?** In fondo il software è costituito da istruzioni rivolte ad una macchina mentre il dominio è un concetto legato al committente e al suo business. Istruire la macchina sul da farsi utilizzando direttamente la logica del dominio può avere delle ripercussioni di natura tecnica?
 
-{{< figure src="/wp-content/uploads/2017/10/carlo_pescio.jpg" title="Carlo Pescio" >}}
+{{< figure src="/image/blog/2017/10/carlo_pescio.jpg" title="Carlo Pescio" >}}
 
 La risposta l&#8217;ho trovata in un recente lavoro di [Carlo Pescio][9], dal titolo [Programming as if the Domain (and Performance) Mattered][10]. Nell&#8217;articolo viene dimostrato con rigore scientifico come le **migliori performance** non si ottengono mediante lo sfruttamento delle caratteristiche di un linguaggio di programmazione, bensì attraverso una **migliore conoscenza del dominio del problema**.
 
