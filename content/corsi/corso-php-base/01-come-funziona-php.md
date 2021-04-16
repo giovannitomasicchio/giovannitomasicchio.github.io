@@ -4,7 +4,7 @@ author: "Giovanni Tomasicchio"
 type: corso
 date: 2005-07-13T22:26:13+0000
 description: "Come funziona il PHP"
-url: /corso-php-base/come-funziona-php/
+url: /corsi/corso-php-base/come-funziona-php/
 weight: 20
 categories:
   - Corso PHP base
