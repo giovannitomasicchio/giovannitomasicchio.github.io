@@ -5,6 +5,7 @@ type: corso
 date: 2005-07-13T22:32:49+0000
 description: "Variabili booleane in PHP: true e false"
 url: /corsi/corso-php-base/true-e-false-le-variabili-booleane/
+weight: 12
 categories:
   - Corso PHP base
   

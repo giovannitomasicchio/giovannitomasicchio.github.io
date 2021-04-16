@@ -5,6 +5,7 @@ type: corso
 date: 2010-12-28T15:57:20+0000
 description: "installare ed utilizzare Zend_Tool per costruire un'applicazione MVC con Zend Framework"
 url: /corsi/corso-zend-framework/zend_tool/
+weight: 15
 categories:
   - Introduzione allo Zend Framework
   

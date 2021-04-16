@@ -5,6 +5,7 @@ type: corso
 date: 2006-08-26T17:59:54+0000
 description: "Corso di programmazione PHP MySQL"
 url: /corsi/corso-php-mysql/introduzione/
+weight: 10
 categories:
   - Corso PHP MySQL
   

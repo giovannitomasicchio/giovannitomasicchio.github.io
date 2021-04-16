@@ -5,6 +5,7 @@ type: corso
 date: 2010-12-28T16:31:38+0000
 description: "Ultime indicazioni sul tutorial dello Zend Framework."
 url: /corsi/corso-zend-framework/conclusioni/
+weight: 1
 categories:
   - Introduzione allo Zend Framework
   

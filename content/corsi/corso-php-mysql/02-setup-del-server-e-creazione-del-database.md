@@ -5,6 +5,7 @@ type: corso
 date: 2006-08-26T18:00:24+0000
 description: "Corso PHP MySQL: creazione del database di prova"
 url: /corsi/corso-php-mysql/setup-del-server-e-creazione-del-database/
+weight: 9
 categories:
   - Corso PHP MySQL
   

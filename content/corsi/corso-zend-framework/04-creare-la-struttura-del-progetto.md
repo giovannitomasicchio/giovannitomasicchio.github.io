@@ -5,6 +5,7 @@ type: corso
 date: 2010-12-28T16:10:20+0000
 description: "Creazione della struttura dell'applicazione Zend Framework con Zend_Tool"
 url: /corsi/corso-zend-framework/creare-la-struttura-del-progetto/
+weight: 13
 categories:
   - Introduzione allo Zend Framework
   

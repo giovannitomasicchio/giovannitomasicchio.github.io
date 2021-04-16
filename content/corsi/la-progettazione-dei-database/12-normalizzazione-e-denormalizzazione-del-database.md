@@ -5,6 +5,7 @@ type: corso
 date: 2007-01-05T12:57:26+0000
 description: "Normalizzazione e denormalizzazione di una base di dati (database)"
 url: /corsi/la-progettazione-dei-database/normalizzazione-e-denormalizzazione-del-database/
+weight: 2
 categories:
   - La progettazione dei database
   

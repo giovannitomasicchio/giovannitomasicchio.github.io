@@ -5,6 +5,7 @@ type: corso
 date: 2010-12-28T16:25:28+0000
 description: "Visualizzazione dell'elenco dei record letti dal database in una applicazione MVC con Zend Framework"
 url: /corsi/corso-zend-framework/elenco-degli-album/
+weight: 5
 categories:
   - Introduzione allo Zend Framework
   

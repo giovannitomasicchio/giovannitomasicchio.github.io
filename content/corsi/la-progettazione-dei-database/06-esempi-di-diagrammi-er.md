@@ -5,6 +5,7 @@ type: corso
 date: 2007-01-05T12:55:35+0000
 description: "Diagrammi ER Entità Relazione"
 url: /corsi/la-progettazione-dei-database/esempi-di-diagrammi-er/
+weight: 8
 categories:
   - La progettazione dei database
   

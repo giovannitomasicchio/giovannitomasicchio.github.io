@@ -5,6 +5,7 @@ type: corso
 date: 2005-07-13T22:34:27+0000
 description: "Cicli e iterazioni negli script PHP, i costrutti WHILE e DO-WHILE"
 url: /corsi/corso-php-base/cicli-e-iterazioni-while-e-do-while/
+weight: 7
 categories:
   - Corso PHP base
   

@@ -5,6 +5,7 @@ type: corso
 date: 2010-12-28T16:20:41+0000
 description: "Usare Zend_View per gestire le view di una applicazione MVC con lo Zend Framework"
 url: /corsi/corso-zend-framework/view/
+weight: 8
 categories:
   - Introduzione allo Zend Framework
   

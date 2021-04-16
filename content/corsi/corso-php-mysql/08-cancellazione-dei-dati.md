@@ -5,6 +5,7 @@ type: corso
 date: 2006-08-26T18:03:06+0000
 description: "Cancellare un record di una tabella MySQL con PHP. Eseguire una DELETE con PHP e MySQL."
 url: /corsi/corso-php-mysql/cancellazione-dei-dati/
+weight: 3
 categories:
   - Corso PHP MySQL
   

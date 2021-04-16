@@ -5,6 +5,7 @@ type: corso
 date: 2005-07-13T22:34:09+0000
 description: "Cicli e iterazioni negli script PHP, i costrutti FOR e FOREACH"
 url: /corsi/corso-php-base/cicli-e-iterazioni-for-e-foreach/
+weight: 8
 categories:
   - Corso PHP base
   

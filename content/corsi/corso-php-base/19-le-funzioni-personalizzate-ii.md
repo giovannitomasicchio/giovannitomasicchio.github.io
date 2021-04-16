@@ -5,6 +5,7 @@ type: corso
 date: 2005-07-13T22:36:03+0000
 description: "Concetti avanzati sui parametri delle funzioni personalizzate di PHP: Parametri di default, passaggio per rifermentodati, visibilità dei parametri, variagili globali."
 url: /corsi/corso-php-base/le-funzioni-personalizzate-ii/
+weight: 2
 categories:
   - Corso PHP base
   

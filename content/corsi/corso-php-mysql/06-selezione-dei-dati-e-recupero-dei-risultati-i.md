@@ -5,6 +5,7 @@ type: corso
 date: 2006-08-26T18:02:12+0000
 description: "Leggere i dati di una tabella MySQL con PHP. Eseguire una SELECT con PHP e MySQL."
 url: /corsi/corso-php-mysql/selezione-dei-dati-e-recupero-dei-risultati-i/
+weight: 5
 categories:
   - Corso PHP MySQL
   

@@ -5,6 +5,7 @@ type: corso
 date: 2007-01-05T12:54:42+0000
 description: "La progettazione di una base di dati (database)."
 url: /corsi/la-progettazione-dei-database/la-progettazione-di-una-base-di-dati/
+weight: 11
 categories:
   - La progettazione dei database
   

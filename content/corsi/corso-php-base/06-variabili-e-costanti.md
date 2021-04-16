@@ -5,6 +5,7 @@ type: corso
 date: 2005-07-13T22:31:48+0000
 description: "Variabili e costanti in PHP"
 url: /corsi/corso-php-base/variabili-e-costanti/
+weight: 15
 categories:
   - Corso PHP base
   

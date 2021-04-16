@@ -5,6 +5,7 @@ type: corso
 date: 2010-12-28T16:18:53+0000
 description: "Creare il model di una applicazione MVC con Zend Framework utilizzando Zend_Db_Table"
 url: /corsi/corso-zend-framework/model/
+weight: 9
 categories:
   - Introduzione allo Zend Framework
   

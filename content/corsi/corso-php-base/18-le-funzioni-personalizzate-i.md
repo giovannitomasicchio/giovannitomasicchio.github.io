@@ -5,6 +5,7 @@ type: corso
 date: 2005-07-13T22:35:43+0000
 description: "Realizzare funzioni personalizzate in PHP"
 url: /corsi/corso-php-base/le-funzioni-personalizzate-i/
+weight: 3
 categories:
   - Corso PHP base
   

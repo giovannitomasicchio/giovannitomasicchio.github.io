@@ -5,6 +5,7 @@ type: corso
 date: 2010-12-28T16:30:26+0000
 description: "cancellazione di un record dal database in una applicazione MVC realizzata con lo Zend Framework"
 url: /corsi/corso-zend-framework/cancellare-un-album/
+weight: 2
 categories:
   - Introduzione allo Zend Framework
   

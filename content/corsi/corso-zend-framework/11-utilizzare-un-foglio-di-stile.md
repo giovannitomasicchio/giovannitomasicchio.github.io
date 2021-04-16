@@ -5,6 +5,7 @@ type: corso
 date: 2010-12-28T16:24:10+0000
 description: "Utilizzare un foglio di stile CSS in una applicazione MVC realizzata con lo Zend Framework"
 url: /corsi/corso-zend-framework/utilizzare-un-foglio-di-stile/
+weight: 6
 categories:
   - Introduzione allo Zend Framework
   

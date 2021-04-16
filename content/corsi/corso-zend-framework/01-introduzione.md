@@ -5,6 +5,7 @@ type: corso
 date: 2010-12-28T15:37:01+0000
 description: "Presentazione del corso sullo Zend Framework e preparazione dell'ambiente di lavoro"
 url: /corsi/corso-zend-framework/introduzione/
+weight: 16
 categories:
   - Introduzione allo Zend Framework
   

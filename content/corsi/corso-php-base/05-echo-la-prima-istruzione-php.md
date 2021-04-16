@@ -5,6 +5,7 @@ type: corso
 date: 2005-07-13T22:31:25+0000
 description: "Mostrare del testo con PHP e la funzione echo"
 url: /corsi/corso-php-base/echo-la-prima-istruzione-php/
+weight: 16
 categories:
   - Corso PHP base
   

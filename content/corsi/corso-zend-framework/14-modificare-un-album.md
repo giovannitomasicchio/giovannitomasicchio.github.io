@@ -5,6 +5,7 @@ type: corso
 date: 2010-12-28T16:28:40+0000
 description: "Update di un record del database in una applicazione MVC realizzata con Zend Framework"
 url: /corsi/corso-zend-framework/modificare-un-album/
+weight: 3
 categories:
   - Introduzione allo Zend Framework
   

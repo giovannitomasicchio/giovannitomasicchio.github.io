@@ -5,6 +5,7 @@ type: corso
 date: 2005-07-13T22:34:49+0000
 description: "Cicli e iterazioni negli script PHP, BREAK e CONTINUE"
 url: /corsi/corso-php-base/cicli-e-iterazioni-break-e-continue/
+weight: 6
 categories:
   - Corso PHP base
   

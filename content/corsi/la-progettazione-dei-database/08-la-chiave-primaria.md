@@ -5,6 +5,7 @@ type: corso
 date: 2007-01-05T12:56:05+0000
 description: "La chiave primaria"
 url: /corsi/la-progettazione-dei-database/la-chiave-primaria/
+weight: 6
 categories:
   - La progettazione dei database
   

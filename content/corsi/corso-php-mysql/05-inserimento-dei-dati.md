@@ -5,6 +5,7 @@ type: corso
 date: 2006-08-26T18:01:40+0000
 description: "Inserire dati in una tabella MySQL con PHP"
 url: /corsi/corso-php-mysql/inserimento-dei-dati/
+weight: 6
 categories:
   - Corso PHP MySQL
   

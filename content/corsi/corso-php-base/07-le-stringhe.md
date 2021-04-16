@@ -5,6 +5,7 @@ type: corso
 date: 2005-07-13T22:32:16+0000
 description: "Le stringhe in PHP"
 url: /corsi/corso-php-base/le-stringhe/
+weight: 14
 categories:
   - Corso PHP base
   

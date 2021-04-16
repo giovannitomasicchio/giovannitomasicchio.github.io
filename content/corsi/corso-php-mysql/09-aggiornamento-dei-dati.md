@@ -5,6 +5,7 @@ type: corso
 date: 2006-08-26T18:03:26+0000
 description: "Modificare i dati di una tabella MySQL con PHP. Eseguide una UPDATE con PHP e MySQL"
 url: /corsi/corso-php-mysql/aggiornamento-dei-dati/
+weight: 3
 categories:
   - Corso PHP MySQL
   

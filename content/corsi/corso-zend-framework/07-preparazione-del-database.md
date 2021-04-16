@@ -5,6 +5,7 @@ type: corso
 date: 2010-12-28T16:17:30+0000
 description: "Preparazione del database necessario alla nostra applicazione MVC con lo Zend Framework"
 url: /corsi/corso-zend-framework/preparazione-del-database/
+weight: 10
 categories:
   - Introduzione allo Zend Framework
   

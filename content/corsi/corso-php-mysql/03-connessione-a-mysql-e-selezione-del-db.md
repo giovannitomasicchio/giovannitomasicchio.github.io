@@ -5,6 +5,7 @@ type: corso
 date: 2006-08-26T18:00:49+0000
 description: "Connessione con PHP al server MySQL e selezione del database."
 url: /corsi/corso-php-mysql/connessione-a-mysql-e-selezione-del-db/
+weight: 8
 categories:
   - Corso PHP MySQL
   

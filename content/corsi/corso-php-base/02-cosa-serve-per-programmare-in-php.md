@@ -5,6 +5,7 @@ type: corso
 date: 2005-07-13T22:27:03+0000
 description: "Cosa serve per programmare in PHP"
 url: /corsi/corso-php-base/cosa-serve-per-programmare-in-php/
+weight: 19
 categories:
   - Corso PHP base
   

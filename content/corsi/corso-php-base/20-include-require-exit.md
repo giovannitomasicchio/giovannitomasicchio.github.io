@@ -5,6 +5,7 @@ type: corso
 date: 2005-07-13T22:36:20+0000
 description: "Inclusione di script PHP esterni con le funzioni include e require. Terminare uno script PHP con la funzione exit e die."
 url: /corsi/corso-php-base/include-require-exit/
+weight: 1
 categories:
   - Corso PHP base
   

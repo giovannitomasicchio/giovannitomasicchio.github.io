@@ -5,6 +5,7 @@ type: corso
 date: 2005-07-13T22:35:08+0000
 description: "Gestire i form HTML con PHP, recuperare l'input dell'utente dall'array $_POST"
 url: /corsi/corso-php-base/i-form-e-larray-$_post/
+weight: 5
 categories:
   - Corso PHP base
   

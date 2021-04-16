@@ -5,6 +5,7 @@ type: corso
 date: 2005-07-13T22:27:44+0000
 description: "Come inserire dei commenti in uno script PHP"
 url: /corsi/corso-php-base/commenti/
+weight: 17
 categories:
   - Corso PHP base
   

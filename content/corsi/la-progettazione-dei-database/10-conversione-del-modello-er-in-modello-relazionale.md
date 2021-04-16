@@ -5,6 +5,7 @@ type: corso
 date: 2007-01-05T12:56:55+0000
 description: "Conversione del Modello ER Entità Relazione in Modello Relazionale"
 url: /corsi/la-progettazione-dei-database/conversione-del-modello-er-in-modello-relazionale/
+weight: 4
 categories:
   - La progettazione dei database
   

@@ -5,6 +5,7 @@ type: corso
 date: 2007-01-05T12:54:18+0000
 description: "DBMS: DataBase Management System"
 url: /corsi/la-progettazione-dei-database/i-dbms/
+weight: 12
 categories:
   - La progettazione dei database
   

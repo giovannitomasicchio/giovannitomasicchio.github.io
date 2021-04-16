@@ -5,6 +5,7 @@ type: corso
 date: 2007-01-05T12:54:01+0000
 description: "Introduzione ai database relazionali"
 url: /corsi/la-progettazione-dei-database/introduzione-al-concetto-di-database-relazionale/
+weight: 13
 categories:
   - La progettazione dei database
   

@@ -5,6 +5,7 @@ type: corso
 date: 2005-07-13T22:33:53+0000
 description: "Conversione dei tipi in PHP, il cast."
 url: /corsi/corso-php-base/la-conversione-automatica-dei-tipi-il-cast/
+weight: 9
 categories:
   - Corso PHP base
   

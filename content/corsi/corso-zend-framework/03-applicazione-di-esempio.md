@@ -5,6 +5,7 @@ type: corso
 date: 2010-12-28T16:08:18+0000
 description: "Presentazione dell'applicazione MVC che si sta per costruire con lo Zend Framework"
 url: /corsi/corso-zend-framework/applicazione-di-esempio/
+weight: 14
 categories:
   - Introduzione allo Zend Framework
   

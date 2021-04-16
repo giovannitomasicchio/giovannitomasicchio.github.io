@@ -5,6 +5,7 @@ type: corso
 date: 2007-01-05T12:57:12+0000
 description: "La chiave primaria surrogata"
 url: /corsi/la-progettazione-dei-database/chiave-primaria-surrogata/
+weight: 3
 categories:
   - La progettazione dei database
   

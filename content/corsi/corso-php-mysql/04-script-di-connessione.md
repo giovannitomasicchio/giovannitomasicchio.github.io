@@ -5,6 +5,7 @@ type: corso
 date: 2006-08-26T18:01:14+0000
 description: "Script PHP di connessione a MySQL"
 url: /corsi/corso-php-mysql/script-di-connessione/
+weight: 7
 categories:
   - Corso PHP MySQL
   

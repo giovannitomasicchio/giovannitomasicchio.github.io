@@ -5,6 +5,7 @@ type: corso
 date: 2010-12-28T16:22:22+0000
 description: "Utilizzare Zend_Layout per centralizzare la gestione del codice HTML comune alle pagine di una applicazione MVC realizzata con lo Zend Framework"
 url: /corsi/corso-zend-framework/layout/
+weight: 7
 categories:
   - Introduzione allo Zend Framework
   

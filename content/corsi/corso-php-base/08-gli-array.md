@@ -5,6 +5,7 @@ type: corso
 date: 2005-07-13T22:32:31+0000
 description: "Gli Array in PHP"
 url: /corsi/corso-php-base/gli-array/
+weight: 13
 categories:
   - Corso PHP base
   

@@ -5,6 +5,7 @@ type: corso
 date: 2007-01-05T12:57:44+0000
 description: "Dal Modello Relazionale al DDL dell'RDBMS"
 url: /corsi/la-progettazione-dei-database/dal-modello-relazionale-al-ddl-dellrdbms/
+weight: 1
 categories:
   - La progettazione dei database
   

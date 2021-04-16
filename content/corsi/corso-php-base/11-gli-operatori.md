@@ -5,6 +5,7 @@ type: corso
 date: 2005-07-13T22:33:23+0000
 description: "Gli operatori PHP"
 url: /corsi/corso-php-base/gli-operatori/
+weight: 10
 categories:
   - Corso PHP base
   

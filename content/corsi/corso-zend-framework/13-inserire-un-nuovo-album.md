@@ -5,6 +5,7 @@ type: corso
 date: 2010-12-28T16:27:27+0000
 description: "Inserimento di un nuovo record nel database con Zend Framework"
 url: /corsi/corso-zend-framework/inserire-un-nuovo-album/
+weight: 4
 categories:
   - Introduzione allo Zend Framework
   

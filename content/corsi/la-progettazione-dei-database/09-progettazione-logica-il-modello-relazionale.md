@@ -5,6 +5,7 @@ type: corso
 date: 2007-01-05T12:56:35+0000
 description: "Il modello relazionale di una base di dati (database). La progettazione logica."
 url: /corsi/la-progettazione-dei-database/progettazione-logica-il-modello-relazionale/
+weight: 5
 categories:
   - La progettazione dei database
   

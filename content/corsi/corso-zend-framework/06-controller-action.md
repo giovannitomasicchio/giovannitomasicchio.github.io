@@ -5,6 +5,7 @@ type: corso
 date: 2010-12-28T16:15:05+0000
 description: "Il ruolo dei controller e delle action in una applicazione Zend Framework"
 url: /corsi/corso-zend-framework/controller-action/
+weight: 11
 categories:
   - Introduzione allo Zend Framework
   

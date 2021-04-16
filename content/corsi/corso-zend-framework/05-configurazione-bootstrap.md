@@ -5,6 +5,7 @@ type: corso
 date: 2010-12-28T16:12:34+0000
 description: "Configurare l'applicazione Zend Framework attraverso il file application.ini"
 url: /corsi/corso-zend-framework/configurazione-bootstrap/
+weight: 12
 categories:
   - Introduzione allo Zend Framework
   

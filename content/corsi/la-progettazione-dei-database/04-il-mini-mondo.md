@@ -5,6 +5,7 @@ type: corso
 date: 2007-01-05T12:55:12+0000
 description: "Analisi del mini-mondo della base di dati (database)"
 url: /corsi/la-progettazione-dei-database/il-mini-mondo/
+weight: 10
 categories:
   - La progettazione dei database
   

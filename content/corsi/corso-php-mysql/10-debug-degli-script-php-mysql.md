@@ -5,6 +5,7 @@ type: corso
 date: 2006-08-26T18:03:45+0000
 description: "Risolvere gli errori di uno script PHP MySQL. Debug degli script PHP/MySQL"
 url: /corsi/corso-php-mysql/debug-degli-script-php-mysql/
+weight: 1
 categories:
   - Corso PHP MySQL
   

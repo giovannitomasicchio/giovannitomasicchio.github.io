@@ -5,6 +5,7 @@ type: corso
 date: 2005-07-13T22:35:25+0000
 description: "Leggere i dati presenti nell'URL (query string) con PHP attraverso l'array $_GET"
 url: /corsi/corso-php-base/larray-$_get-dati-via-url/
+weight: 4
 categories:
   - Corso PHP base
   

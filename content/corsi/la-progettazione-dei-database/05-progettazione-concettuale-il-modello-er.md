@@ -5,6 +5,7 @@ type: corso
 date: 2007-01-05T12:55:20+0000
 description: "Il modello ER entità relazione, la progettazione concettuale di una base di dati (database) "
 url: /corsi/la-progettazione-dei-database/progettazione-concettuale-il-modello-er/
+weight: 9
 categories:
   - La progettazione dei database
   
