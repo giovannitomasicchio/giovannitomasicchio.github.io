@@ -74,7 +74,7 @@ in cui le condizioni utilizzate nella clausola WHERE devono essere le stesse uti
 
 ### Applicazione di esempio
 
-L'applicazione di esempio realizzata, scaricabile a [questo link](http://www.phpnews.it/download/paginazione.zip), si occupa di mostrare l'elenco dei comuni italiani, ordinati per nome e codice ISTAT (codice numerico univoco). I dati vengono prelevati da un'unica tabella, che è possibile creare e popolare utilizzando lo script SQL contenuto nell'archivio ZIP dell'applicazione. Nel nostro esempio mostreremo tutti i dati presenti nella tabella dei comuni, pertanto non ci saranno clausole WHERE nelle SELECT.
+L'applicazione di esempio realizzata, scaricabile a [questo link](/download/paginazione.zip), si occupa di mostrare l'elenco dei comuni italiani, ordinati per nome e codice ISTAT (codice numerico univoco). I dati vengono prelevati da un'unica tabella, che è possibile creare e popolare utilizzando lo script SQL contenuto nell'archivio ZIP dell'applicazione. Nel nostro esempio mostreremo tutti i dati presenti nella tabella dei comuni, pertanto non ci saranno clausole WHERE nelle SELECT.
 
 Il programma è costituito da 3 file: il template HTML, lo script principale che estrae i dati dal database e uno script contenente tre funzioni utili alla creazione dei link di navigazione. Questi saranno nella forma:
 

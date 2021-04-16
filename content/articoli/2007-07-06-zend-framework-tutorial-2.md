@@ -30,7 +30,7 @@ tags:
 
  L'immagine seguente mostra l'organizzazione dei file appena descritta.
 
- ![cartelle.gif](http://www.phpnews.it/images/stories/Articoli/cartelle.gif)
+ ![cartelle.gif](/image/articoli/cartelle.gif)
 
  In figura si notano quindi:
 
@@ -61,7 +61,7 @@ php_flag register_globals off
 php_flag magic_quotes_gpc off
 ```
 
- Con le prime 2 righe attiviamo il motore di conversione degli URL di Apache e lo configuriamo affinché gli URL che puntano a file con estensione diverse da js, ico, gif, jpg, png o css vengano tutti diretti alla pagina index.php. Ricordo che per utilizzare questa funzionalità è necessario attivare l'estensione mod\_rewrite dal file http.conf e inoltre è necessario abilitare l'utilizzo dei file .htaccess, come descritto in [questa pagina](http://www.phpnews.it/articoli/installare-apache-22-php-52-mysql-5-su-windows/7/).
+ Con le prime 2 righe attiviamo il motore di conversione degli URL di Apache e lo configuriamo affinché gli URL che puntano a file con estensione diverse da js, ico, gif, jpg, png o css vengano tutti diretti alla pagina index.php. Ricordo che per utilizzare questa funzionalità è necessario attivare l'estensione mod\_rewrite dal file http.conf e inoltre è necessario abilitare l'utilizzo dei file .htaccess, come descritto in [questa pagina](/articoli/installare-apache-22-php-52-mysql-5-su-windows/7/).
 
  La terza e la quarta riga del file .htaccess invece non sono direttamente collegata all'utilizzo dello Zend Framework ma servono a disabilitare due funzionalità di PHP che possono comportare diversi problemi e malfunzionamenti della nostra applicazione: il register global e il magic quote.
 

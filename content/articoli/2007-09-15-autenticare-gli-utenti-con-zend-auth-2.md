@@ -68,13 +68,13 @@ insert into `users` (`user_name`, `password`, `nome`) values('mario76','525d5d4f
 
  La query di inserimento è utile per popolare la tabella degli utenti in modo da poter subito provare l'applicazione effettuando il login conusername "mario76" e password "segreto", memorizzata con il suo hash MD 5. Non verranno realizzate pagine per la creazione degli utenti, operazione che viene lasciata al lettore che potrà prendere spunto daltutorial sullo Zend Framework.
 
- Potete scaricare tutti gli script realizzati da [questo link](http://www.phpnews.it/download/ZF-auth.zip).
+ Potete scaricare tutti gli script realizzati da [questo link](/download/ZF-auth.zip).
 
 - - - - - -
 
 ###  Il file di bootstrap
 
- Il file di bootstrap utilizzato per questa semplice applicazione non contiene importanti variazioni rispetto a quello analizzato in dettaglio nel [tutorial sullo Zend Framework](http://www.phpnews.it/articoli/zend-framework/zend-framework-tutorial-1/) al quale rimando per eventuali approfondimenti.
+ Il file di bootstrap utilizzato per questa semplice applicazione non contiene importanti variazioni rispetto a quello analizzato in dettaglio nel [tutorial sullo Zend Framework](/articoli/zend-framework/zend-framework-tutorial-1/) al quale rimando per eventuali approfondimenti.
 
  ```php
 <?php

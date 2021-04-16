@@ -58,4 +58,4 @@ La query dell'esempio parte dal presupposto che l'utente può specificare il nom
 
 Questo succede perché MySQL quando valuta una espressione del tipo *condizione\_1 OR condizione\_2*, se trova che la *condizione\_1* è verificata evita di controllare anche la *condizione\_2* poiché il risultato dell'espressione sarà comunque *true*.
 
-Se volete provare la query dell'esempio potete staricare il database dei comuni italiani da [questo link](http://www.phpnews.it/download/italia.zip).
+Se volete provare la query dell'esempio potete staricare il database dei comuni italiani da [questo link](/download/italia.zip).

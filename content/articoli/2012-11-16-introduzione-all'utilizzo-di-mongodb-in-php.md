@@ -48,7 +48,7 @@ Dopo questa breve introduzione al mondo del NoSQL, vediamo adesso come preparare
 
 A questo punto basta avviare mongod (su Windows basta eseguire **mongod.exe** da riga di comando) per avere il server disponibile in rete all'indirizzo IP locale della macchina (il classico localhost 127.0.0.1) ed alla porta TCP 27017. Altre configurazioni come file destinazione dei log, cartelle di storage dei database, autenticazione e molte altre di natura più sistemistica non vengono trattate in questo articolo ma sono ottenibili seguendo le indicazioni fornite dalla documentazione ufficiale presente su [www.mongodb.org](http://www.mongodb.org/).
 
-![](http://www.phpnews.it/images/stories/Articoli/introduzione-mongodb/avvio-server.png)
+![](/image/articoli/introduzione-mongodb/avvio-server.png)
 
 Una volta avviato il server MongoDB, è necessario fare in modo che il linguaggio PHP abbia gli strumenti giusti per interagirvi. Stiamo parlando del “driver” ossia della libreria che traduce, nella lingua parlata dal server, i comandi che si vogliono impartire. I driver di MongoDB sono disponibili sul sito del progetto al link: [www.mongodb.org/display/DOCS/Drivers](http://www.mongodb.org/display/DOCS/Drivers).
 
@@ -117,7 +117,7 @@ Iniziamo a trattare questi dati in MongoDB facendo uso delle fondamentali operaz
 
 Per fare ciò avviamo il client mongo specificando indirizzo IP, porta TCP e nome del database (in questo caso denominato “prova”).
 
-![](http://www.phpnews.it/images/stories/Articoli/introduzione-mongodb/connessione-server.png)
+![](/image/articoli/introduzione-mongodb/connessione-server.png)
 
 Si noti che non è richiesta l’esistenza del database a cui ci stiamo connettendo. Qualora richiedessimo la connessione ad un database non ancora esistente, Mongo lo creerà per noi, svolgendo una versione NoSQL del tradizionale CREATE DATABASE. Nel seguito vedremo come accadrà lo stesso per la creazione di una collection.
 

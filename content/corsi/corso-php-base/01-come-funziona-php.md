@@ -48,9 +48,9 @@ Diamo un'occhiata al seguente codice, senza soffermarci sul suo contenuto (avrem
 </html>
 ```
 
-Per vederne il risultato [cliccate qui](http://www.phpnews.it/corso/prova.php). Sorpresi? Questa volta l'orario è giusto! Ma come è stato possibile? Per scoprirlo vediamo quali sono state le singole fasi che hanno portato a questo risultato:
+Per vederne il risultato [cliccate qui](/corso/prova.php). Sorpresi? Questa volta l'orario è giusto! Ma come è stato possibile? Per scoprirlo vediamo quali sono state le singole fasi che hanno portato a questo risultato:
 
-1. Cliccando sul link di prima (<http://www.phpnews.it/corso/prova.php>) avete richiesto di visionare la pagina prova.php che si trova nella cartella "corso" del server (computer remoto) che ospita il sito www.phpnews.it
+1. Cliccando sul link di prima (http://www.phpnews.it/corso/prova.php) avete richiesto di visionare la pagina prova.php che si trova nella cartella "corso" del server (computer remoto) che ospita il sito www.phpnews.it
 2. Il programma che ha ricevuto questa richiesta, ovvero il server web (da non confondere con il server che è un computer) riceve questa richiesta.
 3. Il server web capisce, guardando l'estensione ".php" del file richiesto, che si tratta di un file PHP ed invece di inviarci immediatamente il suo contenuto lo passa prima ad un ulteriore programma, il **motore PHP**.
 4. Questo motore PHP individua ed esegue tutte le istruzioni PHP presenti nel file che gli è stato passato.

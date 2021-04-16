@@ -33,7 +33,7 @@ VALUES
 
 In generale per lanciare una query in uno script PHP dobbiamo semplicemente chiamare la funzione **mysql\_query()** a cui passare come parametro la stringa contenete la query. Nel caso di un inserimento mysql\_query() restituisce TRUE o FALSE, a seconda dell'esito dell'operazione. Ci basta quindi controllare tale valore per verificare se i dati sono stati correttamente immessi nella tabella. In caso negativo con la funzione **mysql\_error()** possiamo ottenere maggiori indicazioni su cosa è andato storto.
 
-Il seguente esempio fa riferimento al database ed alla tabella presentati nella [Lezione 2](http://www.phpnews.it/corsi/corso-php-mysql/setup-del-server-e-creazione-del-database/). La connessione avviene grazie agli script config.php e connect.php presentati nella [Lezione 4](http://www.phpnews.it/corsi/corso-php-mysql/script-di-connessione/).
+Il seguente esempio fa riferimento al database ed alla tabella presentati nella [Lezione 2](/corsi/corso-php-mysql/setup-del-server-e-creazione-del-database/). La connessione avviene grazie agli script config.php e connect.php presentati nella [Lezione 4](/corsi/corso-php-mysql/script-di-connessione/).
 
  ```
 

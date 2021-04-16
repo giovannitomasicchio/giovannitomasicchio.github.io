@@ -21,7 +21,7 @@ zf create project zf-tutorial
 
 Lo strumento ZF creerà una directory chiamata zf-tutorial e la popolerà con la struttura di directory necessaria. Questa struttura presuppone che si abbia il controllo completo della configurazione di Apache, così si potrà mantenere la maggior parte dei file al di fuori della directory root web. Si dovrebbero vedere i seguenti file e cartelle:
 
-![albero delle cartelle di progetto](/images/stories/Corsi/introduzione_zend_framework/albero_progetto.gif)
+![albero delle cartelle di progetto](/image/corsi/introduzione_zend_framework/albero_progetto.gif)
 
 (In public/ c'è anche un file .htaccess nascosto).
 
@@ -50,4 +50,4 @@ Copiamo la directory library/Zend/ dall'archivio scaricato (ZendFramework-1.10.6
 
 Possiamo adesso fare un primo test andando con il browser su http://localhost/zf-tutorial/public. Dovremmo vedere qualcosa di simile:
 
-![pagina di benvenuto Zend Framework](/images/stories/Corsi/introduzione_zend_framework/welcome.png)
+![pagina di benvenuto Zend Framework](/image/corsi/introduzione_zend_framework/welcome.png)

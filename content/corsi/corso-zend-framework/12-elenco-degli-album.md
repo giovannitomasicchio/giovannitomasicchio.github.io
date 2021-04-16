@@ -64,4 +64,4 @@ Poi creiamo una tabella html in cui visualizzare per ciascun album il titolo, gl
 
 Se si apre http://localhost/zf-tutorial/public/ si dovrebbe adesso vedere un elenco di album, qualcosa del genere:
 
-![Elenco degli album](/images/stories/Corsi/introduzione_zend_framework/my_albums.png)
+![Elenco degli album](/image/corsi/introduzione_zend_framework/my_albums.png)

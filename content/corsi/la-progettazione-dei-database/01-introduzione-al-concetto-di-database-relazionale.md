@@ -18,13 +18,13 @@ Proviamo a dare una definizione di **base di dati**:
 
 Un semplice esempio di base di dati è l'elenco telefonico. Una pagina di un elenco telefonico cittadino può presentare più o meno i seguenti dati:
 
-![rubrica1.gif](images/stories/Corsi/progettazione_database/rubrica1.gif)
+![rubrica1.gif](/image/corsi/progettazione_database/rubrica1.gif)
 
 Si noti che i dati dell'esempio sono tutti correlati tra di loro e sono organizzati in ordine alfabetico per facilitarne la ricerca. I titoli delle colonne (Cognome, Nome, Indirizzo e Numero di Telefono) vengono chiamati **metadati**, mentre tutti gli altri sono i dati veri e propri. Ogni "riga di dati" prende il nome di tupla o record o riga, mentre tutto l'insieme forma una **tabella**.
 
 Ora, proviamo ad ampliare l'esempio supponendo di voler costruire una base di dati per la gestione di una rubrica personale. Oltre al nome, al cognome e all'indirizzo di ogni persona vogliamo sapere il posto in cui lavora con relativo indirizzo e recapito telefonico. La tabella diventerebbe:
 
-![rubrica2.gif](images/stories/Corsi/progettazione_database/rubrica2.gif)
+![rubrica2.gif](/image/corsi/progettazione_database/rubrica2.gif)
 
 Paperon De Paperoni vive di rendita e non ha bisogno di lavorare.
 
@@ -32,7 +32,7 @@ Anche se a prima vista corretta, una memorizzazione del genere non è convenient
 
 Un modo più intelligente di memorizzare tale base di dati è il seguente:
 
-![rubrica3.gif](images/stories/Corsi/progettazione_database/rubrica3.gif)
+![rubrica3.gif](/image/corsi/progettazione_database/rubrica3.gif)
 
 Abbiamo creato due tabelle **associate** tra di loro. Brambilla Michele e Rossi Luca saranno associati entrambi alla riga relativa a Banca Europe, De Magistris Alessandro sarà associato alla riga della KL Elettronix, Paperon. De Paperoni invece non sarà associato a nessun posto di lavoro. Si noti che adesso un'eventuale modifica ai dati di un posto di lavoro si riflettere in modo automatico e trasparente su tutte le persone che vi lavorano.
 

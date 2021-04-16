@@ -26,7 +26,7 @@ tags:
 
  Servirà avere Apache, PHP 5 e MySQL correttamente installati. PHP dovrà avere le estensioni PDO e PDO\_MYSQL caricate, e ovviamente avremo precedentemente scaricato lo Zend Framework e scompattato l'archivio compresso in una cartella sul nostro PC. Infine il mod\_rewrite ed i file .htaccess di Apache dovranno essere abilitati.
 
- Per i più curiosi e per chi non vuole attendere troppo, da [questo link](http://www.phpnews.it/download/ZF-tutorial.zip) potete scaricare il codice completo che compone il progetto, compreso il file SQL per creare il database. Se volete già provarlo vi anticipo che sarà necessario effettuare qualche modifica al file index.php affiché i dati in esso presenti siano corretti per il vostro PC (dati di accesso al DB, percorso della cartella dello Zend Framework). Avremo modo di affrontare con molta più calma tali configurazioni nel seguito del tutorial.
+ Per i più curiosi e per chi non vuole attendere troppo, da [questo link](/download/ZF-tutorial.zip) potete scaricare il codice completo che compone il progetto, compreso il file SQL per creare il database. Se volete già provarlo vi anticipo che sarà necessario effettuare qualche modifica al file index.php affiché i dati in esso presenti siano corretti per il vostro PC (dati di accesso al DB, percorso della cartella dello Zend Framework). Avremo modo di affrontare con molta più calma tali configurazioni nel seguito del tutorial.
 
  In questo primo articolo studieremo l'architettura dell'applicazione, vedremo cioè quali file compongono il progetto e quali sono le responsabilità loro affidate.
 

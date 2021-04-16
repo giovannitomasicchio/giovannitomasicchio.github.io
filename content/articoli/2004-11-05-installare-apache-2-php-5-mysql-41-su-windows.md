@@ -18,7 +18,7 @@ tags:
   
 ---
  **ATTENZIONE !!!**
- La versione più aggiornata di questa guida è [disponibile qui](http://www.phpnews.it/articoli/installare-apache-22-php-52-e-mysql-5-su-windows/)
+ La versione più aggiornata di questa guida è [disponibile qui](/articoli/installare-apache-22-php-52-e-mysql-5-su-windows/)
 
 In questo tutorial mostreremo in dettaglio le procedure di installazione e configurazione di Apache 2, PHP 5 e MySQL 4.1 su Windows 2000/XP. Il nostro scopo principale è quello di ottenere una piattaforma di sviluppo per poter realizzare e testare le nostre applicazioni PHP-MySQL.
 
@@ -48,49 +48,49 @@ L'installazione di Apache 2 è molto semplice, per prima cosa dobbiamo scaricare
 
 Effettuato il download lanciamo l'installer che ci presenterà la seguente schermata:
 
-![apache-01.png](http://www.phpnews.it/images/stories/Articoli/Art1/Apache/apache-01.png)
+![apache-01.png](/image/articoli/Art1/Apache/apache-01.png)
 
 Dopo aver premuto il tasto *Next* ci verrà chiesto di accettare la licenza:
 
-![apache-02.png](http://www.phpnews.it/images/stories/Articoli/Art1/Apache/apache-02.png)
+![apache-02.png](/image/articoli/Art1/Apache/apache-02.png)
 
 Accettata la licenza ci verranno mostrate altre informazioni sul software che andiamo ad installare:
 
-![apache-03.png](http://www.phpnews.it/images/stories/Articoli/Art1/Apache/apache-03.png)
+![apache-03.png](/image/articoli/Art1/Apache/apache-03.png)
 
 Procedendo con l'installazione ci verrà chiesto di fornire alcune informazioni circa il dominio di rete, il nome del server ed un indirizzo email dell'amministratore. Poiché stiamo configurando un server di sviluppo, possiamo rispondere in maniera fantasiosa, senza compromettere il risultato finale.
 
-![apache-04.png](http://www.phpnews.it/images/stories/Articoli/Art1/Apache/apache-04.png)
+![apache-04.png](/image/articoli/Art1/Apache/apache-04.png)
 
 La prossima schermata ci chiederà di indicare il tipo di installazione che intendiamo fare: optiamo per una installazione tipica.
 
-![apache-05.png](http://www.phpnews.it/images/stories/Articoli/Art1/Apache/apache-05.png)
+![apache-05.png](/image/articoli/Art1/Apache/apache-05.png)
 
 Adesso ci viene data la possibilità di scegliere in quale cartella installare Apache. Accettiamo quella che ci viene proposta.
 
-![apache-06.png](http://www.phpnews.it/images/stories/Articoli/Art1/Apache/apache-06.png)
+![apache-06.png](/image/articoli/Art1/Apache/apache-06.png)
 
 Prima di procedere con la vera e propria installazione di Apache ci viene data un ultima possibilità di tornare indietro per effettuare eventuali modifiche alla configurazione:
 
-![apache-07.png](http://www.phpnews.it/images/stories/Articoli/Art1/Apache/apache-07.png)
+![apache-07.png](/image/articoli/Art1/Apache/apache-07.png)
 
 Procediamo premendo il tasto *Install*.
 
-![apache-08.png](http://www.phpnews.it/images/stories/Articoli/Art1/Apache/apache-08.png)
+![apache-08.png](/image/articoli/Art1/Apache/apache-08.png)
 
 Dopo poche decine di secondi l'installazione sarà conclusa e ci verrà proposta la seguente schermata:
 
-![apache-09.png](http://www.phpnews.it/images/stories/Articoli/Art1/Apache/apache-09.png)
+![apache-09.png](/image/articoli/Art1/Apache/apache-09.png)
 
 A conferma della corretta installazione, una nuova icona nel system tray ci informa dello stato del server Apache. Una freccia verde indica che Apache è in esecuzione sulla nostra macchina.
 
-![apache-10.png](http://www.phpnews.it/images/stories/Articoli/Art1/Apache/apache-10.png)
+![apache-10.png](/image/articoli/Art1/Apache/apache-10.png)
 
 Per avere un'ulteriore prova del corretto funzionamento di Apache, apriamo il browser e digitiamo il seguente indirizzo: <http://localhost/>.
 
 Se tutto è andato bene ci verrà mostrata la seguente pagina.
 
-![apache-11.png](http://www.phpnews.it/images/stories/Articoli/Art1/Apache/apache-11.png)
+![apache-11.png](/image/articoli/Art1/Apache/apache-11.png)
 
 - - - - - -
 
@@ -113,11 +113,11 @@ PHPIniDir "C:/php"
 
 Ecco il risultato ottenuto usando il blocco note:
 
-![php-01.png](http://www.phpnews.it/images/stories/Articoli/Art1/PHP/php-01.png)
+![php-01.png](/image/articoli/Art1/PHP/php-01.png)
 
 Come ultima operazione dobbiamo tornare nella cartella **C:\\php** e rinominare il file **php.ini-dist** in **php.ini** che costituisce il file di configurazione di PHP. Per rendere effettive le modifiche fatte alla configurazione di Apache dobbiamo riavviarlo. Clicchiamo quindi due volte sull'icona di Apache presente nel system tray (l'icona a forma di piuma rossa con una freccia verde all'interno), ci apparirà la seguente schermata:
 
-![php-02.png](http://www.phpnews.it/images/stories/Articoli/Art1/PHP/php-02.png)
+![php-02.png](/image/articoli/Art1/PHP/php-02.png)
 
 Per riavviare Apache sarà sufficiente cliccare sul pulsante *Restart*. La procedura dura pochi secondi, se non vengono visualizzati errori significa che tutto è andato a buon fine. Per sincerarcene realizziamo un piccolo script PHP. Apriamo il blocco note e scriviamo le seguenti istruzioni:
 
@@ -129,11 +129,11 @@ phpinfo();
 
 Otterremo qualcosa di simile:
 
-![php-03.png](http://www.phpnews.it/images/stories/Articoli/Art1/PHP/php-03.png)
+![php-03.png](/image/articoli/Art1/PHP/php-03.png)
 
 Salviamo il file appena creato nella cartella **htdocs** di Apache (nel nostro caso **C:\\Programmi\\Apache Group\\Apache2\\htdocs**) impostando il nome a **info.php**. Per evitare che il blocco note automaticamente aggiunga l'estensione .txt è possibile salvare il file scrivendo il nome tra virgolette, ovvero nel campo Nome file della finestra Salva con nome scrivere **"info.php"**. Adesso proviamo a lanciare il nostro piccolo script appena realizzato: apriamo il browser e digitiamo il seguente indirizzo: <http://localhost/info.php> Se tutto è stato eseguito correttamente otterremo la seguente pagina:
 
-![php_05.png](http://www.phpnews.it/images/stories/Articoli/Art1/PHP/php_05.png)
+![php_05.png](/image/articoli/Art1/PHP/php_05.png)
 
 - - - - - -
 
@@ -148,51 +148,51 @@ Prima di tutto, procuriamoci il file di installazione di MySQL 4.1 che possiamo 
 
 Tra le novità presenti nella versione 4.1 di MySQL, spicca subito il nuovo programma di installazione e configurazione, chiaro e semplice da usare. Ecco la schermata che introduce il processo di installazione:
 
-![mysql-01.png](http://www.phpnews.it/images/stories/Articoli/Art1/MySQL/mysql-01.png)
+![mysql-01.png](/image/articoli/Art1/MySQL/mysql-01.png)
 
 Dopo aver premuto il tasto *Next* ci viene chiesto il tipo di installazione che intendiamo effettuare. Possiamo scegliere tra una installazione tipica, una completa ed una personalizzabile.
 
-![mysql-02.png](http://www.phpnews.it/images/stories/Articoli/Art1/MySQL/mysql-02.png)
+![mysql-02.png](/image/articoli/Art1/MySQL/mysql-02.png)
 
 Optiamo per l'installazione tipica e procediamo premendo il tasto *Next*:
 
-![mysql-03.png](http://www.phpnews.it/images/stories/Articoli/Art1/MySQL/mysql-03.png)
+![mysql-03.png](/image/articoli/Art1/MySQL/mysql-03.png)
 
 Adesso ci vengono elencate le opzioni di installazione che abbiamo indicato nei passi precedenti. Si noti che la cartella nella quale verranno copiati i files di MySQL è stata impostata automaticamente. Questo perchè abbiamo scelto di procedere con una installazione tipica. Se tutto è corretto possiamo procedere:
 
-![mysql-04.png](http://www.phpnews.it/images/stories/Articoli/Art1/MySQL/mysql-04.png)
+![mysql-04.png](/image/articoli/Art1/MySQL/mysql-04.png)
 
 Ora ci viene proposto di registrarci al sito MySQL.com per la creazione di un account. Questa procedura non è necessaria e quindi possiamo saltarla.
 
-![mysql-05.png](http://www.phpnews.it/images/stories/Articoli/Art1/MySQL/mysql-05.png)
+![mysql-05.png](/image/articoli/Art1/MySQL/mysql-05.png)
 
 La precedente schermata ci avvisa che l'installazione è conclusa. Possiamo procedere con la configurazione del nostro server MySQL
 
-![mysql-06.png](http://www.phpnews.it/images/stories/Articoli/Art1/MySQL/mysql-06.png)
+![mysql-06.png](/image/articoli/Art1/MySQL/mysql-06.png)
 
 Dopo aver premuto il tasto Next ci verrà chiesto che tipo di configurazione vogliamo fare: dettagliata o standard.
 
-![mysql-07.png](http://www.phpnews.it/images/stories/Articoli/Art1/MySQL/mysql-07.png)
+![mysql-07.png](/image/articoli/Art1/MySQL/mysql-07.png)
 
 La configurazione dettagliata permette di impostare il server MySQL con parametri appropriati al tipo di utilizzo che se ne intende fare. Quella standard invece imposterà settaggi generici ed è indicata come configurazione iniziale. Procediamo quindi con la configurazione standard.
 
-![mysql-08.png](http://www.phpnews.it/images/stories/Articoli/Art1/MySQL/mysql-08.png)
+![mysql-08.png](/image/articoli/Art1/MySQL/mysql-08.png)
 
 Adesso ci viene chiesto se vogliamo che MySQL sia installato come servizio di Windows. Come ci viene suggerito, questa è la soluzione migliore. Impostiamo anche il nome da dare al servizio (MySQL va benissimo) ed indichiamo che dovrà essere lanciato automaticamente all'avvio di Windows.
 
-![mysql-09.png](http://www.phpnews.it/images/stories/Articoli/Art1/MySQL/mysql-09.png)
+![mysql-09.png](/image/articoli/Art1/MySQL/mysql-09.png)
 
 Questa finestra invece serve per impostare le opzioni di sicurezza. Scegliamo di modificare le impostazioni di sicurezza e forniamo una password per l'utente root (l'utente principale di MySQL). Per questo esempio useremo la password testpass. E' importante non dimenticare la password che andiamo ad inserire in questa schermata, sarà quella che useremo per connetterci al database nei prossimi esempi. Dato che stiamo realizzando una piattaforma di sviluppo selezioniamo anche l'opzione per impedire all'utente root l'accesso a MySQL da altri computers. Procediamo quindi premendo il tasto *Next*.
 
-![mysql-10.png](http://www.phpnews.it/images/stories/Articoli/Art1/MySQL/mysql-10.png)
+![mysql-10.png](/image/articoli/Art1/MySQL/mysql-10.png)
 
 Dopo pochi secondi necessari alla preparazione della configurazione e all'avvio di MySQL ci verrà mostrata la seguente schermata conclusiva:
 
-![mysql-11.png](http://www.phpnews.it/images/stories/Articoli/Art1/MySQL/mysql-11.png)
+![mysql-11.png](/image/articoli/Art1/MySQL/mysql-11.png)
 
 Se vogliamo avere conferma che MySQL è stato avviato ed è attivo sulla nostra macchina è sufficiente visualizzare l'elenco dei servizi installati, raggiungibile dal pannello di controllo.
 
-![mysql-12.png](http://www.phpnews.it/images/stories/Articoli/Art1/MySQL/mysql-12.png)
+![mysql-12.png](/image/articoli/Art1/MySQL/mysql-12.png)
 
 Come possiamo osservare, il servizio "MySQL" è attivo.
 
@@ -205,7 +205,7 @@ Come possiamo osservare, il servizio "MySQL" è attivo.
 
 Le novità introdotte con la versione 4.1 di MySQL sono diverse e perciò gli sviluppatori di PHP, invece di aggiornare l'attuale estensione ***mysql***, ovvero la libreria che permette al PHP di interagire con MySQL, ne hanno realizzato una nuova, dal nome ***mysqli*** (mysql improved).
 
-Mysqli non solo permette di sfruttare a pieno le nuove caratteristiche di MySQL 4.1 ma offre anche interessanti novità come ad esempio un completo set di classi che permettono un approccio della programmazione orientato agli oggetti. Se siete interessati ad approfondire l'argomento potete consultare [questo articolo](http://www.phpnews.it/articoli/estensione-mysqli-i/).
+Mysqli non solo permette di sfruttare a pieno le nuove caratteristiche di MySQL 4.1 ma offre anche interessanti novità come ad esempio un completo set di classi che permettono un approccio della programmazione orientato agli oggetti. Se siete interessati ad approfondire l'argomento potete consultare [questo articolo](/articoli/estensione-mysqli-i/).
 
 Mostreremo quindi i passi necessari per abilitare sia l'estensione mysql sia la nuova mysqli. Bisognerà scegliere quale delle due procedure eseguire in relazione alle applicazioni PHP che si intende far giare.
 
@@ -224,7 +224,7 @@ Per prima cosa cerchiamo il file **libmysql.dll** nella cartella di PHP (**C:\\p
 
 Apriamo poi con un editor (nel nostro esempio useremo il blocco note) il file **php.ini** presente nella cartella **C:\\php**. Cerchiamo la riga che inizia per **extension\_dir** e modifichiamola in modo che punti alla cartella delle estensioni di PHP **C:\\php\\ext** come mostrato nella seguente figura:
 
-![mysql-php-04.png](http://www.phpnews.it/images/stories/Articoli/Art1/PHP_MySQL/mysql-php-04.png)
+![mysql-php-04.png](/image/articoli/Art1/PHP_MySQL/mysql-php-04.png)
 
 Fatto ciò scorriamo il file cercando un lungo elenco di righe che iniziano tutte per **;extension**. Portiamoci alla fine di questo elenco e scriviamo la seguente riga:
 
@@ -232,11 +232,11 @@ Fatto ciò scorriamo il file cercando un lungo elenco di righe che iniziano tutt
 
 Il risultato dovrà essere simile a quello mostrato nella seguente finestra
 
-![mysqli1.png](http://www.phpnews.it/images/stories/Articoli/Art1/PHP_MySQL/mysqli1.png)
+![mysqli1.png](/image/articoli/Art1/PHP_MySQL/mysqli1.png)
 
 A questo punto riavviamo Apache come mostrato precedentemente (doppio clic sull'icona di Apache nel system tray, e premere il pulsante *Restart Apache*). Per verificare che PHP ha caricato correttamente l'estensione mysqli apriamo il browser e digitiamo l'indirizzo <http://localhost/info.php>. Circa a metà della pagina che ci verrà mostrata troveremo le seguenti indicazioni:
 
-![mysqli3.png](http://www.phpnews.it/images/stories/Articoli/Art1/PHP_MySQL/mysqli3.png)
+![mysqli3.png](/image/articoli/Art1/PHP_MySQL/mysqli3.png)
 
 Adesso proviamo a collegarci con uno script PHP al nostro database MySQL. Apriamo il blocco note (o l'editor che preferite) e scriviamo il seguente codice:
 
@@ -258,11 +258,11 @@ Fate attenzione ad inserire nel codice (seconda riga) la corretta password di ac
 
 Ecco come appare la finestra del blocco note usata nel nostro esempio:
 
-![mysqli2.png](http://www.phpnews.it/images/stories/Articoli/Art1/PHP_MySQL/mysqli2.png)
+![mysqli2.png](/image/articoli/Art1/PHP_MySQL/mysqli2.png)
 
 Salvate lo script appena realizzato con il nome **testmysql.php** nella cartella **htdocs** di Apache (nel nostro caso **C:\\Programmi\\Apache Group\\Apache2\\htdocs**) . Ricordiamo che per evitare che il blocco note automaticamente aggiunga l'estensione .txt è possibile salvare il file scrivendo il nome tra virgolette (**"testmysql.php"**). Adesso proviamo a lanciare il nostro piccolo script di test: apriamo il browser e digitiamo il seguente indirizzo: <http://localhost/testmysql.php>. Se tutto è stato eseguito correttamente otterremo il seguente risultato:
 
-![mysql-php-08.png](http://www.phpnews.it/images/stories/Articoli/Art1/PHP_MySQL/mysql-php-08.png)
+![mysql-php-08.png](/image/articoli/Art1/PHP_MySQL/mysql-php-08.png)
 
 Nel caso la connessione non riuscisse si otterrà un messaggio di errore esplicativo.
 
@@ -279,15 +279,15 @@ Per prima cosa cerchiamo il file **libmysql.dll** presente nella cartella di PHP
 
 Apriamo poi con un editor (nel nostro esempio useremo il blocco note) il file **php.ini** presente nella cartella **C:\\php**. Cerchiamo la riga che inizia per **extension\_dir** e modifichiamola in modo che punti alla cartella delle estensioni di PHP **C:\\php\\ext** come mostrato nella seguente figura:
 
-![mysql-php-04.png](http://www.phpnews.it/images/stories/Articoli/Art1/PHP_MySQL/mysql-php-04.png)
+![mysql-php-04.png](/image/articoli/Art1/PHP_MySQL/mysql-php-04.png)
 
 Fatto ciò scorriamo il file cercando un lungo elenco di righe che iniziano tutte per ;extension. Individuiamo in questo elenco la riga **;extension=php\_mysql.dll** e cancelliamo il punto e virgola iniziale come mostrato nella successiva schermata:
 
-![mysql-php-05.png](http://www.phpnews.it/images/stories/Articoli/Art1/PHP_MySQL/mysql-php-05.png)
+![mysql-php-05.png](/image/articoli/Art1/PHP_MySQL/mysql-php-05.png)
 
 Adesso riavviamo Apache come mostrato precedentemente (doppio clic sull'icona di Apache nel system tray, e premere il pulsante *Restart Apache*). Per verificare che PHP ha caricato correttamente l'estensione di MySQL apriamo il browser e digitiamo l'indirizzo <http://localhost/info.php>. Circa a metà della pagina che ci verrà mostrata troveremo le seguenti indicazioni:
 
-![mysql_php_06.png](http://www.phpnews.it/images/stories/Articoli/Art1/PHP_MySQL/mysql_php_06.png)
+![mysql_php_06.png](/image/articoli/Art1/PHP_MySQL/mysql_php_06.png)
 
 Ora tutto è pronto per testare uno script PHP-MySQL. Apriamo il blocco note (o l'editor che preferite) e scriviamo il seguente codice:
 
@@ -306,10 +306,10 @@ Fate attenzione ad inserire nel codice (seconda riga) la corretta password di ac
 
 Ecco come appare la finestra del blocco note usata nel nostro esempio:
 
-![mysql-php-07.png](http://www.phpnews.it/images/stories/Articoli/Art1/PHP_MySQL/mysql-php-07.png)
+![mysql-php-07.png](/image/articoli/Art1/PHP_MySQL/mysql-php-07.png)
 
 Salvate lo script appena realizzato con il nome **testmysql.php** nella cartella **htdocs** di Apache (nel nostro caso **C:\\Programmi\\Apache Group\\Apache2\\htdocs**) . Ricordiamo che per evitare che il blocco note automaticamente aggiunga l'estensione .txt è possibile salvare il file scrivendo il nome tra virgolette (**"testmysql.php"**). Adesso proviamo a lanciare il nostro piccolo script di test: apriamo il browser e digitiamo il seguente indirizzo: <http://localhost/testmysql.php> .Se tutto è stato eseguito correttamente otterremo il seguente risultato:
 
-![mysql-php-08.png](http://www.phpnews.it/images/stories/Articoli/Art1/PHP_MySQL/mysql-php-08.png)
+![mysql-php-08.png](/image/articoli/Art1/PHP_MySQL/mysql-php-08.png)
 
 Se invece PHP non riesce a connettersi al nostro database MySQL ci verrà mostrato un messaggio di errore contenente indicazioni sul problema verificatosi.

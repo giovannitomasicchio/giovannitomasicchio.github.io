@@ -33,7 +33,7 @@ tags:
 
  Fatto ciò, cominciamo a configurare il nostro file **php.ini** in modo ottimale per FastCGI.
 
- ![](images/stories/Articoli/IIS7FastCGI/01.gif)
+ ![](/image/articoli/IIS7FastCGI/01.gif)
 
  Se il file php.ini non esiste possiamo rinominare il file **php.ini-dist** in php.ini. Apriamo quindi il php.ini (con un editor di testo in **modalità amministratore**!!!) e andiamo ad impostare i seguenti parametri:
 
@@ -60,21 +60,21 @@ tags:
 
  A questo punto possiamo installare IIS nel nostro sistema. Per far ciò andiamo in *Pannello di controllo* —&gt; *Programmi e funzionalità* —&gt; *Attivazione o disattivazione delle funzionalità di Windows* e selezioniamo per l'installazione **Internet Information Services**.
 
- ![](images/stories/Articoli/IIS7FastCGI/02.gif)
+ ![](/image/articoli/IIS7FastCGI/02.gif)
 
  Cosa molto importate è aggiungere la caratteristica **CGI** in *Internet Information Services* —&gt; *Servizi Web* —&gt; *Funzionalità per lo sviluppo di applicazioni*. Questo consente a IIS di far eseguire le applicazioni esterne sia in modalità CGI che FastCGI.
 
- ![](images/stories/Articoli/IIS7FastCGI/03.gif)
+ ![](/image/articoli/IIS7FastCGI/03.gif)
 
  Dopo i dovuti riavvii di sistema possiamo controllare se il nostro Web Server funziona. Apriamo il nostro browser e nella barra degli indirizzi inseriamo l'indirizzo del nostro server che nel nostro caso è [http://localhost](http://localhost/). Se tutto è andato bene dovremmo vedere la pagina di benvenuto di IIS 7.
 
  Ora passiamo alla configurazione vera e propria di IIS 7 per PHP. Apriamo la console di controllo e di impostazione di IIS 7 nel seguente modo: *Start* —&gt; *Inizia Ricerca* —&gt; digitiamo *InetMgr.exe* e lanciamo l'applicazione. Oppure fare clic sul pulsante *Start*, quindi scegliere *Pannello di controllo*, nel Pannello di controllo fare clic su *Sistema e manutenzione*, poi su *Strumenti di amministrazione* e poi su *Gestione Internet Information Services (IIS)*.
 
- ![](images/stories/Articoli/IIS7FastCGI/04.gif)
+ ![](/image/articoli/IIS7FastCGI/04.gif)
 
  Apriamo la funzionalità **Mapping gestori**. Clicchiamo su *Aggiungi mapping moduli* e specifichiamo le impostazioni di configurazione come indicato di seguito:
 
- ![](images/stories/Articoli/IIS7FastCGI/05.gif)
+ ![](/image/articoli/IIS7FastCGI/05.gif)
 
 > **Percorso richiesta**: \*.php
 >  **Modulo**: FastCgiModule
@@ -83,7 +83,7 @@ tags:
 
  Confermiamo le nostre impostazioni alla seguente richiesta.
 
- ![](images/stories/Articoli/IIS7FastCGI/06.gif)
+ ![](/image/articoli/IIS7FastCGI/06.gif)
 
  Bene, a questo punto non ci resta che verificare se il nostro Web Server riesce a gestire PHP. Creiamo con un semplice editor di testo un file di prova chiamandolo phpinfo.php ed inseriamo la classica funzione phpinfo().
 
@@ -91,7 +91,7 @@ tags:
 
  Salviamo il file nella cartella C:\\inetpub\\wwwroot e lanciamolo col browser puntando all’indirizzo <http://localhost/phpinfo.php>. Se tutto è andato bene dovremmo ottenere una pagina simile alla seguente:
 
- ![](images/stories/Articoli/IIS7FastCGI/07.gif)
+ ![](/image/articoli/IIS7FastCGI/07.gif)
 
  Siamo giunti al termine di questa semplice guida, vi ricordo che questa procedura di installazione vale per Windows Vista SP1. Di seguito sono presenti dei link per aggiornare IIS7. L'aggiornamento per il modulo FastCGI di IIS 7 corregge diversi problemi di compatibilità noti con popolari applicazioni PHP.
 

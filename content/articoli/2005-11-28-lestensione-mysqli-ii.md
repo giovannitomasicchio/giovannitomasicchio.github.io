@@ -19,13 +19,13 @@ tags:
 ---
  In questa seconda parte riprenderemo alcune tecniche già esposte per approfondire diversi aspetti, in particolare vedremo come inviare a MySQL alcune opzioni per la connessione, analizzeremo inoltre la differenza tra query buffered ed unbuffered e vedremo come inviare query multiple. Infine elencheremo altre funzioni di uso comune.
 
- Con il [primo articolo](http://www.phpnews.it/articoli/php/estensione-mysqli-i/) della serie dedicata all'estensione *ext/mysqli* abbiamo iniziato ad esplorare il nuovo set di funzioni ed oggetti messi a disposizione per l'interazione con MySQL 4.1 e versioni successive. Abbiamo visto come effettuare la connessione al database, come inviare una query e come estrarre eventuali risultati, usando sia il classico stile procedurale sia il nuovo approccio ad oggetti.
+ Con il [primo articolo](/articoli/estensione-mysqli-i/) della serie dedicata all'estensione *ext/mysqli* abbiamo iniziato ad esplorare il nuovo set di funzioni ed oggetti messi a disposizione per l'interazione con MySQL 4.1 e versioni successive. Abbiamo visto come effettuare la connessione al database, come inviare una query e come estrarre eventuali risultati, usando sia il classico stile procedurale sia il nuovo approccio ad oggetti.
 
  In questa seconda parte riprenderemo alcune tecniche già esposte per approfondire diversi aspetti, in particolare vedremo come inviare a MySQL alcune opzioni per la connessione, analizzeremo inoltre la differenza tra query buffered ed unbuffered e vedremo come inviare query multiple. Infine elencheremo altre funzioni di uso comune.
 
  Gli esempi che proporremo questa volta utilizzeranno solo l'approccio orientato agli oggetti offerto da *ext/mysqli*, sia perché questo risulta particolarmente diverso dallo stile procedurale della vecchia estensione *ext/mysql*, sia perché permette agli sviluppatori più esperti di poter estendere le classi per ottenere strutture più complesse.
 
- Inoltre continueremo a far riferimento alla tabella ed ai dati in essa inseriti nel [precedente articolo](http://www.phpnews.it/articoli/php/estensione-mysqli-i/).
+ Inoltre continueremo a far riferimento alla tabella ed ai dati in essa inseriti nel [precedente articolo](/articoli/estensione-mysqli-i/).
 
 - - - - - -
 

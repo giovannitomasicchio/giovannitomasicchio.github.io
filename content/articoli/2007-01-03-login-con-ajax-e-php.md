@@ -16,7 +16,7 @@ tags:
 ---
 ###  Introduzione
 
- In un [precedente articolo](http://www.phpnews.it/articoli/php/ajax-in-pratica/) abbiamo visto una semplicissima implementazione della tecnologia AJAX con PHP, che faceva uso del metodo GET dell'HTTP per inviare delle informazioni dal browser al server in maniera asincrona.
+ In un [precedente articolo](/articoli/ajax-in-pratica/) abbiamo visto una semplicissima implementazione della tecnologia AJAX con PHP, che faceva uso del metodo GET dell'HTTP per inviare delle informazioni dal browser al server in maniera asincrona.
 
  Con questo articolo invece ci occupiamo di inviare con AJAX ad uno script PHP i dati inseriti dall'utente all'interno di un comune form HTML. Per farlo ci serviremo di un semplice esempio, realizzeremo infatti un banale sistema di login.
 

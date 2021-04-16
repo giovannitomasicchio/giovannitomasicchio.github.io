@@ -22,7 +22,7 @@ categories:
 
  Ci sono entità per cui non si riesce a trovare un sottoinsieme di attributi in grado di costituire una chiave primaria. Si tratta di entità fortemente connesse attraverso una relazione ad un'ulteriore entità, detta **proprietaria**, dalla quale dipende l'esistenza di tutte le sue istanze. Per chiarire il concetto vediamo il seguente esempio.
 
- ![debole.gif](images/stories/Corsi/progettazione_database/debole.gif)
+ ![debole.gif](/image/corsi/progettazione_database/debole.gif)
 
  L'entità capitolo deve la sua esistenza all'entità proprietaria Libro, infatti i suoi attributi non sono sufficienti a definire una chiave primaria. Questa **entità debole** userà come chiave primaria l'insieme dell'attributo "numero capitolo" (detta **chiave parziale**) e della stessa relazione "contiene". Infatti un capitolo è univocamente individuabile conoscendo il libro da cui è tratto ed il numero di capitolo.
 

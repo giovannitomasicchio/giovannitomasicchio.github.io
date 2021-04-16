@@ -156,7 +156,7 @@ while ($stmt->fetch())
 
  Una transazione è una successione di query che si conclude con un successo o un insuccesso. Nel primo caso gli effetti prodotti dalle query diventano permanenti, altrimenti il database torna nello stato precedente l'inizio della transazione.
 
- Le tabelle di tipo MyISAM non supportano le transazioni, possibili in MySQL solo con tabelle di tipo InnoDB e BDB. Per i nostri esempi useremo sempre la tabella mia\_tabella costruita nel [primo articolo](http://www.phpnews.it/articoli/php/estensione-mysqli-i/), convertendola però in InnoDB attraverso la seguente query:
+ Le tabelle di tipo MyISAM non supportano le transazioni, possibili in MySQL solo con tabelle di tipo InnoDB e BDB. Per i nostri esempi useremo sempre la tabella mia\_tabella costruita nel [primo articolo](/articoli/estensione-mysqli-i/), convertendola però in InnoDB attraverso la seguente query:
 
  ALTER TABLE mia\_tabella type = InnoDB
 
@@ -262,7 +262,7 @@ $mysqli->rollback();
 
  Come accadeva per la vecchia *ext/mysql*, la gestione dei dati di tipo BLOB (**B**inary **L**arge **OB**ject) è analoga a quella dei dati normali. *ext/mysqli* in più introduce una nuova modalità di inserimento dei dati BLOB di gran lunga più efficiente. Attraverso l'uso del metodo `<span style="color: rgb(0, 0, 0);"><span style="color: rgb(0, 0, 187);">send_long_data</span><span style="color: rgb(0, 119, 0);">()</span></span>` della classe *mysqli\_stmt* i voluminosi dati binari non devono essere contenuti nella query ed inviati tutti insieme ma, sfruttando il binding dei parametri, possono essere inviati al server MySQL un po' per volta.
 
- L'esempio che proponiamo è una rivisitazione dello script proposto per l'[upload e l'inserimento dei files all'interno di un database MySQL](http://www.phpnews.it/articoli/php/files-ed-immagini-in-mysql/2/). Questa volta useremo le classi messe a disposizione da *ext/mysqli* ed in particolare vedremo come impiegare il metodo `<span style="color: rgb(0, 0, 0);"><span style="color: rgb(0, 0, 187);">send_long_data</span><span style="color: rgb(0, 119, 0);">()</span></span>`.
+ L'esempio che proponiamo è una rivisitazione dello script proposto per l'[upload e l'inserimento dei files all'interno di un database MySQL](/articoli/files-ed-immagini-in-mysql/2/). Questa volta useremo le classi messe a disposizione da *ext/mysqli* ed in particolare vedremo come impiegare il metodo `<span style="color: rgb(0, 0, 0);"><span style="color: rgb(0, 0, 187);">send_long_data</span><span style="color: rgb(0, 119, 0);">()</span></span>`.
 
  ```php
 <?php

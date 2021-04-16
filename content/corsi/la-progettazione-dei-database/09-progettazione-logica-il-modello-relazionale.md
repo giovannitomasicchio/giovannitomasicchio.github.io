@@ -20,11 +20,11 @@ In una relazione possono esserci particolari campi, che prendono il nome di **ch
 
 Come esempio ecco una rappresentazione grafica di quanto appena detto, che si riferisce al caso della rubrica personale trattato nella prima lezione. Le relazioni vengono rappresentate tramite rettangoli divisi in celle, ogni cella rappresenta un campo della relazione. Le chiavi primarie (**PK**) vengono sottolineate, mentre dalle chiavi esterne (**FK**) parte una freccia verso le chiavi primarie a cui si riferiscono.
 
-![REL1.gif](images/stories/Corsi/progettazione_database/REL1.gif)
+![REL1.gif](/image/corsi/progettazione_database/REL1.gif)
 
 Per convincerci dell'efficacia della chiave esterna nella creazione di legami logici tra relazioni, basta vedere come sarebbero strutturati i dati delle due relazioni che costituiscono la nostra rubrica personale. Osserviamo in particolare come i dati della colonna "Lavoro" (FK) delle prima relazione referenziano quelli presenti nell'omonima colonna della seconda relazione.
 
-![REL2.gif](images/stories/Corsi/progettazione_database/REL2.gif)
+![REL2.gif](/image/corsi/progettazione_database/REL2.gif)
 
 Il Modello Relazionale spesso va accompagnato, oltre che dalla sua rappresentazione grafica, anche da un dizionario dei dati. Tale dizionario è costituito da una descrizione testuale che ha il compito di indicare i domini di tutti gli attributi di ogni tabella con i relativi domini di appartenenza, individuare le chiavi primarie e le chiavi esterne e a volte riporta anche le descrizioni delle relazioni.
 

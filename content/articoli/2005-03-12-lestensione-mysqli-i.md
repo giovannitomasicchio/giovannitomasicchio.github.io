@@ -45,7 +45,7 @@ tags:
 
  In questa serie di articoli affronteremo sia le procedure più basilari per l'interazione con un server MySQL sia le caratteristiche avanzante sottolineando le novità introdotte da ext/mysqli e le differenze con ext/mysql.
 
- Per coloro che non hanno ancora installato PHP 5 e MySQL 4.1 rimandiamo a [questo articolo](http://www.phpnews.it/articoli/php/installare-apache-2-php-5-mysql-4.1-su-windows/) per la procedura dettagliata. Facoltativa ma consigliata è anche l'installazione di phpMyAdmin illustrata [qui](http://www.phpnews.it/articoli/php/guida-installazione-phpmyadmin/).
+ Per coloro che non hanno ancora installato PHP 5 e MySQL 4.1 rimandiamo a [questo articolo](/articoli/installare-apache-2-php-5-mysql-4.1-su-windows/) per la procedura dettagliata. Facoltativa ma consigliata è anche l'installazione di phpMyAdmin illustrata [qui](/articoli/guida-installazione-phpmyadmin/).
 
 - - - - - -
 

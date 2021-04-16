@@ -28,7 +28,7 @@ Le sessioni sono state introdotte in PHP 4 proprio per risolvere questi problemi
 
 Anche le sessioni si basano su tecniche che fanno uso di cookie e dell'URL con la sostanziale differenza che questi mezzi vengono usati esclusivamente per la memorizzazione di un codice che identifichi univocamente l'utente proprietario. Ad ogni utente, riconosciuto attraverso questo identificativo, viene associato sul server un file di testo contenente tutte le informazioni ad egli legate. Questo procedimento è curato interamente da PHP.
 
-![1.png](http://www.phpnews.it/images/stories/Articoli/sessioni/1.png)
+![1.png](/image/articoli/sessioni/1.png)
 
 All'avvio di una sessione, che avviene chiamando il comando [session\_start()](http://www.php.net/manual/it/function.session-start.php), il PHP crea un codice univoco (session ID) che identificherà l'utente corrente nelle successive connessioni e lo invia al client (il browser) attraverso un cookie o accodandolo a tutti gli URL presenti nella pagina richiesta. La scelta tra uno dei due metodi di propagazione del session id viene fatta relativamente alle capacità del browser ed alle impostazioni presenti nel php.ini.
 
@@ -38,7 +38,7 @@ PHP crea poi un file di testo sul server, anch'esso associato al session ID appe
 
 Quando l'utente effettua una nuova richiesta, dopo che è stato lanciato il comando session\_start(), il PHP riconosce l'utente dal session id che possiede, avendolo recuperato dal cookie o dalla query string. Carica quindi i dati presenti nel file di testo sul server, associato al session id, e li mappa all'interno dell'array superglobale **$\_SESSION**.
 
-![2.png](http://www.phpnews.it/images/stories/Articoli/sessioni/2.png)
+![2.png](/image/articoli/sessioni/2.png)
 
 All'interno di uno script è possibile inserire, modificare o cancellare dati della sessione agendo sull'array $\_SESSION come si farebbe con qualsiasi altro array. Tutte le modifiche apportate ai dati di sessione (all'array $\_SESSION) vengono riportate automaticamente sul file di testo sul server al termine dello script.
 

@@ -36,11 +36,11 @@ tags:
 
  Adesso, per evitare di dover spostare diverse librerie di PHP nelle cartelle di sistema, modifichiamo la variabile di sistema "Path" in modo che contenga il percorso alla cartella di PHP appena creata. Per fare ciò apriamo il "Pannello di controllo", clicchiamo sull'icona "Sistema" e nella finestra che ci apparirà portiamo in primo piano il pannello "Avanzate". Premiamo quindi il bottone "Variabili d'ambiente" per visualizzare la seguente finestra di dialogo:
 
- ![](/images/stories/Articoli/IIS/path_1.png)
+ ![](/image/articoli//IIS/path_1.png)
 
  Dall'elenco delle *Variabili di sistema* selezioniamo quella di nome "Path" come mostrato nell'immagine precedente e clicchiamo sul tasto Modifica. A questo punto dovremo modificare il valore della variabile aggiungendo in coda la scritta ";C:\\php" come mostrato di seguito. Attenzione a non dimenticare il punto e virgola!
 
- ![](/images/stories/Articoli/IIS/path_2.png)
+ ![](/image/articoli//IIS/path_2.png)
 
  Fatto ciò dobbiamo riavviare Windows per far si che la modifica effettuata abbia effetto.
 
@@ -50,7 +50,7 @@ tags:
 
   Torniamo adesso nella cartella C:\\php e rinominiamo il file php.ini-dist in php.ini. Questo è il file di configurazione di PHP a cui dobbiamo apportare però diverse modifiche. Apriamolo quindi con un editor di testi (il blocco note va benissimo) ed iniziamo la direttiva cgi.force\_redirect, come mostrato in figura:
 
- ![](/images/stories/Articoli/IIS/php_ini_1.png)
+ ![](/image/articoli//IIS/php_ini_1.png)
 
  modifichiamo questa riga in
 
@@ -60,11 +60,11 @@ tags:
 
  Adesso cerchiamo la direttiva doc\_root e impostiamo il suo valore a "C:\\Inetpub\\wwwroot" ovvero alla root directory di IIS. Dovremmo ottenere qualcosa di simile alla seguente immagine:
 
- ![](/images/stories/Articoli/IIS/php_ini_3.png)
+ ![](/image/articoli//IIS/php_ini_3.png)
 
  La prossima modifica va invece effettuata alla direttiva extension\_dir il cui valore andrà impostato a "C:\\php\\ext" come mostrato di seguito:
 
- ![](/images/stories/Articoli/IIS/php_ini_2.png)
+ ![](/image/articoli//IIS/php_ini_2.png)
 
  Adesso dobbiamo far si che il PHP carichi alcune librerie di utilizzo comune. Ecco i passi (facoltativi) da seguire:
 
@@ -76,7 +76,7 @@ tags:
 
  Infine conviene modificare anche il valore della direttiva session.save\_path in modo che punti ad una cartella di files temporanei del sistema, ad esempio C:\\WINDOWS\\Temp, come mostrato di seguito:
 
- ![](/images/stories/Articoli/IIS/php_ini_7.png)
+ ![](/image/articoli//IIS/php_ini_7.png)
 
  Salviamo quindi il file e procediamo alla configurazione di IIS.
 
@@ -88,19 +88,19 @@ tags:
 
  Avviamo quindi la console di IIS (Pannello di controllo -&gt; Strumenti di Amministrazione -&gt; Internet Information Services) ed espandiamo la struttura ad albero a sinistra fino a mostrare il "Sito Web predefinito". Clicchiamo quindi su questa icona con il tasto destro e selezioniamo la voce "Proprietà" del menù a tendina, come mostrato di seguito.
 
- ![](/images/stories/Articoli/IIS/IIS_1.png)
+ ![](/image/articoli//IIS/IIS_1.png)
 
  Clicchiamo sul pannello "Home directory" per ottenere la seguente schermata:
 
- ![](/images/stories/Articoli/IIS/IIS_2.png)
+ ![](/image/articoli//IIS/IIS_2.png)
 
  Clicchiamo ora sul bottone "configurazione" per accedere alle impostazioni di mapping, come visibile dalla seguente schermata.
 
- ![](/images/stories/Articoli/IIS/IIS_3.png)
+ ![](/image/articoli//IIS/IIS_3.png)
 
  Per aggiungere il supporto agli script PHP dobbiamo cliccare sul pulsante "Aggiungi" e impostare la finestra di dialogo che ci verrà presentata nel seguente modo:
 
- ![](/images/stories/Articoli/IIS/IIS_4.png)
+ ![](/image/articoli//IIS/IIS_4.png)
 
  Una volta impostato il percorso dell'eseguibile a "C:\\php\\php-cgi.exe", l'estensione a ".php" e le altre impostazioni come mostrato in figura (spuntare *Tutti i verbi*, *Modulo script* e *Verifica l'esistenza dei files*) premiamo su "Ok".
 
@@ -121,11 +121,11 @@ tags:
 
  Otterremo qualcosa di simile:
 
- ![](/images/stories/Articoli/Art1/PHP/php-03.png)
+ ![](/image/articoli//Art1/PHP/php-03.png)
 
  Salviamo il file appena creato nella cartella "C:\\Inetpub\\wwwroot\\" impostando il nome a **info.php**. Per evitare che il blocco note automaticamente aggiunga l'estensione .txt è possibile salvare il file scrivendo il nome tra virgolette, ovvero nel campo *Nome file* della finestra *Salva con nome* scrivere **"info.php".** Adesso proviamo a lanciare il nostro piccolo script appena realizzato: apriamo il browser e digitiamo il seguente indirizzo: <http://localhost/info.php> Se tutto è stato eseguito correttamente otterremo la seguente pagina:
 
- ![](/images/stories/Articoli/IIS/fine.png)
+ ![](/image/articoli//IIS/fine.png)
 
  Attraverso questa pagina possiamo verificare diverse cose. Innanzitutto possiamo avere conferma che il file di configurazione "php.ini" sia stato correttamente caricato. Infatti il suo percorso (se non ci sono stati problemi) sarà presente tra i primi parametri visualizzati.
 
