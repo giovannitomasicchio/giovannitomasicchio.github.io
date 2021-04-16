@@ -1,0 +1,119 @@
+<!doctype html><html class=no-js lang=it><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>if e switch: la gestione del flusso - Giovanni Tomasicchio</title><script>(function(a,b){a[b]=a[b].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content="Le strutture per gestire il flusso di uno script PHP, IF e SWITCH"><meta property="og:title" content="if e switch: la gestione del flusso"><meta property="og:description" content="Le strutture per gestire il flusso di uno script PHP, IF e SWITCH"><meta property="og:type" content="article"><meta property="og:url" content="https://giovannitomasicchio.github.io/corsi/corso-php-base/if-e-switch-la-gestione-del-flusso/"><meta property="article:section" content="corsi"><meta property="article:published_time" content="2005-07-13T22:33:06+00:00"><meta property="article:modified_time" content="2005-07-13T22:33:06+00:00"><meta itemprop=name content="if e switch: la gestione del flusso"><meta itemprop=description content="Le strutture per gestire il flusso di uno script PHP, IF e SWITCH"><meta itemprop=datePublished content="2005-07-13T22:33:06+00:00"><meta itemprop=dateModified content="2005-07-13T22:33:06+00:00"><meta itemprop=wordCount content="1107"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="if e switch: la gestione del flusso"><meta name=twitter:description content="Le strutture per gestire il flusso di uno script PHP, IF e SWITCH"><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic|Kaushan+Script:regular"><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-525H86QENV"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-525H86QENV',{anonymize_ip:!1})}</script></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class=logo><a class=logo__link href=/ title="Giovanni Tomasicchio" rel=home><div class="logo__item logo__text"><div class=logo__title>Giovanni Tomasicchio</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
+<span class=menu__btn-title tabindex=-1>Menu</span></button><ul class=menu__list><li class=menu__item><a class=menu__link href=/><span class=menu__text>Home</span></a></li><li class=menu__item><a class=menu__link href=/articoli/><span class=menu__text>Articoli PHP</span></a></li><li class=menu__item><a class=menu__link href=/corsi/><span class=menu__text>Corsi</span></a></li></ul></nav></div></header><div class="wrapper flex"><div class=primary><main class=main role=main><article class=post><header class=post__header><h1 class=post__title>if e switch: la gestione del flusso</h1><div class="post__meta meta"><div class="meta__item-datetime meta__item"><svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2005-07-13T22:33:06Z>13 July 2005</time></div></div></header><div class="content post__content clearfix"><p>Gli esempi visti finora erano composti da una sequenza di istruzioni da eseguire una dopo l&rsquo;altra, dalla prima all&rsquo;ultima. Raggiunta la fine dello script il PHP ci ha mostrato i risultati di tale esecuzione. Il <strong>flusso del programma</strong>, ovvero l&rsquo;ordine di esecuzione delle istruzioni, procedeva quindi in maniera lineare.</p><p>Ci sono però diverse situazioni in cui questo modo di procedere non va bene. Immaginiamo ad esempio di dover realizzare una pagina web in cui gli utenti registrati possono scaricare un certo file mentre gli utenti non registrati devono ricevere un avviso. E' evidente che il nostro script si troverà ad un bivio: se l&rsquo;utente è registrato deve mostrare un collegamento al file da scaricare, altrimenti deve visualizzare un messaggio. Alcune istruzioni dovranno essere eseguite in un caso ma non nell&rsquo;altro e viceversa. Come facciamo a gestire questa situazione? Quello che segue è lo schema generale di una struttura messa a disposizione dal PHP per risolvere il problema:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#66d9ef>if</span>(<span style=color:#a6e22e>condizione</span> <span style=color:#a6e22e>da</span> <span style=color:#a6e22e>verificare</span>)
+{
+   <span style=color:#75715e>// istruzioni da eseguire in caso positivo
+</span><span style=color:#75715e></span>}
+<span style=color:#66d9ef>else</span>
+{
+   <span style=color:#75715e>// istruzioni da eseguire in caso contrario
+</span><span style=color:#75715e></span>}
+</code></pre></div><p>Potremmo leggerla in questo modo: se (if) la condizione tra parentesi tonde è vera allora esegui il primo gruppo di istruzioni, delimitate dalle parentesi graffe. Altrimenti (else) esegui il secondo gruppo di istruzioni, sempre delimitate dalle parentesi graffe.</p><p>Il PHP quindi valuterà se ciò che abbiamo messo tra parentesi tonde, accanto alla parola if, è vero (true) o falso (false). Ricordate le variabili booleane? Nel primo caso verrà eseguito solo il primo gruppo di istruzioni, in caso contrario solo il secondo gruppo.</p><p>Le parentesi graffe hanno il compito di raggruppare le istruzioni. Le incontreremo anche in altri contesti nelle prossime lezioni ma la loro funzionalità sarà la stessa. Se il gruppo di istruzioni è in realtà composto solo da un unico comando allora queste parentesi sono facoltative.</p><p>Spesso questa struttura si usa anche senza il ramo else:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#66d9ef>if</span>(<span style=color:#a6e22e>condizione</span> <span style=color:#a6e22e>da</span> <span style=color:#a6e22e>verificare</span>)
+{
+   <span style=color:#75715e>// istruzioni da eseguire in caso positivo
+</span><span style=color:#75715e></span>}
+</code></pre></div><p>In questi casi il gruppo di istruzioni che segue verrà eseguito solo nel caso in cui la condizione valga true. In caso contrario tali istruzioni verranno ignorate e il PHP continuerà ad eseguire le rimanenti righe.</p><p>Adesso vediamo un esempio più concreto, nel quale viene risolto il problema dell&rsquo;accesso al file per l&rsquo;utente registrato posto all&rsquo;inizio della lezione:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#75715e>/* ATTENZIONE !!! In un vero programma questa istruzione
+</span><span style=color:#75715e>non esisterebbe ma il valore di $utente_registrato verrebbe ricavato
+</span><span style=color:#75715e>da determinati controlli sull&#39;identità dell&#39;utente */</span>
+
+$utente_registrato <span style=color:#f92672>=</span> <span style=color:#66d9ef>true</span>;
+
+<span style=color:#66d9ef>if</span>($utente_registrato)
+{
+   <span style=color:#75715e>// metto qui le istruzioni da eseguire per un utente registrato
+</span><span style=color:#75715e></span>   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Clicca &lt;a href=&#34;file.zip&#34;&gt;qui&lt;/a&gt; per scaricare il file&#39;</span>;
+}
+<span style=color:#66d9ef>else</span>
+{
+   <span style=color:#75715e>// metto qui le istruzioni da eseguire per un utente ospite
+</span><span style=color:#75715e></span>   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Non puoi scaricare il file, devi prima registrarti!&#39;</span>;
+}
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>Il commento iniziale è abbastanza chiaro. In un vero script per verificare se un utente è registrato o meno dovremo fare una serie di controlli. La riga $utente_registrato = true serve proprio a simulare l&rsquo;esito di questi controlli memorizzato in una variabile booleana.</p><p>La struttura if controlla il valore di $utente_registrato. Se vale true verrà mostrato il link da cui scaricare il file. Se vale false l&rsquo;utente riceverà un messaggio esplicativo.</p><p>La condizione controllata dall&rsquo;if non deve essere necessariamente una variabile, ma può essere una qualunque espressione il cui risultato sia però true o false. Il seguente esempio chiarirà il concetto.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+$eta_utente <span style=color:#f92672>=</span> <span style=color:#ae81ff>21</span>;
+
+<span style=color:#66d9ef>if</span>($eta_utente <span style=color:#f92672>&gt;</span> <span style=color:#ae81ff>17</span>)
+{
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Clicca &lt;a href=&#34;file.zip&#34;&gt;qui&lt;/a&gt; per scaricare il file&#39;</span>;
+}
+<span style=color:#66d9ef>else</span>
+{
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Non puoi scaricare il file, non sei maggiorenne!&#39;</span>;
+}
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>Il PHP per prima cosa valuterà l&rsquo;espressione $eta_utente > 17. Se il valore di $eta_utente è maggiore di 17 allora questa espressione varrà true, altrimenti varrà false. Anche in questo caso quindi il costrutto if decide quale istruzioni eseguire a seconda del valore (vero o falso) messo nelle parentesi tonde. Stavolta però questo valore è ottenuto dalla valutazione di una espressione. Il simbolo > indica il maggiore ed è uno degli operatori che possiamo utilizzare in una espressione. Nella prossima lezione verranno mostrati gli altri operatori più comunemente usati in PHP.</p><p>Analizziamo ora il seguente esempio:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+$giorno_della_settimana <span style=color:#f92672>=</span> <span style=color:#ae81ff>2</span>;
+
+<span style=color:#66d9ef>if</span>($giorno_della_settimana <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span>)
+{
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Oggi è lunedì&#39;</span>;
+}
+<span style=color:#66d9ef>if</span>($giorno_della_settimana <span style=color:#f92672>==</span> <span style=color:#ae81ff>2</span>)
+{
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Oggi è martedì&#39;</span>;
+}
+<span style=color:#66d9ef>if</span>($giorno_della_settimana <span style=color:#f92672>==</span> <span style=color:#ae81ff>3</span>)
+{
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Oggi è mercoledì&#39;</span>;
+}
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>Notiamo l&rsquo;uso del doppio simbolo di uguale &ldquo;==&rdquo; che serve ad effettuare un confronto tra il valore contenuto nella variabile $giorno_della_settimana ed i valori 1, 2 e 3. Ricordiamo che il semplice &ldquo;=&rdquo; invece serve ad assegnare un valore ad una variabile.</p><p>E' chiaro che delle 3 strutture if precedenti solo una potrà andare a buon fine. Inoltre se la prima è verificata le altre sicuramente non lo saranno! Nonostante ciò tutti e tre gli if vengono eseguiti. Per ovviare si può usare la seguente variante:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+$giorno_della_settimana <span style=color:#f92672>=</span> <span style=color:#ae81ff>2</span>;
+
+<span style=color:#66d9ef>if</span>($giorno_della_settimana <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span>)
+{
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Oggi è lunedì&#39;</span>;
+}
+<span style=color:#66d9ef>elseif</span>($giorno_della_settimana <span style=color:#f92672>==</span> <span style=color:#ae81ff>2</span>)
+{
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Oggi è martedì&#39;</span>;
+}
+<span style=color:#66d9ef>elseif</span>($giorno_della_settimana <span style=color:#f92672>==</span> <span style=color:#ae81ff>3</span>)
+{
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Oggi è mercoledì&#39;</span>;
+}
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>Notiamo che i successivi if sono stati sostituiti da degli elseif che potremmo leggere &ldquo;altrimenti se&rdquo;. Questa volta, se una delle 3 condizioni viene verificata, le successive non verranno valutate.</p><p>Un simile risultato potrebbe essere raggiunto usando una struttura switch. Vediamo come:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+$giorno_della_settimana <span style=color:#f92672>=</span> <span style=color:#ae81ff>2</span>;
+
+<span style=color:#66d9ef>switch</span> ($giorno_della_settimana) {
+   <span style=color:#66d9ef>case</span> <span style=color:#ae81ff>1</span><span style=color:#f92672>:</span>
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Oggi è lunedì&#39;</span>;
+   <span style=color:#66d9ef>break</span>;
+
+   <span style=color:#66d9ef>case</span> <span style=color:#ae81ff>2</span><span style=color:#f92672>:</span>
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Oggi è martedì&#39;</span>;
+   <span style=color:#66d9ef>break</span>;
+
+   <span style=color:#66d9ef>case</span> <span style=color:#ae81ff>3</span><span style=color:#f92672>:</span>
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Oggi è mercoledì&#39;</span>;
+   <span style=color:#66d9ef>break</span>;
+
+   <span style=color:#66d9ef>default</span><span style=color:#f92672>:</span>
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;giovedì, venerdì sabato o domenica?&#39;</span>;
+   <span style=color:#66d9ef>break</span>;
+}
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>La variabile passata a switch viene confrontata con diversi valori posti accanto ad ogni clausola case. Se viene riscontrata una corrispondenza allora vengono eseguite tutte le istruzioni comprese tra il case corrente ed il successivo break.</p><p>La struttura switch si differenzia dall&rsquo;if principalmente per 3 motivi:</p><ul><li>le condizioni che determinano l&rsquo;esecuzione o meno di un blocco di istruzioni possono essere solo delle uguaglianze;</li><li>il PHP valuta l&rsquo;espressione da confrontare con le diverse clausole <em>case</em> una sola volta;</li><li>è previsto un blocco opzionale di istruzioni, comprese tra il comando default ed il successivo break, che verrà eseguito nel caso in cui nessun&rsquo;altra condizione è stata verificata.</li></ul><p>Con un if è comunque possibile gestire tutte le evenienze gestite da uno switch, anche il blocco di default. Lo script che segue adotta infatti un ulteriore else posto alla fine proprio per contemplare l&rsquo;evenienza che nessuna delle precedenti condizioni sia soddisfatta.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+$giorno_della_settimana <span style=color:#f92672>=</span> <span style=color:#ae81ff>2</span>;
+
+<span style=color:#66d9ef>if</span>($giorno_della_settimana <span style=color:#f92672>==</span> <span style=color:#ae81ff>1</span>)
+{
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Oggi è lunedì&#39;</span>;
+}
+<span style=color:#66d9ef>elseif</span>($giorno_della_settimana <span style=color:#f92672>==</span> <span style=color:#ae81ff>2</span>)
+{
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Oggi è martedì&#39;</span>;
+}
+<span style=color:#66d9ef>elseif</span>($giorno_della_settimana <span style=color:#f92672>==</span> <span style=color:#ae81ff>3</span>)
+{
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Oggi è mercoledì&#39;</span>;
+}
+<span style=color:#66d9ef>else</span>
+{
+   <span style=color:#75715e>// equivalente al blocco &#34;default&#34; dello switch
+</span><span style=color:#75715e></span>   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;giovedì, venerdì sabato o domenica?&#39;</span>;
+}
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div></div></article></main><nav class="pager flex"><div class="pager__item pager__item--prev"><a class=pager__link href=/corsi/corso-php-base/true-e-false-le-variabili-booleane/ rel=prev><span class=pager__subtitle>«&#8201;Precedente</span><p class=pager__title>true e false - le variabili booleane</p></a></div><div class="pager__item pager__item--next"><a class=pager__link href=/corsi/corso-php-base/gli-operatori/ rel=next><span class=pager__subtitle>Prossimo&#8201;»</span><p class=pager__title>Gli operatori</p></a></div></nav></div></div><footer class=footer><div class="container footer__container flex"><div class=footer__copyright>&copy; 2021 Giovanni Tomasicchio.
+<span class=footer__copyright-credits>Generato con <a href=https://gohugo.io/ rel="nofollow noopener" target=_blank>Hugo</a> e il tema <a href=https://github.com/Vimux/Mainroad/ rel="nofollow noopener" target=_blank>Mainroad</a>.</span></div></div></footer></div><script async defer src=/js/menu.js></script></body></html>

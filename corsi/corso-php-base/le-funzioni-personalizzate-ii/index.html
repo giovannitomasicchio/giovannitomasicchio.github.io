@@ -1,0 +1,84 @@
+<!doctype html><html class=no-js lang=it><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>Le funzioni personalizzate - II - Giovanni Tomasicchio</title><script>(function(a,b){a[b]=a[b].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content="Concetti avanzati sui parametri delle funzioni personalizzate di PHP: Parametri di default, passaggio per rifermentodati, visibilità dei parametri, variagili globali."><meta property="og:title" content="Le funzioni personalizzate - II"><meta property="og:description" content="Concetti avanzati sui parametri delle funzioni personalizzate di PHP: Parametri di default, passaggio per rifermentodati, visibilità dei parametri, variagili globali."><meta property="og:type" content="article"><meta property="og:url" content="https://giovannitomasicchio.github.io/corsi/corso-php-base/le-funzioni-personalizzate-ii/"><meta property="article:section" content="corsi"><meta property="article:published_time" content="2005-07-13T22:36:03+00:00"><meta property="article:modified_time" content="2005-07-13T22:36:03+00:00"><meta itemprop=name content="Le funzioni personalizzate - II"><meta itemprop=description content="Concetti avanzati sui parametri delle funzioni personalizzate di PHP: Parametri di default, passaggio per rifermentodati, visibilità dei parametri, variagili globali."><meta itemprop=datePublished content="2005-07-13T22:36:03+00:00"><meta itemprop=dateModified content="2005-07-13T22:36:03+00:00"><meta itemprop=wordCount content="861"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Le funzioni personalizzate - II"><meta name=twitter:description content="Concetti avanzati sui parametri delle funzioni personalizzate di PHP: Parametri di default, passaggio per rifermentodati, visibilità dei parametri, variagili globali."><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic|Kaushan+Script:regular"><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-525H86QENV"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-525H86QENV',{anonymize_ip:!1})}</script></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class=logo><a class=logo__link href=/ title="Giovanni Tomasicchio" rel=home><div class="logo__item logo__text"><div class=logo__title>Giovanni Tomasicchio</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
+<span class=menu__btn-title tabindex=-1>Menu</span></button><ul class=menu__list><li class=menu__item><a class=menu__link href=/><span class=menu__text>Home</span></a></li><li class=menu__item><a class=menu__link href=/articoli/><span class=menu__text>Articoli PHP</span></a></li><li class=menu__item><a class=menu__link href=/corsi/><span class=menu__text>Corsi</span></a></li></ul></nav></div></header><div class="wrapper flex"><div class=primary><main class=main role=main><article class=post><header class=post__header><h1 class=post__title>Le funzioni personalizzate - II</h1><div class="post__meta meta"><div class="meta__item-datetime meta__item"><svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2005-07-13T22:36:03Z>13 July 2005</time></div></div></header><div class="content post__content clearfix"><h3 id=parametri-di-default>parametri di default</h3><p>Spesso capita di realizzare delle funzioni che accettano uno o più parametri ma alcuni di questi assumono quasi sempre lo stesso valore. Il PHP ci permette di assegnare ad essi un valore di <em>default</em> (predefinito) che verrà utilizzato ogni qualvolta tale parametro non sarà specificato nella chiamata della funzione.</p><p>Supponiamo ad esempio di dover realizzare una funzione che crei una descrizione di un film. Passeremo come parametri il titolo del film, il regista, l&rsquo;anno e una indicazione &lsquo;bianco e nero&rsquo; o &lsquo;a colori&rsquo;. Poiché supponiamo che la maggior parte dei film da descrivere sarà a colori allora faremo in modo che questa sia l&rsquo;opzione di default. Vediamo come realizzare tale funzione.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#75715e>// il terzo parametro ha un valore di default
+</span><span style=color:#75715e></span><span style=color:#66d9ef>function</span> <span style=color:#a6e22e>descrivi_film</span>($titolo, $regista, $bn_colori <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;colori&#39;</span>)
+{
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#34;Titolo: </span><span style=color:#e6db74>$titolo</span><span style=color:#e6db74> &lt;br&gt;&#34;</span>;
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#34;Regista: </span><span style=color:#e6db74>$regista</span><span style=color:#e6db74> &lt;br&gt;&#34;</span>;
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#34;B/N - colori: </span><span style=color:#e6db74>$bn_colori</span><span style=color:#e6db74> &lt;br&gt;&#34;</span>;
+}
+
+<span style=color:#75715e>// chiamo la funzione passando 2 soli parametri
+</span><span style=color:#75715e>// il terzo è sottointeso
+</span><span style=color:#75715e></span><span style=color:#a6e22e>descrivi_film</span>(<span style=color:#e6db74>&#39;Il malato immaginario&#39;</span>,<span style=color:#e6db74>&#39;Tonino Cervi&#39;</span>);
+
+<span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;&lt;br&gt;&#39;</span>;
+<span style=color:#75715e>// chiamo la funzione passando tutti e 3 i parametri
+</span><span style=color:#75715e></span><span style=color:#a6e22e>descrivi_film</span>(<span style=color:#e6db74>&#39;I soliti ignoti&#39;</span>,<span style=color:#e6db74>&#39;Mario Monicelli&#39;</span>,<span style=color:#e6db74>&#39;bianco e nero&#39;</span>);
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>Nella definizione della funzione &ldquo;descrivi_film&rdquo; abbiamo assegnato un valore al parametro $bn_colori. Si tratta proprio del valore di default. La funzione è stata chiamata 2 volte, la prima volta senza specificare un valore per il parametro $bn_colori che così ha assunto il valore di default &lsquo;colori&rsquo;. La seconda volta invece impostando tale parametro ad un preciso valore.</p><h3 id=parametri-per-riferimento>parametri per riferimento</h3><p>Partiamo subito con un esempio: una funzione che calcola il quadrato di un numero.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#66d9ef>function</span> <span style=color:#a6e22e>quadrato</span>($a)
+{
+   $a <span style=color:#f92672>=</span> $a <span style=color:#f92672>*</span> $a;
+}
+
+$numero <span style=color:#f92672>=</span> <span style=color:#ae81ff>2</span>;
+<span style=color:#a6e22e>quadrato</span>($numero);
+<span style=color:#66d9ef>echo</span> $numero;
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>Se proviamo a lanciare questo script otterremo come risultato il numero 2 anzichè 4. Perché? Analizziamo le varie fasi del programma:</p><ul><li>La variabile $numero assume il valore 2.</li><li>Viene lanciata la funzione quadrato</li><li>Questa funzione riceve il valore contenuto nella variabile $numero</li><li>Tale valore viene copiato in una nuova variabile: $a</li><li>Viene calcolato il quadrato di $a e salvato sempre nella variabile $a</li><li>Termina la funzione: $a viene distrutta!</li><li>Il programma principale riprende con l&rsquo;istruzione echo $numero che mostrerà ovviamente il valore 2.</li></ul><p>E' quindi chiaro che non possiamo alterare all&rsquo;interno di una funzione i parametri passati sperando che queste modifiche abbiano effetto anche sulle relative variabili del programma principale. Questo perché i parametri durante il passaggio vengono semplicemente copiati. E' possibile però modificare questo comportamento attraverso l&rsquo;uso del carattere <strong>&</strong> (passaggio di variabile per riferimento, già incontrato nei cicli foreach) . Modifichiamo l&rsquo;esempio precedente:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#75715e>// il parametro viene passato &#34;per riferimento&#34;
+</span><span style=color:#75715e></span>
+<span style=color:#66d9ef>function</span> <span style=color:#a6e22e>quadrato</span>(<span style=color:#f92672>&amp;</span>$a)
+{
+   $a <span style=color:#f92672>=</span> $a <span style=color:#f92672>*</span> $a;
+}
+$numero <span style=color:#f92672>=</span> <span style=color:#ae81ff>2</span>;
+<span style=color:#a6e22e>quadrato</span>($numero);
+<span style=color:#66d9ef>echo</span> $numero;
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>Questa volta la variabile $a sarà un alias ovvero un &ldquo;soprannome&rdquo; della variabile $numero. $a e $numero sono la stessa variabile, chiamata in 2 modi diversi! Infatti questa volta la funzione &ldquo;quadrato&rdquo; non riceve una semplice copia del valore della variabile $numero bensì la variabile stessa: invece di passare una copia del contenuto abbiamo inviato il contenitore stesso. Tutte le modifiche effettuate ad $a ovviamente saranno quindi fatte a $numero. Al termine della funzione il &ldquo;soprannome&rdquo; $a viene distrutto ma il suo contenuto è comunque ancora accessibile attraverso $numero. Questa volta lo script darà come risultato 4.</p><h3 id=visibilità-delle-variabili>Visibilità delle variabili</h3><p>Negli esempi precedenti abbiamo visto come la variabile $a, utilizzata per conservare il parametro passato alla funzione, veniva distrutta al termine dell&rsquo;esecuzione della funzione. In realtà questa è la sorte di tutte le variabili che eventualmente verranno create all&rsquo;interno di una funzione, dette anche <strong>variabili locali</strong>, che pertanto saranno &ldquo;invisibili&rdquo; all&rsquo;esterno.</p><p>Un fenomeno analogo avviene per le variabili dichiarate all&rsquo;esterno delle funzioni, nel programma principale, che sono dette anche <strong>variabili globali</strong>. Queste saranno &ldquo;invisibili&rdquo; all&rsquo;interno delle varie funzioni. Il seguente esempio dimostra quanto detto.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#66d9ef>function</span> <span style=color:#a6e22e>test</span>()
+{
+   $b <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+
+   <span style=color:#66d9ef>if</span>(<span style=color:#a6e22e>isset</span>($a))
+       <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Vedo la variabile $a &lt;br&gt;&#39;</span>;
+   <span style=color:#66d9ef>else</span>
+       <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Non vedo la variabile $a &lt;br&gt;&#39;</span>;
+}
+
+<span style=color:#75715e>// programma principale
+</span><span style=color:#75715e></span>$a <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+<span style=color:#a6e22e>test</span>();
+
+<span style=color:#66d9ef>if</span>(<span style=color:#a6e22e>isset</span>($b))
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Vedo la variabile $b&#39;</span>;
+<span style=color:#66d9ef>else</span>
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Non vedo la variabile $b&#39;</span>;
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>Se eseguiamo questo script ci rendiamo conto che la variabile $a, definita nel programma principale, non è visibile nella funzione e la variabile $b, definita nella funzione, non è visibile nel programma principale.</p><p>Questa gestione della visibilità delle variabili serve a garantire una certa separazione dei diversi ambiti di elaborazione (programma principale - funzioni) ed è per questo che le funzioni usano delle tecniche particolari (parametri, return) per prendere o restituire dati da o verso l&rsquo;esterno.</p><p>A volte però, magari per evitare di usare lunghe liste di parametri o per non complicare troppo i valori restituiti da return, si preferisce alterare le normali regole di visibilità delle variabili attraverso l&rsquo;uso del comando <strong>global</strong>.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#66d9ef>function</span> <span style=color:#a6e22e>test</span>()
+{
+   <span style=color:#75715e>// rendo globali le variabili $a e $b
+</span><span style=color:#75715e></span>   <span style=color:#66d9ef>global</span> $a, $b;
+
+   $b <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+
+   <span style=color:#66d9ef>if</span>(<span style=color:#a6e22e>isset</span>($a))
+       <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Vedo la variabile $a &lt;br&gt;&#39;</span>;
+   <span style=color:#66d9ef>else</span>
+       <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Non vedo la variabile $a &lt;br&gt;&#39;</span>;
+}
+
+<span style=color:#75715e>// programma principale
+</span><span style=color:#75715e></span>$a <span style=color:#f92672>=</span> <span style=color:#ae81ff>1</span>;
+<span style=color:#a6e22e>test</span>();
+
+<span style=color:#66d9ef>if</span>(<span style=color:#a6e22e>isset</span>($b))
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Vedo la variabile $b&#39;</span>;
+<span style=color:#66d9ef>else</span>
+   <span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;Non vedo la variabile $b&#39;</span>;
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>Questo script è identico al precedente tranne che per l&rsquo;aggiunta del comando global $a, $b; che ha reso tali variabili globali e visibili sia all&rsquo;interno della funzione che nel programma principale.</p></div></article></main><nav class="pager flex"><div class="pager__item pager__item--prev"><a class=pager__link href=/corsi/corso-php-base/le-funzioni-personalizzate-i/ rel=prev><span class=pager__subtitle>«&#8201;Precedente</span><p class=pager__title>Le funzioni personalizzate - I</p></a></div><div class="pager__item pager__item--next"><a class=pager__link href=/corsi/corso-php-base/include-require-exit/ rel=next><span class=pager__subtitle>Prossimo&#8201;»</span><p class=pager__title>include - require - exit</p></a></div></nav></div></div><footer class=footer><div class="container footer__container flex"><div class=footer__copyright>&copy; 2021 Giovanni Tomasicchio.
+<span class=footer__copyright-credits>Generato con <a href=https://gohugo.io/ rel="nofollow noopener" target=_blank>Hugo</a> e il tema <a href=https://github.com/Vimux/Mainroad/ rel="nofollow noopener" target=_blank>Mainroad</a>.</span></div></div></footer></div><script async defer src=/js/menu.js></script></body></html>

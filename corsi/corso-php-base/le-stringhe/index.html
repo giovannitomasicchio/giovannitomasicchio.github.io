@@ -1,0 +1,79 @@
+<!doctype html><html class=no-js lang=it><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>Le stringhe - Giovanni Tomasicchio</title><script>(function(a,b){a[b]=a[b].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content="Le stringhe in PHP"><meta property="og:title" content="Le stringhe"><meta property="og:description" content="Le stringhe in PHP"><meta property="og:type" content="article"><meta property="og:url" content="https://giovannitomasicchio.github.io/corsi/corso-php-base/le-stringhe/"><meta property="article:section" content="corsi"><meta property="article:published_time" content="2005-07-13T22:32:16+00:00"><meta property="article:modified_time" content="2005-07-13T22:32:16+00:00"><meta itemprop=name content="Le stringhe"><meta itemprop=description content="Le stringhe in PHP"><meta itemprop=datePublished content="2005-07-13T22:32:16+00:00"><meta itemprop=dateModified content="2005-07-13T22:32:16+00:00"><meta itemprop=wordCount content="808"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Le stringhe"><meta name=twitter:description content="Le stringhe in PHP"><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic|Kaushan+Script:regular"><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-525H86QENV"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-525H86QENV',{anonymize_ip:!1})}</script></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class=logo><a class=logo__link href=/ title="Giovanni Tomasicchio" rel=home><div class="logo__item logo__text"><div class=logo__title>Giovanni Tomasicchio</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
+<span class=menu__btn-title tabindex=-1>Menu</span></button><ul class=menu__list><li class=menu__item><a class=menu__link href=/><span class=menu__text>Home</span></a></li><li class=menu__item><a class=menu__link href=/articoli/><span class=menu__text>Articoli PHP</span></a></li><li class=menu__item><a class=menu__link href=/corsi/><span class=menu__text>Corsi</span></a></li></ul></nav></div></header><div class="wrapper flex"><div class=primary><main class=main role=main><article class=post><header class=post__header><h1 class=post__title>Le stringhe</h1><div class="post__meta meta"><div class="meta__item-datetime meta__item"><svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2005-07-13T22:32:16Z>13 July 2005</time></div></div></header><div class="content post__content clearfix"><p>Il PHP è un linguaggio progettato e realizzato per il web. Non sorprende quindi che risulti veramente potente nella gestione dei testi: una pagina web non è forse un testo contenente HTML?</p><p>E' per questo motivo che vale la pena ora soffermarci su come PHP gestisce le stringhe. Iniziamo con un esempio:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#75715e>// stringa definita con i singoli apici
+</span><span style=color:#75715e></span>$stringa1 <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;Ciao a tutti&#39;</span>;
+
+<span style=color:#75715e>// visualizziamo la stringa
+</span><span style=color:#75715e></span><span style=color:#66d9ef>echo</span> $stringa1;
+
+<span style=color:#75715e>// vado a capo
+</span><span style=color:#75715e></span><span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;&lt;br&gt;&#39;</span>;
+
+<span style=color:#75715e>//stringa definita con i doppi apici
+</span><span style=color:#75715e></span>$stringa2 <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;Ciao a tutti&#34;</span>;
+
+<span style=color:#75715e>// visualizziamo la seconda stringa
+</span><span style=color:#75715e></span><span style=color:#66d9ef>echo</span> $stringa2;
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>Salviamo questo script in un file PHP e lanciamolo dal browser.</p><p>Da questo esempio sembrerebbe che, sia che usiamo i <strong>singoli apici</strong> sia che usiamo i <strong>doppi apici</strong> per delimitare una stringa, il risultato sia identico. Ciò è vero però solo per questo semplice script. Il successivo ci mostrerà invece le prime differenze tra le due tecniche:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#75715e>// stringa che cercherò di includere
+</span><span style=color:#75715e></span>$domanda <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;vi piace il PHP?&#39;</span>;
+
+<span style=color:#75715e>// stringa definita con i singoli apici
+</span><span style=color:#75715e></span>$stringa1 <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;Ciao a tutti, $domanda&#39;</span>;
+
+<span style=color:#75715e>// visualizziamo la stringa
+</span><span style=color:#75715e></span><span style=color:#66d9ef>echo</span> $stringa1;
+
+<span style=color:#75715e>// vado a capo
+</span><span style=color:#75715e></span><span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;&lt;br&gt;&#39;</span>;
+
+<span style=color:#75715e>//stringa definita con i doppi apici
+</span><span style=color:#75715e></span>$stringa2 <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;Ciao a tutti, </span><span style=color:#e6db74>$domanda</span><span style=color:#e6db74>&#34;</span>;
+
+<span style=color:#75715e>// visualizziamo la seconda stringa
+</span><span style=color:#75715e></span><span style=color:#66d9ef>echo</span> $stringa2;
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>Salvate anche questo script in un file e visualizzatelo dal browser. Dovreste ottenere il seguente risultato:</p><p>Ciao a tutti, $domanda</p><p>Ciao a tutti, vi piace il PHP?</p><p>Ecco la prima importante differenza tra le stringhe con i singoli apici e quelle con i doppi apici: nel primo caso il PHP non analizza il contenuto della stringa e quindi non nota al suo interno la variabile $domanda che viene considerata come un normale testo. La funzione echo la riporta quindi così come è stata inserita nella stringa.</p><p>Invece nel caso in cui siano stati usati i doppi apici per delimitare la stringa, il PHP legge il contenuto e se trova una variabile la sostituisce con il suo valore. La funzione echo quindi non troverà nella stringa da mostrare il nome della variabile bensì il suo contenuto.</p><p>Quindi il PHP quando incontra una stringa delimitata da doppi apici interpreta il suo contenuto. Oltre a sostituire le variabili con il loro contenuto è anche in grado di riconoscere delle sequenze di caratteri speciali, detti <strong>caratteri di escape</strong>, e sostituirle con speciali formattazioni. Il seguente esempio chiarirà la questione:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#75715e>// una stringa con &#34;strane&#34; sequenze di caratteri
+</span><span style=color:#75715e></span>$stringa <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34; cane </span><span style=color:#ae81ff>\t</span><span style=color:#e6db74> gatto </span><span style=color:#ae81ff>\t</span><span style=color:#e6db74> topo </span><span style=color:#ae81ff>\n</span><span style=color:#e6db74> cavallo </span><span style=color:#ae81ff>\t</span><span style=color:#e6db74> mucca </span><span style=color:#ae81ff>\t</span><span style=color:#e6db74> pecora </span><span style=color:#ae81ff>\n</span><span style=color:#e6db74> rana </span><span style=color:#ae81ff>\t</span><span style=color:#e6db74> serpente </span><span style=color:#ae81ff>\t</span><span style=color:#e6db74> pesce&#34;</span>;
+
+<span style=color:#75715e>// visualizziamo la stringa
+</span><span style=color:#75715e></span><span style=color:#66d9ef>echo</span> $stringa;
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>Se lanciamo questo script noteremo come i caratteri <strong>\t</strong> e <strong>\n</strong> sono scomparsi. Per capire che fine hanno fatto basta chiedere al browser di mostrarci il codice HTML (per IE: tasto destro del mouse -> HTML, per Firefox: tasto destro del mouse -> Visualizza sorgente pagina). Vedremo che al posto di ogni \t è stata inserita una tabulazione mentre dove erano i \n il testo va a capo. Ecco perché il browser non ci ha mostrato tali caratteri, l&rsquo;HTML infatti non prende in considerazione le tabulazioni e gli &ldquo;a capo&rdquo;. Questo tipo di simboli sarà utile quando dovrete formattare il contenuto di un file di testo o di una email.</p><p>Affrontiamo ora un altro problema: come facciamo ad inserire un apice all&rsquo;interno di una stringa delimitata da singoli apici o un doppio apice in una stringa delimitata da doppi apici. Per evitare che questi caratteri vengano interpretati come &ldquo;fine stringa&rdquo; si fanno precedere dal simbolo \. Vediamo un esempio.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#75715e>// stringa definita con i singoli apici
+</span><span style=color:#75715e></span>$stringa1 <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;Il romanzo \&#39;I promessi Sposi\&#39; fu scritto dal &#34;Manzoni&#34;&#39;</span>;
+
+<span style=color:#75715e>// visualizziamo la stringa
+</span><span style=color:#75715e></span><span style=color:#66d9ef>echo</span> $stringa1;
+
+<span style=color:#75715e>// vado a capo
+</span><span style=color:#75715e></span><span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;&lt;br&gt;&#39;</span>;
+
+<span style=color:#75715e>//stringa definita con i doppi apici
+</span><span style=color:#75715e></span>$stringa2 <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;Il romanzo </span><span style=color:#ae81ff>\&#34;</span><span style=color:#e6db74>I promessi Sposi</span><span style=color:#ae81ff>\&#34;</span><span style=color:#e6db74> fu scritto dal &#39;Manzoni&#39;&#34;</span>;
+
+<span style=color:#75715e>// visualizziamo la seconda stringa
+</span><span style=color:#75715e></span><span style=color:#66d9ef>echo</span> $stringa2;
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>Questo esempio mostra anche che i singoli apici all&rsquo;interno della prima stringa e i doppi apici all&rsquo;interno della seconda stringa, non potendo essere confusi con dei delimitatori, possono essere inseriti senza problemi.</p><p>E se volessimo unire due o più stringhe, accodandole una all&rsquo;altra? Basta usare un punto!</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#75715e>// tre stringhe
+</span><span style=color:#75715e></span>$stringa1 <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;Ciao&#39;</span>;
+$stringa2 <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39; a &#39;</span>;
+$stringa3 <span style=color:#f92672>=</span> <span style=color:#e6db74>&#39;tutti&#39;</span>;
+
+<span style=color:#75715e>// unisco le variabili contenenti le stringhe
+</span><span style=color:#75715e></span>$stringa4 <span style=color:#f92672>=</span> $stringa1 <span style=color:#f92672>.</span> $stringa2 <span style=color:#f92672>.</span> $stringa3;
+
+<span style=color:#75715e>// visualizziamo la stringa complessiva
+</span><span style=color:#75715e></span><span style=color:#66d9ef>echo</span> $stringa4;
+
+<span style=color:#75715e>// vado a capo
+</span><span style=color:#75715e></span><span style=color:#66d9ef>echo</span> <span style=color:#e6db74>&#39;&lt;br&gt;&#39;</span>;
+
+<span style=color:#75715e>// unisco e mostro le stringhe direttamente
+</span><span style=color:#75715e></span><span style=color:#66d9ef>echo</span> (<span style=color:#e6db74>&#39;Ciao&#39;</span> <span style=color:#f92672>.</span> <span style=color:#e6db74>&#39; a &#39;</span> <span style=color:#f92672>.</span> <span style=color:#e6db74>&#39;tutti&#39;</span>);
+<span style=color:#75715e>?&gt;</span><span style=color:#960050;background-color:#1e0010>
+</span></code></pre></div><p>L&rsquo;esempio mostra come, attraverso l&rsquo;uso del punto, sia possibile accodare più stringhe in un unico testo. Il punto può essere usato sia direttamente sulle stringhe delimitate da apici (singoli o doppi) sia sulle variabili che contengono stringhe. Il risultato sarà equivalente.</p><p>PHP mette a disposizione molte funzioni per la manipolazione delle stringhe. A tal proposito conviene dare uno sguardo alla sezione del manuale ufficiale di PHP dedicata proprio alle <a href=http://www.php.net/manual/it/ref.strings.php>stringhe</a>.</p></div></article></main><nav class="pager flex"><div class="pager__item pager__item--prev"><a class=pager__link href=/corsi/corso-php-base/variabili-e-costanti/ rel=prev><span class=pager__subtitle>«&#8201;Precedente</span><p class=pager__title>Variabili e costanti</p></a></div><div class="pager__item pager__item--next"><a class=pager__link href=/corsi/corso-php-base/gli-array/ rel=next><span class=pager__subtitle>Prossimo&#8201;»</span><p class=pager__title>Gli array</p></a></div></nav></div></div><footer class=footer><div class="container footer__container flex"><div class=footer__copyright>&copy; 2021 Giovanni Tomasicchio.
+<span class=footer__copyright-credits>Generato con <a href=https://gohugo.io/ rel="nofollow noopener" target=_blank>Hugo</a> e il tema <a href=https://github.com/Vimux/Mainroad/ rel="nofollow noopener" target=_blank>Mainroad</a>.</span></div></div></footer></div><script async defer src=/js/menu.js></script></body></html>

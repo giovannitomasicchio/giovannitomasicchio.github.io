@@ -1,0 +1,165 @@
+<!doctype html><html class=no-js lang=it><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><meta http-equiv=x-ua-compatible content="IE=edge"><title>Inserimento dei dati - Giovanni Tomasicchio</title><script>(function(a,b){a[b]=a[b].replace("no-js","js")})(document.documentElement,"className")</script><meta name=description content="Inserire dati in una tabella MySQL con PHP"><meta property="og:title" content="Inserimento dei dati"><meta property="og:description" content="Inserire dati in una tabella MySQL con PHP"><meta property="og:type" content="article"><meta property="og:url" content="https://giovannitomasicchio.github.io/corsi/corso-php-mysql/inserimento-dei-dati/"><meta property="article:section" content="corsi"><meta property="article:published_time" content="2006-08-26T18:01:40+00:00"><meta property="article:modified_time" content="2006-08-26T18:01:40+00:00"><meta itemprop=name content="Inserimento dei dati"><meta itemprop=description content="Inserire dati in una tabella MySQL con PHP"><meta itemprop=datePublished content="2006-08-26T18:01:40+00:00"><meta itemprop=dateModified content="2006-08-26T18:01:40+00:00"><meta itemprop=wordCount content="1689"><meta itemprop=keywords content><meta name=twitter:card content="summary"><meta name=twitter:title content="Inserimento dei dati"><meta name=twitter:description content="Inserire dati in una tabella MySQL con PHP"><link rel=preconnect href=https://fonts.gstatic.com crossorigin><link rel=dns-prefetch href=//fonts.googleapis.com><link rel=dns-prefetch href=//fonts.gstatic.com><link rel=stylesheet href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,regular,italic,600,600italic,700,700italic,800,800italic|Kaushan+Script:regular"><link rel=stylesheet href=/css/style.css><link rel=stylesheet href=/css/custom.css><link rel="shortcut icon" href=/favicon.ico><script async src="https://www.googletagmanager.com/gtag/js?id=G-525H86QENV"></script><script>var doNotTrack=!1;if(!doNotTrack){window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date),gtag('config','G-525H86QENV',{anonymize_ip:!1})}</script></head><body class=body><div class="container container--outer"><header class=header><div class="container header__container"><div class=logo><a class=logo__link href=/ title="Giovanni Tomasicchio" rel=home><div class="logo__item logo__text"><div class=logo__title>Giovanni Tomasicchio</div></div></a></div><nav class=menu><button class=menu__btn aria-haspopup=true aria-expanded=false tabindex=0>
+<span class=menu__btn-title tabindex=-1>Menu</span></button><ul class=menu__list><li class=menu__item><a class=menu__link href=/><span class=menu__text>Home</span></a></li><li class=menu__item><a class=menu__link href=/articoli/><span class=menu__text>Articoli PHP</span></a></li><li class=menu__item><a class=menu__link href=/corsi/><span class=menu__text>Corsi</span></a></li></ul></nav></div></header><div class="wrapper flex"><div class=primary><main class=main role=main><article class=post><header class=post__header><h1 class=post__title>Inserimento dei dati</h1><div class="post__meta meta"><div class="meta__item-datetime meta__item"><svg class="meta__icon icon icon-time" width="16" height="14" viewBox="0 0 30 28"><path d="M15 0C7 0 1 6 1 14s6 14 14 14 14-6 14-14S23 0 15 0zm0 25C9 25 4 20 4 14S9 3 15 3s11 5 11 11-5 11-11 11zm1-18h-2v8.4l6.8 4.4L22 18l-6-3.8V7z"/></svg><time class=meta__text datetime=2006-08-26T18:01:40Z>26 August 2006</time></div></div></header><div class="content post__content clearfix"><p>Adesso che sappiamo connetterci al server MySQL vediamo come effettuare le query. Cominciamo con un inserimento dati, che segue la sintassi:</p><pre><code>
+INSERT INTO 
+  nome_tabella 
+SET 
+  nome_campo_1 = valore_1,
+  nome_campo_2 = valore_2
+</code></pre><p>oppure:</p><pre><code>
+INSERT INTO nome_tabella 
+  (nome_campo_1, nome_campo_2) 
+VALUES 
+  (valore_1, valore_2)
+</code></pre><p>In generale per lanciare una query in uno script PHP dobbiamo semplicemente chiamare la funzione <strong>mysql_query()</strong> a cui passare come parametro la stringa contenete la query. Nel caso di un inserimento mysql_query() restituisce TRUE o FALSE, a seconda dell&rsquo;esito dell&rsquo;operazione. Ci basta quindi controllare tale valore per verificare se i dati sono stati correttamente immessi nella tabella. In caso negativo con la funzione <strong>mysql_error()</strong> possiamo ottenere maggiori indicazioni su cosa è andato storto.</p><p>Il seguente esempio fa riferimento al database ed alla tabella presentati nella <a href=http://www.phpnews.it/corsi/corso-php-mysql/setup-del-server-e-creazione-del-database/>Lezione 2</a>. La connessione avviene grazie agli script config.php e connect.php presentati nella <a href=http://www.phpnews.it/corsi/corso-php-mysql/script-di-connessione/>Lezione 4</a>.</p><pre><code>
+&lt;?php
+// richiamo il file di configurazione
+require 'config.php';
+
+// richiamo lo script responsabile della connessione a MySQL
+require 'connect.php';
+
+// preparo la query
+$query = &quot;INSERT INTO utenti (nome,email,sesso,newsletter,attivita,messaggio)
+       VALUES ('Mario Rossi','m.rossi@email.it',1,1,2,'inviatemi del materiale illustrativo')&quot;;
+
+// lancio la query
+$result = mysql_query($query);
+
+// controllo l'esito
+if (!$result) {
+   die(&quot;Errore nella query $query: &quot; . mysql_error());
+}
+
+// chiudo la connessione a MySQL
+mysql_close();
+
+echo 'Query eseguita correttamente';
+?&gt;
+</code></pre><p>E' importante osservare che si è preferito non passare direttamente alla funzione mysql_query() la stringa contenente la query. Tale stringa è stata memorizzata nella variabile $query perché potrebbe risultare utile mostrarla in caso di errore, soprattutto se è stata costruita dinamicamente in funzione di dati provenienti dall&rsquo;utente (caso mostrato più avanti).</p><p>Se avessimo effettuato due o più connessioni a diversi server MySQL, per specificare a quale di questi stiamo inviando la query avremmo dovuto passare alla funzione mysql_query() come secondo parametro anche l&rsquo;identificativo di connessione ottenuto durante la procedura di connessione al server.</p><p>Vediamo ora come eseguire la query di inserimento nel caso in cui i dati provengano da un form compilato da un utente. L&rsquo;interazione con l&rsquo;utente complica l&rsquo;esecuzione della query poiché questa volta non sappiamo a priori cosa verrà inviato con il form. Sono necessarie diverse precauzioni quindi e nel seguente esempio ci concentreremo su quelle che assicurano la creazione di una query corretta, tralasciando altri controlli di validità dei dati non meno importanti ma al di la degli scopi di questo corso.</p><p>Lo script che segue si occupa di presentare all&rsquo;utente un form composto da diversi campi (nome, email, sesso, newsletter, attivita, messaggio) appartenenti a differenti tipologie di controlli (textbox, radio button, checkbox, lista, textarea). Quando l&rsquo;utente invia il form, lo script estrae dall&rsquo;array $_POST le informazioni necessarie a construire la query di inserimento.</p><p>Uno dei principali problemi di questo processo è costituito dall&rsquo;inserimento all&rsquo;interno della query di stringhe arbitrarie inviate dall&rsquo;utente. Sappiamo infatti che in una query le stringhe vanno racchiuse da apici:</p><pre><code>
+INSERT INTO elenco_film SET titolo = 'Al bar dello sport'
+</code></pre><p>ma cosa succede se la stringa contiene a sua volta un apice (apostrofo)?</p><pre><code>
+INSERT INTO elenco_film SET titolo = 'L'allenatore nel pallone'
+</code></pre><p>E' evidente che questa query non è corretta, infatti non è possibile distinguere l&rsquo;apostrofo del titolo del film dall&rsquo;apice che delimita la fine della stringa. Per evitare l&rsquo;ambiguità la query va corretta nel seguente modo, inserendo il carattere \ (backslash) prima dell&rsquo;apostrofo:</p><pre><code>
+INSERT INTO elenco_film SET titolo = 'L\'allenatore nel pallone'
+</code></pre><p>Il PHP possiede una funzionalità chiamata <strong>magic quotes GPC</strong> che consiste nell&rsquo;eseguire automaticamente l'<strong>escape</strong>, ovvero l&rsquo;inserimento di un backslash, appena prima di un ' (apice singolo), " (apice doppio), \ (backslash) e NUL per tutti i dati provenienti da GPC (Get, Post e Cookie), ma solo se nel php.ini è abilitata la direttiva magic_quotes_gpc. Sembrerebbe quindi che il problema sia immediatamente risolvibile abilitando tale direttiva.</p><p>In realtà la questione è più complessa, infatti ci sono altri caratteri che potrebbero creare dei problemi se inseriti in una query ed inoltre questi dipendono anche dal set di caratteri impiegato nella connessione a MySQL. L&rsquo;approccio più corretto quindi è disabilitare la funzionalità &ldquo;magic quotes GPC&rdquo; ed affidarsi ad una particolare funzione, <strong>mysql_real_escape_string()</strong>, che effettua il corretto escape di tutti i caratteri potenzialmente pericolosi, tenendo in conto il particolare set di caratteri impiegato nella connessione tra PHP e MySQL (alcuni programmatori utilizzano la funzione addslash() al posto di mysql_real_escape_string(), approccio non del tutto errato ma sicuramente meno specifico e sicuro per un database MySQL).</p><p>Se non è possibile disabilitare il &ldquo;magic quotes GPC&rdquo;, oppure se vogliamo realizzare uno script indipendente da tale funzionalità, è possibile procedere in questo modo. Dapprima controlliamo, interrogando la funzione <strong>get_magic_quotes_gpg()</strong>, se il magic quote è attivato. In caso affermativo rimuoviamo i backslash inseriti dal PHP con la funzione <strong>stripslashes()</strong>. Procediamo poi con mysql_real_escape_string() per effettuare un corretto escape di tutte le stringhe da inserire nella query.</p><p>Ciò che stiamo facendo è proteggere il nostro codice da uno dei più pericolosi problemi di sicurezza: l'<strong>SQL Injection</strong>.</p><p>Vediamo lo script completo:</p><pre><code>
+&lt;?php
+if($_POST) {
+   inserisci_record();
+}
+else {
+   mostra_form();
+}
+
+function inserisci_record()
+{
+   // richiamo il file di configurazione
+   require 'config.php';
+
+   // richiamo lo script responsabile della connessione a MySQL
+   require 'connect.php';
+
+   // recupero i campi di tipo &quot;stringa&quot;
+   $nome      = trim($_POST['nome']);
+   $email     = trim($_POST['email']);
+   $messaggio = trim($_POST['messaggio']);
+
+   // verifico se devo eliminare gli slash inseriti automaticamente da PHP
+   if(get_magic_quotes_gpc())
+   {
+       $nome      = stripslashes($nome);
+       $email     = stripslashes($email);
+       $messaggio = stripslashes($messaggio);
+   }
+
+   $nome      = mysql_real_escape_string($nome);
+   $email     = mysql_real_escape_string($email);
+   $messaggio = mysql_real_escape_string($messaggio);
+
+   // recupero gli altri campi del form
+   $sesso      = isset($_POST['sesso']) ? intval($_POST['sesso']) : 0;
+   $newsletter = isset($_POST['newsletter']) ? 1 : 0;
+   $attivita   = intval($_POST['attivita']);
+
+   // verifico la presenza dei campi obbligatori
+   if(!$nome)
+   {
+       $messaggio = urlencode(&quot;Non hai inserito il nome&quot;);
+       header('location: '.$_SERVER['PHP_SELF'].'?msg='.$messaggio);
+       exit;
+   }
+
+   // preparo la query
+   $query = &quot;INSERT INTO utenti (nome,email,sesso,newsletter,attivita,messaggio)
+             VALUES ('$nome','$email',$sesso,$newsletter,$attivita,'$messaggio')&quot;;
+
+   // invio la query
+   $result = mysql_query($query);
+
+   // controllo l'esito
+   if (!$result) {
+       die(&quot;Errore nella query $query: &quot; . mysql_error());
+   }
+
+   // recupero l'id autoincrement generato da MySQL per il nuovorecord inserito
+   $id_inserito = mysql_insert_id();
+
+   // chiudo la connessione a MySQL
+   mysql_close();
+
+   $messaggio = urlencode(&quot;Inserimento effettuato con successo (ID=$id_inserito)&quot;);
+   header('location: '.$_SERVER['PHP_SELF'].'?msg='.$messaggio);
+}
+
+function mostra_form()
+{
+   // mostro un eventuale messaggio
+   if(isset($_GET['msg']))
+       echo '&lt;b&gt;'.htmlentities($_GET['msg']).'&lt;/b&gt;&lt;br /&gt;&lt;br /&gt;';
+   ?&gt;
+   &lt;form name=&quot;form_registrazione&quot; method=&quot;post&quot; action=&quot;&quot;&gt;
+     &lt;label&gt;nome:
+     &lt;input name=&quot;nome&quot; type=&quot;text&quot; /&gt;
+     &lt;/label&gt;
+     (obbligatorio)
+     &lt;p&gt;
+       &lt;label&gt;email:
+       &lt;input name=&quot;email&quot; type=&quot;text&quot; /&gt;
+       &lt;/label&gt;
+     &lt;/p&gt;
+     &lt;p&gt; Sesso:
+       &lt;label&gt;
+       &lt;input type=&quot;radio&quot; name=&quot;sesso&quot; value=&quot;1&quot; /&gt;
+       M&lt;/label&gt;
+       &lt;label&gt;
+       &lt;input type=&quot;radio&quot; name=&quot;sesso&quot; value=&quot;2&quot; /&gt;
+       F&lt;/label&gt;
+     &lt;/p&gt;
+     &lt;p&gt;
+       &lt;label&gt;inviami newletter:
+       &lt;input name=&quot;newsletter&quot; type=&quot;checkbox&quot; value=&quot;1&quot; /&gt;
+       &lt;/label&gt;
+     &lt;/p&gt;
+     &lt;p&gt;
+       &lt;label&gt;attivit&amp;agrave;:
+       &lt;select name=&quot;attivita&quot;&gt;
+         &lt;option value=&quot;0&quot;&gt;:: seleziona ::&lt;/option&gt;
+         &lt;option value=&quot;1&quot;&gt;studente&lt;/option&gt;
+         &lt;option value=&quot;2&quot;&gt;lavoratore&lt;/option&gt;
+         &lt;option value=&quot;3&quot;&gt;disoccupato&lt;/option&gt;
+       &lt;/select&gt;
+       &lt;/label&gt;
+     &lt;/p&gt;
+     &lt;p&gt;
+       &lt;label&gt;messaggio:&lt;br /&gt;
+       &lt;textarea name=&quot;messaggio&quot; cols=&quot;40&quot; rows=&quot;5&quot;&gt;&lt;/textarea&gt;
+       &lt;/label&gt;
+     &lt;/p&gt;
+     &lt;p&gt;
+       &lt;input name=&quot;invia&quot; type=&quot;submit&quot; value=&quot;Invia&quot; /&gt;
+     &lt;/p&gt;
+   &lt;/form&gt;
+   &lt;?php
+}
+?&gt;
+</code></pre><p>Tutto lo script si basa su due funzioni, mostra_form() per mostrare il form all&rsquo;utente e inserisci_record() per prelevare i dati inviati via POST, preparare ed eseguire la query di inserimento.</p><p>La funzione mostra_form() non necessita di particolari commenti. Si osservino le righe 72-73 che permettono di mostrare un messaggio passato via GET la cui utilità verrà spiegata in seguito.</p><p>La funzione inserisci_record() invece presenta diversi aspetti su cui vale la pena soffermarsi:</p><ul><li>E' buona norma eliminare eventuali spazi vuoti presenti all&rsquo;estremità delle stringhe inviate dall&rsquo;utente. Questi spazi, oltre a costituire uno spreco di risorse del database, possono compromettere il corretto funzionamento dei controlli sulla stringa stessa. Si pensi ad esempio alla verifica della lunghezza della stringa. Per eliminare questi spazio basta usare la funzione trim() (righe 18-20).</li><li>Come ampiamente discusso in precedenza, è necessario effettuare l&rsquo;escape dei caratteri potenzialmente &ldquo;pericolosi&rdquo; presenti nelle stringhe inviate dall&rsquo;utente. Per prima cosa controlliamo se il PHP (probabilmente in maniera non adeguata) ha già effettuato tale operazione interrogando <strong>get_magic_quotes_gpc()</strong> (riga 23). In caso affermativo dobbiamo eliminare i backslash inseriti con <strong>stripslashes()</strong> (righe 25-27). Procediamo poi al corretto escape delle stringhe con la funzione <strong>mysql_real_escape_string()</strong> (righe 30-32).</li><li>Particolare attenzione bisogna prestare al trattamento dei dati provenienti dalle checkbox e dai radio button. Se una checkbox viene selezionata dall&rsquo;utente allora il suo valore sarà presente nell&rsquo;array $_POST, altrimenti tale valore sarà assente. Pertanto usiamo la funzione <strong>isset()</strong> per effettuare tale verifica. Anche un set di radio buttons potrebbe essere privo della selezione dell&rsquo;utente, per cui usiamo anche in questo caso la funzione isset().</li><li>Se un campo della tabella ospita un intero (come i campi &ldquo;sesso&rdquo; e &ldquo;attivita&rdquo;) allora è meglio assicurarci che la query contenga un valore intero da inserire. Per farlo utilizziamo la funzione <strong>intval()</strong>. Anche questo accorgimento serve a proteggere lo script da una SQL Injection.</li><li>Quando si inserisce un record in una tabella è necessario assicurarsi che almeno un campo sia stato riempito. Nell&rsquo;esemio riportato si è scelto di verificare che il campo &ldquo;nome&rdquo; non venga lasciato vuoto. Questo controllo sarebbe stato inefficace se non avessimo usato precedentemente la funzione <strong>trim()</strong>.</li><li>E' importante preparare la query e conservarla in una variabile ($query) invece di passarla direttamente alla funzione mysql_query(). In caso di errore è molto utile visualizzare la query costruita con i dati dell&rsquo;utente per cercare al suo interno eventuali errori causati dalla sua realizzazione dinamica.</li><li>Una tabella contenente un campo auto_increment genera automaticamente un numero intero ad ogni inserimento di un nuovo record. Questo numero spesso rappresenta l&rsquo;identificativo (ID) del record inserito e pertanto potrebbe essere utile recuperarlo dopo aver eseguito la query. La funzione <strong>mysql_insert_id()</strong> serve proprio ad ottenere questo numero.</li></ul><p>Uno dei problemi più comuni in questo tipo di script è la gestione del refresh della pagina. Se l&rsquo;utente, dopo aver inviato il form, ricarica la pagina (pulsante &ldquo;aggiorna&rdquo; del browser) è possibile che lo script di inserimento venga mandato nuovamente in esecuzione e che quindi la query di inserimento venga ripetuta. Una soluzione è quella di reindirizzare il browser verso un URL qualsiasi, anche quello dello stesso script di inserimento, in modo da perdere i dati inviati dall&rsquo;utente (POST). Pertanto, eseguita l&rsquo;interazione col database, lo script termina chiamando la funzione <strong>header()</strong> che conduce il browser all&rsquo;indirizzo specificato. Conviene comunque mostrare un messaggio all&rsquo;utente, per informarlo dell&rsquo;esito dell&rsquo;operazione. Per farlo possiamo accodare all&rsquo;URL utilizzato per il redirect il messaggio da mostrare all&rsquo;utente. Siccome l&rsquo;URL non può contenere qualsiasi carattere allora prepariamo il messaggio convertendo gli eventuali caratteri illeciti con la funzione urlencode(). Ecco spiegato anche l&rsquo;utilità della riga 73 che provvede a visualizzare il contenuto di $_GET[&lsquo;msg&rsquo;].</p></div></article></main><nav class="pager flex"><div class="pager__item pager__item--prev"><a class=pager__link href=/corsi/corso-php-mysql/script-di-connessione/ rel=prev><span class=pager__subtitle>«&#8201;Precedente</span><p class=pager__title>Script di connessione</p></a></div><div class="pager__item pager__item--next"><a class=pager__link href=/corsi/corso-php-mysql/selezione-dei-dati-e-recupero-dei-risultati-i/ rel=next><span class=pager__subtitle>Prossimo&#8201;»</span><p class=pager__title>Selezione dei dati e recupero dei risultati - I</p></a></div></nav></div></div><footer class=footer><div class="container footer__container flex"><div class=footer__copyright>&copy; 2021 Giovanni Tomasicchio.
+<span class=footer__copyright-credits>Generato con <a href=https://gohugo.io/ rel="nofollow noopener" target=_blank>Hugo</a> e il tema <a href=https://github.com/Vimux/Mainroad/ rel="nofollow noopener" target=_blank>Mainroad</a>.</span></div></div></footer></div><script async defer src=/js/menu.js></script></body></html>
