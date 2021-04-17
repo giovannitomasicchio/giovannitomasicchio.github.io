@@ -4,7 +4,8 @@ languageCode = "it-IT"
 defaultContentLanguage = "it"
 paginate = "10" # Number of posts per page
 theme = "mainroad"
-disqusShortname = "" # Enable Disqus comments by entering your Disqus shortname
+comments = true
+disqusShortname = "giovannitomasicchio-it" # Enable Disqus comments by entering your Disqus shortname
 googleAnalytics = "G-525H86QENV" # Enable Google Analytics by entering your tracking id
 
 [Author] # Used in authorbox
@@ -13,6 +14,7 @@ googleAnalytics = "G-525H86QENV" # Enable Google Analytics by entering your trac
   avatar = "img/avatar.png"
 
 [Params]
+comments = true
   subtitle = "" # Deprecated in favor of .Site.Params.logo.subtitle
   description = "Riflessioni sullo sviluppo software di un addetto ai lavori" # Site description. Used in meta description
   copyright = "Giovanni Tomasicchio" # Footer copyright holder, otherwise will use site title
