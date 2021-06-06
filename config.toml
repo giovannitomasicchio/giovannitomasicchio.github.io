@@ -4,7 +4,7 @@ languageCode = "it-IT"
 defaultContentLanguage = "it"
 paginate = "10" # Number of posts per page
 theme = "mainroad"
-disqusShortname = "giovannitomasicchio-it" # Enable Disqus comments by entering your Disqus shortname
+#disqusShortname = "giovannitomasicchio-it" # Enable Disqus comments by entering your Disqus shortname
 googleAnalytics = "G-525H86QENV" # Enable Google Analytics by entering your tracking id
 
 [Author] # Used in authorbox
@@ -84,11 +84,11 @@ googleAnalytics = "G-525H86QENV" # Enable Google Analytics by entering your trac
   #pre = "<i class='fa fa-road'></i>"
   weight = -90
   url = "/corsi/"
-[[menu.main]]
-  name = "Contatti"
-  #pre = "<i class='fa fa-road'></i>"
-  weight = -80
-  url = "/contatti/"
+#[[menu.main]]
+#  name = "Contatti"
+#  #pre = "<i class='fa fa-road'></i>"
+#  weight = -80
+#  url = "/contatti/"
 [[menu.main]]
   name = "Ricerca"
   #pre = "<i class='fa fa-road'></i>"
