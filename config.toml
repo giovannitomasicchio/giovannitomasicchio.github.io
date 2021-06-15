@@ -84,11 +84,6 @@ googleAnalytics = "G-525H86QENV" # Enable Google Analytics by entering your trac
   #pre = "<i class='fa fa-road'></i>"
   weight = -90
   url = "/corsi/"
-#[[menu.main]]
-#  name = "Contatti"
-#  #pre = "<i class='fa fa-road'></i>"
-#  weight = -80
-#  url = "/contatti/"
 [[menu.main]]
   name = "Ricerca"
   #pre = "<i class='fa fa-road'></i>"
